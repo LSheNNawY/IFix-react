@@ -1,6 +1,7 @@
 import {Switch, Route} from 'react-router-dom'
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Register from "./pages/Register";
 
 function App() {
     return (
@@ -8,6 +9,7 @@ function App() {
             <Switch>
                 <Route path='/' component={Home} exact/>
                 <Route path='/login' component={Login}/>
+                <Route path='/register' component={Register}/>
             </Switch>
         </div>
     );
