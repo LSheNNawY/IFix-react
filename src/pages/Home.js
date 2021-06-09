@@ -39,21 +39,34 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            {/*<section>*/}
-            {/*    <div className="container">*/}
-            {/*        <div className="row ">*/}
-            {/*            <div className="col-12">*/}
-            {/*                <h4>How Fixawy Works?</h4>*/}
-            {/*                <div className="col-md-4">*/}
-            {/*                    <p className="lead">Place your*/}
-            {/*                        OrderWith our clear and flexible booking system you just need to choose the service, pick a suitable appointment and confirm your order to find one of our highly qualified repairmen at your doorstep.*/}
-            {/*                        1</p>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
+            <section className="about">
+                <div className="container">
+                    <div className="row ">
+                        <div className="col-12">
+                            <h4 className="about-heading">How IFIX Works?</h4>
+                            <div className="flexRow spaceAround row ">
 
-            {/*</section>*/}
+                                <div className="about-work col-sm-12 col-md-4">
+                                    <p className="title">It is a long established</p>
+                                    <span className="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</span>
+                                </div>
+
+                                <div className="about-work col-sm-12 col-md-4">
+                                    <p className="title">It is a long established</p>
+                                    <span className="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</span>
+                                </div>
+
+                                <div className="about-work col-sm-12 col-md-4">
+                                    <p className="title">It is a long established</p>
+                                    <span className="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
             <FooterComponent/>
         </>
     );

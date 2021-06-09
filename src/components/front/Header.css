@@ -20,12 +20,34 @@
 .img:hover {
     transform: scale(1.1);
 }
-.howItWork-card {
+
+.about .about-heading{
+    font-size: 25px;
+    text-align: left;
+    font-weight: 700;
+    margin-bottom:10px;
+    letter-spacing: 2px;
+
+}
+
+
+.about-work {
     padding: 20px;
     border: 1px solid #ededed;
-    margin: 0 15px;
     border-radius: 35px;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+}
+.about-work .title {
+    font-weight: 700;
+    color: #E8573B;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+.about-work .text{
+    line-height: 1.5;
+
 }
