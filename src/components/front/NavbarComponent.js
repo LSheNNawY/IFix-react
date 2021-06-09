@@ -30,6 +30,7 @@ const NavbarComponent = () => {
                     {/*    <input type="submit" value="login" className="btn logout"/>*/}
                     {/*</form>*/}
                     <Link to='/login' className="btn btn-outline-light text-dark">Login</Link>
+                    <Link to='/register' className="btn btn-outline-light text-dark ml-1">Register</Link>
                 </div>
             </nav>
         </>
