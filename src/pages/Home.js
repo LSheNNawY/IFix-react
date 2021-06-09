@@ -15,7 +15,7 @@ const Home = () => {
     useEffect(() => {
         ajaxGetProfessions(3).then((data) => {
             setProfessions(data);
-            console.log(data);
+             console.log(data);
         })
     }, [])
     return (

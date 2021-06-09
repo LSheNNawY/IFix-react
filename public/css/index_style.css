@@ -1,5 +1,5 @@
 body {
-  background: #ffeee5;
+  /*background: #ffeee5;*/
   font-size: 16px;
   line-height: 1.66em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -97,17 +97,9 @@ nav a {
   left: 1060;
 }
 
-.img {
-  width: 20%;
-  margin-left: 10%;
-}
-.img:hover {
-  transform: scale(1.2);
-}
-.images {
-  margin: 5% auto;
-}
+/*.images {*/
+/*  margin: 5% auto;*/
+/*}*/
 .category {
   background-color: #fff;
-  height: 400px;
 }
