@@ -23,30 +23,32 @@ const Register = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_API_URL + "/professions")
-      .then((res) => setProfessions(res.data))
+    axios.get(process.env.REACT_APP_API_URL + "/professions").then((res) => {
+      setProfessions(res.data);
+    });
   }, []);
-
 
   const register = async (e) => {
     e.preventDefault();
+
+    console.log(data);
     try {
-        const formData = new FormData();
-        formData.append(data);
-        formData.append('picture', profilePic);
+      const formData = new FormData();
+      for (let key in data) {
+        formData.append(key, data[key]);
+      }
+      formData.append("picture", profilePic);
 
-        await axios.post(process.env.REACT_APP_API_URL + "/users", formData, {
-            "Content-Type": "multipart/form-data",
-        });
-
-        console.log(formData);
-    } catch(error) {
-        console.error(error);
+      for (let key of formData.entries()) {
+        console.log(key[0] + " " + key[1]);
+      }
+      await axios.post(process.env.REACT_APP_API_URL + "/users", formData, {
+        "Content-Type": "multipart/form-data",
+      });
+    } catch (error) {
+      console.error(error);
     }
-
-  }
-
+  };
 
   return (
     <>
@@ -63,6 +65,7 @@ const Register = () => {
               <Form.Group controlId="firstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
+                  name="firstName"
                   type="text"
                   placeholder="Enter First Name"
                   onChange={handleChange}
@@ -72,6 +75,7 @@ const Register = () => {
               <Form.Group controlId="lastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
+                  name="lastName"
                   type="text"
                   placeholder="Enter Last Name"
                   onChange={handleChange}
@@ -81,6 +85,7 @@ const Register = () => {
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
+                  name="email"
                   type="email"
                   placeholder="Enter Email"
                   onChange={handleChange}
@@ -90,6 +95,7 @@ const Register = () => {
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
+                  name="password"
                   type="password"
                   placeholder="Password"
                   onChange={handleChange}
@@ -99,6 +105,7 @@ const Register = () => {
               <Form.Group controlId="phone">
                 <Form.Label>Phone</Form.Label>
                 <Form.Control
+                  name="phone"
                   type="text"
                   placeholder="Enter Phone xxx-xxxx-xxxx"
                   onChange={handleChange}
@@ -108,6 +115,7 @@ const Register = () => {
               <Form.Group controlId="address">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
+                  name="address"
                   type="text"
                   placeholder="Enter Address"
                   onChange={handleChange}
@@ -117,6 +125,7 @@ const Register = () => {
               <Form.Group controlId="dateOfBirth">
                 <Form.Label>Date Of Birth</Form.Label>
                 <Form.Control
+                  name="dateOfBirth"
                   type="date"
                   onChange={handleChange}
                   value={data.dateOfBirth}
@@ -124,9 +133,14 @@ const Register = () => {
               </Form.Group>
               <Form.Group controlId="profession">
                 <Form.Label>Profession</Form.Label>
-                <Form.Control as="select" onChange={handleChange} value={data.profession}>
+                <Form.Control
+                  as="select"
+                  onChange={handleChange}
+                  value={data.profession}
+                  name="profession"
+                >
                   {professions.map((profession) => (
-                    <option value={profession.title} key={profession._id}>
+                    <option value={profession._id} key={profession._id}>
                       {profession.title}
                     </option>
                   ))}
@@ -138,9 +152,6 @@ const Register = () => {
                   label="Profile Picture"
                   onChange={(e) => setProfilePic(e.target.files[0])}
                 />
-              </Form.Group>
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
               </Form.Group>
               <Button variant="primary" type="submit">
                 Submit
