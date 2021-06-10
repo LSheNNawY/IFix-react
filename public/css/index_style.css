@@ -1,5 +1,5 @@
 body {
-  background: #ffeee5;
+  /*background: #ffeee5;*/
   font-size: 16px;
   line-height: 1.66em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -69,7 +69,7 @@ body {
 }
 
 .navbar-expand-lg {
-  background-color: #ff5a00;
+  background-color: #ff7e67;
   color: #fff;
 }
 
@@ -94,20 +94,18 @@ nav a {
 }
 .move {
   position: relative;
-  left: 1060;
+  left: 1060px;
 }
 
-.img {
-  width: 20%;
-  margin-left: 10%;
-}
-.img:hover {
-  transform: scale(1.2);
-}
-.images {
-  margin: 5% auto;
-}
+/*.images {*/
+/*  margin: 5% auto;*/
+/*}*/
 .category {
   background-color: #fff;
-  height: 400px;
+}
+footer .text-dark{
+  text-decoration: none;
+  color:#E8573B !important;
+  font-size:20px;
+  font-weight: 700;
 }

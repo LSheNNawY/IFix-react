@@ -4,9 +4,9 @@ const FooterComponent = () => {
     return (
         <>
             <section>
-                <footer className="text-center text-white mt-5" style={{background: '#ffeee5'}}>
-                    <div className="container p-4 pb-0">
-                        <section className="mb-4">
+                <footer className="text-center text-white p-4" style={{background: 'white'}}>
+                    <div className="container pb-0">
+                        <section className="">
                             <a
                                 className="btn btn-primary btn-floating m-1"
                                 style={{backgroundColor: '#3b5998'}}
@@ -52,9 +52,9 @@ const FooterComponent = () => {
                         </section>
                     </div>
 
-                    <div className="text-center p-3" style={{color: '#333333'}}>
+                    <div className="text-center p-2" style={{color: '#333333'}}>
                         © 2021 Copyright:
-                        <a className="text-dark" href="#">IFix</a>
+                        <a className="text-dark" href="#"> IFIX</a>
                     </div>
                 </footer>
             </section>
