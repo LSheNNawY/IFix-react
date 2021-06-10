@@ -1,26 +1,27 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 
 const Register = () => {
-  const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    phone: "",
-    address: "",
-    dateOfBirth: "",
-    profession: "",
-  });
-  const [profilePic, setProfilePic] = useState("");
-  const [professions, setProfessions] = useState([]);
+    const [data, setData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        phone: "",
+        address: "",
+        dateOfBirth: "",
+        profession: "",
+    });
+    const [profilePic, setProfilePic] = useState("");
+    const [professions, setProfessions] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-  };
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setData((prevData) => ({...prevData, [name]: value}));
+    };
+
 
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL + "/professions").then((res) => {

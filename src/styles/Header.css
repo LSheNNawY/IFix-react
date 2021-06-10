@@ -1,0 +1,61 @@
+
+
+.img {
+    width: 60%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    height:100%;
+    cursor: pointer
+}
+
+.title{
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inherit;
+    font-size: 20px;
+    font-weight: 700;
+}
+.img:hover {
+    transform: scale(1.1);
+}
+.about{
+    background-color:#FCEEE5;
+    padding: 40px 0;
+}
+.about .about-heading{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom:40px;
+    letter-spacing: 2px;
+    text-align: center;
+
+}
+
+
+.about-work {
+    background: rgb(255, 255, 255);
+
+    padding: 20px;
+    border: 2px solid #ededed;
+    border-radius: 35px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+.about-work .title {
+    font-weight: 700;
+    color: #E8573B;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+.about-work .text{
+    line-height: 1.5;
+
+}
+.spaceAround{
+    justify-content:space-around;
+}
