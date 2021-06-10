@@ -44,19 +44,19 @@ const Home = () => {
                     <div className="row ">
                         <div className="col-12">
                             <h4 className="about-heading">How IFIX Works?</h4>
-                            <div className="flexRow spaceAround row ">
+                            <div className="spaceAround row ">
 
-                                <div className="about-work col-sm-12 col-md-4">
+                                <div className="about-work col-sm-12 col-md-3">
                                     <p className="title">It is a long established</p>
                                     <span className="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</span>
                                 </div>
 
-                                <div className="about-work col-sm-12 col-md-4">
+                                <div className="about-work col-sm-12 col-md-3">
                                     <p className="title">It is a long established</p>
                                     <span className="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</span>
                                 </div>
 
-                                <div className="about-work col-sm-12 col-md-4">
+                                <div className="about-work col-sm-12 col-md-3">
                                     <p className="title">It is a long established</p>
                                     <span className="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</span>
                                 </div>
