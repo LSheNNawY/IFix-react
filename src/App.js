@@ -1,4 +1,4 @@
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -10,6 +10,7 @@ function App() {
             <Switch>
                 <Route path='/' component={Home} exact/>
                 <Route path='/login' component={Login}/>
+                <Redirect from='/login/' to="/" />
                 <Route path='/register' component={Register}/>
             </Switch>
         </div>
