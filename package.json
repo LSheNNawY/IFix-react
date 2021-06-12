@@ -12,6 +12,7 @@
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "node-sass": "4.14.1",
+    "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-chartist": "^0.14.4",
@@ -19,7 +20,8 @@
     "react-notification-alert": "^0.0.13",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
