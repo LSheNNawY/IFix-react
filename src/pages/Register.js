@@ -46,11 +46,14 @@ function Register() {
               for (let field in values) {
                 formData.append(field, values[field]);
               }
-              await axios.post(process.env.REACT_APP_API_URL + "/users", formData, {
+              const added = await axios.post(process.env.REACT_APP_API_URL + "/users", formData, {
                 "Content-Type": "multipart/form-data",
               });
+              if(added) {
+                  console.log(added);
+                  history.push("/");
+              }
               actions.setSubmitting(false);
-              history.push("/");
             } catch (error) {
               console.error(error);
             }}}
