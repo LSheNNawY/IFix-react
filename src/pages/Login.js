@@ -5,7 +5,7 @@ import FooterComponent from "../components/front/FooterComponent";
 import {Link, useHistory} from "react-router-dom";
 
 const ajaxLogin = async (email, password) => {
-    const data = await (
+    const data = await ( 
         await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
             method: "POST",
             credentials: "include",
