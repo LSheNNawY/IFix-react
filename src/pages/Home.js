@@ -3,6 +3,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import HeaderComponent from "../components/front/HeaderComponent";
 import ProfessionComponent from "../components/front/ProfessionComponent";
+import {Link} from "react-router-dom";
 
 const ajaxGetProfessions = async (professionsNum = '3') => {
     const data = await (await fetch(`${process.env.REACT_APP_API_URL}/professions?professions=${professionsNum}`)).json();
@@ -28,10 +29,10 @@ const Home = () => {
                     <div className="row ">
                         <div className="images col-12">
                             <div className="row justify-content-center align-items-center align-baseline">
-
                                 {
                                     professions.map(profession => <ProfessionComponent profession={profession} key={profession._id}/>)
                                 }
+                                <Link to={'/'}>See more</Link>
                             </div>
 
                         </div>

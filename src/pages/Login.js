@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Button} from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import {Link, useHistory} from "react-router-dom";
@@ -20,7 +19,6 @@ const ajaxLogin = async (email, password) => {
 
 const Login = () => {
     const [user, setUser] = useState({email: "", password: ""});
-    const [error, setError] = useState("");
 
     const history = useHistory();
 
