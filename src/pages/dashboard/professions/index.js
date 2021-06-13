@@ -30,21 +30,11 @@ function Professions() {
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <td colSpan="3" className="border-0 text-center">
-                        Professions
-                      </td>
-                      <td colSpan="3" className="border-0 text-center">
-                        Services
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="border-0">ID </td>
-                      <td className="border-0">Title </td>
-                      <td className="border-0">Image </td>
-                      <td className="border-0">Title </td>
-                      <td className="border-0">Description </td>
-                      <td className="border-0">Price </td>
-                      <td className="border-0">Actions </td>
+                      <th className="border-0"> ID </th>
+                      <th className="border-0"> Title </th>
+                      <th className="border-0"> Image </th>
+                      <th className="border-0"> Services </th>
+                      <th className="border-0"> Actions </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -52,31 +42,44 @@ function Professions() {
                       professions.map((profession, index) => {
                         return (
                           <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{profession.title}</td>
-                            <td>{profession.img}</td>
-                            {profession.services.length > 0 ? (
-                              <>
-                                <td>{profession.services[index].title}</td>
-                                <td>
-                                  {profession.services[index].description}
-                                </td>
-                                <td>{profession.services[index].price}</td>
-                              </>
-                            ) : (
-                              <>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </>
-                            )}
+                            <td> {index + 1} </td>
+                            <td> {profession.title} </td>
+                            <td> {profession.img} </td>
                             <td>
-                              <a href="/">
-                                <Button variant="primary">Edit</Button>{" "}
-                              </a>
-                              <a href="/">
-                                <Button variant="danger">Delete</Button>{" "}
-                              </a>
+                              <table table-hover table-striped>
+                                <thead>
+                                  <tr>
+                                    <th className="border-0"> Title </th>
+                                    <th className="border-0"> Description </th>
+                                    <th className="border-0"> Price </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {profession.services.length > 0 ? (
+                                    profession.services.map((service, i) => {
+                                      return (
+                                        <tr>
+                                          <td>
+                                            {profession.services[i].title}
+                                          </td>
+                                          <td>
+                                            {profession.services[i].description}
+                                          </td>
+                                          <td>
+                                            {profession.services[i].price}
+                                          </td>
+                                        </tr>
+                                      );
+                                    })
+                                  ) : (
+                                    <></>
+                                  )}
+                                </tbody>
+                              </table>
+                            </td>
+                            <td>
+                              <Button variant="primary">Edit</Button>{" "}
+                              <Button variant="danger">Delete</Button>{" "}
                             </td>
                           </tr>
                         );
