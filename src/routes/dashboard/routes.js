@@ -4,6 +4,7 @@ import TableList from "../../pages/dashboard/TableList";
 import Typography from "../../pages/dashboard/Typography";
 import Maps from "../../pages/dashboard/Maps";
 import Notifications from "../../pages/dashboard/Notifications";
+import Professions from "../../pages/dashboard/professions/index"
 
 const dashboardRoutes = [
     {
@@ -46,6 +47,13 @@ const dashboardRoutes = [
         name: "Notifications",
         icon: "fa fa-bullhorn",
         component: Notifications,
+        layout: "/admin",
+    },
+    {
+        path: "/professions",
+        name: "Professions",
+        icon: "fa fa-clipboard",
+        component: Professions,
         layout: "/admin",
     },
 ];
