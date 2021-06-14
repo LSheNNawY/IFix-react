@@ -1,95 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/CollapseTable.css";
-import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
-function CollapseTable({ professions }) {
+import axios from "axios";
+import { useHistory } from "react-router";
+import { Redirect } from "react-router-dom";
+
+// react-bootstrap components
+import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
+
+function CollapseTable({ profession, setProfession, index }) {
+  const deleteProfission = (id) => {
+    if (window.confirm("Are you sure?")) {
+      axios
+        .delete(process.env.REACT_APP_API_URL + "/professions/" + id)
+        .then((res) => {
+          setProfession((olddata) =>
+            olddata.filter((profession) => profession._id !== id)
+          );
+        });
+    }
+  };
   return (
     <>
-      <div classNameName="container">
-        <div classNameName="col-md-12">
-          <div classNameName="panel panel-default">
-            <div classNameName="panel-heading">Professions</div>
-            <div classNameName="panel-body">
-              <table classNameName="table table-condensed table-striped">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>TITLE</th>
-                    <th>IMAGE</th>
-                    <th>SERVICES</th>
-                    <th>ACTIONS</th>
-                  </tr>
-                </thead>
+      <tr>
+        <td>{index + 1}</td>
+        <td>{profession.title}</td>
+        <td>{profession.img}</td>
+        <td>
+          <button
+            data-toggle="collapse"
+            data-target={"#demo1" + profession._id}
+            className="accordion-toggle"
+            className="btn btn-primary mr-1"
+          >
+            <span className="fas fa-eye"></span>
+          </button>
+        </td>
+        <td>
+          <button className="btn btn-warning mr-1">
+            <i className="fa fa-pen"></i>
+          </button>
+          <button
+            className="btn btn-danger mr-1"
+            onClick={() => deleteProfission(profession._id)}
+          >
+            <i className="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td colSpan="12" className="hiddenRow">
+          <div
+            className="accordian-body collapse"
+            id={"demo1" + profession._id}
+          >
+            <table className="table table-striped">
+              <thead>
+                <tr className="info">
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
 
-                <tbody>
-                  {professions.map((item, index) => {
-                    return (
-                      <>
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td>{item.title}</td>
-                          <td>{item.img}</td>
-                          <td
-                            data-toggle="collapse"
-                            data-target={"#demo1" + index}
-                            className="accordion-toggle"
-                          >
-                            <button className="btn btn-primary btn-xs">
-                              <span className="fas fa-eye"></span>
-                            </button>
-                          </td>
-                          <td>
-                            <Button variant="outline-primary">Edit</Button>{" "}
-                            <Button variant="outline-danger">Delete</Button>{" "}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="12" classNameName="hiddenRow">
-                            <div
-                              classNameName="accordian-body collapse"
-                              id={"demo1" + index}
-                            >
-                              <table classNameName="table table-striped">
-                                <thead>
-                                  <tr classNameName="info">
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                  </tr>
-                                </thead>
-
-                                <tbody>
-                                  {professions[index].services.map(
-                                    (service, i) => {
-                                      return (
-                                        <>
-                                          <tr
-                                            data-toggle="collapse"
-                                            className="accordion-toggle"
-                                          >
-                                            <td> {service.title}</td>
-                                            <td> {service.description}</td>
-                                            <td> {service.price}</td>
-                                          </tr>
-                                        </>
-                                      );
-                                    }
-                                  )}
-                                </tbody>
-                              </table>
-                            </div>
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+              <tbody>
+                {profession.services.map((service, i) => {
+                  return (
+                    <tr
+                      data-toggle="collapse"
+                      className="accordion-toggle"
+                      key={i}
+                    >
+                      <td> {service.title}</td>
+                      <td> {service.description}</td>
+                      <td> {service.price}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
-        </div>
-      </div>
+        </td>
+      </tr>
     </>
   );
 }
-
 export default CollapseTable;
