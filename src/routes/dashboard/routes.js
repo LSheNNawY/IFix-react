@@ -6,6 +6,7 @@ import Maps from "../../pages/dashboard/Maps";
 import Notifications from "../../pages/dashboard/Notifications";
 import Admins from "../../pages/dashboard/Admins";
 import Users from "../../pages/dashboard/Users";
+import Employees from "../../pages/dashboard/Employees";
 
 const dashboardRoutes = [
     {
@@ -58,9 +59,16 @@ const dashboardRoutes = [
         layout: "/admin",
     },
     {
-        path: "/users",
-        name: "Users",
+        path: "/employees",
+        name: "Employees",
         icon: "fa fa-users",
+        component: Employees,
+        layout: "/admin",
+    },
+    {
+        path: "/users",
+        name: "Clients",
+        icon: "fa fa-user-tie",
         component: Users,
         layout: "/admin",
     },

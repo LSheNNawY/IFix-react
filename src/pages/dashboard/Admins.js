@@ -50,7 +50,6 @@ export default function Admins() {
         axios
             .get(`${process.env.REACT_APP_API_URL}/admins`)
             .then(({ data }) => {
-                console.log(data);
                 setAdmins(data);
             })
             .catch((error) => {
@@ -68,6 +67,7 @@ export default function Admins() {
                             <div className="float-right">
                                 <button
                                     className="btn btn-primary"
+                                    title="Add"
                                     onClick={() => {
                                         handleAddAdmin();
                                     }}
@@ -87,7 +87,7 @@ export default function Admins() {
                                         <th className="border-0">
                                             Phone number
                                         </th>
-                                        <th className="border-0">Staus</th>
+                                        <th className="border-0">Status</th>
                                         <th className="border-0">Joined</th>
                                         <th className="border-0">Controls</th>
                                     </tr>
@@ -131,6 +131,7 @@ export default function Admins() {
                                                     </button>
                                                     <button
                                                         className="btn btn-danger mr-1"
+                                                        title="Delete"
                                                         onClick={() =>
                                                             handleDeleteAdmin(
                                                                 admin._id
@@ -143,6 +144,7 @@ export default function Admins() {
                                                     "active" ? (
                                                         <button
                                                             className="btn btn-info"
+                                                            title="Block"
                                                             onClick={() =>
                                                                 handleLockAdmin(
                                                                     admin._id,
@@ -155,6 +157,7 @@ export default function Admins() {
                                                     ) : (
                                                         <button
                                                             className="btn btn-info"
+                                                            title="Unblock"
                                                             onClick={() =>
                                                                 handleLockAdmin(
                                                                     admin._id,
