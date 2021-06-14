@@ -52,7 +52,7 @@ const dashboardRoutes = [
     {
         path: "/professions",
         name: "Professions",
-        icon: "fa fa-clipboard",
+        icon: "fa fa-bullhorn",
         component: Professions,
         layout: "/admin",
     },

@@ -1,90 +1,91 @@
-import React from "react";
+import React,{useState} from "react";
 import "../../styles/CollapseTable.css";
-function CollapseTable({ professions }) {
+import axios from "axios";
+import { useHistory } from "react-router";
+import { Redirect } from "react-router-dom";
+
+import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
+
+
+function CollapseTable({ profession }) {
+
+
+    const [professionState, setProfession] = useState([profession]);
+    console.log(professionState)
+
+    const history = useHistory();
+
+    const deleteProfission = (id) => {
+        if (window.confirm("Are you sure?")) {
+
+            axios.delete(process.env.REACT_APP_API_URL + "/professions/" + id).then((res) => {
+                setProfession((olddata) =>
+                    olddata.filter((profession) => profession._id !== id)
+                );
+            })
+        }
+    }
     return (
         <>
-            <div className="container">
-                <div className="col-md-12">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Employee</div>
-                        <div className="panel-body">
-                            <table className="table table-condensed table-striped">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>ID</th>
-                                    <th>TITLE</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>IMAGE</th>
-                                    <th>ACTIONS</th>
-                                </tr>
-                                </thead>
 
-                                <tbody>
-                                {professions.map((item, index) => {
+            <tr>
+                <td>{profession._id}</td>
+                <td>{profession.title}</td>
+                <td>{profession.img}</td>
+                <td
+                    data-toggle="collapse"
+                    data-target={"#demo1" + profession._id}
+                    className="accordion-toggle"
+                >
+                    <button className="btn btn-primary btn-xs">
+                        <span className="fas fa-eye"></span>
+                    </button>
+                </td>
+                <td>
+                    <Button variant="outline-primary">Edit</Button>{" "}
+                    <Button variant="outline-danger"
+                            onClick={() => deleteProfission(profession._id)}>Delete</Button>{" "}
+                </td>
+            </tr>
+            <tr>
+                <td colSpan="12" className="hiddenRow">
+                    <div
+                        className="accordian-body collapse"
+                        id={"demo1" + profession._id}
+                    >
+                        <table className="table table-striped">
+                            <thead>
+                            <tr className="info">
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {profession.services.map(
+                                (service, i) => {
                                     return (
-                                        <>
+                                        
                                             <tr
                                                 data-toggle="collapse"
-                                                data-target={"#demo1"+index}
-                                                class="accordion-toggle"
-                                            >
-                                                <td>
-                                                    <button class="btn btn-default btn-xs">
-                                                        <span class="glyphicon glyphicon-eye-open"></span>
-                                                    </button>
-                                                </td>
-                                                <td>{index + 1}</td>
-                                                <td>{item.title}</td>
-                                                <td>{item.description}</td>
-                                                <td>{item.img}</td>
-                                                <td>
-                                                    <button className="btn btn-primary">EDIT</button>
-                                                </td>
+                                                className="accordion-toggle"
+                                                key={i}
+                                                >
+                                                <td> {service.title}</td>
+                                                <td> {service.description}</td>
+                                                <td> {service.price}</td>
                                             </tr>
-                                            <tr>
-                                                <td colSpan="12" className="hiddenRow">
-                                                    <div className="accordian-body collapse" id={"demo1"+index}>
-                                                        <table className="table table-striped">
-                                                            <thead>
-                                                            <tr className="info">
-                                                                <th>Title</th>
-                                                                <th>Description</th>
-                                                                <th>Price</th>
-                                                            </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                            {
-                                                                professions[index].services.map((service,i)=>{
-                                                                    return (
-                                                                        <>
-                                                                            <tr data-toggle="collapse"  class="accordion-toggle">
-
-                                                                                <td> {service.title}</td>
-                                                                                <td> {service.description}</td>
-                                                                                <td> {service.price}</td>
-                                                                            </tr>
-                                                                        </>
-                                                                    )
-                                                                })
-                                                            }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </>
                                     );
-                                })}
-                                </tbody>
-                            </table>
-                        </div>
+                                }
+                            )}
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-            </div>
+                </td>
+            </tr>
         </>
-    );
-}
 
+    )
+}
 export default CollapseTable;
