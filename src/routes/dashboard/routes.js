@@ -5,6 +5,8 @@ import Typography from "../../pages/dashboard/Typography";
 import Maps from "../../pages/dashboard/Maps";
 import Notifications from "../../pages/dashboard/Notifications";
 import Professions from "../../pages/dashboard/professions/index"
+import Admins from "../../pages/dashboard/Admins";
+import Users from "../../pages/dashboard/Users";
 
 const dashboardRoutes = [
     {
@@ -15,7 +17,7 @@ const dashboardRoutes = [
         layout: "/admin",
     },
     {
-        path: "/user",
+        path: "/profile",
         name: "User Profile",
         icon: "fa fa-user-circle",
         component: UserProfile,
@@ -55,8 +57,20 @@ const dashboardRoutes = [
         icon: "fa fa-bullhorn",
         component: Professions,
         layout: "/admin",
-    }
-
+    },
+    {   path: "/admins",
+        name: "Admins",
+        icon: "fa fa-user-shield",
+        component: Admins,
+        layout: "/admin",
+    },
+    {
+        path: "/users",
+        name: "Users",
+        icon: "fa fa-users",
+        component: Users,
+        layout: "/admin",
+    },
 ];
 
 export default dashboardRoutes;
