@@ -34,9 +34,22 @@ function Jobs() {
     });
   }, []);
 
-  /*  const deleteUser = (id) => {
-    setJobs(jobs.filter((job) => job.id !== id))
-  } */
+  
+  const deleteUser = (id) => {
+    if (window.confirm("Are you sure..?")) {
+        axios
+            .delete(`${process.env.REACT_APP_API_URL}/jobs/${id}`)
+            .then(({ data }) => {
+                console.log("data will delete = " ,data)
+                setJobs((old) =>
+                    old.filter((job) => job._id !== id)
+                );
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+};
 
   return (
     <>
@@ -106,12 +119,12 @@ function Jobs() {
                                 <tbody>
                                   <tr>
                                     <td>
-                                      {job.employee.firstName +
+                                      {job.client.firstName +
                                         " " +
-                                        job.employee.lastName}
+                                        job.client.lastName}
                                     </td>
 
-                                    <td>{job.employee.phone}</td>
+                                    <td>{job.client.phone}</td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -169,14 +182,20 @@ function Jobs() {
                             {/*  <td> {job.description} </td> */}
                             <td> {job.price} </td>
                             <td>
-                              <Button variant="danger">Delete</Button>{" "}
+                              <Button 
+                              variant="danger" 
+                              onClick={() =>
+                                deleteUser(
+                                  job._id
+                                )
+                              }>Delete</Button>
                             </td>
                           </tr>
                         );
                       })
                     ) : (
                       <tr>
-                        <td colSpan="8">Wait for loading..</td>
+                        <td colSpan="8">not found jobs..!</td>
                       </tr>
                     )}
                   </tbody>
