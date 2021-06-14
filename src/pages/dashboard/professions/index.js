@@ -35,11 +35,11 @@ function Professions() {
 
 
                     {
-                      professions.map(profession => <CollapseTable profession={profession} key={profession._id}/>)
+                      professions.map(profession => <CollapseTable profession={profession} setProfession={setProfessions} key={profession._id}/>)
                     }
 
 
-
+                   
                   </tbody>
                 </table>
               </div>

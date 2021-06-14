@@ -7,13 +7,7 @@ import { Redirect } from "react-router-dom";
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 
 
-function CollapseTable({ profession }) {
-
-
-    const [professionState, setProfession] = useState([profession]);
-    console.log(professionState)
-
-    const history = useHistory();
+function CollapseTable({ profession ,setProfession}) {
 
     const deleteProfission = (id) => {
         if (window.confirm("Are you sure?")) {

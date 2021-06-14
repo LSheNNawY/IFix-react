@@ -55,7 +55,8 @@ const dashboardRoutes = [
         icon: "fa fa-bullhorn",
         component: Professions,
         layout: "/admin",
-    },
+    }
+
 ];
 
 export default dashboardRoutes;
