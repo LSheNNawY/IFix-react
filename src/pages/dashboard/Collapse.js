@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "../../styles/CollapseTable.css";
 import axios from "axios";
-import { useHistory } from "react-router";
-import { Redirect } from "react-router-dom";
 
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 function CollapseTable({ profession, setProfession, index }) {
+  
   const deleteProfission = (id) => {
     if (window.confirm("Are you sure?")) {
       axios
