@@ -4,12 +4,12 @@ import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 function CollapseTable({ professions }) {
   return (
     <>
-      <div className="container">
-        <div className="col-md-12">
-          <div className="panel panel-default">
-            <div className="panel-heading">Professions</div>
-            <div className="panel-body">
-              <table className="table table-condensed table-striped">
+      <div classNameName="container">
+        <div classNameName="col-md-12">
+          <div classNameName="panel panel-default">
+            <div classNameName="panel-heading">Professions</div>
+            <div classNameName="panel-body">
+              <table classNameName="table table-condensed table-striped">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -31,10 +31,10 @@ function CollapseTable({ professions }) {
                           <td
                             data-toggle="collapse"
                             data-target={"#demo1" + index}
-                            class="accordion-toggle"
+                            className="accordion-toggle"
                           >
-                            <button class="btn btn-primary btn-xs">
-                              <span class="fas fa-eye"></span>
+                            <button className="btn btn-primary btn-xs">
+                              <span className="fas fa-eye"></span>
                             </button>
                           </td>
                           <td>
@@ -43,14 +43,14 @@ function CollapseTable({ professions }) {
                           </td>
                         </tr>
                         <tr>
-                          <td colSpan="12" className="hiddenRow">
+                          <td colSpan="12" classNameName="hiddenRow">
                             <div
-                              className="accordian-body collapse"
+                              classNameName="accordian-body collapse"
                               id={"demo1" + index}
                             >
-                              <table className="table table-striped">
+                              <table classNameName="table table-striped">
                                 <thead>
-                                  <tr className="info">
+                                  <tr classNameName="info">
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Price</th>
@@ -64,7 +64,7 @@ function CollapseTable({ professions }) {
                                         <>
                                           <tr
                                             data-toggle="collapse"
-                                            class="accordion-toggle"
+                                            className="accordion-toggle"
                                           >
                                             <td> {service.title}</td>
                                             <td> {service.description}</td>
