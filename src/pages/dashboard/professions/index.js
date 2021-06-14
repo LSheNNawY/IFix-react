@@ -33,7 +33,7 @@ function Professions() {
                   <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                    <th className="border-0">#</th>
+                    <th   className="border-0">#</th>
                       <th className="border-0">TITLE</th>
                       <th className="border-0">IMAGE</th>
                       <th className="border-0">SERVICES</th>
