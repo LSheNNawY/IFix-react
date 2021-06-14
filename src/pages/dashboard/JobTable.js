@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // react-bootstrap components
-import { 
-  Card, 
-  Table, 
-  Container, 
-  Row, 
-  Col, 
-  Button } from "react-bootstrap";
+import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 
 // const ajaxJobs = async () => {
 //   const data = await (
@@ -36,10 +30,11 @@ function Jobs() {
     axios.get(process.env.REACT_APP_API_URL + "/jobs").then((res) => {
       setJobs(res.data);
       console.log(res.data);
+      console.log(res.data[1].client.phone);
     });
   }, []);
 
- /*  const deleteUser = (id) => {
+  /*  const deleteUser = (id) => {
     setJobs(jobs.filter((job) => job.id !== id))
   } */
 
@@ -82,25 +77,20 @@ function Jobs() {
                                 <thead>
                                   <tr>
                                     <th className="border-0"> Name </th>
+
                                     <th className="border-0"> Phone </th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {job.client.length > 0 ? (
-                                    job.client.map((client, i) => {
-                                      return (
-                                        <tr>
-                                          <td>
-                                            {job.client[i].firstName +
-                                              job.client[i].lastName}
-                                          </td>
-                                          <td>{job.client[i].phone}</td>
-                                        </tr>
-                                      );
-                                    })
-                                  ) : (
-                                    <></>
-                                  )}
+                                  <tr>
+                                    <td>
+                                      {job.employee.firstName +
+                                        " " +
+                                        job.employee.lastName}
+                                    </td>
+
+                                    <td>{job.employee.phone}</td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </td>
@@ -114,25 +104,15 @@ function Jobs() {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {job.employee.length > 0 ? (
-                                    job.employee.map(
-                                      (employee, i) => {
-                                        return (
-                                          <tr>
-                                            <td>
-                                              {job.employee[i].firstName}
-                                            </td>
+                                  <tr>
+                                    <td>
+                                      {job.employee.firstName +
+                                        " " +
+                                        job.employee.lastName}
+                                    </td>
 
-                                            <td>
-                                              {job.employee[i].phone}
-                                            </td>
-                                          </tr>
-                                        );
-                                      }
-                                    )
-                                  ) : (
-                                    <></>
-                                  )}
+                                    <td>{job.employee.phone}</td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </td>
@@ -145,17 +125,9 @@ function Jobs() {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {job.profession.length > 0 ? (
-                                    job.profession.map((profession, i) => {
-                                      return (
-                                        <tr>
-                                          <td>{job.profession[i].title}</td>
-                                        </tr>
-                                      );
-                                    })
-                                  ) : (
-                                    <></>
-                                  )}
+                                  <tr>
+                                    <td>{job.profession.title}</td>
+                                  </tr>
                                 </tbody>
                               </table>
                             </td>
