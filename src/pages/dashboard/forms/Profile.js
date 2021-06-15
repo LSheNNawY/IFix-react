@@ -1,7 +1,6 @@
 import { Button, Image, Modal } from "react-bootstrap";
 
 const Profile = (props) => {
-  console.log(props);
   const user = props.user;
   let show = props.show;
 
