@@ -26,12 +26,6 @@ export default function Users() {
       });
   };
 
-  // const handleShowProfile = (user) => {
-  //     console.log(user);
-  //     setProfileInfo(user);
-  //     setShowProfile(true);
-  // }
-
   const handleDeleteUser = (id) => {
     if (window.confirm("Are you sure?")) {
       axios
@@ -129,8 +123,9 @@ export default function Users() {
                           )}
                           <button
                             className="btn btn-primary"
-                            onClick={() => {setShowProfile(true);
-                                setProfileInfo(user);
+                            onClick={() => {
+                              setShowProfile(true);
+                              setProfileInfo(user);
                             }}
                           >
                             <i className="fa fa-user"></i>
@@ -145,7 +140,13 @@ export default function Users() {
           </Card>
         </Col>
       </Row>
-      {profileInfo != null ? (<Profile user={profileInfo} show={showProfile} setShow={setShowProfile}/>) : null}
+      {profileInfo != null ? (
+        <Profile
+          user={profileInfo}
+          show={showProfile}
+          setShow={setShowProfile}
+        />
+      ) : null}
     </Container>
   );
 }

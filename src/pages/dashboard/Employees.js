@@ -2,20 +2,20 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
 
-export default function Admins() {
-    const [admins, setAdmins] = useState([]);
+export default function Employees() {
+    const [employees, setEmployees] = useState([]);
 
-    const handleLockAdmin = (id, status) => {
+    const handleLockEmployee = (id, status) => {
         axios
-            .put(`${process.env.REACT_APP_API_URL}/admins/${id}/${status}`)
+            .put(`${process.env.REACT_APP_API_URL}/employees/${id}/${status}`)
             .then(({ data }) => {
-                setAdmins((oldAdmins) => {
-                    const newAdmins = oldAdmins.filter((admin) => {
-                        if (admin._id === id) admin.status = data.status;
-                        return admin;
+                setEmployees((oldEmployees) => {
+                    const newEmployees = oldEmployees.filter((employee) => {
+                        if (employee._id === id) employee.status = data.status;
+                        return employee;
                     });
 
-                    return newAdmins;
+                    return newEmployees;
                 });
             })
             .catch((error) => {
@@ -23,13 +23,13 @@ export default function Admins() {
             });
     };
 
-    const handleDeleteAdmin = (id) => {
+    const handleDeleteEmployee = (id) => {
         if (window.confirm("Are you sure?")) {
             axios
-                .delete(`${process.env.REACT_APP_API_URL}/admins/${id}`)
+                .delete(`${process.env.REACT_APP_API_URL}/employees/${id}`)
                 .then(({ data }) => {
-                    setAdmins((oldAdmins) =>
-                        oldAdmins.filter((admin) => admin._id !== id)
+                    setEmployees((oldAdmins) =>
+                        oldAdmins.filter((employee) => employee._id !== id)
                     );
                 })
                 .catch((error) => {
@@ -38,19 +38,15 @@ export default function Admins() {
         }
     };
 
-    const handleEditAdmin = (id) => {
-        console.log(id);
-    };
-
-    const handleAddAdmin = () => {
+    const handleAddEmployee = () => {
         console.log("add");
     };
 
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_API_URL}/admins`)
+            .get(`${process.env.REACT_APP_API_URL}/employees`)
             .then(({ data }) => {
-                setAdmins(data);
+                setEmployees(data);
             })
             .catch((error) => {
                 console.log(error);
@@ -62,17 +58,17 @@ export default function Admins() {
                 <Col md="12">
                     <Card className="strpied-tabled-with-hover">
                         <Card.Header>
-                            <Card.Title as="h4">Admins</Card.Title>
+                            <Card.Title as="h4">Employees</Card.Title>
                             <p className="card-category">control</p>
                             <div className="float-right">
                                 <button
                                     className="btn btn-primary"
                                     title="Add"
                                     onClick={() => {
-                                        handleAddAdmin();
+                                        handleAddEmployee();
                                     }}
                                 >
-                                    <i className="fa fa-plus"></i> New Admin
+                                    <i className="fa fa-plus"></i> New Employee
                                 </button>
                             </div>
                         </Card.Header>
@@ -87,87 +83,96 @@ export default function Admins() {
                                         <th className="border-0">
                                             Phone number
                                         </th>
+                                        <th className="border-0">Profession</th>
                                         <th className="border-0">Status</th>
                                         <th className="border-0">Joined</th>
                                         <th className="border-0">Controls</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {admins.map((admin, index) => {
+                                    {employees.map((employee, index) => {
                                         return (
-                                            <tr key={admin._id}>
+                                            <tr key={employee._id}>
                                                 <td>{index + 1}</td>
                                                 <td>
-                                                    {admin.firstName.toLowerCase()}
+                                                    {employee.firstName.toLowerCase()}
                                                 </td>
                                                 <td>
-                                                    {admin.lastName.toLowerCase()}
+                                                    {employee.lastName.toLowerCase()}
                                                 </td>
-                                                <td>{admin.email}</td>
-                                                <td>{admin.phone}</td>
+                                                <td>{employee.email}</td>
+                                                <td>{employee.phone}</td>
+                                                <td>{employee.profession.title}</td>
                                                 <td>
                                                     <span
                                                         className={
-                                                            admin.status ===
+                                                            employee.status ===
                                                             "active"
                                                                 ? "badge bg-success text-light"
                                                                 : "badge bg-danger text-light"
                                                         }
                                                     >
-                                                        {admin.status}
+                                                        {employee.status}
                                                     </span>
                                                 </td>
-                                                <td>{admin.created_at}</td>
+                                                <td>{employee.created_at}</td>
                                                 <td>
-                                                    <button
-                                                        className="btn btn-warning mr-1"
-                                                        onClick={() => {
-                                                            handleEditAdmin(
-                                                                admin._id
-                                                            );
-                                                        }}
-                                                    >
-                                                        <i className="fa fa-pen"></i>
-                                                    </button>
                                                     <button
                                                         className="btn btn-danger mr-1"
                                                         title="Delete"
                                                         onClick={() =>
-                                                            handleDeleteAdmin(
-                                                                admin._id
+                                                            handleDeleteEmployee(
+                                                                employee._id
                                                             )
                                                         }
                                                     >
                                                         <i className="fa fa-trash"></i>
                                                     </button>
-                                                    {admin.status ===
-                                                    "active" ? (
-                                                        <button
-                                                            className="btn btn-info"
-                                                            title="Block"
-                                                            onClick={() =>
-                                                                handleLockAdmin(
-                                                                    admin._id,
-                                                                    "block"
-                                                                )
-                                                            }
-                                                        >
-                                                            <i className="fa fa-lock"></i>
-                                                        </button>
-                                                    ) : (
+                                                    {employee.status ===
+                                                        "blocked" &&
+                                                    employee.status !==
+                                                        "pending interview" ? (
                                                         <button
                                                             className="btn btn-info"
                                                             title="Unblock"
                                                             onClick={() =>
-                                                                handleLockAdmin(
-                                                                    admin._id,
+                                                                handleLockEmployee(
+                                                                    employee._id,
                                                                     "unblock"
                                                                 )
                                                             }
                                                         >
                                                             <i className="fa fa-lock-open"></i>
                                                         </button>
+                                                    ) : (
+                                                        <button
+                                                            className="btn btn-info"
+                                                            title="Block"
+                                                            onClick={() =>
+                                                                handleLockEmployee(
+                                                                    employee._id,
+                                                                    "block"
+                                                                )
+                                                            }
+                                                        >
+                                                            <i className="fa fa-lock"></i>
+                                                        </button>
                                                     )}
+                                                    {employee.status ===
+                                                    "pending interview" ? (
+                                                        <button
+                                                            className="btn btn-success ml-1"
+                                                            title="Activate"
+                                                            onClick={() =>
+                                                                handleLockEmployee(
+                                                                    employee._id,
+                                                                    "unblock"
+                                                                )
+                                                            }
+                                                        >
+                                                            <i className="fa fa-user-check"></i>
+                                                        </button>
+                                                    ) : null}
                                                 </td>
                                             </tr>
                                         );
