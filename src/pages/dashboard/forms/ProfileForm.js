@@ -1,35 +1,52 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Button, Col, Form, Modal } from "react-bootstrap";
+import { Button, Col, Form, Modal, Image } from "react-bootstrap";
+import { useEffect } from "react";
 
-const schema = yup.object().shape({
-  firstName: yup.string().min(3).max(15).required("First Name Required"),
-  lastName: yup.string().min(3).max(15).required("Last Name Required"),
-  email: yup.string().email("Invalid Email").required("Email Required"),
-  passwordRequired: yup.boolean(),
-  password: yup.string().min(6).when("passwordRequired", {
-    is: true,
-    then: yup.string().required(),
-  }),
-  phone: yup
-    .string()
-    .matches(/^01[0125][0-9]{8}$/gm, "Invalid Phone Number")
-    .required("Phone Required"),
-  address: yup.string().required("Address Required"),
-  dateOfBirth: yup.date(),
-  pictureRequired: yup.boolean(),
-  picture: yup.mixed().when("pictureRequired", {
-    is: true,
-    then: yup.string().required(),
-  }),
-});
+const schema = yup
+  .object()
+  .shape({
+    firstName: yup.string().min(3).max(15).required("First Name Required"),
+    lastName: yup.string().min(3).max(15).required("Last Name Required"),
+    email: yup.string().email("Invalid Email").required("Email Required"),
+    passwordRequired: yup.boolean(),
+    password: yup.string().min(6).when("passwordRequired", {
+      is: true,
+      then: yup.string().required(),
+    }),
+    phone: yup
+      .string()
+      .matches(/^01[0125][0-9]{8}$/gm, "Invalid Phone Number")
+      .required("Phone Required"),
+    address: yup.string().required("Address Required"),
+    dateOfBirth: yup.date(),
+    pictureRequired: yup.boolean(),
+    picture: yup.mixed().when("pictureRequired", {
+      is: true,
+      then: yup.string().required(),
+    }),
+    professionRequired: yup.boolean(),
+    profession: yup.string().when("professionRequired", {
+      is: true,
+      then: yup.string().required(),
+    }),
+  })
+  .nullable();
 
 function ProfileForm(props) {
+  const [professions, setProfessions] = useState([]);
+  const [pic, setPic] = useState('');
   let user = props.user;
   const role = user ? user.role : props.role;
   let show = props.show;
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/professions`)
+      .then((res) => setProfessions(res.data));
+  }, []);
 
   const handleClose = () => {
     show = false;
@@ -69,19 +86,32 @@ function ProfileForm(props) {
         address: "",
         dateOfBirth: "",
         pictureRequired: role === "admin" ? false : true,
-        picture: null,
+        picture: "",
+        professionRequired: role === "employee" ? true : false,
+        profession: "",
       }
     : {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         passwordRequired: true,
+        password:"",
         phone: user.phone,
         address: user.address,
         dateOfBirth: user.dateOfBirth ? formatDate(user.dateOfBirth) : "",
         pictureRequired: role === "admin" ? false : true,
-        picture: null,
+        picture: user.picture ?? "",
+        professionRequired: role === "employee" ? true : false,
+        profession: user.profession,
       };
+
+      useEffect(()=> {
+        if(user) {
+          setPic("http://localhost:5000/uploads/users/" + user.picture)
+        } else {
+          setPic("")
+        }
+      }, [user])
 
   return (
     <>
@@ -115,7 +145,8 @@ function ProfileForm(props) {
                     if (
                       field === "pictureRequired" ||
                       field === "passwordRequired" ||
-                      (field === "picture" && values[field] === null)
+                      (field === "picture" && values[field] === null) ||
+                      field === "professionRequired"
                     ) {
                       continue;
                     } else {
@@ -177,6 +208,7 @@ function ProfileForm(props) {
                 console.error(error);
               }
             }}
+
           >
             {({
               handleSubmit,
@@ -259,6 +291,29 @@ function ProfileForm(props) {
                       {errors.password}
                     </Form.Control.Feedback>
                   </Form.Group>
+                  {role === "employee" ? (
+                    <Form.Group as={Col} md="6" controlId="validationFormik110">
+                      <Form.Label>Profession</Form.Label>
+                      <Form.Control
+                        as="select"
+                        name="profession"
+                        value={values.profession}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={touched.profession && !!errors.profession}
+                      >
+                        {professions.map((profession) => (
+                          <option value={profession._id} key={profession._id}>
+                            {profession.title}
+                          </option>
+                        ))}
+                      </Form.Control>
+
+                      <Form.Control.Feedback type="invalid" tooltip>
+                        {errors.profession}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  ) : null}
                 </Form.Row>
 
                 <Form.Row>
@@ -313,12 +368,25 @@ function ProfileForm(props) {
                 </Form.Row>
                 {role === "employee" ? (
                   <Form.Group>
+                    {user && values.picture ? (
+                      <Image
+                        src={
+                         pic
+                        }
+                        roundedCircle
+                        width="120"
+                        height="120"
+                        className="mr-2"
+                      />
+                    ) : null}
                     <Form.File
                       className="position-relative"
                       required
                       name="picture"
                       label="Picture"
-                      onChange={(e) => (values.picture = e.target.files[0])}
+                      onChange={(e) => {values.picture = e.target.files[0];
+                        setPic(URL.createObjectURL(values.picture));
+                      }}
                       onBlur={handleBlur}
                       isInvalid={touched.picture && !!errors.picture}
                       feedback={errors.picture}
