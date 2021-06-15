@@ -17,8 +17,8 @@ function Profession() {
   const history = useHistory();
   return (
     <>
-      <Container className="mt-3">
-        <h2 className="mt-4 mb-2 text-center">Create Profession</h2>
+      <Container className="mt-3 w-100">
+        <h2 className="mt-4 mb-4 text-center">Create Profession</h2>
         <Formik
           validationSchema={schema}
           onSubmit={async (values, actions) => {
@@ -74,7 +74,9 @@ function Profession() {
                 <Form.Group
                   as={Col}
                   md="10"
-                  className="offset-1"
+
+
+                  className="offset-1 mb-5"
                   controlId="validationFormik101"
                 >
                   <Form.Label>Title</Form.Label>
@@ -84,6 +86,7 @@ function Profession() {
                     value={values.title}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    placeholder="Title"
                     isInvalid={touched.title && errors.title}
                   />
                   <Form.Control.Feedback type="invalid" tooltip>
@@ -95,14 +98,18 @@ function Profession() {
                 <Form.Group
                   as={Col}
                   md="10"
-                  className="offset-1"
+                  className="offset-1 mb-5"
                   controlId="validationFormik102"
                 >
+                  <label>Image</label>
                   <Form.File
                     className="position-relative"
                     required
+                    id="custom-file"
                     name="img"
-                    label="Image"
+                    label=""
+                    placeholder="Image"
+                    custom
                     onChange={(e) => (values.img = e.target.files[0])}
                     onBlur={handleBlur}
                     isInvalid={touched.img && errors.img}
@@ -115,7 +122,7 @@ function Profession() {
                 <Form.Group
                   as={Col}
                   md="5"
-                  className="offset-1"
+                  className="offset-1 mb-5"
                   controlId="validationFormik102"
                 >
                   <Form.Label>Service</Form.Label>
@@ -132,7 +139,7 @@ function Profession() {
                     {errors.service}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="5" controlId="validationFormik104" >
+                <Form.Group as={Col} md="5" controlId="validationFormik104">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
                     type="number"
@@ -170,8 +177,8 @@ function Profession() {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Form.Row>
-              <Form.Row className="text-center">
-                <Button type="submit" style={{ margin: "auto" }} >
+              <Form.Row className="text-center mt-5">
+                <Button type="submit" style={{ margin: "auto" }}>
                   Save
                 </Button>
               </Form.Row>
