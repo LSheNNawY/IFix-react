@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0823106-e764-42bc-9764-ce3ccbc22953" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/index_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/index_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/dashboard/professions/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/professions/create.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +75,7 @@
       <workItem from="1623455332650" duration="2006000" />
       <workItem from="1623711622532" duration="9765000" />
       <workItem from="1623752947098" duration="11917000" />
-      <workItem from="1623768194209" duration="1818000" />
+      <workItem from="1623768194209" duration="3147000" />
     </task>
     <servers />
   </component>
