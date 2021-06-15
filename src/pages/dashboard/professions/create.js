@@ -10,6 +10,7 @@ const schema = yup.object().shape({
   description: yup.string().required("Description Required"),
   service: yup.string().required("Service Required"),
   img: yup.string().required("Img Required"),
+  price :yup.number()
 });
 
 function Profession() {
@@ -17,7 +18,7 @@ function Profession() {
   return (
     <>
       <Container className="mt-3">
-        <h2 className="mt-4 mb-4 text-center">Create Profession</h2>
+        <h2 className="mt-4 mb-2 text-center">Create Profession</h2>
         <Formik
           validationSchema={schema}
           onSubmit={async (values, actions) => {
@@ -41,7 +42,6 @@ function Profession() {
                 }
               );
               if (added) {
-                console.log(added);
                 history.push("/admin/professions");
               }
               actions.setSubmitting(false);
@@ -73,8 +73,8 @@ function Profession() {
               <Form.Row>
                 <Form.Group
                   as={Col}
-                  md="8"
-                  className="offset-2"
+                  md="10"
+                  className="offset-1"
                   controlId="validationFormik101"
                 >
                   <Form.Label>Title</Form.Label>
@@ -94,8 +94,8 @@ function Profession() {
               <Form.Row>
                 <Form.Group
                   as={Col}
-                  md="8"
-                  className="offset-2"
+                  md="10"
+                  className="offset-1"
                   controlId="validationFormik102"
                 >
                   <Form.File
@@ -114,8 +114,8 @@ function Profession() {
               <Form.Row>
                 <Form.Group
                   as={Col}
-                  md="4"
-                  className="offset-2"
+                  md="5"
+                  className="offset-1"
                   controlId="validationFormik102"
                 >
                   <Form.Label>Service</Form.Label>
@@ -132,7 +132,7 @@ function Profession() {
                     {errors.service}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationFormik104">
+                <Form.Group as={Col} md="5" controlId="validationFormik104" >
                   <Form.Label>Price</Form.Label>
                   <Form.Control
                     type="number"
@@ -142,14 +142,17 @@ function Profession() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.price}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>
                 <Form.Group
                   as={Col}
-                  md="8"
-                  className="offset-2"
+                  md="10"
+                  className="offset-1"
                   controlId="validationFormik103"
                 >
                   <Form.Label>Description</Form.Label>
@@ -168,7 +171,7 @@ function Profession() {
                 </Form.Group>
               </Form.Row>
               <Form.Row className="text-center">
-                <Button type="submit" style={{ margin: "auto" }}>
+                <Button type="submit" style={{ margin: "auto" }} >
                   Save
                 </Button>
               </Form.Row>
