@@ -60,7 +60,7 @@ function Jobs() {
               <Card.Header>
                 <Card.Title as="h4">Jobs Table</Card.Title>
                 <p className="card-category">
-                  Here is a subtitle for this table
+                  control
                 </p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
@@ -161,7 +161,7 @@ function Jobs() {
                                         return (
                                           <tr>
                                             <td>
-                                              {job.profession.services[i].title}
+                                              {job.profession.services[i].service}
                                             </td>
 
                                             <td>
@@ -183,12 +183,12 @@ function Jobs() {
                             <td> {job.price} </td>
                             <td>
                               <Button 
-                              variant="danger" 
+                              className="btn btn-danger mr-1" 
                               onClick={() =>
                                 deleteUser(
                                   job._id
                                 )
-                              }>Delete</Button>
+                              }><i className="fa fa-trash"></i></Button>
                             </td>
                           </tr>
                         );
