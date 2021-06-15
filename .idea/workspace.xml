@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0823106-e764-42bc-9764-ce3ccbc22953" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/Collapse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/Collapse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/dashboard/service/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/professions/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/professions/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -45,6 +49,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -69,7 +74,8 @@
       <workItem from="1623270440454" duration="2442000" />
       <workItem from="1623275486529" duration="4815000" />
       <workItem from="1623455332650" duration="2006000" />
-      <workItem from="1623711622532" duration="59000" />
+      <workItem from="1623711622532" duration="9765000" />
+      <workItem from="1623752947098" duration="6559000" />
     </task>
     <servers />
   </component>

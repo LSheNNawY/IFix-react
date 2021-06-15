@@ -1,122 +1,122 @@
-import React from "react";
-import $ from "jquery";
+import React from 'react';
+import { Formik } from 'formik';
+import axios from "axios";
+import * as yup from "yup";
+import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
+import {Link, useHistory} from "react-router-dom";
 
-// react-bootstrap components
-import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
-const handleCreateService = () => {
-  // const row = document.getElementById("serviceCont")
-  // const children=row.innerHTML;
-  // console.log(children);
-  // const input= document.createElement('div')
-  // input.className="row";
-  // input.innerHTML=children
-  // row.append(input)
 
-  let children = $("#serviceCont").children();
-  let childrenres = children.map((i, child) => {
-    if (i < 3) {
-       return child
-      // $("#serviceCont").append(child);
-    }
-  });
-  $("#serviceCont").append(childrenres)
-};
+const Profisson = () => (
+    <div>
+        <div className="float-right">
+            <button  to="/new"className="btn btn-primary">
+                <i className="fa fa-plus"></i> <Link to="/admin/new">New Service</Link>
+            </button>
+        </div>
+        <Formik
+            onSubmit={async ( values, actions ) => {
+            console.log(values);
+            console.log(actions);
+            actions.setSubmitting(true)
+            try {
+                const formData = new FormData();
+                for (let field in values) {
+                    formData.append(field, values[field]);
+                }
+                console.log(formData)
 
-function Profession() {
-  return (
-    <>
-      <Container fluid>
-        <Row>
-          <Col md="12">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Create Profession</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <Form className="form">
-                  <Row>
-                    <Col className="pr-1" md="11">
-                      <Form.Group>
-                        <label>Title</label>
-                        <Form.Control
-                          placeholder="Title"
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="11">
-                      <Form.Group>
-                        <label>Image</label>
+                // const added = await axios.post(process.env.REACT_APP_API_URL + "/professions", formData, {
+                //     "Content-Type": "multipart/form-data",
+                // });
+                // if(added) {
+                //     console.log(added);
+                // }
+                actions.setSubmitting(false);
+            } catch (error) {
+                console.error(error);
+            }}}
+            initialValues={{
+                title: "",
+                img: null,
+                service: "",
+                description:"",
+                price: 0
+            }}
+        >
+            {({ handleSubmit, handleChange, handleBlur, values, touched, errors }) => (
+                <Form noValidate encType="multipart/form-data" onSubmit={handleSubmit}>
+                    <Form.Row>
+                        <Form.Group as={Col} md="6" controlId="validationFormik101">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="title"
+                                value={values.title}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Group>
                         <Form.File
-                          className="position-relative"
-                          required
-                          name="image"
+                            className="position-relative"
+                            required
+                            name="img"
+                            label="img"
+                            onChange={e => values.img = e.target.files[0]}
+                            onBlur={handleBlur}
+                            id="validationFormik107"
+
                         />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="12">
-                      <label>Services</label>
-                    </Col>
-                  </Row>
-                  <Row  className="serviceCont">
-                    <Col className="pr-1" md="3">
-                      <Form.Group>
-                        <label>Title</label>
-                        <Form.Control
-                          placeholder="Service Title"
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                    <Col className="pl-1" md="3">
-                      <Form.Group>
-                        <label>Description</label>
-                        <Form.Control
-                          placeholder=" Service Description"
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
+                    </Form.Group>
 
-                    <Col className="pl-1" md="3">
-                      <Form.Group>
-                        <label>Price</label>
-                        <Form.Control
-                          placeholder="Service Price"
-                          type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Col>
-                    <Button
-                      className="btn-fill pull-right mt-3"
-                      variant="info"
-                      onClick={() => handleCreateService()}
-                    >
-                      +{" "}
-                    </Button>
-                  </Col>
-                  <Button
-                    className="btn-fill pull-right"
-                    type="submit"
-                    variant="info"
-                  >
-                    Save
-                  </Button>
-                  <div className="clearfix"></div>
+                    <Form.Row>
+                        <Form.Group as={Col} md="4" controlId="validationFormik102">
+                            <Form.Label>service</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="service"
+                                name="service"
+                                value={values.service}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+
+                        </Form.Group>
+                        <Form.Group as={Col} md="4" controlId="validationFormik103">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="description"
+                                name="description"
+                                value={values.description}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+
+                        </Form.Group>
+                        <Form.Group as={Col} md="4" controlId="validationFormik104">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="price"
+                                name="price"
+                                value={values.price}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+
+                        </Form.Group>
+
+                    </Form.Row>
+
+                    <Button type="submit">Save</Button>
                 </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </>
-  );
-}
+            )}
+        </Formik>
+    </div>
+);
 
-export default Profession;
+export default Profisson;
