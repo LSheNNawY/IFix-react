@@ -8,7 +8,7 @@ import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 function ServiceTable({ profession }) {
   const [modalShow, setModalShow] = useState(false);
   const [professionState, setProfessionState]=useState({})
-  const [selectedService, setSelectedService]=useState({})
+  const [selectedService, setSelectedService]=useState({service:"",description:"",price:""})
 
   const handleEditService = (professionId,service)=>{
     setModalShow(true)

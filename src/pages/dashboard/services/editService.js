@@ -22,7 +22,8 @@ const schema = yup.object().shape({
 });
 
 function EditService (props) {
-  const { selectedService , professionState, setProfessionState, onHide } =props;
+  const { selectedService , professionState, setProfessionState, onHide } = props;
+  console.log(selectedService);
 
   const handleUpdateProfession = async (values) => {
     let data = {
@@ -66,9 +67,9 @@ function EditService (props) {
               }
             }}
             initialValues={{
-              service: "",
-              description: "",
-              price: "",
+              service: selectedService.service,
+              description: selectedService.description,
+              price: selectedService.price,
             }}
           >
             {({

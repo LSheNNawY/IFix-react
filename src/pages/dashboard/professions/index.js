@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ProfessionTable from "./Profession";
+import ProfessionTable from "./ProfessionTable";
 import CreateProfession from "./CreateProfession"
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
