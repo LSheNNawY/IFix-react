@@ -55,7 +55,7 @@ function CollapseTable({ profession, setProfession, index }) {
             <table className="table table-striped">
               <thead>
                 <tr className="info">
-                  <th>Title</th>
+                  <th>Service</th>
                   <th>Description</th>
                   <th>Price</th>
                 </tr>
@@ -69,7 +69,7 @@ function CollapseTable({ profession, setProfession, index }) {
                       className="accordion-toggle"
                       key={i}
                     >
-                      <td> {service.title}</td>
+                      <td> {service.service}</td>
                       <td> {service.description}</td>
                       <td> {service.price}</td>
                     </tr>

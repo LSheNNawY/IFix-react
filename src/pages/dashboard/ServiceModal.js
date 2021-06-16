@@ -20,11 +20,6 @@ function ServiceModal(props) {
                size="lg"
                aria-labelledby="contained-modal-title-vcenter"
                centered>
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Using Grid in Modal
-                </Modal.Title>
-            </Modal.Header>
             <Modal.Body className="show-grid" >
                 <Container className="mt-3 w-100">
                     <h2 className="mt-4 mb-4 text-center">Create Profession</h2>
@@ -52,7 +47,7 @@ function ServiceModal(props) {
                                 );
                                 if (added) {
                                     console.log(added);
-                                    history.push("/admin/professions");
+                                    props.onHide()
                                 }
                                 actions.setSubmitting(false);
                             } catch (error) {
@@ -194,9 +189,6 @@ function ServiceModal(props) {
                     </Formik>
                 </Container>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 }

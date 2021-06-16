@@ -18,6 +18,8 @@ function Professions() {
     });
   }, []);
 
+  console.log(professions)
+
   return (
     <>
         <ServiceModal show={modalShow} onHide={() => setModalShow(false)} />
