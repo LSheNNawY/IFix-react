@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../styles/CollapseTable.css"
 import axios from "axios";
-import Service from "../services/service"
+import ServiceTable from "../services/ServiceTable"
 
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
@@ -55,7 +55,7 @@ function ProfessionTable({ profession, setProfession, index }) {
             className="accordian-body collapse"
             id={"demo1" + profession._id}
           >
-            <Service profession={profession}/>
+            <ServiceTable profession={profession}/>
             
           </div>
         </td>
@@ -63,4 +63,4 @@ function ProfessionTable({ profession, setProfession, index }) {
     </>
   );
 }
-export default ProfessionTable;
+export default  ProfessionTable;

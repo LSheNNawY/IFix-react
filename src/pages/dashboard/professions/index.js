@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ProfessionTable from "./Profession";
-import CreateProfession from "./createProfession"
 
+import ProfessionTable from "./ProfessionTable";
+import CreateProfession from "./CreateProfession"
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 
-function Professions() {
+function Index() {
     const [professions, setProfessions] = useState([]);
 
     const [modalShow, setModalShow] = useState(false);
@@ -53,7 +53,7 @@ function Professions() {
                   </thead>
                   <tbody>
                     {professions.map((profession, index) => (
-                      <ProfessionTable
+                      < ProfessionTable 
                         profession={profession}
                         setProfession={setProfessions}
                         index={index}
@@ -71,4 +71,4 @@ function Professions() {
   );
 }
 
-export default Professions;
+export default Index;
