@@ -1,4 +1,4 @@
-import {Route, Switch, Redirect} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -17,10 +17,13 @@ function App() {
     return (
         <div className="App">
             <Switch>
-                <Route path='/' component={Home} exact/>
-                <Route path='/login' component={Login}/>
-                <Route path='/register' component={Register}/>
-                <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+                <Route path="/" component={Home} exact />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route
+                    path="/admin"
+                    render={(props) => <AdminLayout {...props} />}
+                />
             </Switch>
         </div>
     );
