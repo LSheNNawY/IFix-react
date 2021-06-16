@@ -22,7 +22,7 @@ function Professions() {
 
   return (
     <>
-        <ServiceModal show={modalShow} onHide={() => setModalShow(false)} />
+        <ServiceModal setProfessions={setProfessions} professions={professions}  show={modalShow} onHide={() => setModalShow(false)} />
 
         <Container fluid>
         <Row>
