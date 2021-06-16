@@ -1,27 +1,43 @@
 import React, { useState } from "react";
-import "../../../styles/CollapseTable.css"
+import "../../../styles/CollapseTable.css";
 import axios from "axios";
-import ServiceTable from "../services/ServiceTable"
+import ServiceTable from "../services/ServiceTable";
 
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
+import EditProfession from "./editProfession";
 
-function ProfessionTable({ profession, setProfession, index }) {
-  const [modalShow, setModalShow ] = useState(false);
+function ProfessionTable({
+  professionState,
+  setProfessions,
+  index,
+  setRefresh,
+}) {
+  const [modalShow, setModalShow] = useState(false);
+  const [profession, setProfession] = useState(professionState);
 
   const deleteProfission = (id) => {
     if (window.confirm("Are you sure?")) {
       axios
-        .delete(process.env.REACT_APP_API_URL + "/professions/"+ id)
+        .delete(process.env.REACT_APP_API_URL + "/professions/" + id)
         .then((res) => {
-          setProfession((olddata) =>
+          setProfessions((olddata) =>
             olddata.filter((profession) => profession._id !== id)
           );
         });
     }
   };
+
   return (
     <>
+      <EditProfession
+        setRefresh={setRefresh}
+        profession={profession}
+        setProfession={setProfession}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+
       <tr>
         <td>{index + 1}</td>
         <td>{profession.title}</td>
@@ -37,7 +53,10 @@ function ProfessionTable({ profession, setProfession, index }) {
           </button>
         </td>
         <td>
-          <button className="btn btn-warning mr-1">
+          <button
+            className="btn btn-warning mr-1"
+            onClick={() => setModalShow(true)}
+          >
             <i className="fa fa-pen"></i>
           </button>
           <button
@@ -54,12 +73,14 @@ function ProfessionTable({ profession, setProfession, index }) {
             className="accordian-body collapse"
             id={"demo1" + profession._id}
           >
-            <ServiceTable profession={profession} setProfession={setProfession}/>
-            
+            <ServiceTable
+              profession={profession}
+              setProfession={setProfession}
+            />
           </div>
         </td>
       </tr>
     </>
   );
 }
-export default  ProfessionTable;
+export default ProfessionTable;

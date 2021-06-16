@@ -20,13 +20,13 @@ const schema = yup.object().shape({
 });
 
 function editService (props) {
-  const { profession, setProfession, selectedService , show, onHide } = props;
+  const {  profession,setProfession,selectedService ,show, onHide } = props;
 
 
 
   const handleUpdateProfession = async (values) => {
     let data = {
-      "services":[values]
+      services:[values]
     };
 
     await axios
@@ -38,8 +38,7 @@ function editService (props) {
             }
         )
         .then(({data}) => {
-          console.log(data);
-            // setProfession(data);
+            setProfession(data)
             onHide()
       });
   };

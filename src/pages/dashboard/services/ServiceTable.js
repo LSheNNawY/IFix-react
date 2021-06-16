@@ -1,32 +1,48 @@
 import React, { useState } from "react";
 import "../../../styles/CollapseTable.css";
 import axios from "axios";
-import editService from "./editService";
-
-// react-bootstrap components
+import EditService from "./editService";
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
-function ServiceTable({ profession,setProfession }) {
+function ServiceTable({ profession, setProfession }) {
   const [modalShow, setModalShow] = useState(false);
-  // const [professionState, setProfessionState] = useState({});
   const [selectedService, setSelectedService] = useState({
     service: "",
     description: "",
     price: "",
   });
 
-  const handleEditService = (professionId, service) => {
+  const handleEditService = (service) => {
     setModalShow(true);
-    axios
-      .get(process.env.REACT_APP_API_URL + "/professions/" + professionId)
-      .then(({ data }) => {
-        setProfession(data);
-        setSelectedService(service);
+    setSelectedService(service);
+  };
+
+
+  const handleDeleteService = async(id) => {
+    if (window.confirm("Are you sure?")) {
+      let services = profession.services;
+      let data={};
+      services = services.filter((service) => service._id !== id);
+      data={
+        services:services
+      }
+      await axios
+        .put(
+            process.env.REACT_APP_API_URL + "/professions/" + profession._id,
+            data,
+            {
+              "Content-Type": "multipart/form-data",
+            }
+        )
+        .then(({data}) => {
+            setProfession(data)
       });
+     
+    }
   };
   return (
     <>
-      <editService
+      <EditService
         profession={profession}
         setProfession={setProfession}
         selectedService={selectedService}
@@ -54,11 +70,14 @@ function ServiceTable({ profession,setProfession }) {
                   {" "}
                   <button
                     className="btn btn-warning mr-1"
-                    onClick={() => handleEditService(profession._id, service)}
+                    onClick={() => handleEditService(service)}
                   >
                     <i className="fa fa-pen"></i>
                   </button>
-                  <button className="btn btn-danger mr-1">
+                  <button
+                    className="btn btn-danger mr-1"
+                    onClick={() => handleDeleteService(service._id)}
+                  >
                     <i className="fa fa-trash"></i>
                   </button>
                 </td>
@@ -70,4 +89,5 @@ function ServiceTable({ profession,setProfession }) {
     </>
   );
 }
+
 export default ServiceTable;
