@@ -18,11 +18,10 @@ function Professions() {
     });
   }, []);
 
-  console.log(professions)
 
   return (
     <>
-        <ServiceModal show={modalShow} onHide={() => setModalShow(false)} />
+        <ServiceModal professions={professions} setProfessions={setProfessions} show={modalShow} onHide={() => setModalShow(false)} />
 
         <Container fluid>
         <Row>
