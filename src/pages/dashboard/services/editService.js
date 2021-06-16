@@ -21,23 +21,24 @@ const schema = yup.object().shape({
   Price: yup.number(),
 });
 
-function Service(props) {
-  const { selectedService, professionState, setProfessionState, onHide } =
-    props;
+function EditService (props) {
+  const { selectedService , professionState, setProfessionState, onHide } =props;
 
-  const handleUpdateProfession = async (formData) => {
-    let dataf = {services:[formData]};
+  const handleUpdateProfession = async (values) => {
+    let data = {
+      "services":[values]
+    };
     
     await axios
       .put(
         process.env.REACT_APP_API_URL + "/professions/" + professionState._id,
-        dataf,
+        data,
         {
           "Content-Type": "multipart/form-data",
         }
       )
-      .then(({ data }) => {
-        setProfessionState(data);
+      .then(({ res }) => {
+        setProfessionState(res);
         onHide();
       });
   };
@@ -58,12 +59,7 @@ function Service(props) {
             onSubmit={async (values, actions) => {
               actions.setSubmitting(true);
               try {
-                const formData = new FormData();
-                for (let field in values) {
-                  formData.append(field, values[field]);
-                }
                 handleUpdateProfession(values);
-
                 actions.setSubmitting(false);
               } catch (error) {
                 console.error(error);
@@ -97,8 +93,7 @@ function Service(props) {
                       type="text"
                       placeholder="service"
                       name="service"
-                      value={selectedService.service}
-                      defaultValue={selectedService.service}
+                      value={values.service}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       isInvalid={touched.service && errors.service}
@@ -156,5 +151,5 @@ function Service(props) {
   );
 }
 
-render(<Service />);
-export default Service;
+render(<EditService/>);
+export default EditService;
