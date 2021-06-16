@@ -7,7 +7,7 @@ import Service from "../services/service"
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 function ProfessionTable({ profession, setProfession, index }) {
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow ] = useState(false);
   const [professionSate , setProfessionState] = useState({})
 
   const deleteProfission = (id) => {
@@ -21,15 +21,6 @@ function ProfessionTable({ profession, setProfession, index }) {
         });
     }
   };
-
-  // const handleEditService = (id)=>{
-  //   setModalShow(true)
-  //   axios
-  //   .get(process.env.REACT_APP_API_URL + "/professions/"+ id)
-  //   .then(({data}) => {
-  //     setProfessionState((oldData) => data);
-  //   });
-  // }
   return (
     <>
       <tr>
