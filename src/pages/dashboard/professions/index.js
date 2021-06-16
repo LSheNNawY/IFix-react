@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CollapseTable from "../../dashboard/Collapse";
-import { Link } from "react-router-dom";
-import ServiceModal from "../ServiceModal";
+import ProfessionTable from "./Profession";
+import CreateProfession from "./createProfession"
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 
@@ -21,7 +20,7 @@ function Professions() {
 
   return (
     <>
-        <ServiceModal professions={professions} setProfessions={setProfessions} show={modalShow} onHide={() => setModalShow(false)} />
+        <CreateProfession professions={professions} setProfessions={setProfessions} show={modalShow} onHide={() => setModalShow(false)} />
 
         <Container fluid>
         <Row>
@@ -32,6 +31,7 @@ function Professions() {
                 <p className="card-category">control</p>
                 <div className="float-right">
                     <Button variant="primary" onClick={() => setModalShow(true)}>
+                    <i className="fa fa-plus"></i>
                         New Profession
                     </Button>
 
@@ -50,7 +50,7 @@ function Professions() {
                   </thead>
                   <tbody>
                     {professions.map((profession, index) => (
-                      <CollapseTable
+                      <ProfessionTable
                         profession={profession}
                         setProfession={setProfessions}
                         index={index}
