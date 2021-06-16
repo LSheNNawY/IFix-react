@@ -1,27 +1,38 @@
 import React, { useState } from "react";
 import "../../../styles/CollapseTable.css";
 import axios from "axios";
-import EditService from "./EditService"
+import editService from "./editService";
+
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
-function ServiceTable({ profession }) {
+function ServiceTable({ profession,setProfession }) {
   const [modalShow, setModalShow] = useState(false);
-  const [professionState, setProfessionState]=useState({})
-  const [selectedService, setSelectedService]=useState({service:"",description:"",price:""})
+  // const [professionState, setProfessionState] = useState({});
+  const [selectedService, setSelectedService] = useState({
+    service: "",
+    description: "",
+    price: "",
+  });
 
-  const handleEditService = (professionId,service)=>{
-    setModalShow(true)
+  const handleEditService = (professionId, service) => {
+    setModalShow(true);
     axios
-    .get(process.env.REACT_APP_API_URL + "/professions/"+ professionId)
-    .then(({data}) => {
-      setProfessionState(data);
-      setSelectedService(service)
-    });
-  }
+      .get(process.env.REACT_APP_API_URL + "/professions/" + professionId)
+      .then(({ data }) => {
+        setProfession(data);
+        setSelectedService(service);
+      });
+  };
   return (
     <>
-      <EditService professionState={professionState} setProfessionState={setProfessionState} selectedService={selectedService} show={modalShow} onHide={() => setModalShow(false)} />
+      <editService
+        profession={profession}
+        setProfession={setProfession}
+        selectedService={selectedService}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
       <table className="table table-striped">
         <thead>
           <tr className="info">
@@ -41,7 +52,10 @@ function ServiceTable({ profession }) {
                 <td> {service.price}</td>
                 <td>
                   {" "}
-                  <button className="btn btn-warning mr-1" onClick={()=>handleEditService(profession._id,service)}>
+                  <button
+                    className="btn btn-warning mr-1"
+                    onClick={() => handleEditService(profession._id, service)}
+                  >
                     <i className="fa fa-pen"></i>
                   </button>
                   <button className="btn btn-danger mr-1">

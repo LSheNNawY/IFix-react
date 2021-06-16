@@ -8,7 +8,6 @@ import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 function ProfessionTable({ profession, setProfession, index }) {
   const [modalShow, setModalShow ] = useState(false);
-  const [professionSate , setProfessionState] = useState({})
 
   const deleteProfission = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -55,7 +54,7 @@ function ProfessionTable({ profession, setProfession, index }) {
             className="accordian-body collapse"
             id={"demo1" + profession._id}
           >
-            <ServiceTable profession={profession}/>
+            <ServiceTable profession={profession} setProfession={setProfession}/>
             
           </div>
         </td>
