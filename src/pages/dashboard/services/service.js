@@ -2,26 +2,27 @@ import React, { useState } from "react";
 import "../../../styles/CollapseTable.css";
 import ServiceModal from "./editService";
 import axios from "axios";
-
-
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 function ServiceTable({ profession }) {
   const [modalShow, setModalShow] = useState(false);
+  const [professionState, setProfessionState]=useState({})
+  const [selectedService, setSelectedService]=useState({})
 
-  // const handleEditService = (id)=>{
-  //   setModalShow(true)
-  //   axios
-  //   .get(process.env.REACT_APP_API_URL + "/professions/"+ id)
-  //   .then(({data}) => {
-  //     setProfessionState((oldData) => data);
-  //   });
-  // }
+  const handleEditService = (service,professionId)=>{
+    setModalShow(true)
+    axios
+    .get(process.env.REACT_APP_API_URL + "/professions/"+ professionId)
+    .then(({data}) => {
+      setProfessionState(data);
+      setSelectedService(service)
+    });
+  }
   return (
     <>
-      <ServiceModal show={modalShow} onHide={() => setModalShow(false)} />
 
+      <ServiceModal professionState={professionState} setProfessionState={setProfessionState} selectedService={selectedService} show={modalShow} onHide={() => setModalShow(false)} />
       <table className="table table-striped">
         <thead>
           <tr className="info">
@@ -42,7 +43,7 @@ function ServiceTable({ profession }) {
                 <td> {service.price}</td>
                 <td>
                   {" "}
-                  <button className="btn btn-warning mr-1">
+                  <button className="btn btn-warning mr-1" onClick={()=>handleEditService(service,profession._id)}>
                     <i className="fa fa-pen"></i>
                   </button>
 
