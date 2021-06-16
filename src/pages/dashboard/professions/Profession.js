@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import "../../styles/CollapseTable.css";
+import "../../../styles/CollapseTable.css"
 import axios from "axios";
+import Service from "../services/service"
 
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
-function CollapseTable({ profession, setProfession, index }) {
-  
+function ProfessionTable({ profession, setProfession, index }) {
+  const [modalShow, setModalShow] = useState(false);
+  const [professionSate , setProfessionState] = useState({})
+
   const deleteProfission = (id) => {
     if (window.confirm("Are you sure?")) {
       axios
-        .delete(process.env.REACT_APP_API_URL + "/professions/" + id)
+        .delete(process.env.REACT_APP_API_URL + "/professions/"+ id)
         .then((res) => {
           setProfession((olddata) =>
             olddata.filter((profession) => profession._id !== id)
@@ -18,6 +21,15 @@ function CollapseTable({ profession, setProfession, index }) {
         });
     }
   };
+
+  // const handleEditService = (id)=>{
+  //   setModalShow(true)
+  //   axios
+  //   .get(process.env.REACT_APP_API_URL + "/professions/"+ id)
+  //   .then(({data}) => {
+  //     setProfessionState((oldData) => data);
+  //   });
+  // }
   return (
     <>
       <tr>
@@ -52,35 +64,12 @@ function CollapseTable({ profession, setProfession, index }) {
             className="accordian-body collapse"
             id={"demo1" + profession._id}
           >
-            <table className="table table-striped">
-              <thead>
-                <tr className="info">
-                  <th>Service</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {profession.services.map((service, i) => {
-                  return (
-                    <tr
-                      data-toggle="collapse"
-                      className="accordion-toggle"
-                      key={i}
-                    >
-                      <td> {service.service}</td>
-                      <td> {service.description}</td>
-                      <td> {service.price}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <Service profession={profession}/>
+            
           </div>
         </td>
       </tr>
     </>
   );
 }
-export default CollapseTable;
+export default ProfessionTable;

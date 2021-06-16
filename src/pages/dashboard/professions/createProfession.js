@@ -3,17 +3,15 @@ import {
   Col,
   Container,
   Form,
-  InputGroup,
   Modal,
-  Row,
 } from "react-bootstrap";
 import React, { useState } from "react";
 import { render } from "@testing-library/react";
 import { Formik } from "formik";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import ModalDialog from "react-bootstrap/ModalDialog";
 import * as yup from "yup";
+
 const schema = yup.object().shape({
   title: yup.string().min(3).max(15).required("Title Required"),
   description: yup.string().required("Description Required"),
@@ -21,9 +19,7 @@ const schema = yup.object().shape({
   img: yup.string().required("Img Required"),
 });
 
-
-function ServiceModal(props) {
-  const history = useHistory();
+function CreateProfession(props) {
   const { professions, setProfessions, show, onHide } = props;
 
   const handleCreateProfession =async(formData)=>{
@@ -214,5 +210,5 @@ function ServiceModal(props) {
   );
 }
 
-render(<ServiceModal />);
-export default ServiceModal;
+render(<CreateProfession/>);
+export default CreateProfession;

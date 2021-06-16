@@ -5,7 +5,6 @@ import Typography from "../../pages/dashboard/Typography";
 import Maps from "../../pages/dashboard/Maps";
 import Notifications from "../../pages/dashboard/Notifications";
 import Professions from "../../pages/dashboard/professions/index"
-import ProfessionsCreate from "../../pages/dashboard/professions/create"
 
 
 const dashboardRoutes = [
@@ -56,13 +55,6 @@ const dashboardRoutes = [
         name: "Professions",
         icon: "fa fa-bullhorn",
         component: Professions,
-        layout: "/admin",
-    },
-    {
-        path: "/new",
-        name: "Professions.new",
-        icon: "fa fa-bullhorn",
-        component:ProfessionsCreate ,
         layout: "/admin",
     }
 
