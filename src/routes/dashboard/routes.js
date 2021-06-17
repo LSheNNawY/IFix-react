@@ -4,7 +4,7 @@ import TableList from "../../pages/dashboard/TableList";
 import Typography from "../../pages/dashboard/Typography";
 import Maps from "../../pages/dashboard/Maps";
 import Notifications from "../../pages/dashboard/Notifications";
-import Professions from "../../pages/dashboard/professions/index"
+import Professions from "../../pages/dashboard/professions/Index"
 
 
 const dashboardRoutes = [

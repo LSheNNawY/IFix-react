@@ -19,7 +19,7 @@ const schema = yup.object().shape({
   Price: yup.number(),
 });
 
-function editService (props) {
+function EditService (props) {
   const {  profession,setProfession,selectedService ,show, onHide } = props;
 
 
@@ -151,4 +151,4 @@ function editService (props) {
 }
 
 render(<editService/>);
-export default editService;
+export default EditService;

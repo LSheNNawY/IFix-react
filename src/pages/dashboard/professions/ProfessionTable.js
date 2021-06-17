@@ -5,7 +5,7 @@ import ServiceTable from "../services/ServiceTable";
 
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
-import EditProfession from "./editProfession";
+import EditProfession from "./EditProfession";
 
 function ProfessionTable({
   professionState,

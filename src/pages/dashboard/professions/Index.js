@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import ProfessionTable from "./ProfessionTable";
-import CreateProfession from "./createProfession"
+import CreateProfession from "./CreateProfession"
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
-import EditProfession from "./editProfession";
+import editProfession from "./EditProfession";
 
 function Index() {
     const [professions, setProfessions] = useState([]);
