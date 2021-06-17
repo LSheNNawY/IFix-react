@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../styles/CollapseTable.css";
 import axios from "axios";
-import EditService from "./editService";
+import EditService from "./EditService";
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 function ServiceTable({ profession, setProfession }) {

@@ -5,15 +5,13 @@ import ServiceTable from "../services/ServiceTable";
 
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
-import EditProfession from "./editProfession";
+import EditProfession from "./EditProfession";
+import CreateService from "../services/CreateService";
 
-function ProfessionTable({
-  professionState,
-  setProfessions,
-  index,
-  setRefresh,
-}) {
-  const [modalShow, setModalShow] = useState(false);
+function ProfessionTable({ professionState, setProfessions, index }) {
+  const [modalProfessionShow, setmodalProfessionShow] = useState(false);
+  const [modalServiceShow, setmodalServiceShow] = useState(false);
+
   const [profession, setProfession] = useState(professionState);
 
   const deleteProfission = (id) => {
@@ -31,11 +29,17 @@ function ProfessionTable({
   return (
     <>
       <EditProfession
-        setRefresh={setRefresh}
         profession={profession}
         setProfession={setProfession}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
+        show={modalProfessionShow}
+        onHide={() => setmodalProfessionShow(false)}
+      />
+
+      <CreateService
+        profession={profession}
+        setProfession={setProfession}
+        show={modalServiceShow}
+        onHide={() => setmodalServiceShow(false)}
       />
 
       <tr>
@@ -55,7 +59,7 @@ function ProfessionTable({
         <td>
           <button
             className="btn btn-warning mr-1"
-            onClick={() => setModalShow(true)}
+            onClick={() => setmodalProfessionShow(true)}
           >
             <i className="fa fa-pen"></i>
           </button>
@@ -64,6 +68,12 @@ function ProfessionTable({
             onClick={() => deleteProfission(profession._id)}
           >
             <i className="fa fa-trash"></i>
+          </button>
+          <button
+            className="btn btn-info mr-1"
+            onClick={() => setmodalServiceShow(true)}
+          >
+            <i className="fas fa-plus"></i>
           </button>
         </td>
       </tr>
