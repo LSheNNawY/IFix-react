@@ -3,6 +3,7 @@ import "../../../styles/CollapseTable.css";
 import axios from "axios";
 import ServiceTable from "../services/ServiceTable";
 
+
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 import EditProfession from "./EditProfession";
@@ -45,7 +46,14 @@ function ProfessionTable({ professionState, setProfessions, index }) {
       <tr>
         <td>{index + 1}</td>
         <td>{profession.title}</td>
-        <td>{profession.img}</td>
+
+        <td>
+          <div style={{width:"100px"}}>
+            <img style={{width:"60%"}} src={`http://localhost:5000/uploads/professions/${profession.img}`}/>
+
+          </div>
+
+        </td>
         <td>
           <button
             data-toggle="collapse"
