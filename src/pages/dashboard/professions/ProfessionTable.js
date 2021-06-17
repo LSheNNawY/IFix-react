@@ -82,6 +82,7 @@ function ProfessionTable({ professionState, setProfessions, index }) {
             onClick={() => setmodalServiceShow(true)}
           >
             <i className="fas fa-plus"></i>
+            Service
           </button>
         </td>
       </tr>
