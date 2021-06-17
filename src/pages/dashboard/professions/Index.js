@@ -5,7 +5,7 @@ import ProfessionTable from "./ProfessionTable";
 import CreateProfession from "./CreateProfession"
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
-import editProfession from "./EditProfession";
+import EditProfession from "./EditProfession";
 
 function Index() {
     const [professions, setProfessions] = useState([]);

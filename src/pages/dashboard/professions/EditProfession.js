@@ -17,7 +17,7 @@ const schema = yup.object().shape({
     img: yup.string().required("Img Required"),
 });
 
-function editProfession(props) {
+function EditProfession(props) {
     const { profession,setProfession, show, onHide} = props;
 
     const handleUpdateProfession = async (data) => {
@@ -144,5 +144,4 @@ function editProfession(props) {
     );
 }
 
-render(<editProfession/>);
-export default editProfession;
+export default EditProfession;

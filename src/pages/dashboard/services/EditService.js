@@ -150,5 +150,5 @@ function EditService (props) {
   );
 }
 
-render(<editService/>);
+
 export default EditService;

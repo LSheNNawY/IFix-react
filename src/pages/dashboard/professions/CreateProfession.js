@@ -211,5 +211,4 @@ function CreateProfession(props) {
   );
 }
 
-render(<CreateProfession/>);
 export default CreateProfession;
