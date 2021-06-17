@@ -22,9 +22,7 @@ const schema = yup.object().shape({
 function EditService (props) {
   const {  profession,setProfession,selectedService ,show, onHide } = props;
 
-
-
-  const handleUpdateProfession = async (values) => {
+  const handleUpdateService = async (values) => {
     let data = {
       services:[values]
     };
@@ -59,7 +57,7 @@ function EditService (props) {
                 onSubmit={async (values, actions) => {
                   actions.setSubmitting(true);
                   try {
-                    handleUpdateProfession(values);
+                    handleUpdateService(values);
                     actions.setSubmitting(false);
                   } catch (error) {
                     console.error(error);
