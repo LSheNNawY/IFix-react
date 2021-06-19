@@ -2,6 +2,9 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import AboutUs from "./pages/AboutUs";
+import Profile from "./pages/Profile";
+import Contact from "./pages/Contact";
 
 import AdminLayout from "./layouts/Admin";
 
@@ -12,8 +15,7 @@ import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "./assets/dashboard/css/demo.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import AboutUs from "./pages/AboutUs";
-import Profile from "./pages/Profile";
+
 
 function App() {
     return (
@@ -22,6 +24,7 @@ function App() {
                 <Route path="/" component={Home} exact />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/contact" component={Contact} />
                 <Route
                     path="/admin"
                     render={(props) => <AdminLayout {...props} />}

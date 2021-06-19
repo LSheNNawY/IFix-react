@@ -27,13 +27,13 @@ const NavbarComponent = () => {
                     >
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a
+                                <Link
                                     class="nav-link  active"
                                     aria-current="page"
-                                    href="index.html"
+                                    to="/"
                                 >
                                     HOME
-                                </a>
+                                </Link>
                             </li>
                             <li class="nav-item">
                                 <a
@@ -50,9 +50,9 @@ const NavbarComponent = () => {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link  " href="contact.html">
+                                <Link class="nav-link  " to="/contact">
                                     CONTACT
-                                </a>
+                                </Link>
                             </li>
                             <li
                                 class="nav-item"
