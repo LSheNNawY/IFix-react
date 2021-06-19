@@ -12,6 +12,8 @@ import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "./assets/dashboard/css/demo.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import AboutUs from "./pages/AboutUs";
+import Profile from "./pages/Profile";
 
 function App() {
     return (
@@ -24,6 +26,11 @@ function App() {
                     path="/admin"
                     render={(props) => <AdminLayout {...props} />}
                 />
+
+
+
+                <Route path="/aboutUs" component={AboutUs} />
+
             </Switch>
         </div>
     );
