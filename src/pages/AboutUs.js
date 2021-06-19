@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavbarComponent from "../components/front/NavbarComponent";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import "../assets/front/css/index.css";
 import "../assets/front/css/about.css";
@@ -13,8 +13,32 @@ import fix3 from "../assets/front/img/fix3.jpg"
 
 import FooterComponent from "../components/front/FooterComponent";
 import ChooseUsComponent from "../components/front/ChooseUsComponent";
-
+import Employee from "../components/front/EmployeeComponent";
+import axios from "axios";
+const ajaxGetProfessions = async (professionsNum = "3") => {
+    return await axios.get(
+        `${process.env.REACT_APP_API_URL}/professions?professions=${professionsNum}`
+    );
+};
 const AboutUs = (props) => {
+
+    const [professions, setProfessions] = useState([]);
+    const [employees, setEmployees] = useState([]);
+    const sliderText = "We Provide Best Fix Services";
+
+    useEffect(() => {
+        ajaxGetProfessions(3).then(({ data }) => {
+            setProfessions(data);
+            let emps = [];
+            data.forEach((profession) => {
+                if (profession.employees.length>0) {
+                    emps.push(profession.employees[0]);
+                }
+            });
+
+            setEmployees(emps);
+        });
+    }, []);
     return (
         <div className="index-wrapper">
             <NavbarComponent />
@@ -25,9 +49,9 @@ const AboutUs = (props) => {
                             <div className="breadcrumb__text">
                                 <h2>About US</h2>
                                 <div className="breadcrumb__links">
-                                    <a href="">Home</a>
+                                    <Link to="/">Home</Link>
                                     <span style={{color: "white"}}>|</span>
-                                    <a href="">contact</a>
+                                    <Link to="/contact">contact</Link>
                                 </div>
                             </div>
                         </div>
@@ -37,73 +61,19 @@ const AboutUs = (props) => {
 
 
 
-            <div className="container-fluid">
-
-                <div className="row " style={{width: "90%", marginLeft:"5%" , marginTop: "50PX"}}>
-                    <div className="col-lg-6 col-md-6 about__text">
-                        <div className="label">Welcome To IFix</div>
-                        <h2><span>We provide services</span> for multiple customers in various industries and segments
-                        </h2>
-                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Quis
-                            ipsum suspendisse ultrices gravida lacus vel facilisis.
-                        </p>
-                        <a href="" className="primary-btn">Contact us</a>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-
-                        <div className="about__video set-bg" style={{ backgroundImage: 'url(' + about + ')'}}>
-                            <a href="https://www.youtube.com/watch?v=0AlYkJwy9Qk" className="play-btn video-popup"><i
-                                className="fa fa-play"></i></a>
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-
-                <div className="row"
-                     style={{width: "90%", marginLeft:"5%" , marginTop: "50PX", marginBottom: "50px", backgroundColor: "white",paddingBottom: "20px"}}>
-
-                    <div className="col-lg-6 ">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <img src={fix1} style={{height:"500px"}}/>
-                            </div>
-                            <div className="col-lg-6">
-                                <img src={fix2} height="225px" style={{marginBottom: "50px"}}/>
-
-                                    <img src={fix3} height="225px"/>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="col-lg-6 col-md-6 about__text" style={{paddingLeft: "50px"}}>
-                        <div className="label  mt-5">WHY CHOOSE US</div>
-                        <span className="choose">Why choose us</span>
-                        <h2 className="mt-3 mb-3" style={{width: "120px",borderBottom: "3px solid lightgray"}}></h2>
-                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                            ipsum suspendisse ultrices gravida lacus vel facilisis.
-                        </p>
-                        <ul className="chooseUl">
-                            <li><i class="fas fa-check-square"></i>bla bla bla bla bla bla bla</li>
-                            <li><i class="fas fa-check-square"></i>bla bla bla bla bla bla bla</li>
-                            <li><i class="fas fa-check-square"></i>bla bla bla bla bla bla bla</li>
-                            <li><i class="fas fa-check-square"></i>bla bla bla bla bla bla bla</li>
-                            <li><i class="fas fa-check-square"></i>bla bla bla bla bla bla bla</li>
-
-                        </ul>
-                        <a href="" className="primary-btn">Contact us</a>
-                    </div>
-                </div>
-            </div>
-
-
+            <ChooseUsComponent />
+            {/* small insights */}
             <div className="counter">
                 <div className="container-fluid">
-                    <div className="row" style={{width: "90%",marginLeft:"5%",marginTop: "50PX" ,marginBottom: "50px"}}>
+                    <div
+                        className="row"
+                        style={{
+                            width: "90%",
+                            marginLeft: "5%",
+                            marginTop: "50px",
+                            marginBottom: "50px",
+                        }}
+                    >
                         <div className="col-md-6 content">
                             <i className="fas fa-users"></i>
                             <div className="counter__item__num">
@@ -111,7 +81,6 @@ const AboutUs = (props) => {
                                 <span>k+</span>
                                 <p>Happy Customers</p>
                             </div>
-
                         </div>
                         <div className="col-md-6 content">
                             <i className="fas fa-comment-dollar"></i>
@@ -126,10 +95,61 @@ const AboutUs = (props) => {
             </div>
 
 
+
+            {/* team */}
+            <div
+                className="team"
+                style={{
+                    position: "relative",
+                    bottom: "210px",
+                }}
+            >
+                <div className="container-fluid">
+                    <div
+                        className="row "
+                        style={{
+                            width: "90%",
+                            marginLeft: "5%",
+                            marginTop: "50px",
+                            marginBottom: "50px",
+                        }}
+                    >
+                        <div className="col-12 text-center">
+                            <p className="label ">TOP RATED</p>
+                            <h2>Meet our TOP RATED</h2>
+                            <h2
+                                className="mt-3 mb-3"
+                                style={{
+                                    width: "120px",
+                                    borderBottom: "3px solid lightgray",
+                                    marginLeft: "45%",
+                                }}
+                            ></h2>
+                            <div
+                                className="row"
+                                style={{
+                                    marginTop: "30px",
+                                }}
+                            >
+                                {employees.length>0 &&
+                                employees.map((employee) => (
+                                    <Employee
+                                        employee={employee}
+                                        key={employee._id}
+                                    />
+                                ))}
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <FooterComponent />
         </div>
     )
-
 };
 
 export default AboutUs;
