@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
-// import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
+import AllProfessions from "./pages/AllProfessions";
 
 import AdminLayout from "./layouts/Admin";
 
@@ -15,9 +15,7 @@ import "./assets/dashboard/css/animate.min.css";
 import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "./assets/dashboard/css/demo.css";
 
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
 
 function App() {
     return (
@@ -27,12 +25,16 @@ function App() {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/aboutUs" component={AboutUs} />
+                <Route
+                    path="/profile/:id"
+                    render={(props) => <Profile {...props} />}
+                />
                 <Route
                     path="/admin"
                     render={(props) => <AdminLayout {...props} />}
                 />
-                <Route path="/profile/:id" render={(props) => <Profile {...props} />} />            
-                <Route path="/aboutUs" component={AboutUs} />
+                <Route path="/professions" component={AllProfessions} />
 
             </Switch>
         </div>
