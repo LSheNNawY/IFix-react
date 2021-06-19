@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,23 +16,33 @@ import ifix3 from "../assets/front/img/fix3.jpg";
 
 import emp1Img from "../assets/front/img/employees/employee1.jpg";
 
-
-
 const ajaxGetProfessions = async (professionsNum = "3") => {
     return await axios.get(
         `${process.env.REACT_APP_API_URL}/professions?professions=${professionsNum}`
     );
 };
 
+const getEmployeesByProfessionIds = async (professionsIds) => {
+    return await axios.get(
+        `${process.env.REACT_APP_API_URL}/employees?professionsIds=${professionsIds}`
+    );
+};
+
 const Home = () => {
     const [professions, setProfessions] = useState([]);
     const [employees, setsetEmployees] = useState([]);
+    const sliderText = "We Provide Best Fix Services";
 
     useEffect(() => {
         ajaxGetProfessions(3).then(({ data }) => {
             setProfessions(data);
-            const ProfEmployees = data.map(profession => profession.employee)
-            console.log(data);
+            let profIds = "";
+            data.forEach(profession => {
+                console.log(profession);
+            })
+            getEmployeesByProfessionIds(profIds).then(({ data }) => {
+                console.log(data);
+            });
         });
     }, []);
     return (
@@ -72,9 +81,7 @@ const Home = () => {
                                 <span className=" animate__animated animate__fadeInLeft">
                                     Best fix
                                 </span>
-                                <h2>
-                                    We Provide Best fix Services All Over World
-                                </h2>
+                                <h2>{sliderText}</h2>
                                 <Link to={"/contact"} className="primary-btn">
                                     Contact us
                                 </Link>
@@ -91,12 +98,10 @@ const Home = () => {
                         <div className="carousel-caption d-none d-md-block">
                             <div className="hero__text">
                                 <span>Best fix</span>
-                                <h2>
-                                    We Provide Best fix Services All Over World
-                                </h2>
-                                <a href="contact.html" className="primary-btn">
+                                <h2>{sliderText}</h2>
+                                <Link to={"contact"} className="primary-btn">
                                     Contact us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -109,9 +114,7 @@ const Home = () => {
                         <div className="carousel-caption d-none d-md-block">
                             <div className="hero__text">
                                 <span>Best fix</span>
-                                <h2>
-                                    We Provide Best fix Services All Over World
-                                </h2>
+                                <h2>{sliderText}</h2>
                                 <a href="contact.html" className="primary-btn">
                                     Contact us
                                 </a>
@@ -326,15 +329,11 @@ const Home = () => {
                                     marginTop: "30px",
                                 }}
                             >
-                             
                                 <div className="col-lg-3 col-md-6">
-                                    <img src={emp1Img} alt="img" />
+                                    <Link to={`profile`}>
+                                        <img src={emp1Img} alt="img" />
+                                    </Link>
                                     <div className="team__item__text">
-                                        {/* <div className="team__item__social">
-                                            <a href={"/profile"}>
-                                                <i className="fab fa-youtube-square"></i>
-                                            </a>
-                                        </div> */}
                                         <Link to={`profile`}>
                                             <h4>Employee Name</h4>
                                         </Link>
@@ -347,7 +346,6 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            
                             </div>
                         </div>
                     </div>
