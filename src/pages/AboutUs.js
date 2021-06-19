@@ -12,6 +12,7 @@ import fix2 from "../assets/front/img/fix2.jpg"
 import fix3 from "../assets/front/img/fix3.jpg"
 
 import FooterComponent from "../components/front/FooterComponent";
+import ChooseUsComponent from "../components/front/ChooseUsComponent";
 
 const AboutUs = (props) => {
     return (
