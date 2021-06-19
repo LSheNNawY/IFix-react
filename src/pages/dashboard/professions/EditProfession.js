@@ -21,6 +21,7 @@ function EditProfession(props) {
     const { profession,setProfession, show, onHide} = props;
 
     const handleUpdateProfession = async (data) => {
+
         await axios
             .put(
                 process.env.REACT_APP_API_URL + "/professions/" + profession._id,
