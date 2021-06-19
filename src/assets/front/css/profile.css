@@ -1,4 +1,3 @@
-
 .home_banner_area {
     position: relative;
     z-index: 1;
@@ -73,5 +72,65 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
+    color: #ffc446;
+}
+
+.site-btn {
+    font-size: 15px;
+    color: #fff;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    background: #052336;
+    padding: 14px 30px 12px;
+}
+
+img{
+    width:100%;
+    height:100%;
+}
+
+.review{
+    padding: 100px 0px;
+  
+}
+.review h1{
+    padding: 25px
+
+}
+.one__review{
+    padding: 20px;
+    border-bottom:1px solid lightgray;
+    margin-bottom: 10px;
+}
+
+.review .reviewer img{
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    
+}
+.review .reviewer h4{
+    margin-top: 8px;
+}
+.review .reviewer p{
+    color:rgb(161, 158, 158);
+}
+@media   (min-width: 1199px){
+    .review .reviewer .col-6 {
+    margin-left: -80px;
+  
+ }
+}
+.review__content{
+    margin-top: 25px;
+}
+.review__content p{
+    color: gray;
+}
+
+.rate i {
     color: #ffc446;
 }
