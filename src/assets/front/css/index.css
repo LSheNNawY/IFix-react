@@ -285,53 +285,63 @@
     transition: all, 0.6s;
 }
 
-.index-wrapper .services__item {
-    margin-bottom: 80px;
-    margin-top: 80px;
-}
-.index-wrapper .services__item__icon {
-    height: 85px;
-    width: 85px;
-    border: 1px solid #ffc446;
-    color: #ffc446;
-    font-size: 40px;
-    line-height: 85px;
-    text-align: center;
-    border-radius: 10px;
-    float: left;
-    margin-right: 42px;
-    margin-top: 15px;
-    margin-left: 13px;
-    transition: all, 0.3s;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -webkit-transition: all, 0.3s;
-    -o-transition: all, 0.3s;
-}
 
-.index-wrapper .services__item__icon a {
-    color: #ffc446;
-}
 
-.index-wrapper .services__item__icon a i {
-    width: 50px;
-}
-.index-wrapper .services__item__text h4 {
-    color: #0e1f24;
-    font-size: 22px;
-    font-weight: 600;
+.index-wrapper .label {
+    font-size: 15px;
+    color: #ffc446;
+    font-weight: 700;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
-.index-wrapper .services__item__text p {
+.index-wrapper .about__text h2 {
+    font-size: 35px;
+    color: #444;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: Rajdhani-Medium;
+}
+.index-wrapper .about__text h2 span {
+    font-weight: 600;
+    color: #170e02;
+    font-family: Rajdhani-Medium;
+}
+.index-wrapper .about__text p {
+    color: #424242;
+    font-size: 17px;
+    line-height: 30px;
+    margin-bottom: 30px;
+}
+.index-wrapper .about__text .primary-btn , .team .primary-btn {
+    background: #052336;
+}
+
+/* why u choose us and about */
+
+.index-wrapper .choose {
+  
+    font-size: 40px;
+    font-weight: 600;
+    color: #0e1f24;
+    text-transform: uppercase;
+    position: relative;
+    display: block;
+}
+.index-wrapper .chooseUl li {
+    list-style: none;
+    font-size: 15px;
     font-weight: 300;
-    margin-bottom: 0;
-    line-height: 27px;
+    color: #444;
+    line-height: 32px;
+    margin-left: -35px;
 }
-.index-wrapper .services__item__text {
-    text-align: left;
+.index-wrapper .chooseUl li i {
+    color: #ffc446;
+    margin-right: 10px;
 }
+
 
 /* ----counter-- */
 .index-wrapper .counter {
