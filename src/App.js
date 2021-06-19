@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import AboutUs from "./pages/AboutUs";
-import Profile from "./pages/Profile";
+// import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
 
 import AdminLayout from "./layouts/Admin";

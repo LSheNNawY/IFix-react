@@ -4,17 +4,15 @@ import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import ProfessionComponent from "../components/front/ProfessionComponent";
 import FooterComponent from "../components/front/FooterComponent";
+import Employee from "../components/front/EmployeeComponent"
+import ChooseUsComponent from "../components/front/ChooseUsComponent"
 
 import "../assets/front/css/index.css";
 // import "../assets/front/css/animate.min.css";
 
 import carosel from "../assets/front/img/carasoul/carasoul1.jpg";
 import carosel2 from "../assets/front/img/carasoul/ca.jpg";
-import ifix1 from "../assets/front/img/fix1.jpg";
-import ifix2 from "../assets/front/img/fix2.jpg";
-import ifix3 from "../assets/front/img/fix3.jpg";
 
-import emp1Img from "../assets/front/img/employees/employee1.jpg";
 
 const ajaxGetProfessions = async (professionsNum = "3") => {
     return await axios.get(
@@ -22,27 +20,25 @@ const ajaxGetProfessions = async (professionsNum = "3") => {
     );
 };
 
-const getEmployeesByProfessionIds = async (professionsIds) => {
-    return await axios.get(
-        `${process.env.REACT_APP_API_URL}/employees?professionsIds=${professionsIds}`
-    );
-};
-
 const Home = () => {
     const [professions, setProfessions] = useState([]);
-    const [employees, setsetEmployees] = useState([]);
+    const [employees, setEmployees] = useState([]);
     const sliderText = "We Provide Best Fix Services";
 
     useEffect(() => {
         ajaxGetProfessions(3).then(({ data }) => {
             setProfessions(data);
-            let profIds = "";
-            data.forEach(profession => {
-                console.log(profession);
-            })
-            getEmployeesByProfessionIds(profIds).then(({ data }) => {
-                console.log(data);
+            let emps = [];
+            data.forEach((profession) => {
+                if (profession.employees) {
+                    // console.log(profession.employees[0]);
+                    emps.push(profession.employees[0]);
+                }
             });
+
+            setEmployees(emps);
+            console.log(employees);
+            // console.log(employees);
         });
     }, []);
     return (
@@ -184,84 +180,7 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* why u choose us */}
-            <div className="container-fluid">
-                <div
-                    className="row"
-                    style={{
-                        width: "90%",
-                        marginLeft: "5%",
-                        marginTop: "50px",
-                        marginBottom: "50px",
-                        backgroundColor: "white",
-                        paddingBottom: "20px",
-                    }}
-                >
-                    <div className="col-lg-6 ">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <img src={ifix1} height="500px" alt="img" />
-                            </div>
-                            <div className="col-lg-6">
-                                <img
-                                    src={ifix2}
-                                    height="225px"
-                                    style={{ marginBottom: "50px" }}
-                                    alt="img"
-                                />
-
-                                <img src={ifix3} height="225px" alt="img" />
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="col-lg-6 col-md-6 about__text"
-                        style={{ paddingLeft: "50px" }}
-                    >
-                        <div className="label mt-5">WHY YOU CHOOSE US</div>
-                        <span className="choose">Why choose us</span>
-                        <h2
-                            className="mt-3 mb-3"
-                            style={{
-                                width: "120px",
-                                borderBottom: "3px solid lightgray",
-                            }}
-                        ></h2>
-                        <p>
-                            Consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Quis
-                            ipsum suspendisse ultrices gravida lacus vel
-                            facilisis.
-                        </p>
-                        <ul className="chooseUl">
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                        </ul>
-                        <a href="contact.html" className="primary-btn">
-                            Contact us
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+            <ChooseUsComponent />
             {/* small insights */}
             <div className="counter">
                 <div className="container-fluid">
@@ -329,23 +248,13 @@ const Home = () => {
                                     marginTop: "30px",
                                 }}
                             >
-                                <div className="col-lg-3 col-md-6">
-                                    <Link to={`profile`}>
-                                        <img src={emp1Img} alt="img" />
-                                    </Link>
-                                    <div className="team__item__text">
-                                        <Link to={`profile`}>
-                                            <h4>Employee Name</h4>
-                                        </Link>
-                                        <div className="rate">
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                {employees &&
+                                    employees.map((employee) => (
+                                        <Employee
+                                            employee={employee}
+                                            key={employee._id}
+                                        />
+                                    ))}
                             </div>
                         </div>
                     </div>
