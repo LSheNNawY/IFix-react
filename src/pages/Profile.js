@@ -6,6 +6,8 @@ import "../assets/front/css/profile.css";
 import ReactStars from "react-rating-stars-component";
 import FooterComponent from "../components/front/FooterComponent";
 import NavbarComponent from "../components/front/NavbarComponent";
+import dateFormat from 'dateformat';
+
 
 const Profile = (props) => {
   const [empData, setEmpData] = useState({
@@ -19,6 +21,7 @@ const Profile = (props) => {
     profession: {},
     jobs: [],
   });
+
   const { id } = props.match.params;
   const ajaxGetEmployee = async () => {
     await axios
@@ -56,7 +59,7 @@ const Profile = (props) => {
                     <li>
                       <a href="#">
                         <i className="far fa-calendar-alt"></i>{" "}
-                        {empData.dateOfBirth}
+                        {dateFormat(empData.dateOfBirth, "mmmm dS, yyyy")}                       
                       </a>
                     </li>
                     <li>
@@ -92,10 +95,15 @@ const Profile = (props) => {
                   <div className="reviewer">
                     <div className="row">
                       <div className="col-2">
-                        {/* <img src="images/employees/employee3.jpg" alt="" /> */}
+                        <img
+                          src={`http://localhost:5000/uploads/users/${job.client.picture}`}
+                          alt=""
+                        />
                       </div>
                       <div className="col-6">
-                      <h4>{job.client.firstName}</h4>
+                        <h4>
+                          {job.client.firstName + " " + job.client.lastName}
+                        </h4>
                         <div className="rate">
                           {
                             <ReactStars
@@ -107,9 +115,6 @@ const Profile = (props) => {
                           }
                         </div>
                       </div>
-                      {/* <div className="col-2">
-                        <p>4 days ago</p>
-                      </div> */}
                     </div>
                   </div>
                   <div className="review__content">
