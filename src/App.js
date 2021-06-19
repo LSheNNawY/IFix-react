@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import AllProfessions from "./pages/AllProfessions";
+import Services from "./pages/Services";
 
 import AdminLayout from "./layouts/Admin";
 
@@ -35,7 +36,11 @@ function App() {
                     render={(props) => <AdminLayout {...props} />}
                 />
                 <Route path="/professions" component={AllProfessions} />
-
+                <Route
+                    path="/services/:id"
+                    render={(props) => <Services {...props} />}
+                />
+                {/* <Route path="/services" component={Services} /> */}
             </Switch>
         </div>
     );

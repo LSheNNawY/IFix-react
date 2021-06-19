@@ -14,19 +14,10 @@ const ajaxGetProfessions = async () => {
 
 const AllProfessions = () => {
   const [professions, setProfessions] = useState([]);
-  const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     ajaxGetProfessions().then(({ data }) => {
       setProfessions(data);
-      let emps = [];
-      data.forEach((profession) => {
-        if (profession.employees.length > 0) {
-          emps.push(profession.employees[0]);
-        }
-      });
-
-      setEmployees(emps);
     });
   }, []);
   return (
