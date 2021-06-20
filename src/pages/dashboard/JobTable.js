@@ -111,133 +111,116 @@ function Jobs() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {jobs.length > 0 ? (
-                                            jobs.map((job, index) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <td> {index + 1} </td>
+                                        {jobs.map((job, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td> {index + 1} </td>
 
-                                                        <td>
-                                                            {job.employee
-                                                                .firstName +
-                                                                " " +
-                                                                job.employee
-                                                                    .lastName}
-                                                        </td>
+                                                    <td>
+                                                        {job.employee
+                                                            .firstName +
+                                                            " " +
+                                                            job.employee
+                                                                .lastName}
+                                                    </td>
 
-                                                        <td>
-                                                            {job.employee.phone}
-                                                        </td>
+                                                    <td>
+                                                        {job.employee.phone}
+                                                    </td>
 
-                                                        <td>
-                                                            {job.client
-                                                                .firstName +
-                                                                " " +
-                                                                job.client
-                                                                    .lastName}
-                                                        </td>
+                                                    <td>
+                                                        {job.client.firstName +
+                                                            " " +
+                                                            job.client.lastName}
+                                                    </td>
 
-                                                        <td>
-                                                            {job.client.phone}
-                                                        </td>
+                                                    <td>{job.client.phone}</td>
 
-                                                        <td>
-                                                            {
-                                                                job.profession
-                                                                    .title
-                                                            }
-                                                        </td>
+                                                    <td>
+                                                        {job.profession
+                                                            ? job.profession
+                                                                  .title
+                                                            : "-"}
+                                                    </td>
 
-                                                        <td>
-                                                            {job.profession
-                                                                .services
-                                                                .length > 0 ? (
-                                                                job.profession.services.map(
-                                                                    (
-                                                                        service,
-                                                                        i
-                                                                    ) => {
-                                                                        return (
-                                                                            <p>
-                                                                                {
-                                                                                    job
-                                                                                        .profession
-                                                                                        .services[
-                                                                                        i
-                                                                                    ]
-                                                                                        .service
-                                                                                }
-                                                                            </p>
-                                                                        );
-                                                                    }
-                                                                )
-                                                            ) : (
-                                                                <></>
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {job.profession
-                                                                .services
-                                                                .length > 0 ? (
-                                                                job.profession.services.map(
-                                                                    (
-                                                                        service,
-                                                                        i
-                                                                    ) => {
-                                                                        return (
-                                                                            <p>
-                                                                                {" "}
-                                                                                {
-                                                                                    job
-                                                                                        .profession
-                                                                                        .services[
-                                                                                        i
-                                                                                    ]
-                                                                                        .price
-                                                                                }
-                                                                            </p>
-                                                                        );
-                                                                    }
-                                                                )
-                                                            ) : (
-                                                                <></>
-                                                            )}
-                                                        </td>
-
-                                                        <td>
-                                                            {" "}
-                                                            {job.warranty}{" "}
-                                                        </td>
-                                                        <td>
-                                                            {" "}
-                                                            {
-                                                                job.payment_method
-                                                            }{" "}
-                                                        </td>
-                                                        {/*  <td> {job.description} </td> */}
-                                                        <td> {job.price} </td>
-                                                        <td>
-                                                            <Button
-                                                                className="btn btn-danger mr-1"
-                                                                onClick={() =>
-                                                                    deleteUser(
-                                                                        job._id
-                                                                    )
+                                                    <td>
+                                                        {job.profession.services
+                                                            .length > 0 ? (
+                                                            job.profession.services.map(
+                                                                (
+                                                                    service,
+                                                                    i
+                                                                ) => {
+                                                                    return (
+                                                                        <p>
+                                                                            {
+                                                                                job
+                                                                                    .profession
+                                                                                    .services[
+                                                                                    i
+                                                                                ]
+                                                                                    .service
+                                                                            }
+                                                                        </p>
+                                                                    );
                                                                 }
-                                                            >
-                                                                <i className="fa fa-trash"></i>
-                                                            </Button>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })
-                                        ) : (
-                                            <tr>
-                                                <td colSpan="8">
-                                                    not found jobs..!
-                                                </td>
-                                            </tr>
-                                        )}
+                                                            )
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {job.profession.services
+                                                            .length > 0 ? (
+                                                            job.profession.services.map(
+                                                                (
+                                                                    service,
+                                                                    i
+                                                                ) => {
+                                                                    return (
+                                                                        <p>
+                                                                            {" "}
+                                                                            {
+                                                                                job
+                                                                                    .profession
+                                                                                    .services[
+                                                                                    i
+                                                                                ]
+                                                                                    .price
+                                                                            }
+                                                                        </p>
+                                                                    );
+                                                                }
+                                                            )
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </td>
+
+                                                    <td> {job.warranty} </td>
+                                                    <td>
+                                                        {" "}
+                                                        {
+                                                            job.payment_method
+                                                        }{" "}
+                                                    </td>
+                                                    {/*  <td> {job.description} </td> */}
+                                                    <td> {job.price} </td>
+                                                    <td>
+                                                        <Button
+                                                            className="btn btn-danger mr-1"
+                                                            onClick={() =>
+                                                                deleteUser(
+                                                                    job._id
+                                                                )
+                                                            }
+                                                        >
+                                                            <i className="fa fa-trash"></i>
+                                                        </Button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                 </Table>
                             </Card.Body>
