@@ -45,7 +45,7 @@ const Services = (props) => {
       {profession && (
         <div className="container">
           <div
-            className="row "
+            className="row"
             style={{
               width: "90%",
               marginLeft: "5%",
@@ -63,7 +63,8 @@ const Services = (props) => {
                   borderBottom: "3px solid lightgray",
                   marginLeft: "45%",
                 }}
-              ></h2>
+              >
+              </h2>
             </div>
             {profession.services &&
               profession.services.map((service) => {
@@ -78,7 +79,6 @@ const Services = (props) => {
               <div
                 className="row "
                 style={{
-                  width: "90%",
                   marginLeft: "5%",
                   marginTop: "50px",
                   marginBottom: "50px",

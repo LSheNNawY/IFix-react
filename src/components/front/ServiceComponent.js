@@ -4,7 +4,6 @@ import "../../assets/front/css/profession.css";
 import "../../styles/Header.css";
 
 const ServiceComponent = ({ service }) => {
-  console.log("service comp", service);
   return (
     <>
       <div className="col-lg-4 col-md-6 profession-wrapper">
@@ -17,7 +16,7 @@ const ServiceComponent = ({ service }) => {
             <h4>{service.service}</h4>
             <p>{service.description}</p>
             <p style={{ color: "#111", fontWeight: "700" }}>
-              price : {service.price}$
+              price : $ {service.price}
             </p>
           </div>
         </div>

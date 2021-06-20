@@ -102,7 +102,7 @@ export default function Employees() {
                                                 </td>
                                                 <td>{employee.email}</td>
                                                 <td>{employee.phone}</td>
-                                                <td>{employee.profession.title}</td>
+                                                <td>{employee.profession? employee.profession.title : "-" }</td>
                                                 <td>
                                                     <span
                                                         className={
