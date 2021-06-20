@@ -3,8 +3,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { Link, useHistory } from "react-router-dom";
 import { authFormValidation } from "../helpers/loginValidation";
-import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
-
+import "../assets/front/css/login.css";
 const ajaxLogin = async (email, password) => {
   const data = await (
     await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
@@ -50,105 +49,113 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="login-wrapper">
       <NavbarComponent />
+      <div
+        style={{
+          backgroundColor: "#ebeeef",
+          paddingTop: "120px",
+          paddingBottom: "120px",
+        }}
+      >
+        <div className="container ">
+          <div className="row">
+            <div className=" login-form col-lg-6 col-md-8">
+              
+              <div className="login-form-title">
+                <span className="login-form-title-1">login In</span>
+              </div>
+            
 
-      <div className="container mt-5 ">
-        <div className="row">
-        <Container className="mt-5 w-50">
-          <Form onSubmit={submitHandler} className="w-50 ml-5 ">
-            <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
-                Email address
-              </label>
-              <div className="input-group-prepend">
-                <span
-                  className={`input-group ${
-                    errors.email !== "" && errors.email !== "valid"
-                      ? "border-danger"
-                      : ""
-                  }`}
-                ></span>
-              </div>
-              <input
-                type="email"
-                className={`form-control  ${
-                  errors.email !== "" && errors.email !== "valid"
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                name="email"
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
-                value={user.email}
-              />
-              {errors.email !== "" && errors.email !== "valid" ? (
-                <h6 className="invalid-feedback">{errors.email}</h6>
-              ) : null}
+              <form onSubmit={submitHandler}>
+                <div className="mb-3">
+                  <label for="exampleInputEmail1" className="form-label">
+                    Email address
+                  </label>
+                  <div className="input-group-prepend">
+                    <span
+                      className={`input-group ${
+                        errors.email !== "" && errors.email !== "valid"
+                          ? "border-danger"
+                          : ""
+                      }`}
+                    ></span>
+                  </div>
+                  <input
+                    type="email"
+                    className={`form-control  ${
+                      errors.email !== "" && errors.email !== "valid"
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    name="email"
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
+                    value={user.email}
+                    placeholder="Enter your email"
+                  />
+                  {errors.email !== "" && errors.email !== "valid" ? (
+                    <h6 className="invalid-feedback">{errors.email}</h6>
+                  ) : null}
+                </div>
+                <div className="mb-3">
+                  <label for="exampleInputPassword1" className="form-label">
+                    Password
+                  </label>
+                  <div className="input-group-prepend">
+                    <span
+                      className={`input-group${
+                        errors.password !== "" && errors.password !== "valid"
+                          ? "border-danger"
+                          : ""
+                      }`}
+                    ></span>
+                  </div>
+                  <input
+                    type="password"
+                    className={`form-control  ${
+                      errors.password !== "" && errors.password !== "valid"
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    id="exampleInputPassword1"
+                    name="password"
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
+                    value={user.password}
+                  />
+                  {errors.password !== "" && errors.password !== "valid" ? (
+                    <h6 className="invalid-feedback">{errors.password}</h6>
+                  ) : null}
+                </div>
+                {loggingError ? (
+                  <h6 className="text-danger pb-3">{loggingError}</h6>
+                ) : (
+                  ""
+                )}
+ 
+                <button type="submit" className="btn btn-primary mb-3 site-btn">
+                  Submit
+                </button>
+                <div className="text-center w-100">
+                  <p className="text-muted font-weight-bold">
+                    Not a member?
+                    <Link to="/register" className=" ml-2 text-warning" >
+                      Register
+                    </Link>
+                  </p>
+                </div>
+              </form>
+           
             </div>
-            <div className="mb-3">
-              <label for="exampleInputPassword1" className="form-label">
-                Password
-              </label>
-              <div className="input-group-prepend">
-                <span
-                  className={`input-group${
-                    errors.password !== "" && errors.password !== "valid"
-                      ? "border-danger"
-                      : ""
-                  }`}
-                ></span>
-              </div>
-              <input
-                type="password"
-                className={`form-control  ${
-                  errors.password !== "" && errors.password !== "valid"
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="exampleInputPassword1"
-                name="password"
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                value={user.password}
-              />
-              {errors.password !== "" && errors.password !== "valid" ? (
-                <h6 className="invalid-feedback">{errors.password}</h6>
-              ) : null}
-            </div>
-            {loggingError ? (
-              <h6 className="text-danger pb-3">{loggingError}</h6>
-            ) : (
-              ""
-            )}
-            <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-              />
-              <label className="form-check-label" for="exampleCheck1">
-                Check me out
-              </label>
-            </div>
-            <button type="submit" className="btn btn-primary mb-3">
-              Submit
-            </button>
-            <div className="text-center w-100">
-              <p className="text-muted font-weight-bold">
-                Not a member?
-                <Link to="/register" className="text-primary ml-2">
-                  Register
-                </Link>
-              </p>
-            </div>
-          </Form>
-          </Container>
+          </div>
         </div>
       </div>
-
-     {/*  <FooterComponent /> */}
-    </>
+    </div>
   );
 };
 

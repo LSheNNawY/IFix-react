@@ -6,7 +6,7 @@ const NavbarComponent = () => {
     return (
         <div className="navbar-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light ">
-                <div class="container-fluid">
+                <div class="container">
                     <a class="navbar-brand" href="/">
                         Navbar
                     </a>
@@ -22,7 +22,7 @@ const NavbarComponent = () => {
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div
-                        class="collapse navbar-collapse float-end col-md-4"
+                        class="collapse navbar-collapse float-end col-lg-6"
                         id="navbarNav"
                     >
                         <ul class="navbar-nav">
