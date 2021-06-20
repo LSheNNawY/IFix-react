@@ -155,7 +155,8 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+      <FooterComponent />
+        </div>
   );
 };
 

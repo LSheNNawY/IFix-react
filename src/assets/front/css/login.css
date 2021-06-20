@@ -80,7 +80,7 @@ input,label{
 
     
 }
-input::placeholder{
+.login-wrapper  input::placeholder{
     transition: all 2s
 }
 .login-wrapper .form-control:focus{
