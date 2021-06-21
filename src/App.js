@@ -15,28 +15,23 @@ import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "./assets/dashboard/css/demo.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import AuthContextProvider from "./context/AuthContext";
 
 function App() {
-    return (
-        <div className="App">
-            <Switch>
-                <Route path="/" component={Home} exact />
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="/contact" component={Contact} />
-                <Route
-                    path="/admin"
-                    render={(props) => <AdminLayout {...props} />}
-                />
-
-
-
-                <Route path="/aboutUs" component={AboutUs} />
-
-            </Switch>
-        </div>
-    );
+  return (
+    <AuthContextProvider>
+      <div className="App">
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route path="/aboutUs" component={AboutUs} />
+        </Switch>
+      </div>
+    </AuthContextProvider>
+  );
 }
 
 export default App;
