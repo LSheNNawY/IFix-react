@@ -3,6 +3,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { Link, useHistory } from "react-router-dom";
 import { authFormValidation } from "../helpers/loginValidation";
+import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 
 const ajaxLogin = async (email, password) => {
   const data = await (
@@ -52,9 +53,10 @@ const Login = () => {
     <>
       <NavbarComponent />
 
-      <div className="container mt-5">
+      <div className="container mt-5 ">
         <div className="row">
-          <form onSubmit={submitHandler}>
+        <Container className="mt-5 w-50">
+          <Form onSubmit={submitHandler} className="w-50 ml-5 ">
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
                 Email address
@@ -70,36 +72,49 @@ const Login = () => {
               </div>
               <input
                 type="email"
-                className={`form-control  ${errors.email !== '' && errors.email !== 'valid' ? "is-invalid" : ""}`}
+                className={`form-control  ${
+                  errors.email !== "" && errors.email !== "valid"
+                    ? "is-invalid"
+                    : ""
+                }`}
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 name="email"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 value={user.email}
               />
-              {errors.email !== '' && errors.email !== 'valid' ?
-                                        <h6 className='invalid-feedback'>{errors.email}</h6> : null}
+              {errors.email !== "" && errors.email !== "valid" ? (
+                <h6 className="invalid-feedback">{errors.email}</h6>
+              ) : null}
             </div>
             <div className="mb-3">
               <label for="exampleInputPassword1" className="form-label">
                 Password
               </label>
               <div className="input-group-prepend">
-                                        <span
-                                            className={`input-group${errors.password !== '' && errors.password !== 'valid' ? "border-danger" : ""}`}>
-                                           
-                                        </span>
-                                    </div>
+                <span
+                  className={`input-group${
+                    errors.password !== "" && errors.password !== "valid"
+                      ? "border-danger"
+                      : ""
+                  }`}
+                ></span>
+              </div>
               <input
                 type="password"
-                className={`form-control  ${errors.password !== '' && errors.password !== 'valid' ? "is-invalid" : ""}`}
+                className={`form-control  ${
+                  errors.password !== "" && errors.password !== "valid"
+                    ? "is-invalid"
+                    : ""
+                }`}
                 id="exampleInputPassword1"
                 name="password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 value={user.password}
               />
-              {errors.password !== '' && errors.password !== 'valid' ?
-                                        <h6 className='invalid-feedback'>{errors.password}</h6> : null}
+              {errors.password !== "" && errors.password !== "valid" ? (
+                <h6 className="invalid-feedback">{errors.password}</h6>
+              ) : null}
             </div>
             {loggingError ? (
               <h6 className="text-danger pb-3">{loggingError}</h6>
@@ -116,7 +131,7 @@ const Login = () => {
                 Check me out
               </label>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary mb-3">
               Submit
             </button>
             <div className="text-center w-100">
@@ -127,11 +142,12 @@ const Login = () => {
                 </Link>
               </p>
             </div>
-          </form>
+          </Form>
+          </Container>
         </div>
       </div>
 
-      <FooterComponent />
+     {/*  <FooterComponent /> */}
     </>
   );
 };
