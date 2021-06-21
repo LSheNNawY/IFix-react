@@ -4,7 +4,10 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
+import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
+import "../assets/front/css/register.css";
+
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(15).required("First Name Required"),
@@ -31,10 +34,21 @@ function Register() {
   }, []);
 
   return (
-    <>
+    <div className="register-wrapper">
       <NavbarComponent />
+      <div
+        style={{
+          backgroundColor: "#ebeeef",
+          paddingTop: "120px",
+          paddingBottom: "120px",
+        }}
+      >
       <Container className="mt-5 w-50">
-        <h1 className="mt-4 mb-4">Register</h1>
+      <div className=" login-form ">
+              <div className="login-form-title">
+              <h1 className="mt-4 mb-4 login-form-title-1">Register</h1> 
+              </div>
+        {/* <h1 className="mt-4 mb-4">Register</h1> */}
         <Formik
           validationSchema={schema}
           onSubmit={async ( values, actions ) => {
@@ -73,7 +87,7 @@ function Register() {
             <Form noValidate encType="multipart/form-data" onSubmit={handleSubmit}>
               <Form.Row>
                 <Form.Group as={Col} md="6" controlId="validationFormik101">
-                  <Form.Label>First name</Form.Label>
+                  <Form.Label >First name</Form.Label>
                   <Form.Control
                     type="text"
                     name="firstName"
@@ -87,7 +101,7 @@ function Register() {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="6" controlId="validationFormik102">
-                  <Form.Label>Last name</Form.Label>
+                  <Form.Label >Last name</Form.Label>
                   <Form.Control
                     type="text"
                     name="lastName"
@@ -128,7 +142,7 @@ function Register() {
                 </Form.Group>
 
                 <Form.Group as={Col} md="6" controlId="validationFormik103">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label >Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Password"
@@ -147,7 +161,7 @@ function Register() {
 
               <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationFormik104">
-                  <Form.Label>Phone</Form.Label>
+                  <Form.Label >Phone</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Phone"
@@ -183,7 +197,7 @@ function Register() {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="validationFormik114">
-                  <Form.Label>Birth Date</Form.Label>
+                  <Form.Label >Birth Date</Form.Label>
                   <Form.Control
                     type="date"
                     name="dateOfBirth"
@@ -217,8 +231,9 @@ function Register() {
                 </Form.Group>
               </Form.Row>
               <Form.Group>
+            
                 <Form.File
-                  className="position-relative"
+                  className="position-relative "
                   required
                   name="picture"
                   label="Picture"
@@ -229,13 +244,17 @@ function Register() {
                   id="validationFormik107"
                   feedbackTooltip
                 />
+               
               </Form.Group>
-              <Button type="submit">Submit form</Button>
+              <Button type="submit" className="site-btn ">Submit form</Button>
             </Form>
           )}
         </Formik>
+        </div>
       </Container>
-    </>
+      </div>
+      <FooterComponent />
+        </div>
   );
 }
 
