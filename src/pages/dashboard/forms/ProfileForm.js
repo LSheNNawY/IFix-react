@@ -22,11 +22,11 @@ const schema = yup
       .required("Phone Required"),
     address: yup.string().required("Address Required"),
     dateOfBirth: yup.date(),
-    pictureRequired: yup.boolean(),
-    picture: yup.mixed().when("pictureRequired", {
-      is: true,
-      then: yup.string().required(),
-    }),
+    // pictureRequired: yup.boolean(),
+    // picture: yup.mixed().when("pictureRequired", {
+    //   is: true,
+    //   then: yup.string().required(),
+    // }),
     professionRequired: yup.boolean(),
     profession: yup.string().when("professionRequired", {
       is: true,
@@ -37,7 +37,7 @@ const schema = yup
 
 function ProfileForm(props) {
   const [professions, setProfessions] = useState([]);
-  const [pic, setPic] = useState('');
+  const [pic, setPic] = useState("");
   let user = props.user;
   const role = user ? user.role : props.role;
   let show = props.show;
@@ -85,8 +85,8 @@ function ProfileForm(props) {
         phone: "",
         address: "",
         dateOfBirth: "",
-        pictureRequired: role === "admin" ? false : true,
-        picture: "",
+        // pictureRequired: role === "admin" ? false : true,
+        // picture: "",
         professionRequired: role === "employee" ? true : false,
         profession: "",
       }
@@ -95,23 +95,23 @@ function ProfileForm(props) {
         lastName: user.lastName,
         email: user.email,
         passwordRequired: true,
-        password:"",
+        password: "",
         phone: user.phone,
         address: user.address,
         dateOfBirth: user.dateOfBirth ? formatDate(user.dateOfBirth) : "",
-        pictureRequired: role === "admin" ? false : true,
-        picture: user.picture ?? "",
+        // pictureRequired: role === "admin" ? false : true,
+        // picture: user.picture ?? "",
         professionRequired: role === "employee" ? true : false,
-        profession: user.profession,
+        profession: user.profession._id,
       };
 
-      useEffect(()=> {
-        if(user) {
-          setPic("http://localhost:5000/uploads/users/" + user.picture)
-        } else {
-          setPic("")
-        }
-      }, [user])
+  useEffect(() => {
+    if (user) {
+      setPic("http://localhost:5000/uploads/users/" + user.picture);
+    } else {
+      setPic("");
+    }
+  }, [user]);
 
   return (
     <>
@@ -143,7 +143,7 @@ function ProfileForm(props) {
                 if (role === "employee") {
                   for (let field in values) {
                     if (
-                      field === "pictureRequired" ||
+                      // field === "pictureRequired" ||
                       field === "passwordRequired" ||
                       (field === "picture" && values[field] === null) ||
                       field === "professionRequired"
@@ -152,6 +152,9 @@ function ProfileForm(props) {
                     } else {
                       formData.append(field, values[field]);
                     }
+                  }
+                  for (let i of formData.entries()) {
+                    console.log(i[0] + " => " + i[1]);
                   }
                 } else {
                   adminData = {
@@ -208,7 +211,6 @@ function ProfileForm(props) {
                 console.error(error);
               }
             }}
-
           >
             {({
               handleSubmit,
@@ -302,6 +304,7 @@ function ProfileForm(props) {
                         onBlur={handleBlur}
                         isInvalid={touched.profession && !!errors.profession}
                       >
+                        <option value="">Select Profession</option>
                         {professions.map((profession) => (
                           <option value={profession._id} key={profession._id}>
                             {profession.title}
@@ -368,11 +371,9 @@ function ProfileForm(props) {
                 </Form.Row>
                 {role === "employee" ? (
                   <Form.Group>
-                    {user && values.picture ? (
+                    {user && user.picture ? (
                       <Image
-                        src={
-                         pic
-                        }
+                        src={pic}
                         roundedCircle
                         width="120"
                         height="120"
@@ -384,7 +385,8 @@ function ProfileForm(props) {
                       required
                       name="picture"
                       label="Picture"
-                      onChange={(e) => {values.picture = e.target.files[0];
+                      onChange={(e) => {
+                        values.picture = e.target.files[0];
                         setPic(URL.createObjectURL(values.picture));
                       }}
                       onBlur={handleBlur}
