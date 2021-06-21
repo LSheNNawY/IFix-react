@@ -7,6 +7,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
 import "../assets/front/css/register.css";
+import bsCustomFileInput from "bs-custom-file-input";
 
 
 const schema = yup.object().shape({
@@ -21,12 +22,16 @@ const schema = yup.object().shape({
   address: yup.string().required("Address Required"),
   dateOfBirth: yup.date(),
   profession: yup.string().required("Profession Required"),
-  picture: yup.mixed().required("Picture Required"),
+  // picture: yup.mixed().required("Picture Required"),
 });
 
 function Register() {
   const [professions, setProfessions] = useState([]);
   const history = useHistory();
+  useEffect(() => {
+    bsCustomFileInput.init();
+  }, [])
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/professions")
@@ -234,7 +239,7 @@ function Register() {
             
                 <Form.File
                   className="position-relative "
-                  required
+                  // required
                   name="picture"
                   label="Picture"
                   onChange={e => values.picture = e.target.files[0]}
@@ -243,6 +248,7 @@ function Register() {
                   feedback={errors.picture}
                   id="validationFormik107"
                   feedbackTooltip
+                  custom
                 />
                
               </Form.Group>
