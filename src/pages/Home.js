@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from "react";
-import NavbarComponent from "../components/front/NavbarComponent";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import NavbarComponent from "../components/front/NavbarComponent";
+import ProfessionComponent from "../components/front/ProfessionComponent";
+import FooterComponent from "../components/front/FooterComponent";
+import Employee from "../components/front/EmployeeComponent"
+import ChooseUsComponent from "../components/front/ChooseUsComponent"
 
 import "../assets/front/css/index.css";
-// import "../assets/front/css/about.css";
-import "../assets/front/css/animate.min.css";
+// import "../assets/front/css/animate.min.css";
 
 import carosel from "../assets/front/img/carasoul/carasoul1.jpg";
 import carosel2 from "../assets/front/img/carasoul/ca.jpg";
-import ifix1 from "../assets/front/img/fix1.jpg";
-import ifix2 from "../assets/front/img/fix2.jpg";
-import ifix3 from "../assets/front/img/fix3.jpg";
 
-import emp1Img from "../assets/front/img/employees/employee1.jpg";
-import emp2Img from "../assets/front/img/employees/employee2.jpg";
-import emp3Img from "../assets/front/img/employees/employee3.jpg";
-import emp4Img from "../assets/front/img/employees/employee4.jpg";
-
-import FooterComponent from "../components/front/FooterComponent";
 
 const ajaxGetProfessions = async (professionsNum = "3") => {
-    const data = await (
-        await fetch(
-            `${process.env.REACT_APP_API_URL}/professions?professions=${professionsNum}`
-        )
-    ).json();
-    return data;
+    return await axios.get(
+        `${process.env.REACT_APP_API_URL}/professions?professions=${professionsNum}`
+    );
 };
 
 const Home = () => {
     const [professions, setProfessions] = useState([]);
+    const [employees, setEmployees] = useState([]);
+    const sliderText = "We Provide Best Fix Services";
 
     useEffect(() => {
-        ajaxGetProfessions(3).then((data) => {
+        ajaxGetProfessions(3).then(({ data }) => {
             setProfessions(data);
-            console.log(data);
+            let emps = [];
+            data.forEach((profession) => {
+                if (profession.employees.length>0) {
+                    emps.push(profession.employees[0]);
+                }
+            });
+
+            setEmployees(emps);
         });
     }, []);
     return (
@@ -73,12 +74,10 @@ const Home = () => {
                                 <span className=" animate__animated animate__fadeInLeft">
                                     Best fix
                                 </span>
-                                <h2>
-                                    We Provide Best fix Services All Over World
-                                </h2>
-                                <a href="contact.html" className="primary-btn">
+                                <h2>{sliderText}</h2>
+                                <Link to={"/contact"} className="primary-btn">
                                     Contact us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -92,12 +91,10 @@ const Home = () => {
                         <div className="carousel-caption d-none d-md-block">
                             <div className="hero__text">
                                 <span>Best fix</span>
-                                <h2>
-                                    We Provide Best fix Services All Over World
-                                </h2>
-                                <a href="contact.html" className="primary-btn">
+                                <h2>{sliderText}</h2>
+                                <Link to={"contact"} className="primary-btn">
                                     Contact us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -110,9 +107,7 @@ const Home = () => {
                         <div className="carousel-caption d-none d-md-block">
                             <div className="hero__text">
                                 <span>Best fix</span>
-                                <h2>
-                                    We Provide Best fix Services All Over World
-                                </h2>
+                                <h2>{sliderText}</h2>
                                 <a href="contact.html" className="primary-btn">
                                     Contact us
                                 </a>
@@ -170,155 +165,19 @@ const Home = () => {
                                 }}
                             ></h2>
                             <div className="row">
-                                <div className="col-lg-4 col-md-6">
-                                    <div className="services__item">
-                                        <div className="services__item__icon">
-                                            <a href="#">
-                                                <i className="fas fa-bolt"></i>
-                                            </a>
-                                        </div>
-                                        <div className="services__item__text">
-                                            <a href="electricity_services.html">
-                                                {" "}
-                                                <h4>Electricity</h4>
-                                            </a>
-                                            <p>
-                                                Quis ipsum suspendisse ultrices
-                                                gravida. Risus commodo viverra
-                                                maecenas accumsan lacus vel
-                                                facilisis.{" "}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6">
-                                    <div className="services__item">
-                                        <div className="services__item__icon">
-                                            <a href="#">
-                                                {" "}
-                                                <i className="fas fa-wrench"></i>
-                                            </a>
-                                        </div>
-                                        <div className="services__item__text">
-                                            <a href="#">
-                                                {" "}
-                                                <h4> Service Name</h4>
-                                            </a>
-                                            <p>
-                                                Quis ipsum suspendisse ultrices
-                                                gravida. Risus commodo viverra
-                                                maecenas accumsan lacus vel
-                                                facilisis.{" "}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6">
-                                    <div className="services__item">
-                                        <div className="services__item__icon">
-                                            <a href="#">
-                                                {" "}
-                                                <i className="fas fa-hammer"></i>
-                                            </a>
-                                        </div>
-                                        <div className="services__item__text">
-                                            <a href="#">
-                                                {" "}
-                                                <h4> Service Name</h4>
-                                            </a>
-                                            <p>
-                                                Quis ipsum suspendisse ultrices
-                                                gravida. Risus commodo viverra
-                                                maecenas accumsan lacus vel
-                                                facilisis.{" "}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {professions.map((profession) => (
+                                    <ProfessionComponent
+                                        profession={profession}
+                                        key={profession._id}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* why u choose us */}
-            <div className="container-fluid">
-                <div
-                    className="row"
-                    style={{
-                        width: "90%",
-                        marginLeft: "5%",
-                        marginTop: "50px",
-                        marginBottom: "50px",
-                        backgroundColor: "white",
-                        paddingBottom: "20px",
-                    }}
-                >
-                    <div className="col-lg-6 ">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <img src={ifix1} height="500px" alt="img" />
-                            </div>
-                            <div className="col-lg-6">
-                                <img
-                                    src={ifix2}
-                                    height="225px"
-                                    style={{ marginBottom: "50px" }}
-                                    alt="img"
-                                />
-
-                                <img src={ifix3} height="225px" alt="img" />
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="col-lg-6 col-md-6 about__text"
-                        style={{ paddingLeft: "50px" }}
-                    >
-                        <div className="label  mt-5">WHY cHOOSE US</div>
-                        <span className="choose">Why choose us</span>
-                        <h2
-                            className="mt-3 mb-3"
-                            style={{
-                                width: "120px",
-                                borderBottom: "3px solid lightgray",
-                            }}
-                        ></h2>
-                        <p>
-                            Consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Quis
-                            ipsum suspendisse ultrices gravida lacus vel
-                            facilisis.
-                        </p>
-                        <ul className="chooseUl">
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                            <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
-                            </li>
-                        </ul>
-                        <a href="contact.html" className="primary-btn">
-                            Contact us
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+            <ChooseUsComponent />
             {/* small insights */}
             <div className="counter">
                 <div className="container-fluid">
@@ -386,99 +245,16 @@ const Home = () => {
                                     marginTop: "30px",
                                 }}
                             >
-                                <div className="col-lg-3 col-md-6">
-                                    <img src={emp1Img} alt="img" />
-                                    <div className="team__item__text">
-                                        <div className="team__item__social">
-                                            <a href="#">
-                                                <i className="fab fa-youtube-square"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-facebook-square"></i>
-                                            </a>
-                                        </div>
-                                        <a href="profile.html">
-                                            <h4>Employee Name</h4>
-                                        </a>
-                                        <div className="rate">
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                {employees.length>0 &&
+                                    employees.map((employee) => (
+                                        <Employee
+                                            employee={employee}
+                                            key={employee._id}
+                                        />
+                                    ))}
 
-                                <div className="col-lg-3 col-md-6">
-                                    <img src={emp2Img} alt="img" />
-                                    <div className="team__item__text">
-                                        <div className="team__item__social">
-                                            <a href="#">
-                                                <i className="fab fa-youtube-square"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-facebook-square"></i>
-                                            </a>
-                                        </div>
-                                        <a href="profile.html">
-                                            <h4>Employee Name</h4>
-                                        </a>
-                                        <div className="rate">
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6">
-                                    <img src={emp3Img} alt="img" />
-                                    <div className="team__item__text">
-                                        <div className="team__item__social">
-                                            <a href="#">
-                                                <i className="fab fa-youtube-square"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-facebook-square"></i>
-                                            </a>
-                                        </div>
-                                        <a href="profile.html">
-                                            <h4>Employee Name</h4>
-                                        </a>
-                                        <div className="rate">
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6">
-                                    <img src={emp4Img} alt="img" />
-                                    <div className="team__item__text">
-                                        <div className="team__item__social">
-                                            <a href="#">
-                                                <i className="fab fa-youtube-square"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-facebook-square"></i>
-                                            </a>
-                                        </div>
-                                        <a href="profile.html">
-                                            <h4>Employee Name</h4>
-                                        </a>
-                                        <div className="rate">
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                            <i className="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
+
+
                             </div>
                         </div>
                     </div>
