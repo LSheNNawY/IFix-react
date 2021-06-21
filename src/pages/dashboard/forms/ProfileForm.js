@@ -4,6 +4,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, Col, Form, Modal, Image } from "react-bootstrap";
 import { useEffect } from "react";
+import { useRef } from "react";
+
 
 const schema = yup
   .object()
@@ -38,6 +40,8 @@ const schema = yup
 function ProfileForm(props) {
   const [professions, setProfessions] = useState([]);
   const [pic, setPic] = useState("");
+  const passwordRef = useRef(null);
+
   let user = props.user;
   const role = user ? user.role : props.role;
   let show = props.show;
@@ -57,6 +61,15 @@ function ProfileForm(props) {
   const roleName = (role) => {
     let newRoleName = role.charAt(0).toUpperCase() + role.slice(1);
     return newRoleName;
+  };
+
+  const verifyPassword = async (userId, password) => {
+    const valid = await axios.post(
+      `${process.env.REACT_APP_API_URL}/users/verify-password`,
+      { userId, password }
+    );
+    console.log(valid);
+    return valid;
   };
 
   const formatDate = (date) => {
@@ -169,20 +182,32 @@ function ProfileForm(props) {
                 }
 
                 if (user) {
-                  const done = await axios.put(
-                    `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
-                    role === "employee" ? formData : adminData,
-                    role === "employee"
-                      ? {
-                          "Content-Type": "multipart/form-data",
-                        }
-                      : null
+                  console.log(user);
+                  const validPassword = await verifyPassword(
+                    user._id,
+                    values.password
                   );
-                  if (done) {
-                    console.log(done);
-                    props.setShow(false);
-                    props.setInfo(null);
-                    props.setRefresh(true);
+                  console.log(validPassword);
+                  if (validPassword.data) {
+                    const done = await axios.put(
+                      `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
+                      role === "employee" ? formData : adminData,
+                      role === "employee"
+                        ? {
+                            "Content-Type": "multipart/form-data",
+                          }
+                        : null
+                    );
+                    if (done) {
+                      console.log(done);
+                      props.setShow(false);
+                      props.setInfo(null);
+                      props.setRefresh(true);
+                    }
+                  } else {
+                    console.log(passwordRef.current);
+                    passwordRef.current.className = "form-control  border-danger"
+                    return alert("Enter correct password");
                   }
                 } else {
                   for (let data of formData.entries()) {
@@ -277,9 +302,12 @@ function ProfileForm(props) {
                       {errors.email}
                     </Form.Control.Feedback>
                   </Form.Group>
+
+                  {/* password field */}
                   <Form.Group as={Col} md="6" controlId="validationFormik103">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                      ref={passwordRef}
                       type="password"
                       placeholder="Password"
                       name="password"
@@ -293,6 +321,8 @@ function ProfileForm(props) {
                       {errors.password}
                     </Form.Control.Feedback>
                   </Form.Group>
+
+                  {/* profession field */}
                   {role === "employee" ? (
                     <Form.Group as={Col} md="6" controlId="validationFormik110">
                       <Form.Label>Profession</Form.Label>
