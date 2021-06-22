@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(15).required("First Name Required"),
@@ -22,6 +24,7 @@ const schema = yup.object().shape({
 });
 
 function Register() {
+  const { getLoggedIn } = useContext(AuthContext);
   const [professions, setProfessions] = useState([]);
   const history = useHistory();
   useEffect(() => {
@@ -37,26 +40,32 @@ function Register() {
         <h1 className="mt-4 mb-4">Register</h1>
         <Formik
           validationSchema={schema}
-          onSubmit={async ( values, actions ) => {
+          onSubmit={async (values, actions) => {
             console.log(values);
             console.log(actions);
-            actions.setSubmitting(true)
+            actions.setSubmitting(true);
             try {
               const formData = new FormData();
               for (let field in values) {
                 formData.append(field, values[field]);
               }
-              const added = await axios.post(process.env.REACT_APP_API_URL + "/users", formData, {
-                "Content-Type": "multipart/form-data",
-              });
-              if(added) {
-                  console.log(added);
-                  history.push("/");
+              const added = await axios.post(
+                process.env.REACT_APP_API_URL + "/users",
+                formData,
+                {
+                  "Content-Type": "multipart/form-data",
+                }
+              );
+              if (added) {
+                console.log(added);
+                await getLoggedIn();
+                history.push("/");
               }
               actions.setSubmitting(false);
             } catch (error) {
               console.error(error);
-            }}}
+            }
+          }}
           initialValues={{
             firstName: "",
             lastName: "",
@@ -69,8 +78,19 @@ function Register() {
             picture: null,
           }}
         >
-          {({ handleSubmit, handleChange, handleBlur, values, touched, errors }) => (
-            <Form noValidate encType="multipart/form-data" onSubmit={handleSubmit}>
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            values,
+            touched,
+            errors,
+          }) => (
+            <Form
+              noValidate
+              encType="multipart/form-data"
+              onSubmit={handleSubmit}
+            >
               <Form.Row>
                 <Form.Group as={Col} md="6" controlId="validationFormik101">
                   <Form.Label>First name</Form.Label>
@@ -222,7 +242,7 @@ function Register() {
                   required
                   name="picture"
                   label="Picture"
-                  onChange={e => values.picture = e.target.files[0]}
+                  onChange={(e) => (values.picture = e.target.files[0])}
                   onBlur={handleBlur}
                   isInvalid={touched.picture && !!errors.picture}
                   feedback={errors.picture}
