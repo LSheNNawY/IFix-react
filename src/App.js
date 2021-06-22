@@ -17,33 +17,33 @@ import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "./assets/dashboard/css/demo.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import AuthContextProvider from "./context/AuthContext";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 function App() {
-    return (
-        <div className="App">
-            <Switch>
-                <Route path="/" component={Home} exact />
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="/contact" component={Contact} />
-                <Route path="/aboutUs" component={AboutUs} />
-                <Route
-                    path="/profile/:id"
-                    render={(props) => <Profile {...props} />}
-                />
-                <Route
-                    path="/admin"
-                    render={(props) => <AdminLayout {...props} />}
-                />
-                <Route path="/professions" component={AllProfessions} />
-                <Route
-                    path="/services/:id"
-                    render={(props) => <Services {...props} />}
-                />
-                {/* <Route path="/services" component={Services} /> */}
-            </Switch>
-        </div>
-    );
+  return (
+    <AuthContextProvider>
+      <div className="App">
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/aboutUs" component={AboutUs} />
+          <Route
+            path="/profile/:id"
+            render={(props) => <Profile {...props} />}
+          />
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route
+            path="/services/:id"
+            render={(props) => <Services {...props} />}
+          />
+        </Switch>
+      </div>
+    </AuthContextProvider>
+  );
 }
-
 export default App;
