@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { Link, useHistory } from "react-router-dom";
 import { authFormValidation } from "../helpers/loginValidation";
+import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
+import AuthContext from "../context/AuthContext";
+
 import "../assets/front/css/login.css";
 const ajaxLogin = async (email, password) => {
   const data = await (
@@ -22,6 +25,7 @@ const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loggingError, setLoggingError] = useState("");
+  const { getLoggedIn } = useContext(AuthContext);
 
   const history = useHistory();
   const submitHandler = async (e) => {
@@ -38,6 +42,7 @@ const Login = () => {
               email: userData.email,
             })
           );
+          await getLoggedIn();
           history.push("/");
         } else {
           setLoggingError("Wrong user!");
@@ -56,16 +61,15 @@ const Login = () => {
           backgroundColor: "#ebeeef",
           paddingTop: "120px",
           paddingBottom: "120px",
+          marginTop: "-80px",
         }}
       >
         <div className="container ">
           <div className="row">
             <div className=" login-form col-lg-6 col-md-8">
-              
               <div className="login-form-title">
                 <span className="login-form-title-1">login In</span>
               </div>
-            
 
               <form onSubmit={submitHandler}>
                 <div className="mb-3">
@@ -137,26 +141,25 @@ const Login = () => {
                 ) : (
                   ""
                 )}
- 
+
                 <button type="submit" className="btn btn-primary mb-3 site-btn">
                   Submit
                 </button>
                 <div className="text-center w-100">
                   <p className="text-muted font-weight-bold">
                     Not a member?
-                    <Link to="/register" className=" ml-2 text-warning" >
+                    <Link to="/register" className=" ml-2 text-warning">
                       Register
                     </Link>
                   </p>
                 </div>
               </form>
-           
             </div>
           </div>
         </div>
       </div>
       <FooterComponent />
-        </div>
+    </div>
   );
 };
 
