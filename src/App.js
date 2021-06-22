@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
 import Order from "./pages/Order";
 import Contact from "./pages/Contact";
+import Jobs from "./pages/Jobs";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/aboutUs" component={AboutUs} />
           <Route path="/order" component={Order}/>
+          <Route path="/jobs" component={Jobs}/>
           <Route
             path="/profile/:id"
             render={(props) => <Profile {...props} />}

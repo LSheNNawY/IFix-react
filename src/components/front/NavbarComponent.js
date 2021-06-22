@@ -28,29 +28,70 @@ const NavbarComponent = () => {
           >
             <ul class="navbar-nav">
               <li class="nav-item">
-                <Link class={`nav-link ${location.pathname === '/'? 'active' : ''}`} aria-current="page" to="/">
+                <Link
+                  class={`nav-link ${
+                    location.pathname === "/" ? "active" : ""
+                  }`}
+                  aria-current="page"
+                  to="/"
+                >
                   HOME
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class={`nav-link ${location.pathname === '/professions'? 'active' : ''}`} to="/professions">
+                <Link
+                  class={`nav-link ${
+                    location.pathname === "/professions" ? "active" : ""
+                  }`}
+                  to="/professions"
+                >
                   SERVICES
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class={`nav-link ${location.pathname === '/aboutUs'? 'active' : ''}`} to="/aboutUs">
+                <Link
+                  class={`nav-link ${
+                    location.pathname === "/aboutUs" ? "active" : ""
+                  }`}
+                  to="/aboutUs"
+                >
                   ABOUT
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class={`nav-link ${location.pathname === '/contact'? 'active' : ''}`} to="/contact">
+                <Link
+                  class={`nav-link ${
+                    location.pathname === "/contact" ? "active" : ""
+                  }`}
+                  to="/contact"
+                >
                   CONTACT
                 </Link>
               </li>
-              <li class="nav-item" style={{ backgroundColor: "#ffc446" }}>
-                <a class="nav-link " href="#">
-                  LOGOUT
-                </a>
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link className="dropdown-item" to="/jobs">
+                    My Jobs
+                  </Link>
+                  <Link className="dropdown-item" to="/profile/:id">
+                    Profile
+                  </Link>
+                  <div className="dropdown-divider"></div>
+                  <Link className="dropdown-item" href="#">
+                    Logout
+                  </Link>
+                </div>
               </li>
             </ul>
           </div>
