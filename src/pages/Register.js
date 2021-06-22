@@ -48,6 +48,7 @@ function Register() {
           backgroundColor: "#ebeeef",
           paddingTop: "120px",
           paddingBottom: "120px",
+          marginTop: "-140px",
         }}
       >
         <Container className="mt-5 w-50">
