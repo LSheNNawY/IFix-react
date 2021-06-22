@@ -1,0 +1,65 @@
+@font-face {
+    font-family: Rajdhani-Medium;
+    src: url(../fonts/Rajdhani-Medium.ttf);
+}
+@font-face {
+    font-family: Rajdhani-SemiBold;
+    src: url(../fonts/Rajdhani-SemiBold.ttf);
+}
+input,label{
+    font-family:  Rajdhani-SemiBold;
+
+}
+.register-wrapper Form{
+    background-color: white;
+    padding: 40px;
+   
+}
+ .register-wrapper Label{
+    color: gray;
+    
+ }
+.register-wrapper input , .register-wrapper select{
+    height: 50px;
+    /* margin-bottom: -20px; */
+    border: none;
+    transition: all 2s;
+    border-bottom: rgb(163, 155, 155) solid .5px;
+   
+}
+.register-wrapper select{
+    margin-top: 12px;
+}
+.register-wrapper .site-btn {
+    font-size: 15px;
+    color: #fff;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    background: #052336;
+    padding: 14px 30px 12px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.register-wrapper .site-btn:hover{
+    color: #fff;
+    background: #052336;
+}
+.register-wrapper input:focus::placeholder{
+    position: relative;
+    top: -10px;
+    border: none;
+
+    
+}
+.register-wrapper  input::placeholder{
+    transition: all 2s
+}
+.register-wrapper .form-control:focus{
+    outline: none ;
+    border: none;
+    border-bottom: rgb(163, 155, 155) solid .5px;
+}

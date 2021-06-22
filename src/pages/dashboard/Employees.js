@@ -107,7 +107,11 @@ export default function Employees() {
                           <td>{employee.lastName.toLowerCase()}</td>
                           <td>{employee.email}</td>
                           <td>{employee.phone}</td>
-                          <td>{employee.profession ? employee.profession.title : "N/A"}</td>
+                          <td>
+                            {employee.profession
+                              ? employee.profession.title
+                              : "N/A"}
+                          </td>
                           <td>
                             <span
                               className={

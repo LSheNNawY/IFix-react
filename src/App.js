@@ -2,9 +2,12 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
-// import Profile from "./pages/Profile";
+import Order from "./pages/Order";
 import Contact from "./pages/Contact";
+import AllProfessions from "./pages/AllProfessions";
+import Services from "./pages/Services";
 
 import AdminLayout from "./layouts/Admin";
 
@@ -29,12 +32,20 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/contact" component={Contact} />
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
           <Route path="/aboutUs" component={AboutUs} />
+          <Route path="/order" component={Order}/>
+          <Route
+            path="/profile/:id"
+            render={(props) => <Profile {...props} />}
+          />
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route
+            path="/services/:id"
+            render={(props) => <Services {...props} />}
+          />
         </Switch>
       </div>
     </AuthContextProvider>
   );
 }
-
 export default App;
