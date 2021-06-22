@@ -17,7 +17,7 @@ import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "./assets/dashboard/css/demo.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import AuthContextProvider from "./context/AuthContext";
+import  {AuthContextProvider}  from "./context/AuthContext";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
