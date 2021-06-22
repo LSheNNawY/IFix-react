@@ -30,15 +30,12 @@ const Home = () => {
             setProfessions(data);
             let emps = [];
             data.forEach((profession) => {
-                if (profession.employees) {
-                    // console.log(profession.employees[0]);
+                if (profession.employees.length>0) {
                     emps.push(profession.employees[0]);
                 }
             });
 
             setEmployees(emps);
-            console.log(employees);
-            // console.log(employees);
         });
     }, []);
     return (
@@ -248,13 +245,16 @@ const Home = () => {
                                     marginTop: "30px",
                                 }}
                             >
-                                {employees &&
+                                {employees.length>0 &&
                                     employees.map((employee) => (
                                         <Employee
                                             employee={employee}
                                             key={employee._id}
                                         />
                                     ))}
+
+
+
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import React from "react";
 import ifix1 from "../../assets/front/img/fix1.jpg";
 import ifix2 from "../../assets/front/img/fix2.jpg";
 import ifix3 from "../../assets/front/img/fix3.jpg";
+<style>.hh {{ height: "225px" }}</style>;
 
 export default function ChooseUsComponent() {
     return (
@@ -27,12 +28,11 @@ export default function ChooseUsComponent() {
                             <div className="col-lg-6">
                                 <img
                                     src={ifix2}
-                                    height="225px"
-                                    style={{ marginBottom: "50px" }}
+                                    style={{ marginBottom: "15px", height: "250px" }}
                                     alt="img"
                                 />
 
-                                <img src={ifix3} height="225px" alt="img" />
+                                <img src={ifix3} alt="img" style={{marginTop: "15px",height: "250px"}}/>
                             </div>
                         </div>
                     </div>

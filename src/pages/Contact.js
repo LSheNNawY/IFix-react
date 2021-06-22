@@ -23,7 +23,7 @@ const Contact = () => {
                 <div className="breadcrumb__links">
                   <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
-                  <a href="aboutUs.html">ABOUT</a>
+                  <Link to="aboutUs">ABOUT</Link>
                 </div>
               </div>
             </div>
