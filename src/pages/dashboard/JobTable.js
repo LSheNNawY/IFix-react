@@ -29,8 +29,8 @@ function Jobs() {
     useEffect(() => {
         axios.get(process.env.REACT_APP_API_URL + "/jobs").then((res) => {
             setJobs(res.data);
-            /*  console.log(res.data);
-      console.log(res.data[1].client.phone); */
+            console.log(res.data);
+    //   console.log(res.data[1].client.phone);
         });
     }, []);
 

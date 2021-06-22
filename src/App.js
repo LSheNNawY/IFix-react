@@ -11,12 +11,6 @@ import Services from "./pages/Services";
 
 import AdminLayout from "./layouts/Admin";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/dashboard/css/animate.min.css";
-import "./assets/dashboard/css/light-bootstrap-dashboard-react.css";
-import "./assets/dashboard/css/demo.css";
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import {AuthContextProvider} from "./context/AuthContext";
 import axios from "axios";
