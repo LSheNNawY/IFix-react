@@ -468,3 +468,52 @@
 .index-wrapper .rate i {
     color: #ffc446;
 }
+
+/* jobs */
+.index-wrapper .services__item {
+    margin: auto;
+    margin-top:25px ;
+    margin-bottom: 60px;
+}
+.index-wrapper  .services__item__icon {
+    height: 85px;
+    width: 85px;
+    border: 1px solid #ffc446;
+    color: #ffc446;
+    font-size: 40px;
+    line-height: 85px;
+    text-align: center;
+    border-radius: 10px;
+    float: left;
+    margin-right: 42px;
+    margin-left: 13px;
+    transition: all, 0.3s;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    
+}
+
+.index-wrapper .services__item__icon a {
+    color: #ffc446;
+}
+
+.index-wrapper .services__item__icon a i {
+    width: 50px;
+}
+.index-wrapper .services__item__icon:hover{
+    background-color:#ffc446 ;
+    color: white;
+}
+ .index-wrapper .profession-wrapper .services__item__text p {
+    font-weight: 300;
+    margin-bottom: 0;
+    line-height: 27px;
+    margin-top: 20px;
+    color: rgb(87, 85, 85)
+}
+ .index-wrapper .profession-wrapper .services__item__text {
+    text-align: left;
+}

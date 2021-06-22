@@ -43,8 +43,6 @@ const Order = () => {
                   <input
                     type="date"
                     className="form-control"
-                   
-                    
                   />
                 </div>
 
