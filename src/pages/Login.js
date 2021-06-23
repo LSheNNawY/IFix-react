@@ -4,7 +4,7 @@ import FooterComponent from "../components/front/FooterComponent";
 import { Link, useHistory } from "react-router-dom";
 import { authFormValidation } from "../helpers/loginValidation";
 import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
-import AuthContext from "../context/AuthContext";
+import UserContext from "../context/UserContext";
 
 import "../assets/front/css/login.css";
 const ajaxLogin = async (email, password) => {
@@ -25,7 +25,7 @@ const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loggingError, setLoggingError] = useState("");
-  const { getLoggedIn } = useContext(AuthContext);
+  const { getUser } = useContext(UserContext);
 
   const history = useHistory();
   const submitHandler = async (e) => {
@@ -42,7 +42,7 @@ const Login = () => {
               email: userData.email,
             })
           );
-          await getLoggedIn();
+          await getUser();
           history.push("/");
         } else {
           setLoggingError("Wrong user!");
