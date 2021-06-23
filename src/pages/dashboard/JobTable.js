@@ -67,18 +67,18 @@ function Jobs() {
                                                 {" "}
                                                 Employee_Name{" "}
                                             </th>
-                                            <th className="border-0">
+                                           {/*  <th className="border-0">
                                                 {" "}
                                                 Employee_Phone{" "}
-                                            </th>
+                                            </th> */}
                                             <th className="border-0">
                                                 {" "}
                                                 Client_Name{" "}
                                             </th>
-                                            <th className="border-0">
+                                            {/* <th className="border-0">
                                                 {" "}
                                                 Client_Phone{" "}
-                                            </th>
+                                            </th> */}
                                             <th className="border-0">
                                                 {" "}
                                                 Profession{" "}
@@ -87,10 +87,10 @@ function Jobs() {
                                                 {" "}
                                                 Service_Title{" "}
                                             </th>
-                                            <th className="border-0">
+                                           {/*  <th className="border-0">
                                                 {" "}
                                                 Service_Price{" "}
-                                            </th>
+                                            </th> */}
                                             <th className="border-0">
                                                 {" "}
                                                 Warranty{" "}
@@ -117,24 +117,25 @@ function Jobs() {
                                                     <td> {index + 1} </td>
 
                                                     <td>
-                                                        {job.employee
+
+                                                        {job.employee && job.employee
                                                             .firstName +
                                                             " " +
                                                             job.employee
                                                                 .lastName}
                                                     </td>
 
-                                                    <td>
-                                                        {job.employee.phone}
-                                                    </td>
+                                                   {/*  <td>
+                                                        {job.employee && job.employee.phone}
+                                                    </td> */}
 
                                                     <td>
-                                                        {job.client.firstName +
+                                                        { job.client && job.client.firstName +
                                                             " " +
                                                             job.client.lastName}
                                                     </td>
 
-                                                    <td>{job.client.phone}</td>
+                                                   {/*  <td>{job.client && job.client.phone}</td> */}
 
                                                     <td>
                                                         {job.profession
@@ -172,7 +173,7 @@ function Jobs() {
                                                             <></>
                                                         )}
                                                     </td>
-                                                    <td>
+                                                   {/*  <td>
                                                         {job.profession &&
                                                         job.profession
                                                             .services &&
@@ -196,7 +197,7 @@ function Jobs() {
                                                         ) : (
                                                             <></>
                                                         )}
-                                                    </td>
+                                                    </td> */}
 
                                                     <td> {job.warranty} </td>
                                                     <td>
