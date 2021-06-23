@@ -75,7 +75,7 @@ const NavbarComponent = () => {
                                 </Link>
                             </li>
                             {
-                                user || user === false ? (<>
+                                user ?  (<>
                                     <li className="nav-item dropdown">
                                         <Link
                                             className="nav-link dropdown-toggle"
