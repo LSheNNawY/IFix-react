@@ -4,11 +4,14 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
+import Order from "./pages/Order";
 import Contact from "./pages/Contact";
+import Jobs from "./pages/Jobs";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
 
 import AdminLayout from "./layouts/Admin";
+import Review from "./pages/Review";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,6 +36,10 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/aboutUs" component={AboutUs} />
           <Route path="/professions" component={AllProfessions} />
+          <Route path="/order" component={Order}/>
+          <Route path="/jobs" component={Jobs}/>
+          <Route path="/review" component={Review}/>
+
           <Route
             path="/profile/:id"
             render={(props) => <Profile {...props} />}

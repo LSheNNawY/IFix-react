@@ -61,6 +61,7 @@ const Login = () => {
           backgroundColor: "#ebeeef",
           paddingTop: "120px",
           paddingBottom: "120px",
+          marginTop: "-80px",
         }}
       >
         <div className="container ">
