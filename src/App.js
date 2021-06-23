@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
+import Order from "./pages/Order";
 import Contact from "./pages/Contact";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/contact" component={Contact} />
           <Route path="/aboutUs" component={AboutUs} />
+          <Route path="/order" component={Order}/>
           <Route
             path="/profile/:id"
             render={(props) => <Profile {...props} />}

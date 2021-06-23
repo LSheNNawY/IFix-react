@@ -43,4 +43,7 @@ input,label{
     margin-top: 10px;
 }
 
-  
+.register-wrapper .site-btn:hover{
+    color: #fff;
+    background: #052336;
+}
