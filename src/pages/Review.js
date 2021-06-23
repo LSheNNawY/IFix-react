@@ -7,13 +7,15 @@ import { useLocation } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, Col, Container, Form } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 
 const Review = (props) => {
   const [job, setJob] = useState({});
-  const [rate, setRate] = useState("");
+  const [rate, setRate] = useState(0);
   const location = useLocation();
+  const history = useHistory();
 
   const ratingChanged = (newRating) => {
     setRate(newRating);
@@ -24,14 +26,14 @@ const Review = (props) => {
       review: {
         rate: rate,
         comment: values.comment,
-      },
+      }
     };
     await axios
-      .put(process.env.REACT_APP_API_URL + "/jobs/" + job._id, review, {
+      .put(process.env.REACT_APP_API_URL + "/jobs/" + job._id +"/updateReview", review , {
         "Content-Type": "multipart/form-data",
       })
       .then(({ data }) => {
-        console.log(data);
+        history.push("/jobs");
       });
   };
 

@@ -20,7 +20,7 @@ const Jobs = () => {
     jobs: [],
   });
   const ajaxGetUser = async () => {
-    let id = "60c67036a55795eae7bb274d";
+    let id = "60c67036a55795eae7bb274d"; //should be authenticated user
     await axios
       .get(process.env.REACT_APP_API_URL + "/users/" + id)
       .then(({ data }) => {
@@ -94,25 +94,27 @@ const Jobs = () => {
                               </h4>
                             </div>
                           </div>
-                          <div className="row">
-                            <Link
-                              className="offset-11 col-1"
-                              style={{ display: "inline-block" }}
-                              to={{
-                                pathname: "/review",
-                                state: {
-                                  job: job,
-                                },
-                              }}
-                            >
-                              {" "}
-                              <div>
-                                <button type="submit" class="site-btn">
-                                  Review
-                                </button>
-                              </div>
-                            </Link>
-                          </div>
+                          {job.review === undefined ? (
+                           <div className="row">
+                           <Link
+                             className="offset-11 col-1"
+                             style={{ display: "inline-block" }}
+                             to={{
+                               pathname: "/review",
+                               state: {
+                                 job: job,
+                               },
+                             }}
+                           >
+                             {" "}
+                             <div>
+                               <button type="submit" class="site-btn">
+                                 Review
+                               </button>
+                             </div>
+                           </Link>
+                         </div>
+                          ):("")}
                         </div>
                       </div>
                     </div>
