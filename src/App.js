@@ -15,6 +15,7 @@ import AdminLayout from "./layouts/Admin";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import {AuthContextProvider} from "./context/AuthContext";
 import axios from "axios";
+import ProfessionTable from "./pages/dashboard/professions/ProfessionTable";
 
 axios.defaults.withCredentials = true;
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/aboutUs" component={AboutUs} />
           <Route path="/order" component={Order}/>
           <Route path="/jobs" component={Jobs}/>
+          <Route path="/professions" component={AllProfessions}/>
           <Route
             path="/profile/:id"
             render={(props) => <Profile {...props} />}

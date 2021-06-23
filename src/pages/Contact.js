@@ -9,14 +9,14 @@ const Contact = () => {
       <NavbarComponent />
       {/*  contact   */}
       <div
-        classNameName="contact"
+        className="contact"
         style={{
           backgroundImage: `url(${contact_header})`,
           marginTop: "-30px",
         }}
       >
-        <div classNameName="container">
-          <div classNameName="row">
+        <div className="container">
+          <div className="row">
             <div className="col-lg-12 text-center">
               <div className="breadcrumb__text">
                 <h2>CONTACT US</h2>
@@ -40,10 +40,10 @@ const Contact = () => {
                 height="500"
                 id="gmap_canvas"
                 src="https://maps.google.com/maps?q=mansoura&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                frameborder="0"
+                frameBorder="0"
                 scrolling="no"
-                marginheight="0"
-                marginwidth="0"
+                marginHeight="0"
+                marginWidth="0"
                 style={{ marginLeft: "5%", border: "0", width: "90%" }}
               ></iframe>
 
