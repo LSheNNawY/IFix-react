@@ -5,12 +5,12 @@ const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
   const [loggedIn, setLoggedIn] = useState(undefined);
-  const getLoggedIn = async () => {
+  async function getLoggedIn() {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/logged-in`
     );
     setLoggedIn(response.data);
-  };
+  }
   useEffect(() => {
     getLoggedIn();
   }, []);
@@ -22,4 +22,5 @@ const AuthContextProvider = (props) => {
   );
 };
 
-export default AuthContextProvider;
+export default AuthContext;
+export { AuthContextProvider };

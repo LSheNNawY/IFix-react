@@ -29,9 +29,24 @@ const Order = () => {
                   </select>
                 </div>
                 <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
-  </div>
+                  <label for="inputAddress">Address</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputAddress"
+                    placeholder="Enter your Address
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Start Date</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                   
+                    
+                  />
+                </div>
 
 
                 <button type="submit" class="btn btn-primary site-btn">
