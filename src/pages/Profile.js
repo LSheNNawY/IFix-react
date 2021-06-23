@@ -10,6 +10,7 @@ import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
 
 import empImg from "../assets/front/img/employees/employee1.jpg";
+import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 
 const Profile = (props) => {
     const [empData, setEmpData] = useState({
@@ -30,6 +31,7 @@ const Profile = (props) => {
             .get(process.env.REACT_APP_API_URL + "/employees/" + id)
             .then(({ data }) => {
                 setEmpData(data);
+                console.log(data)
             });
     };
 
@@ -66,7 +68,7 @@ const Profile = (props) => {
 
                                     <ul className="list basic_info mb-5">
                                         <li>
-                                            <a href="#">
+                                            <a>
                                                 <i className="far fa-calendar-alt"></i>{" "}
                                                 {dateFormat(
                                                     empData.dateOfBirth,
@@ -74,22 +76,22 @@ const Profile = (props) => {
                                                 )}
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#">
+                                        {/* <li>
+                                            <a>
                                                 <i className="fas fa-phone"></i>{" "}
                                                 {empData.phone}
                                             </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
+                                        </li> */}
+                                        {/* <li>
+                                            <a>
                                                 <i className="fas fa-envelope-square"></i>{" "}
                                                 {empData.email}
                                             </a>
-                                        </li>
+                                        </li> */}
                                     </ul>
-                                    <button type="submit" className="site-btn">
+                                    <Link to={`/order?prof=${empData.profession._id}&emp=${empData._id}`} className="site-btn">
                                         BOOK
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +111,7 @@ const Profile = (props) => {
                                         <div className="row">
                                             <div className="col-2">
                                                 <img
-                                                    src={`http://localhost:5000/uploads/users/${job.client.picture}`}
+                                                    src={job.client? `http://localhost:5000/uploads/users/${job.client.picture}` : clientDefaultImg}
                                                     alt=""
                                                 />
                                             </div>

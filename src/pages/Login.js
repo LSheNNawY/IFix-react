@@ -73,7 +73,7 @@ const Login = () => {
 
               <form onSubmit={submitHandler}>
                 <div className="mb-3">
-                  <label for="exampleInputEmail1" className="form-label">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
                     Email address
                   </label>
                   <div className="input-group-prepend">
@@ -106,7 +106,7 @@ const Login = () => {
                   ) : null}
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
                     Password
                   </label>
                   <div className="input-group-prepend">
