@@ -6,8 +6,6 @@ import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
 import "../assets/front/css/register.css";
 import bsCustomFileInput from "bs-custom-file-input";
 
@@ -27,7 +25,6 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-  const { getLoggedIn } = useContext(AuthContext);
   const [professions, setProfessions] = useState([]);
   const history = useHistory();
   useEffect(() => {
@@ -77,7 +74,6 @@ function Register() {
                   );
                   if (added) {
                     console.log(added);
-                    await getLoggedIn();
                     history.push("/");
                   }
                   actions.setSubmitting(false);
