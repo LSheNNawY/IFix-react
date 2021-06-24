@@ -111,7 +111,7 @@ const Jobs = () => {
                             {job.ended_at ? (
                               <div className="col-6">
                                 <h4>
-                                  From :
+                                  To :
                                   {dateFormat(job.ended_at, "mmmm dS, yyyy")}
                                 </h4>
                               </div>
