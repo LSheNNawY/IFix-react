@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import dateFormat from "dateformat";
 import ReactStars from "react-rating-stars-component";
 import FooterComponent from "../components/front/FooterComponent";
 import NavbarComponent from "../components/front/NavbarComponent";
+import UserContext from "../context/UserContext";
 
 import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
@@ -13,6 +14,7 @@ import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 
 const Profile = (props) => {
+    const { user } = useContext(UserContext);
     const [empData, setEmpData] = useState({
         firstName: "",
         lastName: "",
@@ -31,7 +33,7 @@ const Profile = (props) => {
             .get(process.env.REACT_APP_API_URL + "/employees/" + id)
             .then(({ data }) => {
                 setEmpData(data);
-                console.log(data)
+                console.log(data);
             });
     };
 
@@ -64,11 +66,13 @@ const Profile = (props) => {
                                             " " +
                                             empData.lastName}
                                     </h3>
-                                    <h4>{empData.profession.title}</h4>
+                                    {empData.profession ? (
+                                        <h4>{empData.profession.title}</h4>
+                                    ) : null}
 
                                     <ul className="list basic_info mb-5">
                                         <li>
-                                            <a>
+                                            <a href="#">
                                                 <i className="far fa-calendar-alt"></i>{" "}
                                                 {dateFormat(
                                                     empData.dateOfBirth,
@@ -76,22 +80,34 @@ const Profile = (props) => {
                                                 )}
                                             </a>
                                         </li>
-                                        {/* <li>
-                                            <a>
+                                        <li>
+                                            <a href="#">
                                                 <i className="fas fa-phone"></i>{" "}
                                                 {empData.phone}
                                             </a>
-                                        </li> */}
-                                        {/* <li>
-                                            <a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
                                                 <i className="fas fa-envelope-square"></i>{" "}
                                                 {empData.email}
                                             </a>
-                                        </li> */}
+                                        </li>
                                     </ul>
-                                    <Link to={`/order?prof=${empData.profession._id}&emp=${empData._id}`} className="site-btn">
-                                        BOOK
-                                    </Link>
+                                    {user && user.id === id ? (
+                                        <button
+                                            type="submit"
+                                            className="site-btn"
+                                        >
+                                            Edit Profile
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            to={`/order?prof=${empData.profession? empData.profession._id: ""}&emp=${empData._id}`}
+                                            className="site-btn"
+                                        >
+                                            BOOK
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -106,12 +122,12 @@ const Profile = (props) => {
                     {empData.jobs.length > 0 ? (
                         empData.jobs.map((job) => {
                             return (
-                                <div className="one__review" key={job._id}>
+                                <div className="one__review">
                                     <div className="reviewer">
                                         <div className="row">
                                             <div className="col-2">
                                                 <img
-                                                    src={job.client? `http://localhost:5000/uploads/users/${job.client.picture}` : clientDefaultImg}
+                                                    src={`http://localhost:5000/uploads/users/${job.client.picture}`}
                                                     alt=""
                                                 />
                                             </div>
@@ -149,7 +165,7 @@ const Profile = (props) => {
                             );
                         })
                     ) : (
-                        <div>No Reviews</div>
+                        <div>Loading ......</div>
                     )}
                 </div>
             </section>
