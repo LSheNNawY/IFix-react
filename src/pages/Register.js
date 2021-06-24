@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import "../assets/front/css/register.css";
@@ -29,6 +29,8 @@ const schema = yup.object().shape({
 function Register() {
   const { getLoggedIn } = useContext(AuthContext);
   const [professions, setProfessions] = useState([]);
+  const [role, setRole] = useState("");
+
   const history = useHistory();
   useEffect(() => {
     bsCustomFileInput.init();
@@ -110,6 +112,7 @@ function Register() {
                   encType="multipart/form-data"
                   onSubmit={handleSubmit}
                 >
+                
                   <Form.Row>
                     <Form.Group as={Col} md="6" controlId="validationFormik101">
                       <Form.Label>First name</Form.Label>

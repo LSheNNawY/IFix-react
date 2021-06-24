@@ -99,7 +99,7 @@ function Jobs() {
                                                 {" "}
                                                 Payment Method{" "}
                                             </th>
-                                            {/* <th className="border-0"> Description </th> */}
+                                           
                                             <th className="border-0">
                                                 {" "}
                                                 Price{" "}
@@ -145,33 +145,10 @@ function Jobs() {
                                                     </td>
 
                                                     <td>
-                                                        {job.profession &&
-                                                        job.profession
-                                                            .services &&
-                                                        job.profession.services
-                                                            .length > 0 ? (
-                                                            job.profession.services.map(
-                                                                (
-                                                                    service,
-                                                                    i
-                                                                ) => {
-                                                                    return (
-                                                                        <p>
-                                                                            {
-                                                                                job
-                                                                                    .profession
-                                                                                    .services[
-                                                                                    i
-                                                                                ]
-                                                                                    .service
-                                                                            }
-                                                                        </p>
-                                                                    );
-                                                                }
-                                                            )
-                                                        ) : (
-                                                            <></>
-                                                        )}
+                                                    {job.service
+                                                            ? job.service
+                                                            : "-"}
+                                                           
                                                     </td>
                                                    {/*  <td>
                                                         {job.profession &&
@@ -204,7 +181,7 @@ function Jobs() {
                                                         {" "}
                                                         { job.payment_method }{" "}
                                                     </td>
-                                                    {/*  <td> {job.description} </td> */}
+                                                   
                                                     <td> {job.price} </td>
                                                     <td>
                                                         <Button
