@@ -29,8 +29,8 @@ function Jobs() {
     useEffect(() => {
         axios.get(process.env.REACT_APP_API_URL + "/jobs").then((res) => {
             setJobs(res.data);
-            /*  console.log(res.data);
-      console.log(res.data[1].client.phone); */
+            console.log(res.data);
+    //   console.log(res.data[1].client.phone);
         });
     }, []);
 
@@ -144,7 +144,10 @@ function Jobs() {
                                                     </td>
 
                                                     <td>
-                                                        {job.profession.services
+                                                        {job.profession &&
+                                                        job.profession
+                                                            .services &&
+                                                        job.profession.services
                                                             .length > 0 ? (
                                                             job.profession.services.map(
                                                                 (
@@ -170,7 +173,10 @@ function Jobs() {
                                                         )}
                                                     </td>
                                                     <td>
-                                                        {job.profession.services
+                                                        {job.profession &&
+                                                        job.profession
+                                                            .services &&
+                                                        job.profession.services
                                                             .length > 0 ? (
                                                             job.profession.services.map(
                                                                 (
@@ -181,12 +187,7 @@ function Jobs() {
                                                                         <p>
                                                                             {" "}
                                                                             {
-                                                                                job
-                                                                                    .profession
-                                                                                    .services[
-                                                                                    i
-                                                                                ]
-                                                                                    .price
+                                                                                job.profession.services[i].price
                                                                             }
                                                                         </p>
                                                                     );
@@ -200,9 +201,7 @@ function Jobs() {
                                                     <td> {job.warranty} </td>
                                                     <td>
                                                         {" "}
-                                                        {
-                                                            job.payment_method
-                                                        }{" "}
+                                                        { job.payment_method }{" "}
                                                     </td>
                                                     {/*  <td> {job.description} </td> */}
                                                     <td> {job.price} </td>

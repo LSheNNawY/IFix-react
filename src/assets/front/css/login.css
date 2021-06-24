@@ -8,7 +8,6 @@
 }
 input,label,option,select{
     font-family:  Rajdhani-SemiBold;
-
 }
 
 
@@ -65,21 +64,20 @@ input,label,option,select{
 }
  
  .login-wrapper .form-control {
-   
     height: 50px;
     margin-bottom: 10px;
     border: none;
-   
     transition: all 2s;
     border-bottom: rgb(163, 155, 155) solid .5px;
-    ;
- }
+    -webkit-transition: all 2s;
+    -moz-transition: all 2s;
+    -ms-transition: all 2s;
+    -o-transition: all 2s;
+}
  .login-wrapper input:focus::placeholder{
     position: relative;
     top: -10px;
-    border: none;
-
-    
+    border: none;   
 }
 .login-wrapper  input::placeholder{
     transition: all 2s
@@ -115,4 +113,8 @@ input,label,option,select{
 }
 .login-form select option{
     color: gray;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
 }
