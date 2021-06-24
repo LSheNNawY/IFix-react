@@ -27,11 +27,13 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-    const [professions, setProfessions] = useState([]);
-    const history = useHistory();
-    useEffect(() => {
-        bsCustomFileInput.init();
-    }, []);
+  const [professions, setProfessions] = useState([]);
+  const [role, setRole] = useState("");
+
+  const history = useHistory();
+  useEffect(() => {
+    bsCustomFileInput.init();
+  }, []);
 
     useEffect(() => {
         axios

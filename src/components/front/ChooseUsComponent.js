@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import ifix1 from "../../assets/front/img/fix1.jpg";
 import ifix2 from "../../assets/front/img/fix2.jpg";
@@ -77,9 +78,9 @@ export default function ChooseUsComponent() {
                                 bla bla bla bla bla
                             </li>
                         </ul>
-                        <a href="contact.html" className="primary-btn">
+                        <Link to="/contact" className="primary-btn">
                             Contact us
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
