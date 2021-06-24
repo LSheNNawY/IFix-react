@@ -3,27 +3,7 @@ import axios from "axios";
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 
-// const ajaxJobs = async () => {
-//   const data = await (
-//     await fetch(`${process.env.REACT_APP_API_URL}/jobs`)
-//   ).json();
-//   return data;
-// };
-
 function Jobs() {
-  /* const [jobs, setJobs] = useState([]);
-
-  useEffect(() => {
-    ajaxJobs().then((data) => {
-      
-        setJobs(data);
-        console.log("data jobs: ",data);
-      
-      
-      
-    });
-  }, []); */
-
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -113,31 +93,6 @@ function Jobs() {
                           <td>{job.profession ? job.profession.title : "-"}</td>
 
                           <td>{job.service ? job.service : "-"}</td>
-                          {/*  <td>
-                                    {job.profession &&
-                                     job.profession
-                                     .services &&
-                                     job.profession.services
-                                     .length > 0 ? (
-                                     job.profession.services.map(
-                                     (
-                                        service,
-                                        i
-                                    ) => {
-                                         return (
-                                            <p>
-                                                {" "}
-                                                {
-                                                    job.profession.services[i].price
-                                                }
-                                            </p>
-                                        );
-                                     }
-                                    )
-                                    ) : (
-                                        <></>
-                                    )}
-                                        </td> */}
 
                           <td> {job.warranty} </td>
                           <td> {job.payment_method} </td>
@@ -164,5 +119,6 @@ function Jobs() {
     </>
   );
 }
+
 
 export default Jobs;

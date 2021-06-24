@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { Button, Col, Form, Modal, Image } from "react-bootstrap";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const schema = yup
@@ -42,9 +44,13 @@ function ProfileForm(props) {
   const [pic, setPic] = useState("");
   const passwordRef = useRef(null);
 
+
+
   let user = props.user;
   const role = user ? user.role : props.role;
   let show = props.show;
+
+  toast.configure()
 
   useEffect(() => {
     axios
@@ -90,33 +96,33 @@ function ProfileForm(props) {
 
   const initialValues = !user
     ? {
-        firstName: "",
-        lastName: "",
-        email: "",
-        passwordRequired: true,
-        password: "",
-        phone: "",
-        address: "",
-        dateOfBirth: "",
-        // pictureRequired: role === "admin" ? false : true,
-        // picture: "",
-        professionRequired: role === "employee" ? true : false,
-        profession: "",
-      }
+      firstName: "",
+      lastName: "",
+      email: "",
+      passwordRequired: true,
+      password: "",
+      phone: "",
+      address: "",
+      dateOfBirth: "",
+      // pictureRequired: role === "admin" ? false : true,
+      // picture: "",
+      professionRequired: role === "employee" ? true : false,
+      profession: "",
+    }
     : {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        passwordRequired: true,
-        password: "",
-        phone: user.phone,
-        address: user.address,
-        dateOfBirth: user.dateOfBirth ? formatDate(user.dateOfBirth) : "",
-        // pictureRequired: role === "admin" ? false : true,
-        // picture: user.picture ?? "",
-        professionRequired: role === "employee" ? true : false,
-        profession: user.profession._id,
-      };
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      passwordRequired: true,
+      password: "",
+      phone: user.phone,
+      address: user.address,
+      dateOfBirth: user.dateOfBirth ? formatDate(user.dateOfBirth) : "",
+      // pictureRequired: role === "admin" ? false : true,
+      // picture: user.picture ?? "",
+      professionRequired: role === "employee" ? true : false,
+      profession: user.profession ? user.profession._id : "",
+    };
 
   useEffect(() => {
     if (user) {
@@ -194,8 +200,8 @@ function ProfileForm(props) {
                       role === "employee" ? formData : adminData,
                       role === "employee"
                         ? {
-                            "Content-Type": "multipart/form-data",
-                          }
+                          "Content-Type": "multipart/form-data",
+                        }
                         : null
                     );
                     if (done) {
@@ -203,11 +209,13 @@ function ProfileForm(props) {
                       props.setShow(false);
                       props.setInfo(null);
                       props.setRefresh(true);
+                      toast.success('User updated Successfully')
                     }
                   } else {
                     console.log(passwordRef.current);
                     passwordRef.current.className = "form-control  border-danger"
-                    return alert("Enter correct password");
+                    return toast.error('Enter your password correctly')
+
                   }
                 } else {
                   for (let data of formData.entries()) {
@@ -218,8 +226,8 @@ function ProfileForm(props) {
                     role === "employee" ? formData : adminData,
                     role === "employee"
                       ? {
-                          "Content-Type": "multipart/form-data",
-                        }
+                        "Content-Type": "multipart/form-data",
+                      }
                       : null
                   );
 
@@ -228,6 +236,8 @@ function ProfileForm(props) {
                     props.setShow(false);
                     props.setInfo(null);
                     props.setRefresh(true);
+                    toast.success('User Added Successfully')
+
                   }
                 }
 
@@ -405,9 +415,8 @@ function ProfileForm(props) {
                       <Image
                         src={pic}
                         roundedCircle
-                        width="120"
-                        height="120"
                         className="mr-2"
+                        style={{width: 120, height: 120}}
                       />
                     ) : null}
                     <Form.File
