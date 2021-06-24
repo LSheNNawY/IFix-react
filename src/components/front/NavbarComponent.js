@@ -10,13 +10,13 @@ const NavbarComponent = () => {
     const location = useLocation();
     return (
         <div className="navbar-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light ">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/">
+            <nav className="navbar navbar-expand-lg navbar-light ">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="/">
                         Navbar
                     </a>
                     <button
-                        class="navbar-toggler"
+                        className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarNav"
@@ -24,16 +24,16 @@ const NavbarComponent = () => {
                         aria-expanded="false"
                         aria-label="Toggle navigation"
                     >
-                        <span class="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"></span>
                     </button>
                     <div
-                        class="collapse navbar-collapse float-end col-md-4"
+                        className="collapse navbar-collapse float-end col-md-4"
                         id="navbarNav"
                     >
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
                                 <Link
-                                    class={`nav-link ${
+                                    className={`nav-link ${
                                         location.pathname === "/"
                                             ? "active"
                                             : ""
@@ -44,9 +44,9 @@ const NavbarComponent = () => {
                                     HOME
                                 </Link>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <Link
-                                    class={`nav-link ${
+                                    className={`nav-link ${
                                         location.pathname === "/professions"
                                             ? "active"
                                             : ""
@@ -56,9 +56,9 @@ const NavbarComponent = () => {
                                     SERVICES
                                 </Link>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <Link
-                                    class={`nav-link ${
+                                    className={`nav-link ${
                                         location.pathname === "/aboutUs"
                                             ? "active"
                                             : ""
@@ -68,9 +68,9 @@ const NavbarComponent = () => {
                                     ABOUT
                                 </Link>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <Link
-                                    class={`nav-link ${
+                                    className={`nav-link ${
                                         location.pathname === "/contact"
                                             ? "active"
                                             : ""
@@ -121,9 +121,9 @@ const NavbarComponent = () => {
                                 </>
                             ) : (
                                 <>
-                                    <li class="nav-item">
+                                    <li className="nav-item">
                                         <Link
-                                            class={`nav-link ${
+                                            className={`nav-link ${
                                                 location.pathname === "/login"
                                                     ? "active"
                                                     : ""

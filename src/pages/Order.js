@@ -74,7 +74,7 @@ const Order = () => {
                 console.log(data);
                 handleClose();
                 setSuccessMsg(true);
-                notify("💥 Order created successfully, we will contact you", "success");
+                notify("💥 Order created successfully, we will contact you", "success", history, "/");
             })
             .catch(() => {
                 notify(
@@ -92,7 +92,6 @@ const Order = () => {
                 );
                 setLoggedUser(response.data);
                 setAddress(response.data.address);
-                console.log(response.data);
                 if (JSON.stringify(response.data) === "{}") {
                     history.push(
                         `/login?prof=${professionId}&emp=${employeeId}`
