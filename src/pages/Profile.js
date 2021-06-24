@@ -11,6 +11,7 @@ import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
 
 import empImg from "../assets/front/img/employees/employee1.jpg";
+import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 
 const Profile = (props) => {
   const { user } = useContext(UserContext);
@@ -32,6 +33,7 @@ const Profile = (props) => {
       .get(process.env.REACT_APP_API_URL + "/employees/" + id)
       .then(({ data }) => {
         setEmpData(data);
+        console.log(data);
       });
   };
 
@@ -59,32 +61,21 @@ const Profile = (props) => {
               <div className="col-lg-6 home_banner_area_text">
                 <div className="personal_text">
                   <h6>Hello Everybody, i am</h6>
-                  <h3>
-                    {empData.firstName +
-                      " " +
-                      empData.lastName}
-                  </h3>
-                  {
-                    empData.profession ? (
-                      <h4>{empData.profession.title}</h4>
-                    ) : null
-                  }
-
+                  <h3>{empData.firstName + " " + empData.lastName}</h3>
+                  {empData.profession ? (
+                    <h4>{empData.profession.title}</h4>
+                  ) : null}
 
                   <ul className="list basic_info mb-5">
                     <li>
                       <a href="#">
                         <i className="far fa-calendar-alt"></i>{" "}
-                        {dateFormat(
-                          empData.dateOfBirth,
-                          "mmmm dS, yyyy"
-                        )}
+                        {dateFormat(empData.dateOfBirth, "mmmm dS, yyyy")}
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i className="fas fa-phone"></i>{" "}
-                        {empData.phone}
+                        <i className="fas fa-phone"></i> {empData.phone}
                       </a>
                     </li>
                     <li>
@@ -94,14 +85,20 @@ const Profile = (props) => {
                       </a>
                     </li>
                   </ul>
-                  {
-                    user && user.id === id ? (<button type="submit" className="site-btn">
+                  {user && user.id === id ? (
+                    <button type="submit" className="site-btn">
                       Edit Profile
-                    </button>) : (<button type="submit" className="site-btn">
+                    </button>
+                  ) : (
+                    <Link
+                      to={`/order?prof=${
+                        empData.profession ? empData.profession._id : ""
+                      }&emp=${empData._id}`}
+                      className="site-btn"
+                    >
                       BOOK
-                    </button>)
-                  }
-
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -127,22 +124,21 @@ const Profile = (props) => {
                       </div>
                       <div className="col-6">
                         <h4>
-                          {job.client.firstName +
-                            " " +
-                            job.client.lastName}
+                          {job.client.firstName + " " + job.client.lastName}
                         </h4>
                         <div className="rate">
                           {
-                            <ReactStars
-                              count={
-                                job.review.rate
-                              }
-                              value={
-                                job.review.rate
-                              }
-                              size={24}
-                              Color="#ffd700"
-                            />
+                
+                            // <ReactStars
+                            //     count={
+                            //         job.review.rate
+                            //     }
+                            //     value={
+                            //         job.review.rate
+                            //     }
+                            //     size={24}
+                            //     Color="#ffd700"
+                            // />
                           }
                         </div>
                       </div>
@@ -159,7 +155,7 @@ const Profile = (props) => {
               );
             })
           ) : (
-            <div>No Reviews</div>
+            <div>Loading ......</div>
           )}
         </div>
       </section>
