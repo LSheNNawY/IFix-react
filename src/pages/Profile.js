@@ -106,7 +106,7 @@ const Profile = (props) => {
                     {empData.jobs.length > 0 ? (
                         empData.jobs.map((job) => {
                             return (
-                                <div className="one__review">
+                                <div className="one__review" key={job._id}>
                                     <div className="reviewer">
                                         <div className="row">
                                             <div className="col-2">

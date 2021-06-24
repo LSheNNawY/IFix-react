@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { Button, Container, Modal } from "react-bootstrap";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import UserContext from "../context/UserContext";
@@ -12,10 +13,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../assets/front/css/login.css";
 
 const checkServiceAvailability = (arr, service) => {
-    return arr.some( (ser) =>  {
+    return arr.some((ser) => {
         return service === ser.service;
     });
-}
+};
 
 const Order = () => {
     const { user } = useContext(UserContext);
@@ -24,6 +25,8 @@ const Order = () => {
     const [service, setService] = useState("");
     const [address, setAddress] = useState("");
     const [startDate, setStartDate] = useState(new Date());
+    const [errors, setErrors] = useState({});
+    const [showModal, setShowModal] = useState(false)
 
     const history = useHistory();
     const { search } = useLocation();
@@ -31,15 +34,45 @@ const Order = () => {
     const professionId = searchParams.get("prof");
     const employeeId = searchParams.get("emp");
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setShowModal(true);
+        setErrors({});
+        let errObj = {};
+
+        if (!service || service === "other")
+            errObj.service = "Service is required";
+
+        if (!address || address === "other")
+            errObj.address = "Address is required";
+
+        setErrors(errObj);
+
+        if (JSON.stringify(errObj) === "{}") {
+            axios
+                .post(`${process.env.REACT_APP_API_URL}/jobs`, {
+                    client: loggedUser.id,
+                    employee: employeeId,
+                    profession: professionId,
+                    service,
+                    address,
+                    price: 50,
+                })
+                .then(({ data }) => {
+                    console.log(data);
+                });
+        }
+    };
+
     useEffect(() => {
-        console.log(user);
         if (user === undefined || JSON.stringify(user) === "{}") {
             async function getUser() {
                 const response = await axios.get(
                     `${process.env.REACT_APP_API_URL}/users/current-user`
                 );
                 setLoggedUser(response.data);
-                setAddress(response.data.address)
+                setAddress(response.data.address);
+                console.log(response.data);
                 if (JSON.stringify(response.data) === "{}") {
                     history.push(
                         `/login?prof=${professionId}&emp=${employeeId}`
@@ -78,9 +111,17 @@ const Order = () => {
                 const employee = await axios.get(
                     `${process.env.REACT_APP_API_URL}/employees/${employeeId}`
                 );
-                if(employee.data.jobs.length > 0) {
-                    console.log(employee.data.jobs[employee.data.jobs.length - 1])
-                    setStartDate(new Date(employee.data.jobs[employee.data.jobs.length - 1].created_at))
+                if (employee.data.jobs.length > 0) {
+                    console.log(
+                        employee.data.jobs[employee.data.jobs.length - 1]
+                    );
+                    setStartDate(
+                        new Date(
+                            employee.data.jobs[
+                                employee.data.jobs.length - 1
+                            ].created_at
+                        )
+                    );
                 }
             }
             getEmployeeJobs();
@@ -109,7 +150,7 @@ const Order = () => {
                                 </span>
                             </div>
 
-                            <form>
+                            <form onSubmit={(e) => handleSubmit(e)}>
                                 <div className="form-group ">
                                     <label htmlFor="inputService">
                                         Service
@@ -136,7 +177,11 @@ const Order = () => {
                                 </div>
 
                                 {(service === "other" ||
-                                !checkServiceAvailability(services, service)) && service !== "" ? (
+                                    !checkServiceAvailability(
+                                        services,
+                                        service
+                                    )) &&
+                                service !== "" ? (
                                     <div className="form-group">
                                         <label htmlFor="description">
                                             Service Description
@@ -145,13 +190,19 @@ const Order = () => {
                                             onChange={(e) => {
                                                 setService(e.target.value);
                                             }}
-                                            className="form-control"
+                                            className={
+                                                errors.service
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"
+                                            }
                                             name="description"
                                             id="description"
                                             cols="30"
                                             rows="20"
                                             style={{
-                                                border: "1px solid #000",
+                                                border: errors.service
+                                                    ? "1px solid #F00"
+                                                    : "1px solid #000",
                                                 height: "100px",
                                             }}
                                         ></textarea>
@@ -186,13 +237,19 @@ const Order = () => {
                                             onChange={(e) => {
                                                 setAddress(e.target.value);
                                             }}
-                                            className="form-control"
+                                            className={
+                                                errors.address
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"
+                                            }
                                             name="address"
                                             id="address"
                                             cols="30"
                                             rows="20"
                                             style={{
-                                                border: "1px solid #000",
+                                                border: errors.address
+                                                    ? "1px solid #F00"
+                                                    : "1px solid #000",
                                                 height: "100px",
                                             }}
                                         ></textarea>
@@ -228,7 +285,6 @@ const Order = () => {
                     </div>
                 </div>
             </div>
-
             <FooterComponent />
         </div>
     );
