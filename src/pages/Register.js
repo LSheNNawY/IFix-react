@@ -27,7 +27,6 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-  const { getLoggedIn } = useContext(AuthContext);
   const [professions, setProfessions] = useState([]);
   const [role, setRole] = useState("");
 
@@ -79,7 +78,6 @@ function Register() {
                   );
                   if (added) {
                     console.log(added);
-                    await getLoggedIn();
                     history.push("/");
                   }
                   actions.setSubmitting(false);
