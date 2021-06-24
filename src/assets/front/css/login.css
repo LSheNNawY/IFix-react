@@ -8,7 +8,6 @@
 }
 input,label,option,select{
     font-family:  Rajdhani-SemiBold;
-
 }
 
 
@@ -114,4 +113,8 @@ input,label,option,select{
 }
 .login-form select option{
     color: gray;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
 }
