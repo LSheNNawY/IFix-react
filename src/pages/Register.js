@@ -6,10 +6,13 @@ import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 import "../assets/front/css/register.css";
 import bsCustomFileInput from "bs-custom-file-input";
 import { Link, useLocation } from "react-router-dom";
 import { Alert } from "bootstrap";
+import UserContext from "../context/UserContext";
 
 const schema = yup.object().shape({
     firstName: yup.string().min(3).max(15).required("First Name Required"),
@@ -22,25 +25,27 @@ const schema = yup.object().shape({
         .required("Phone Required"),
     address: yup.string().required("Address Required"),
     dateOfBirth: yup.date(),
-    profession: yup.string().required("Profession Required"),
-    // picture: yup.mixed().required("Picture Required"),
+
+    professionRequired: yup.boolean(),
+    profession: yup.string().when("professionRequired", {
+        is: true,
+        then: yup.string().required(),
+    }),
 });
 
 function Register() {
-  const [professions, setProfessions] = useState([]);
-  const [role, setRole] = useState("");
-
-  const history = useHistory();
-  useEffect(() => {
-    bsCustomFileInput.init();
-  }, []);
-
+    const { getUser } = useContext(UserContext);
+    const [professions, setProfessions] = useState([]);
+    const history = useHistory();
+    const [role, setRole] = useState("");
+    useEffect(() => {
+        bsCustomFileInput.init();
+    }, []);
     useEffect(() => {
         axios
             .get(process.env.REACT_APP_API_URL + "/professions")
             .then((res) => setProfessions(res.data));
     }, []);
-
     return (
         <div className="register-wrapper">
             <NavbarComponent />
@@ -53,6 +58,24 @@ function Register() {
                 }}
             >
                 <Container className="mt-5 w-50">
+                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                        <li className="nav-item ">
+                            <button
+                                className="nav-link"
+                                onClick={() => setRole("employee")}
+                            >
+                                employee
+                            </button>
+                        </li>
+                        <li className="nav-item ">
+                            <button
+                                className="nav-link "
+                                onClick={() => setRole("user")}
+                            >
+                                User
+                            </button>
+                        </li>
+                    </ul>
                     <div className=" login-form ">
                         <div className="login-form-title">
                             <h1 className="mt-4 mb-4 login-form-title-1">
@@ -68,20 +91,37 @@ function Register() {
                                 actions.setSubmitting(true);
                                 try {
                                     const formData = new FormData();
+
                                     for (let field in values) {
-                                        formData.append(field, values[field]);
+                                        if (
+                                            field === "professionRequired" ||
+                                            (field === "profession" &&
+                                                values[field] === "")
+                                        ) {
+                                            continue;
+                                        } else {
+                                            formData.append(
+                                                field,
+                                                values[field]
+                                            );
+                                        }
                                     }
+                                    for (let i of formData.entries()) {
+                                        console.log(i[0] + " => " + i[1]);
+                                    }
+
                                     const added = await axios.post(
-                                        process.env.REACT_APP_API_URL +
-                                            "/users",
+                                        `${process.env.REACT_APP_API_URL}/${role}s`,
                                         formData,
                                         {
                                             "Content-Type":
                                                 "multipart/form-data",
                                         }
                                     );
+
                                     if (added) {
                                         console.log(added);
+                                        await getUser();
                                         history.push("/");
                                     }
                                     actions.setSubmitting(false);
@@ -97,8 +137,9 @@ function Register() {
                                 phone: "",
                                 address: "",
                                 dateOfBirth: "",
+                                professionRequired:
+                                    role === "employee" ? true : false,
                                 profession: "",
-                                picture: null,
                             }}
                         >
                             {({
@@ -156,7 +197,6 @@ function Register() {
                                                     !!errors.lastName
                                                 }
                                             />
-
                                             <Form.Control.Feedback
                                                 type="invalid"
                                                 tooltip
@@ -165,7 +205,6 @@ function Register() {
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                     </Form.Row>
-
                                     <Form.Row>
                                         <Form.Group
                                             as={Col}
@@ -195,7 +234,6 @@ function Register() {
                                                 </Form.Control.Feedback>
                                             </InputGroup>
                                         </Form.Group>
-
                                         <Form.Group
                                             as={Col}
                                             md="6"
@@ -214,7 +252,6 @@ function Register() {
                                                     !!errors.password
                                                 }
                                             />
-
                                             <Form.Control.Feedback
                                                 type="invalid"
                                                 tooltip
@@ -227,7 +264,7 @@ function Register() {
                                     <Form.Row>
                                         <Form.Group
                                             as={Col}
-                                            md="4"
+                                            md={role === "employee" ? "4" : "6"}
                                             controlId="validationFormik104"
                                         >
                                             <Form.Label>Phone</Form.Label>
@@ -250,47 +287,55 @@ function Register() {
                                                 {errors.phone}
                                             </Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group
-                                            as={Col}
-                                            md="4"
-                                            controlId="validationFormik110"
-                                        >
-                                            <Form.Label>Profession</Form.Label>
-                                            <Form.Control
-                                                as="select"
-                                                name="profession"
-                                                value={values.profession}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                isInvalid={
-                                                    touched.profession &&
-                                                    !!errors.profession
-                                                }
+                                        {role === "employee" ? (
+                                            <Form.Group
+                                                as={Col}
+                                                md="4"
+                                                controlId="validationFormik110"
                                             >
-                                                {professions.map(
-                                                    (profession) => (
-                                                        <option
-                                                            value={
-                                                                profession._id
-                                                            }
-                                                            key={profession._id}
-                                                        >
-                                                            {profession.title}
-                                                        </option>
-                                                    )
-                                                )}
-                                            </Form.Control>
+                                                <Form.Label>
+                                                    Profession
+                                                </Form.Label>
+                                                <Form.Control
+                                                    as="select"
+                                                    name="profession"
+                                                    value={values.profession}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    isInvalid={
+                                                        touched.profession &&
+                                                        !!errors.profession
+                                                    }
+                                                >
+                                                    {professions.map(
+                                                        (profession) => (
+                                                            <option
+                                                                value={
+                                                                    profession._id
+                                                                }
+                                                                key={
+                                                                    profession._id
+                                                                }
+                                                            >
+                                                                {
+                                                                    profession.title
+                                                                }
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </Form.Control>
 
-                                            <Form.Control.Feedback
-                                                type="invalid"
-                                                tooltip
-                                            >
-                                                {errors.profession}
-                                            </Form.Control.Feedback>
-                                        </Form.Group>
+                                                <Form.Control.Feedback
+                                                    type="invalid"
+                                                    tooltip
+                                                >
+                                                    {errors.profession}
+                                                </Form.Control.Feedback>
+                                            </Form.Group>
+                                        ) : null}
                                         <Form.Group
                                             as={Col}
-                                            md="4"
+                                            md={role === "employee" ? "4" : "6"}
                                             controlId="validationFormik114"
                                         >
                                             <Form.Label>Birth Date</Form.Label>
@@ -313,7 +358,6 @@ function Register() {
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                     </Form.Row>
-
                                     <Form.Row>
                                         <Form.Group
                                             as={Col}
@@ -333,7 +377,6 @@ function Register() {
                                                     !!errors.address
                                                 }
                                             />
-
                                             <Form.Control.Feedback
                                                 type="invalid"
                                                 tooltip
@@ -376,5 +419,4 @@ function Register() {
         </div>
     );
 }
-
 export default Register;
