@@ -1,12 +1,11 @@
 import React from "react";
-import {useContext} from "react";
-import {Link, useLocation} from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../../assets/front/css/navbar.css";
 import UserContext from "../../context/UserContext";
 
 const NavbarComponent = () => {
-
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext);
 
     const location = useLocation();
     return (
@@ -35,7 +34,9 @@ const NavbarComponent = () => {
                             <li class="nav-item">
                                 <Link
                                     class={`nav-link ${
-                                        location.pathname === "/" ? "active" : ""
+                                        location.pathname === "/"
+                                            ? "active"
+                                            : ""
                                     }`}
                                     aria-current="page"
                                     to="/"
@@ -46,7 +47,9 @@ const NavbarComponent = () => {
                             <li class="nav-item">
                                 <Link
                                     class={`nav-link ${
-                                        location.pathname === "/professions" ? "active" : ""
+                                        location.pathname === "/professions"
+                                            ? "active"
+                                            : ""
                                     }`}
                                     to="/professions"
                                 >
@@ -56,7 +59,9 @@ const NavbarComponent = () => {
                             <li class="nav-item">
                                 <Link
                                     class={`nav-link ${
-                                        location.pathname === "/aboutUs" ? "active" : ""
+                                        location.pathname === "/aboutUs"
+                                            ? "active"
+                                            : ""
                                     }`}
                                     to="/aboutUs"
                                 >
@@ -66,15 +71,17 @@ const NavbarComponent = () => {
                             <li class="nav-item">
                                 <Link
                                     class={`nav-link ${
-                                        location.pathname === "/contact" ? "active" : ""
+                                        location.pathname === "/contact"
+                                            ? "active"
+                                            : ""
                                     }`}
                                     to="/contact"
                                 >
                                     CONTACT
                                 </Link>
                             </li>
-                            {
-                                user ?  (<>
+                            {user ? (
+                                <>
                                     <li className="nav-item dropdown">
                                         <span
                                             className="nav-link dropdown-toggle"
@@ -86,32 +93,48 @@ const NavbarComponent = () => {
                                         >
                                             Dropdown
                                         </span>
-                                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <Link className="dropdown-item" to="/jobs">
+                                        <div
+                                            className="dropdown-menu"
+                                            aria-labelledby="navbarDropdown"
+                                        >
+                                            <Link
+                                                className="dropdown-item"
+                                                to="/jobs"
+                                            >
                                                 My Jobs
                                             </Link>
-                                            <Link className="dropdown-item" to={`/profile/${user.id}`}>
+                                            <Link
+                                                className="dropdown-item"
+                                                to={`/profile/${user.id}`}
+                                            >
                                                 Profile
                                             </Link>
                                             <div className="dropdown-divider"></div>
-                                            <Link className="dropdown-item" to="/logout">
+                                            <Link
+                                                className="dropdown-item"
+                                                to="/logout"
+                                            >
                                                 Logout
                                             </Link>
                                         </div>
                                     </li>
-                                </>) : (<>
+                                </>
+                            ) : (
+                                <>
                                     <li class="nav-item">
                                         <Link
                                             class={`nav-link ${
-                                                location.pathname === "/login" ? "active" : ""
+                                                location.pathname === "/login"
+                                                    ? "active"
+                                                    : ""
                                             }`}
                                             to="/login"
                                         >
                                             Login
                                         </Link>
                                     </li>
-                                </>)
-                            }
+                                </>
+                            )}
                         </ul>
                     </div>
                 </div>

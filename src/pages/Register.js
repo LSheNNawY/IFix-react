@@ -8,6 +8,8 @@ import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
 import "../assets/front/css/register.css";
 import bsCustomFileInput from "bs-custom-file-input";
+import { Link, useLocation } from "react-router-dom";
+import { Alert } from "bootstrap";
 
 const schema = yup.object().shape({
     firstName: yup.string().min(3).max(15).required("First Name Required"),
