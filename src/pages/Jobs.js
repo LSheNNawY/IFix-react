@@ -52,6 +52,7 @@ const Jobs = () => {
                   <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
                   <Link to="/jobs">Jobs</Link>
+                  <Link to="Contact">CONTACT</Link>
                 </div>
               </div>
             </div>

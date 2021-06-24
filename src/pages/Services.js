@@ -17,7 +17,7 @@ const Services = (props) => {
 
   useEffect(() => {
     ajaxGetProfession(id).then(({ data }) => {
-      console.log(data);
+      // console.log(data);
       setProfession(data);
     });
   }, []);
