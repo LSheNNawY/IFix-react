@@ -74,7 +74,7 @@ const Order = () => {
                 console.log(data);
                 handleClose();
                 setSuccessMsg(true);
-                notify("💥 Order created successfully", "success");
+                notify("💥 Order created successfully, we will contact you", "success");
             })
             .catch(() => {
                 notify(
