@@ -10,3 +10,8 @@
     padding: 0 10px;
     margin: 0 3px;
 }
+.navbar-wrapper .navbar .navbar-nav .nav-item .nav-link i{
+   font-size: 20px;
+    margin-top: 10px;
+    
+}

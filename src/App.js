@@ -12,6 +12,7 @@ import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
 
 import AdminLayout from "./layouts/Admin";
+import Review from "./pages/Review";
 
 import UserContext from "./context/UserContext";
 import axios from "axios";

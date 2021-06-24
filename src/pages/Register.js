@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import {Formik} from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik } from "formik";
 import * as yup from "yup";
-import {Button, Col, Container, Form, InputGroup} from "react-bootstrap";
+import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
-import {Link, useHistory } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import { useHistory } from "react-router-dom";
 import "../assets/front/css/register.css";
 import bsCustomFileInput from "bs-custom-file-input";
+import { Link, useLocation } from "react-router-dom";
+import { Alert } from "bootstrap";
 
 const schema = yup.object().shape({
     firstName: yup.string().min(3).max(15).required("First Name Required"),
@@ -43,7 +43,7 @@ function Register() {
 
     return (
         <div className="register-wrapper">
-            <NavbarComponent/>
+            <NavbarComponent />
             <div
                 style={{
                     backgroundColor: "#ebeeef",
@@ -55,7 +55,9 @@ function Register() {
                 <Container className="mt-5 w-50">
                     <div className=" login-form ">
                         <div className="login-form-title">
-                            <h1 className="mt-4 mb-4 login-form-title-1">Register</h1>
+                            <h1 className="mt-4 mb-4 login-form-title-1">
+                                Register
+                            </h1>
                         </div>
                         {/* <h1 className="mt-4 mb-4">Register</h1> */}
                         <Formik
@@ -70,10 +72,12 @@ function Register() {
                                         formData.append(field, values[field]);
                                     }
                                     const added = await axios.post(
-                                        process.env.REACT_APP_API_URL + "/users",
+                                        process.env.REACT_APP_API_URL +
+                                            "/users",
                                         formData,
                                         {
-                                            "Content-Type": "multipart/form-data",
+                                            "Content-Type":
+                                                "multipart/form-data",
                                         }
                                     );
                                     if (added) {
@@ -98,20 +102,24 @@ function Register() {
                             }}
                         >
                             {({
-                                  handleSubmit,
-                                  handleChange,
-                                  handleBlur,
-                                  values,
-                                  touched,
-                                  errors,
-                              }) => (
+                                handleSubmit,
+                                handleChange,
+                                handleBlur,
+                                values,
+                                touched,
+                                errors,
+                            }) => (
                                 <Form
                                     noValidate
                                     encType="multipart/form-data"
                                     onSubmit={handleSubmit}
                                 >
                                     <Form.Row>
-                                        <Form.Group as={Col} md="6" controlId="validationFormik101">
+                                        <Form.Group
+                                            as={Col}
+                                            md="6"
+                                            controlId="validationFormik101"
+                                        >
                                             <Form.Label>First name</Form.Label>
                                             <Form.Control
                                                 type="text"
@@ -119,13 +127,23 @@ function Register() {
                                                 value={values.firstName}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.firstName && !!errors.firstName}
+                                                isInvalid={
+                                                    touched.firstName &&
+                                                    !!errors.firstName
+                                                }
                                             />
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.firstName}
                                             </Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group as={Col} md="6" controlId="validationFormik102">
+                                        <Form.Group
+                                            as={Col}
+                                            md="6"
+                                            controlId="validationFormik102"
+                                        >
                                             <Form.Label>Last name</Form.Label>
                                             <Form.Control
                                                 type="text"
@@ -133,10 +151,16 @@ function Register() {
                                                 value={values.lastName}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.lastName && !!errors.lastName}
+                                                isInvalid={
+                                                    touched.lastName &&
+                                                    !!errors.lastName
+                                                }
                                             />
 
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.lastName}
                                             </Form.Control.Feedback>
                                         </Form.Group>
@@ -158,15 +182,25 @@ function Register() {
                                                     value={values.email}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    isInvalid={touched.email && !!errors.email}
+                                                    isInvalid={
+                                                        touched.email &&
+                                                        !!errors.email
+                                                    }
                                                 />
-                                                <Form.Control.Feedback type="invalid" tooltip>
+                                                <Form.Control.Feedback
+                                                    type="invalid"
+                                                    tooltip
+                                                >
                                                     {errors.email}
                                                 </Form.Control.Feedback>
                                             </InputGroup>
                                         </Form.Group>
 
-                                        <Form.Group as={Col} md="6" controlId="validationFormik103">
+                                        <Form.Group
+                                            as={Col}
+                                            md="6"
+                                            controlId="validationFormik103"
+                                        >
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control
                                                 type="password"
@@ -175,17 +209,27 @@ function Register() {
                                                 value={values.password}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.password && !!errors.password}
+                                                isInvalid={
+                                                    touched.password &&
+                                                    !!errors.password
+                                                }
                                             />
 
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.password}
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                     </Form.Row>
 
                                     <Form.Row>
-                                        <Form.Group as={Col} md="4" controlId="validationFormik104">
+                                        <Form.Group
+                                            as={Col}
+                                            md="4"
+                                            controlId="validationFormik104"
+                                        >
                                             <Form.Label>Phone</Form.Label>
                                             <Form.Control
                                                 type="text"
@@ -194,13 +238,23 @@ function Register() {
                                                 value={values.phone}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.phone && !!errors.phone}
+                                                isInvalid={
+                                                    touched.phone &&
+                                                    !!errors.phone
+                                                }
                                             />
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.phone}
                                             </Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group as={Col} md="4" controlId="validationFormik110">
+                                        <Form.Group
+                                            as={Col}
+                                            md="4"
+                                            controlId="validationFormik110"
+                                        >
                                             <Form.Label>Profession</Form.Label>
                                             <Form.Control
                                                 as="select"
@@ -208,20 +262,37 @@ function Register() {
                                                 value={values.profession}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.profession && !!errors.profession}
+                                                isInvalid={
+                                                    touched.profession &&
+                                                    !!errors.profession
+                                                }
                                             >
-                                                {professions.map((profession) => (
-                                                    <option value={profession._id} key={profession._id}>
-                                                        {profession.title}
-                                                    </option>
-                                                ))}
+                                                {professions.map(
+                                                    (profession) => (
+                                                        <option
+                                                            value={
+                                                                profession._id
+                                                            }
+                                                            key={profession._id}
+                                                        >
+                                                            {profession.title}
+                                                        </option>
+                                                    )
+                                                )}
                                             </Form.Control>
 
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.profession}
                                             </Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group as={Col} md="4" controlId="validationFormik114">
+                                        <Form.Group
+                                            as={Col}
+                                            md="4"
+                                            controlId="validationFormik114"
+                                        >
                                             <Form.Label>Birth Date</Form.Label>
                                             <Form.Control
                                                 type="date"
@@ -229,9 +300,15 @@ function Register() {
                                                 value={values.dateOfBirth}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.dateOfBirth && !!errors.dateOfBirth}
+                                                isInvalid={
+                                                    touched.dateOfBirth &&
+                                                    !!errors.dateOfBirth
+                                                }
                                             />
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.dateOfBirth}
                                             </Form.Control.Feedback>
                                         </Form.Group>
@@ -251,10 +328,16 @@ function Register() {
                                                 value={values.address}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                isInvalid={touched.address && !!errors.address}
+                                                isInvalid={
+                                                    touched.address &&
+                                                    !!errors.address
+                                                }
                                             />
 
-                                            <Form.Control.Feedback type="invalid" tooltip>
+                                            <Form.Control.Feedback
+                                                type="invalid"
+                                                tooltip
+                                            >
                                                 {errors.address}
                                             </Form.Control.Feedback>
                                         </Form.Group>
@@ -265,9 +348,15 @@ function Register() {
                                             // required
                                             name="picture"
                                             label="Picture"
-                                            onChange={(e) => (values.picture = e.target.files[0])}
+                                            onChange={(e) =>
+                                                (values.picture =
+                                                    e.target.files[0])
+                                            }
                                             onBlur={handleBlur}
-                                            isInvalid={touched.picture && !!errors.picture}
+                                            isInvalid={
+                                                touched.picture &&
+                                                !!errors.picture
+                                            }
                                             feedback={errors.picture}
                                             id="validationFormik107"
                                             feedbackTooltip
@@ -283,7 +372,7 @@ function Register() {
                     </div>
                 </Container>
             </div>
-            <FooterComponent/>
+            <FooterComponent />
         </div>
     );
 }
