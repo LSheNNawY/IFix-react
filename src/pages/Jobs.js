@@ -47,10 +47,7 @@ const Jobs = () => {
                 <div className="col-9">
                 <div className="services__item__text">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Labore dicta nihil illo porro voluptates. Nobis fuga
-                    mollitia atque culpa cumque eveniet itaque labore, aliquid
-                    dolorum eaque dolores reiciendis accusamus amet.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.Labore dicta nihil illo porro voluptates. Nobis fug mollitia atque culpa cumque eveniet itaque labore, aliqui dolorum eaque dolores reiciendis accusamus amet.
                   </p>
                 </div>
                 <div className="dates">

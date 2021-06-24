@@ -23,7 +23,7 @@ const NavbarComponent = () => {
             <span class="navbar-toggler-icon"></span>
           </button>
           <div
-            class="collapse navbar-collapse float-end col-md-4"
+            class="collapse navbar-collapse col-4"
             id="navbarNav"
           >
             <ul class="navbar-nav">
@@ -78,7 +78,7 @@ const NavbarComponent = () => {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Dropdown
+                 <i class="fas fa-user"></i>
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link className="dropdown-item" to="/jobs">

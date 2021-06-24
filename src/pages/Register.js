@@ -10,6 +10,8 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import "../assets/front/css/register.css";
 import bsCustomFileInput from "bs-custom-file-input";
+import { Link, useLocation } from "react-router-dom";
+import { Alert } from "bootstrap";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(3).max(15).required("First Name Required"),
@@ -22,14 +24,19 @@ const schema = yup.object().shape({
     .required("Phone Required"),
   address: yup.string().required("Address Required"),
   dateOfBirth: yup.date(),
-  profession: yup.string().required("Profession Required"),
-  // picture: yup.mixed().required("Picture Required"),
+
+   professionRequired: yup.boolean(),
+    profession: yup.string().when("professionRequired", {
+      is: true,
+      then: yup.string().required(),
+    }),
 });
 
 function Register() {
   const { getLoggedIn } = useContext(AuthContext);
   const [professions, setProfessions] = useState([]);
   const history = useHistory();
+  const [role, setRole] = useState('');
   useEffect(() => {
     bsCustomFileInput.init();
   }, []);
@@ -52,6 +59,18 @@ function Register() {
         }}
       >
         <Container className="mt-5 w-50">
+          <ul className="nav nav-tabs" id="myTab" role="tablist">
+            <li className="nav-item ">
+            <button  className="nav-link"  onClick={() => setRole("employee")}>employee
+      </button>
+            </li>
+            <li  className="nav-item ">
+            <button className="nav-link " onClick={() => setRole("user")}>User
+            
+            </button>
+
+            </li>
+          </ul>
           <div className=" login-form ">
             <div className="login-form-title">
               <h1 className="mt-4 mb-4 login-form-title-1">Register</h1>
@@ -65,16 +84,39 @@ function Register() {
                 actions.setSubmitting(true);
                 try {
                   const formData = new FormData();
-                  for (let field in values) {
-                    formData.append(field, values[field]);
-                  }
-                  const added = await axios.post(
-                    process.env.REACT_APP_API_URL + "/users",
-                    formData,
-                    {
-                      "Content-Type": "multipart/form-data",
+                 
+                
+                    for (let field in values) {
+                      if (
+                        field === "professionRequired" || (field ==="profession" && values[field]==="")
+                      ) {
+                        continue;
+                      } else {
+                        formData.append(field, values[field]);
+                      }
                     }
+                    for (let i of formData.entries()) {
+                      console.log(i[0] + " => " + i[1]); 
+                    }
+
+                  
+                  
+                 
+                  // const added = await axios.post(
+                  //   process.env.REACT_APP_API_URL + "/users",
+                  //   formData,
+                  //   {
+                  //     "Content-Type": "multipart/form-data",
+                  //   }
+                  // );
+                  const added = await axios.post(
+                    `${process.env.REACT_APP_API_URL}/${role}s`,
+                   formData ,
+                    {
+                          "Content-Type": "multipart/form-data",
+                        }
                   );
+                  
                   if (added) {
                     console.log(added);
                     await getLoggedIn();
@@ -93,8 +135,9 @@ function Register() {
                 phone: "",
                 address: "",
                 dateOfBirth: "",
-                profession: "",
-                picture: null,
+                professionRequired:role ==="employee" ? true : false,
+                profession: "" ,
+              
               }}
             >
               {({
@@ -185,7 +228,7 @@ function Register() {
                   </Form.Row>
 
                   <Form.Row>
-                    <Form.Group as={Col} md="4" controlId="validationFormik104">
+                    <Form.Group as={Col} md={role==="employee" ? "4" : "6"} controlId="validationFormik104">
                       <Form.Label>Phone</Form.Label>
                       <Form.Control
                         type="text"
@@ -200,8 +243,9 @@ function Register() {
                         {errors.phone}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} md="4" controlId="validationFormik110">
-                      <Form.Label>Profession</Form.Label>
+                    {role === "employee" ? ( 
+                     <Form.Group as={Col} md="4" controlId="validationFormik110">
+                     <Form.Label>Profession</Form.Label>
                       <Form.Control
                         as="select"
                         name="profession"
@@ -215,13 +259,13 @@ function Register() {
                             {profession.title}
                           </option>
                         ))}
-                      </Form.Control>
+                      </Form.Control> 
 
                       <Form.Control.Feedback type="invalid" tooltip>
                         {errors.profession}
                       </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group as={Col} md="4" controlId="validationFormik114">
+                    </Form.Group> ) : null}
+                    <Form.Group as={Col} md={role==="employee" ? "4" : "6"} controlId="validationFormik114">
                       <Form.Label>Birth Date</Form.Label>
                       <Form.Control
                         type="date"
