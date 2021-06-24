@@ -1,9 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Button, Container, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import axios from "axios";
 import DatePicker from "react-datepicker";
+
 import UserContext from "../context/UserContext";
+
+import { notify } from "../helpers/generalFunctions";
 
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
@@ -26,7 +32,8 @@ const Order = () => {
     const [address, setAddress] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [errors, setErrors] = useState({});
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [successMsg, setSuccessMsg] = useState(false);
 
     const history = useHistory();
     const { search } = useLocation();
@@ -34,9 +41,10 @@ const Order = () => {
     const professionId = searchParams.get("prof");
     const employeeId = searchParams.get("emp");
 
-    const handleSubmit = (e) => {
+    const handleClose = () => setShowModal(false);
+
+    const handleValidation = (e) => {
         e.preventDefault();
-        setShowModal(true);
         setErrors({});
         let errObj = {};
 
@@ -47,21 +55,33 @@ const Order = () => {
             errObj.address = "Address is required";
 
         setErrors(errObj);
-
         if (JSON.stringify(errObj) === "{}") {
-            axios
-                .post(`${process.env.REACT_APP_API_URL}/jobs`, {
-                    client: loggedUser.id,
-                    employee: employeeId,
-                    profession: professionId,
-                    service,
-                    address,
-                    price: 50,
-                })
-                .then(({ data }) => {
-                    console.log(data);
-                });
+            setShowModal(true);
         }
+    };
+
+    const handleSubmit = (e) => {
+        axios
+            .post(`${process.env.REACT_APP_API_URL}/jobs`, {
+                client: loggedUser.id,
+                employee: employeeId,
+                profession: professionId,
+                service,
+                address,
+                price: 50,
+            })
+            .then(({ data }) => {
+                console.log(data);
+                handleClose();
+                setSuccessMsg(true);
+                notify("💥 Order created successfully", "success");
+            })
+            .catch(() => {
+                notify(
+                    "💥 Error creating order, please try again later",
+                    "error"
+                );
+            });
     };
 
     useEffect(() => {
@@ -133,6 +153,30 @@ const Order = () => {
     return (
         <div className="login-wrapper">
             <NavbarComponent />
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Terms and conditions.</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ul>
+                        <li>fees ......</li>
+                        <li>cond. 5</li>
+                        <li>cond. 4</li>
+                        <li>cond. 3</li>
+                        <li>cond. 2</li>
+                    </ul>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             <div
                 style={{
                     backgroundColor: "#ebeeef",
@@ -142,6 +186,9 @@ const Order = () => {
                 }}
             >
                 <div className="container ">
+                    <div className="col-12">
+                        {successMsg ? <ToastContainer /> : null}
+                    </div>
                     <div className="row">
                         <div className=" login-form col-md-8">
                             <div className="login-form-title">
@@ -150,14 +197,18 @@ const Order = () => {
                                 </span>
                             </div>
 
-                            <form onSubmit={(e) => handleSubmit(e)}>
+                            <form onSubmit={(e) => handleValidation(e)}>
                                 <div className="form-group ">
                                     <label htmlFor="inputService">
                                         Service
                                     </label>
                                     <select
                                         id="inputService"
-                                        className="form-control"
+                                        className={
+                                            errors.service
+                                                ? "form-control is-invalid"
+                                                : "form-control"
+                                        }
                                         onChange={(e) => {
                                             setService(e.target.value);
                                         }}
@@ -257,9 +308,7 @@ const Order = () => {
                                 ) : null}
 
                                 <div className="form-group">
-                                    <label htmlFor="inputAddress">
-                                        Start Date
-                                    </label>
+                                    <label htmlFor="inputAddress">Date</label>
                                     <br />
                                     {/* <input
                                         type="date"
