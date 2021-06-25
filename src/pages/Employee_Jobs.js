@@ -13,23 +13,13 @@ const Jobs = () => {
     const { user } = useContext(UserContext);
     const history = useHistory();
     const [loggedUser, setLoggedUser] = useState({});
+    const [jobs, setJobs] = useState([]);
 
-    const [employee, setEmployee] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        address: "",
-        picture: "",
-        dateOfBirth: "",
-        profession: {},
-        jobs: [],
-    });
-    const ajaxGetUser = async () => {
+    const getEmployeeJobs = async (user) => {
         await axios
-            .get(process.env.REACT_APP_API_URL + "/users/" + user.id)
+            .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user.id}`)
             .then(({ data }) => {
-                setEmployee(data);
+                setJobs(data);
                 console.log(data);
             });
     };
@@ -46,20 +36,18 @@ const Jobs = () => {
                 } else if (response.data.role !== "employee") {
                     history.push("/");
                 } else {
-                    console.log(response.data);
+                    getEmployeeJobs(response.data);
                 }
             }
             getUser();
         } else {
             setLoggedUser(user);
-            if (user.role !== "employee") {
+            if (user.role === "employee") {
+                getEmployeeJobs(user);
+            } else {
                 history.push("/");
             }
         }
-    }, []);
-
-    useEffect(() => {
-        ajaxGetUser();
     }, []);
 
     return (
@@ -96,8 +84,8 @@ const Jobs = () => {
                     <div className="container">
                         <div className="row">
                             <div className=" profession-wrapper">
-                                {employee.jobs.map((job) => (
-                                    <JobComponent job={job} />
+                                {jobs.map((job) => (
+                                    <JobComponent job={job} key={job._id} />
                                 ))}
                             </div>
                         </div>
