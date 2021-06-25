@@ -6,6 +6,8 @@ import ReactStars from "react-rating-stars-component";
 import FooterComponent from "../components/front/FooterComponent";
 import NavbarComponent from "../components/front/NavbarComponent";
 import UserContext from "../context/UserContext";
+import { useHistory } from "react-router-dom";
+import EmployeeReview from "./EmployeeReview";
 
 import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
@@ -14,164 +16,158 @@ import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 
 const Profile = (props) => {
-    const { user } = useContext(UserContext);
-    const [empData, setEmpData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        address: "",
-        picture: "",
-        dateOfBirth: "",
-        profession: {},
-        jobs: [],
-    });
+  const { user } = useContext(UserContext);
+  const [userData, setUserData] = useState({});
+  const [role, setRole] = useState("");
+  const history = useHistory();
 
-    const { id } = props.match.params;
-    const ajaxGetEmployee = async () => {
-        await axios
-            .get(process.env.REACT_APP_API_URL + "/employees/" + id)
-            .then(({ data }) => {
-                setEmpData(data);
-                console.log(data);
-            });
-    };
+  //   const [userData, setuserData] = useState({
+  //     firstName: "",
+  //     lastName: "",
+  //     email: "",
+  //     phone: "",
+  //     address: "",
+  //     picture: "",
+  //     dateOfBirth: "",
+  //     profession: {},
+  //     jobs: [],
+  //   });
 
-    useEffect(() => {
-        ajaxGetEmployee();
-    }, []);
+  //   const { id } = props.match.params;
+  const ajaxGetUser = async (id, roleState) => {
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id) //question???
+      .then(({ data }) => {
+        setUserData(data);
+      });
+  };
 
-    return (
-        <div className="user-profile">
-            <NavbarComponent />
-            {empData ? (
-                <section className="home_banner_area">
-                    <div className="container box_1620">
-                        <div className="row">
-                            <div className="col-lg-6 home_banner_area_image">
-                                <img
-                                    src={
-                                        empData.picture
-                                            ? `http://localhost:5000/uploads/users/${empData.picture}`
-                                            : empImg
-                                    }
-                                    alt=""
-                                />
-                            </div>
-                            <div className="col-lg-6 home_banner_area_text">
-                                <div className="personal_text">
-                                    <h6>Hello Everybody, i am</h6>
-                                    <h3>
-                                        {empData.firstName +
-                                            " " +
-                                            empData.lastName}
-                                    </h3>
-                                    {empData.profession ? (
-                                        <h4>{empData.profession.title}</h4>
-                                    ) : null}
+  useEffect(() => {
+    if (user === undefined || JSON.stringify(user) === "{}") {
+      async function getUser() {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/current-user`
+        );
+        if (response.data === "") {
+          history.push("/login");
+        } else {
+          if (JSON.stringify(props.match.params) !== "{}") {
+            let { id } = props.match.params;
+            setRole("employee");
+            ajaxGetUser(id, "employee");
+          } else {
+            if (response.data.role === "employee") {
+              setRole("employee");
+              ajaxGetUser(response.data.id, "employee");
+            } else {
+              setRole("user");
+              console.log("user");
+              ajaxGetUser(response.data.id, "user");
+            }
+          }
+        }
 
-                                    <ul className="list basic_info mb-5">
-                                        <li>
-                                            <a href="#">
-                                                <i className="far fa-calendar-alt"></i>{" "}
-                                                {dateFormat(
-                                                    empData.dateOfBirth,
-                                                    "mmmm dS, yyyy"
-                                                )}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fas fa-phone"></i>{" "}
-                                                {empData.phone}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fas fa-envelope-square"></i>{" "}
-                                                {empData.email}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    {user && user.id === id ? (
-                                        <button
-                                            type="submit"
-                                            className="site-btn"
-                                        >
-                                            Edit Profile
-                                        </button>
-                                    ) : (
-                                        <Link
-                                            to={`/order?prof=${empData.profession? empData.profession._id: ""}&emp=${empData._id}`}
-                                            className="site-btn"
-                                        >
-                                            BOOK
-                                        </Link>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            ) : (
-                <div>Loading ......</div>
-            )}
-            <section className="review">
-                <div className="container">
-                    <h1>REVIEWS</h1>
-                    {empData.jobs.length > 0 ? (
-                        empData.jobs.map((job) => {
-                            return (
-                                <div className="one__review" key={job._id}>
-                                    <div className="reviewer">
-                                        <div className="row">
-                                            <div className="col-2">
-                                                <img
-                                                    src={`http://localhost:5000/uploads/users/${job.client.picture}`}
-                                                    alt=""
-                                                />
-                                            </div>
-                                            <div className="col-6">
-                                                <h4>
-                                                    {job.client.firstName +
-                                                        " " +
-                                                        job.client.lastName}
-                                                </h4>
-                                                <div className="rate">
-                                                    {
-                                                        <ReactStars
-                                                            count={
-                                                                job.review.rate
-                                                            }
-                                                            value={
-                                                                job.review.rate
-                                                            }
-                                                            size={24}
-                                                            Color="#ffd700"
-                                                        />
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="review__content">
-                                        <div className="row">
-                                            <div className="col-lg-10">
-                                                <p>{job.review.comment}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <div>Loading ......</div>
-                    )}
+        // else if (response.data.role === "employee") {
+        //   setRole("employee");
+        //   ajaxGetUser(response.data.id,"employee");
+        // } else {
+        //   setRole("user");
+        //   ajaxGetUser(response.data.id,"user");
+        // }
+      }
+      getUser();
+      //   } else {
+      //     if (user.role === "employee") {
+      //       history.push("/");
+      //     } else {
+      //       ajaxGetUser(user.id);
+      //     }
+    }
+  }, []);
+  return (
+    <div className="user-profile">
+      {/* {/* <NavbarComponent /> */}
+      {userData ? (
+        <section className="home_banner_area">
+          <div className="container box_1620">
+            <div className="row">
+              <div className="col-lg-6 home_banner_area_image">
+                <img
+                  src={
+                    userData.picture
+                      ? `http://localhost:5000/uploads/users/${userData.picture}`
+                      : empImg
+                  }
+                  alt=""
+                />
+              </div>
+              <div className="col-lg-6 home_banner_area_text">
+                <div className="personal_text">
+                  <h6>Hello Everybody, i am</h6>
+                  <h3>{userData.firstName + " " + userData.lastName}</h3>
+                  {role == "employee" ? (
+                    userData.profession ? (
+                      <h4>{userData.profession.title}</h4>
+                    ) : null
+                  ) : null}
+
+                  <ul className="list basic_info mb-5">
+                    <li>
+                      <a href="#">
+                        <i className="far fa-calendar-alt"></i>{" "}
+                        {dateFormat(userData.dateOfBirth, "mmmm dS, yyyy")}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="fas fa-phone"></i> {userData.phone}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="fas fa-envelope-square"></i>{" "}
+                        {userData.email}
+                      </a>
+                    </li>
+                  </ul>
+                  {/* {user && user.id === id ? (
+                    <button type="submit" className="site-btn">
+                      Edit Profile
+                    </button>
+                  ) : (
+                    <Link
+                      to={`/order?prof=${
+                        userData.profession ? userData.profession._id : ""
+                      }&emp=${userData._id}`}
+                      className="site-btn"
+                    >
+                      BOOK
+                    </Link>
+                  )} */}
                 </div>
-            </section>
-            <FooterComponent />
-        </div>
-    );
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <div>Loading ......</div>
+      )}
+      {role == "employee" ? (
+        <>
+          <section className="review">
+            <div className="container">
+              <h1>REVIEWS</h1>
+              {userData.jobs &&
+                userData.jobs.map((job) => {
+                  return <EmployeeReview key={job._id} job={job} />;
+                })}
+            </div>
+          </section>
+        </>
+      ) : null}
+      <FooterComponent />
+    </div>
+  );
 };
 
 export default Profile;

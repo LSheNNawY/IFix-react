@@ -35,6 +35,7 @@ function App() {
         <Route path="/review" component={Review} />
         <Route path="/jobs" component={Jobs} />
         <Route path="/professions" component={AllProfessions} />
+        <Route exact path="/profile" component={Profile} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route
