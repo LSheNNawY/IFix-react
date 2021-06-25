@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
@@ -67,6 +67,7 @@ const Jobs = () => {
                   <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
                   <Link to="/jobs">Jobs</Link>
+                  <Link to="Contact">CONTACT</Link>
                 </div>
               </div>
             </div>
@@ -74,7 +75,7 @@ const Jobs = () => {
         </div>
       </div>
       {/* my jobs */}
-      {loggedUser.jobs ? (
+      {user.jobs ? (
         <div className="container">
           <div className="row">
             <div className=" profession-wrapper">

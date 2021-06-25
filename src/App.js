@@ -8,13 +8,14 @@ import AboutUs from "./pages/AboutUs";
 import Order from "./pages/Order";
 import Contact from "./pages/Contact";
 import Jobs from "./pages/Jobs";
+import Employee_Jobs from "./pages/Employee_Jobs";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
 
 import AdminLayout from "./layouts/Admin";
 import Review from "./pages/Review";
 
-import UserContext from "./context/UserContext";
+// import UserContext from "./context/UserContext";
 import axios from "axios";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -22,7 +23,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   return (
     <div className="App">
       <Switch>
@@ -33,7 +34,8 @@ function App() {
         <Route path="/aboutUs" component={AboutUs} />
         <Route path="/order" component={Order} />
         <Route path="/review" component={Review} />
-        <Route path="/jobs" component={Jobs} />
+        <Route path="/jobs" component={Employee_Jobs} />
+        {/* <Route path="/employeejobs" component={Employee_Jobs} /> */}
         <Route path="/professions" component={AllProfessions} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />

@@ -48,6 +48,10 @@ input,label{
     color: #fff;
     background: #052336;
 }
+.register-wrapper .site-btn:focus{
+    color: #fff;
+    background: #052336;
+}
 .register-wrapper input:focus::placeholder{
     position: relative;
     top: -10px;
