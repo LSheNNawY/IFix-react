@@ -8,6 +8,11 @@ import FixedPlugin from "../components/dashboard/FixedPlugin/FixedPlugin";
 
 import routes from "../routes/dashboard/routes.js";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../assets/dashboard/css/animate.min.css";
+import "../assets/dashboard/css/light-bootstrap-dashboard-react.css";
+import "../assets/dashboard/css/demo.css";
+
 import sidebarImage from "../assets/dashboard/img/sidebar-3.jpg";
 
 function Admin() {
