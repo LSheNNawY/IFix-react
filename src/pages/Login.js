@@ -52,23 +52,25 @@ const Login = () => {
         }
     };
 
-  return (
-    <div className="login-wrapper">
-      <NavbarComponent />
-      <div
-        style={{
-          backgroundColor: "#ebeeef",
-          paddingTop: "120px",
-          paddingBottom: "120px",
-          marginTop: "-80px",
-        }}
-      >
-        <div className="container ">
-          <div className="row">
-            <div className=" login-form col-lg-6 col-md-8">
-              <div className="login-form-title">
-                <span className="login-form-title-1">login</span>
-              </div>
+    return (
+        <div className="login-wrapper">
+            <NavbarComponent />
+            <div
+                style={{
+                    backgroundColor: "#ebeeef",
+                    paddingTop: "120px",
+                    paddingBottom: "120px",
+                    marginTop: "-80px",
+                }}
+            >
+                <div className="container ">
+                    <div className="row">
+                        <div className=" login-form col-lg-6 col-md-8">
+                            <div className="login-form-title">
+                                <span className="login-form-title-1">
+                                    login
+                                </span>
+                            </div>
 
                             <form onSubmit={submitHandler}>
                                 <div className="mb-3">
@@ -149,6 +151,7 @@ const Login = () => {
                                             })
                                         }
                                         value={user.password}
+                                        placeholder="Enter your password"
                                     />
                                     {errors.password !== "" &&
                                     errors.password !== "valid" ? (
