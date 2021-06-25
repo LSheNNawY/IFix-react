@@ -68,7 +68,7 @@ const Login = () => {
                         <div className=" login-form col-lg-6 col-md-8">
                             <div className="login-form-title">
                                 <span className="login-form-title-1">
-                                    login In
+                                    login
                                 </span>
                             </div>
 
