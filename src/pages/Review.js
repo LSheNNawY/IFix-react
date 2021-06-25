@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import "../assets/front/css/index.css";
@@ -8,11 +8,15 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, Col, Container, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
+
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 
 const Review = (props) => {
   const [job, setJob] = useState({});
+  const { user } = useContext(UserContext);
+  const [loggedUser, setLoggedUser] = useState({});
   const [rate, setRate] = useState(0);
   const location = useLocation();
   const history = useHistory();
@@ -38,6 +42,22 @@ const Review = (props) => {
   };
 
   useEffect(() => {
+    if (user === undefined || JSON.stringify(user) === "{}") {
+      async function getUser() {
+          const response = await axios.get(
+              `${process.env.REACT_APP_API_URL}/users/current-user`
+          );
+
+          if (JSON.stringify(response.data) === "{}") {
+              history.push('/login');
+          } else if (response.data.role === "employee") {
+              history.push("/");
+          } else {
+           setLoggedUser(response.data);
+          }
+      }
+      getUser();
+  } 
     setJob(location.state.job);
   }, []);
 

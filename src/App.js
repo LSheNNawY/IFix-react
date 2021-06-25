@@ -32,6 +32,7 @@ function App() {
         <Route path="/contact" component={Contact} />
         <Route path="/aboutUs" component={AboutUs} />
         <Route path="/order" component={Order} />
+        <Route path="/review" component={Review} />
         <Route path="/jobs" component={Jobs} />
         <Route path="/professions" component={AllProfessions} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />

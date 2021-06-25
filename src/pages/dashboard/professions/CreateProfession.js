@@ -16,8 +16,6 @@ const schema = yup.object().shape({
 
 function CreateProfession(props) {
     const { professions, setProfessions, show, onHide } = props;
-
-
     useEffect(() => {
         bsCustomFileInput.init();
     }, []);
@@ -137,10 +135,11 @@ function CreateProfession(props) {
                                         <label>Image</label>
                                         <Form.File
                                             className="position-relative"
-                                            required
+                                            // required
                                             name="img"
                                             label="img"
                                             placeholder="Image"
+
                                             onChange={(e) =>
                                                 (values.img = e.target.files[0])
                                             }
@@ -150,8 +149,9 @@ function CreateProfession(props) {
                                             }
                                             feedback={errors.img}
                                             feedbackTooltip
-                                            custom
+                                            id="custom-file"
 
+                                            custom
                                         />
                                     </Form.Group>
                                 </Form.Row>
