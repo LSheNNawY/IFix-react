@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
@@ -48,43 +48,32 @@ const ClientJobs = ({ job }) => {
                         <div className="services__item__text"></div>
                         <div className="dates">
                           <div className="row">
-                            {job.started_at ? (
-                              <div className="col-6 ">
+                            <div className="col-6 ">
                               <h4>
-                                Start_date:{" "}
-                                <h6>
-                                  {dateFormat(
-                                    job.started_at,
-                                    "mmmm dS, yyyy"
-                                  )}
+                                Started At:{" "}
+                                <h6 className="badge badge-success">
+                                  {job.ended_at
+                                    ? dateFormat(job.started_at, "mmmm dS, yyyy - h:MM TT")
+                                    : ""}
                                 </h6>
                               </h4>
                             </div>
-                            ) : (
-                              ""
-                            )}
-
-                            {job.ended_at ? (
-                              <div className="col-6 ">
-                                <h4>
-                                  End_date:{" "}
-                                  <h6>
-                                    {dateFormat(
-                                      job.ended_at,
-                                      "mmmm dS, yyyy"
-                                    )}
-                                  </h6>
-                                </h4>
-                              </div>
-                            ) : (
-                              ""
-                            )}
+                            <div className="col-6 ">
+                              <h4>
+                                Ended At:{" "}
+                                <h6 className="badge badge-success">
+                                  {job.ended_at
+                                    ? dateFormat(job.ended_at, "mmmm dS, yyyy - h:MM TT")
+                                    : ""}
+                                </h6>
+                              </h4>
+                            </div>
                           </div>
 
                           <div className="row ">
                             <div className="col-6 ">
                               <h4>
-                                Price : <h6>{jobState.price}</h6>{" "}
+                                Price : <h6 className="badge badge-success">{jobState.price} EGP</h6>{" "}
                               </h4>
                             </div>
                             {job.review === undefined &&

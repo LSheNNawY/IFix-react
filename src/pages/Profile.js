@@ -59,7 +59,6 @@ const Profile = (props) => {
               ajaxGetUser(response.data.id, "employee");
             } else {
               setRole("user");
-              console.log("user");
               ajaxGetUser(response.data.id, "user");
             }
           }
@@ -74,10 +73,10 @@ const Profile = (props) => {
       } else {
         if (user.role === "employee") {
           setRole("employee");
-          ajaxGetUser(user.data.id, "employee");
+          ajaxGetUser(user.id, "employee");
         } else {
           setRole("user");
-          ajaxGetUser(user.data.id, "user");
+          ajaxGetUser(user.id, "user");
         }
       }
     }
