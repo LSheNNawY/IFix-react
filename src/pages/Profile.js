@@ -19,6 +19,8 @@ const Profile = (props) => {
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
   const [role, setRole] = useState("");
+  const [jobs, setJobs] = useState([]);
+
   const history = useHistory();
 
   const ajaxGetUser = async (id, roleState) => {
@@ -26,6 +28,15 @@ const Profile = (props) => {
       .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id)
       .then(({ data }) => {
         setUserData(data);
+        getUserJobs(data)
+      });
+  };
+
+  const getUserJobs = async (user) => {
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)
+      .then(({ data }) => {
+        setJobs(data);
       });
   };
 
@@ -55,8 +66,7 @@ const Profile = (props) => {
         }
       }
       getUser();
-    } 
-    else {
+    } else {
       if (JSON.stringify(props.match.params) !== "{}") {
         let { id } = props.match.params;
         setRole("employee");
@@ -67,14 +77,13 @@ const Profile = (props) => {
           ajaxGetUser(user.data.id, "employee");
         } else {
           setRole("user");
-          console.log("user");
           ajaxGetUser(user.data.id, "user");
         }
       }
     }
   }, []);
   return (
-    <div className="user-profile">
+    <div className="index-wrapper">
       <NavbarComponent />
       {JSON.stringify(userData) !== "{}" ? (
         <>
@@ -144,9 +153,9 @@ const Profile = (props) => {
               <section className="review">
                 <div className="container">
                   <h1>REVIEWS</h1>
-                  {userData.jobs &&
-                    userData.jobs.map((job) => {
-                      return <EmployeeReview key={job._id} job={job} />
+                  {jobs &&
+                    jobs.map((job) => {
+                      return <EmployeeReview key={job._id} job={job} />;
                     })}
                 </div>
               </section>
@@ -156,8 +165,8 @@ const Profile = (props) => {
               <section>
                 <div className="container" style={{ marginTop: "15rem" }}>
                   <h1>My Jobs</h1>
-                  {userData.jobs &&
-                    userData.jobs.map((job) => {
+                  {jobs &&
+                     jobs.map((job) => {
                       return <ClientJobs key={job._id} job={job} />;
                     })}
                 </div>
