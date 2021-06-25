@@ -76,15 +76,15 @@
 }
 
 .site-btn {
-    font-size: 15px;
-    color: #fff;
-    font-family: "Rajdhani", sans-serif;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border: none;
-    background: #052336;
-    padding: 14px 30px 12px;
+    font-size: 15px !important;
+    color: #fff !important;
+    font-family: "Rajdhani", sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    background: #052336 !important;
+    padding: 14px 30px 12px !important;
 }
 
 img{
@@ -92,10 +92,10 @@ img{
     height:100%;
 }
 
-.review{
+/* .review{
     padding: 100px 0px;
   
-}
+} */
 .review h1{
     padding: 25px
 

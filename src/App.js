@@ -1,4 +1,4 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -7,7 +7,6 @@ import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
 import Order from "./pages/Order";
 import Contact from "./pages/Contact";
-import Jobs from "./pages/Jobs";
 import Employee_Jobs from "./pages/Employee_Jobs";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
@@ -34,9 +33,9 @@ function App() {
         <Route path="/aboutUs" component={AboutUs} />
         <Route path="/order" component={Order} />
         <Route path="/review" component={Review} />
-        <Route path="/jobs" component={Employee_Jobs} />
-        {/* <Route path="/employeejobs" component={Employee_Jobs} /> */}
         <Route path="/professions" component={AllProfessions} />
+        <Route exact path="/profile" component={Profile} />
+        <Route path="/jobs" component={Employee_Jobs} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route
