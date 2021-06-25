@@ -14,12 +14,16 @@ import "../assets/front/css/profile.css";
 
 import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
+import ProfileEdit from "../components/ProfileEdit";
 
 const Profile = (props) => {
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
   const [role, setRole] = useState("");
   const history = useHistory();
+  const [profileInfo, setProfileInfo] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const ajaxGetUser = async (id, roleState) => {
     await axios
@@ -27,6 +31,10 @@ const Profile = (props) => {
       .then(({ data }) => {
         setUserData(data);
       });
+  };
+  const handleEdit = (data) => {
+    setShowProfile(true);
+    setProfileInfo(data);
   };
 
   useEffect(() => {
@@ -55,8 +63,7 @@ const Profile = (props) => {
         }
       }
       getUser();
-    } 
-    else {
+    } else {
       if (JSON.stringify(props.match.params) !== "{}") {
         let { id } = props.match.params;
         setRole("employee");
@@ -72,7 +79,7 @@ const Profile = (props) => {
         }
       }
     }
-  }, []);
+  }, [refresh]);
   return (
     <div className="user-profile">
       <NavbarComponent />
@@ -120,20 +127,24 @@ const Profile = (props) => {
                         </a>
                       </li>
                     </ul>
-                    {/* {user && user.id === id ? (
-                    <button type="submit" className="site-btn">
-                      Edit Profile
-                    </button>
-                  ) : (
-                    <Link
-                      to={`/order?prof=${
-                        userData.profession ? userData.profession._id : ""
-                      }&emp=${userData._id}`}
-                      className="site-btn"
-                    >
-                      BOOK
-                    </Link>
-                  )} */}
+                    {user && user.id === userData._id ? (
+                      <button
+                        type="submit"
+                        className="site-btn"
+                        onClick={() => handleEdit(userData)}
+                      >
+                        Edit Profile
+                      </button>
+                    ) : (
+                      <Link
+                        to={`/order?prof=${
+                          userData.profession ? userData.profession._id : ""
+                        }&emp=${userData._id}`}
+                        className="site-btn"
+                      >
+                        BOOK
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -146,7 +157,7 @@ const Profile = (props) => {
                   <h1>REVIEWS</h1>
                   {userData.jobs &&
                     userData.jobs.map((job) => {
-                      return <EmployeeReview key={job._id} job={job} />
+                      return <EmployeeReview key={job._id} job={job} />;
                     })}
                 </div>
               </section>
@@ -164,6 +175,14 @@ const Profile = (props) => {
               </section>
             </>
           )}
+          <ProfileEdit
+            show={showProfile}
+            user={userData}
+            role={setUserData.role}
+            setShow={setShowProfile}
+            setInfo={setProfileInfo}
+            setRefresh={setRefresh}
+          />
         </>
       ) : (
         <h1 class="text-center">Loading</h1>
