@@ -7,7 +7,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import UserContext from "../context/UserContext";
 import { useHistory } from "react-router-dom";
 import EmployeeReview from "./EmployeeReview";
-import Jobs from "./Jobs";
+import ClientJobs from "./ClientJobs";
 
 import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
@@ -158,7 +158,7 @@ const Profile = (props) => {
                   <h1>My Jobs</h1>
                   {userData.jobs &&
                     userData.jobs.map((job) => {
-                      return <Jobs key={job._id} job={job} />;
+                      return <ClientJobs key={job._id} job={job} />;
                     })}
                 </div>
               </section>

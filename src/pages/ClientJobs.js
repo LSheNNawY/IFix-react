@@ -9,7 +9,7 @@ import dateFormat from "dateformat";
 import UserContext from "../context/UserContext";
 import { useHistory } from "react-router-dom";
 
-const Jobs = ({ job }) => {
+const ClientJobs = ({ job }) => {
   const history = useHistory();
   const [jobState, setJobState] = useState(job);
 
@@ -95,4 +95,4 @@ const Jobs = ({ job }) => {
   );
 };
 
-export default Jobs;
+export default ClientJobs;
