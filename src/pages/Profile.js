@@ -146,7 +146,7 @@ const Profile = (props) => {
                   <h1>REVIEWS</h1>
                   {userData.jobs &&
                     userData.jobs.map((job) => {
-                      return <EmployeeReview key={job._id} job={job} />;
+                      return <EmployeeReview key={job._id} job={job} />
                     })}
                 </div>
               </section>
@@ -168,7 +168,6 @@ const Profile = (props) => {
       ) : (
         <h1 class="text-center">Loading</h1>
       )}
-      )
       <FooterComponent />
     </div>
   );
