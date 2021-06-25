@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import dateFormat from "dateformat";
-import ReactStars from "react-rating-stars-component";
 import FooterComponent from "../components/front/FooterComponent";
 import NavbarComponent from "../components/front/NavbarComponent";
 import UserContext from "../context/UserContext";
 import { useHistory } from "react-router-dom";
 import EmployeeReview from "./EmployeeReview";
+import Jobs from "./Jobs";
 
 import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
@@ -21,22 +21,9 @@ const Profile = (props) => {
   const [role, setRole] = useState("");
   const history = useHistory();
 
-  //   const [userData, setuserData] = useState({
-  //     firstName: "",
-  //     lastName: "",
-  //     email: "",
-  //     phone: "",
-  //     address: "",
-  //     picture: "",
-  //     dateOfBirth: "",
-  //     profession: {},
-  //     jobs: [],
-  //   });
-
-  //   const { id } = props.match.params;
   const ajaxGetUser = async (id, roleState) => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id) //question???
+      .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id)
       .then(({ data }) => {
         setUserData(data);
       });
@@ -66,28 +53,31 @@ const Profile = (props) => {
             }
           }
         }
-
-        // else if (response.data.role === "employee") {
-        //   setRole("employee");
-        //   ajaxGetUser(response.data.id,"employee");
-        // } else {
-        //   setRole("user");
-        //   ajaxGetUser(response.data.id,"user");
-        // }
       }
       getUser();
-      //   } else {
-      //     if (user.role === "employee") {
-      //       history.push("/");
-      //     } else {
-      //       ajaxGetUser(user.id);
-      //     }
+
+    } else {
+      if (JSON.stringify(props.match.params) !== "{}") {
+        let { id } = props.match.params;
+        setRole("employee");
+        ajaxGetUser(id, "employee");
+      } else {
+        if (user.role === "employee") {
+          setRole("employee");
+          ajaxGetUser(user.data.id, "employee");
+        } else {
+          setRole("user");
+          console.log("user");
+          ajaxGetUser(user.data.id, "user");
+        }
+      }
     }
   }, []);
+  console.log(userData);
   return (
     <div className="user-profile">
-      {/* {/* <NavbarComponent /> */}
-      {userData ? (
+      {/* <NavbarComponent /> */}
+      {JSON.stringify(userData)!=="{}"? (
         <section className="home_banner_area">
           <div className="container box_1620">
             <div className="row">
@@ -105,7 +95,7 @@ const Profile = (props) => {
                 <div className="personal_text">
                   <h6>Hello Everybody, i am</h6>
                   <h3>{userData.firstName + " " + userData.lastName}</h3>
-                  {role == "employee" ? (
+                  {role === "employee" ? (
                     userData.profession ? (
                       <h4>{userData.profession.title}</h4>
                     ) : null
@@ -150,9 +140,9 @@ const Profile = (props) => {
           </div>
         </section>
       ) : (
-        <div>Loading ......</div>
+        <h1>Not Found</h1>
       )}
-      {role == "employee" ? (
+      {role === "employee" ? (
         <>
           <section className="review">
             <div className="container">
@@ -164,7 +154,19 @@ const Profile = (props) => {
             </div>
           </section>
         </>
-      ) : null}
+      ) : (
+        <>
+          <section>
+            <div className="container" style={{ marginTop: "15rem" }}>
+              <h1>My Jobs</h1>
+              {userData.jobs &&
+                userData.jobs.map((job) => {
+                  return <Jobs key={job._id} job={job} />;
+                })}
+            </div>
+          </section>
+        </>
+      )}
       <FooterComponent />
     </div>
   );

@@ -19,7 +19,7 @@ const Contact = () => {
           <div className="row">
             <div className="col-lg-12 text-center">
               <div className="breadcrumb__text">
-                <h2>CONTACT US</h2>
+                <h2>Contact US</h2>
                 <div className="breadcrumb__links">
                   <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>

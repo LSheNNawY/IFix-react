@@ -8,6 +8,7 @@ import AboutUs from "./pages/AboutUs";
 import Order from "./pages/Order";
 import Contact from "./pages/Contact";
 import Jobs from "./pages/Jobs";
+import Employee_Jobs from "./pages/Employee_Jobs";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
 
@@ -36,6 +37,8 @@ function App() {
         <Route path="/jobs" component={Jobs} />
         <Route path="/professions" component={AllProfessions} />
         <Route exact path="/profile" component={Profile} />
+        <Route path="/employeejobs" component={Employee_Jobs} />
+        <Route path="/professions" component={AllProfessions} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route
