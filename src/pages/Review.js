@@ -29,6 +29,7 @@ const Review = (props) => {
       .then(({ data }) => {
         setJob(data);
         onHide()
+        console.log(data);
       });
   };
 
