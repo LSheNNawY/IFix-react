@@ -55,8 +55,8 @@ const Profile = (props) => {
         }
       }
       getUser();
-
-    } else {
+    } 
+    else {
       if (JSON.stringify(props.match.params) !== "{}") {
         let { id } = props.match.params;
         setRole("employee");
@@ -73,54 +73,54 @@ const Profile = (props) => {
       }
     }
   }, []);
-  console.log(userData);
   return (
     <div className="user-profile">
-      {/* <NavbarComponent /> */}
-      {JSON.stringify(userData)!=="{}"? (
-        <section className="home_banner_area">
-          <div className="container box_1620">
-            <div className="row">
-              <div className="col-lg-6 home_banner_area_image">
-                <img
-                  src={
-                    userData.picture
-                      ? `http://localhost:5000/uploads/users/${userData.picture}`
-                      : empImg
-                  }
-                  alt=""
-                />
-              </div>
-              <div className="col-lg-6 home_banner_area_text">
-                <div className="personal_text">
-                  <h6>Hello Everybody, i am</h6>
-                  <h3>{userData.firstName + " " + userData.lastName}</h3>
-                  {role === "employee" ? (
-                    userData.profession ? (
-                      <h4>{userData.profession.title}</h4>
-                    ) : null
-                  ) : null}
+      <NavbarComponent />
+      {JSON.stringify(userData) !== "{}" ? (
+        <>
+          <section className="home_banner_area">
+            <div className="container box_1620">
+              <div className="row">
+                <div className="col-lg-6 home_banner_area_image">
+                  <img
+                    src={
+                      userData.picture
+                        ? `http://localhost:5000/uploads/users/${userData.picture}`
+                        : empImg
+                    }
+                    alt=""
+                  />
+                </div>
+                <div className="col-lg-6 home_banner_area_text">
+                  <div className="personal_text">
+                    <h6>Hello Everybody, i am</h6>
+                    <h3>{userData.firstName + " " + userData.lastName}</h3>
+                    {role === "employee" ? (
+                      userData.profession ? (
+                        <h4>{userData.profession.title}</h4>
+                      ) : null
+                    ) : null}
 
-                  <ul className="list basic_info mb-5">
-                    <li>
-                      <a href="#">
-                        <i className="far fa-calendar-alt"></i>{" "}
-                        {dateFormat(userData.dateOfBirth, "mmmm dS, yyyy")}
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-phone"></i> {userData.phone}
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-envelope-square"></i>{" "}
-                        {userData.email}
-                      </a>
-                    </li>
-                  </ul>
-                  {/* {user && user.id === id ? (
+                    <ul className="list basic_info mb-5">
+                      <li>
+                        <a href="#">
+                          <i className="far fa-calendar-alt"></i>{" "}
+                          {dateFormat(userData.dateOfBirth, "mmmm dS, yyyy")}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fas fa-phone"></i> {userData.phone}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fas fa-envelope-square"></i>{" "}
+                          {userData.email}
+                        </a>
+                      </li>
+                    </ul>
+                    {/* {user && user.id === id ? (
                     <button type="submit" className="site-btn">
                       Edit Profile
                     </button>
@@ -134,39 +134,41 @@ const Profile = (props) => {
                       BOOK
                     </Link>
                   )} */}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      ) : (
-        <h1>Not Found</h1>
-      )}
-      {role === "employee" ? (
-        <>
-          <section className="review">
-            <div className="container">
-              <h1>REVIEWS</h1>
-              {userData.jobs &&
-                userData.jobs.map((job) => {
-                  return <EmployeeReview key={job._id} job={job} />;
-                })}
-            </div>
           </section>
+          {role === "employee" ? (
+            <>
+              <section className="review">
+                <div className="container">
+                  <h1>REVIEWS</h1>
+                  {userData.jobs &&
+                    userData.jobs.map((job) => {
+                      return <EmployeeReview key={job._id} job={job} />;
+                    })}
+                </div>
+              </section>
+            </>
+          ) : (
+            <>
+              <section>
+                <div className="container" style={{ marginTop: "15rem" }}>
+                  <h1>My Jobs</h1>
+                  {userData.jobs &&
+                    userData.jobs.map((job) => {
+                      return <Jobs key={job._id} job={job} />;
+                    })}
+                </div>
+              </section>
+            </>
+          )}
         </>
       ) : (
-        <>
-          <section>
-            <div className="container" style={{ marginTop: "15rem" }}>
-              <h1>My Jobs</h1>
-              {userData.jobs &&
-                userData.jobs.map((job) => {
-                  return <Jobs key={job._id} job={job} />;
-                })}
-            </div>
-          </section>
-        </>
+        <h1 class="text-center">Loading</h1>
       )}
+      )
       <FooterComponent />
     </div>
   );
