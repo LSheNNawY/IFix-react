@@ -20,6 +20,8 @@ const Profile = (props) => {
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
   const [role, setRole] = useState("");
+  const [jobs, setJobs] = useState([]);
+
   const history = useHistory();
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
@@ -29,6 +31,15 @@ const Profile = (props) => {
       .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id)
       .then(({ data }) => {
         setUserData(data);
+        getUserJobs(data)
+      });
+  };
+
+  const getUserJobs = async (user) => {
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)
+      .then(({ data }) => {
+        setJobs(data);
       });
   };
   const handleEdit = (data) => {
@@ -55,7 +66,6 @@ const Profile = (props) => {
               ajaxGetUser(response.data.id, "employee");
             } else {
               setRole("user");
-              console.log("user");
               ajaxGetUser(response.data.id, "user");
             }
           }
@@ -70,17 +80,16 @@ const Profile = (props) => {
       } else {
         if (user.role === "employee") {
           setRole("employee");
-          ajaxGetUser(user.data.id, "employee");
+          ajaxGetUser(user.id, "employee");
         } else {
           setRole("user");
-          console.log("user");
-          ajaxGetUser(user.data.id, "user");
+          ajaxGetUser(user.id, "user");
         }
       }
     }
   }, []);
   return (
-    <div className="user-profile">
+    <div className="index-wrapper">
       <NavbarComponent />
       {JSON.stringify(userData) !== "{}" ? (
         <>
@@ -154,8 +163,8 @@ const Profile = (props) => {
               <section className="review">
                 <div className="container">
                   <h1>REVIEWS</h1>
-                  {userData.jobs &&
-                    userData.jobs.map((job) => {
+                  {jobs &&
+                    jobs.map((job) => {
                       return <EmployeeReview key={job._id} job={job} />;
                     })}
                 </div>
@@ -166,8 +175,8 @@ const Profile = (props) => {
               <section>
                 <div className="container" style={{ marginTop: "15rem" }}>
                   <h1>My Jobs</h1>
-                  {userData.jobs &&
-                    userData.jobs.map((job) => {
+                  {jobs &&
+                     jobs.map((job) => {
                       return <ClientJobs key={job._id} job={job} />;
                     })}
                 </div>

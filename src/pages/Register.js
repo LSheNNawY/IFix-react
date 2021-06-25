@@ -7,11 +7,9 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+
 import "../assets/front/css/register.css";
 import bsCustomFileInput from "bs-custom-file-input";
-import { Link, useLocation } from "react-router-dom";
-import { Alert } from "bootstrap";
 import UserContext from "../context/UserContext";
 
 const schema = yup.object().shape({

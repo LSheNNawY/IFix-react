@@ -42,7 +42,7 @@ const EmployeeReview = ({ job }) => {
           </div>
         </div>
       </div>
-      ):<div>No Reviews</div>}
+      ):""}
    
     </>
   );
