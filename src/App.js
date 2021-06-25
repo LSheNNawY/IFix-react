@@ -14,7 +14,7 @@ import Services from "./pages/Services";
 import AdminLayout from "./layouts/Admin";
 import Review from "./pages/Review";
 
-import UserContext from "./context/UserContext";
+// import UserContext from "./context/UserContext";
 import axios from "axios";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -22,7 +22,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   return (
     <div className="App">
       <Switch>
@@ -35,8 +35,7 @@ function App() {
         <Route path="/review" component={Review} />
         <Route path="/professions" component={AllProfessions} />
         <Route exact path="/profile" component={Profile} />
-        <Route path="/employeejobs" component={Employee_Jobs} />
-        <Route path="/professions" component={AllProfessions} />
+        <Route path="/jobs" component={Employee_Jobs} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route
