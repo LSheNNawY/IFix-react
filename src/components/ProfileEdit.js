@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom";
 
 const schema = yup
   .object()
@@ -42,6 +43,7 @@ function ProfileEdit(props) {
   const [professions, setProfessions] = useState([]);
   const [pic, setPic] = useState("");
   const passwordRef = useRef(null);
+  const history = useHistory();
 
   let user = props.user;
   const role = user ? user.role : props.role;
@@ -173,10 +175,18 @@ function ProfileEdit(props) {
                   );
                   if (done) {
                     console.log(done);
-                    props.setShow(false);
-                    props.setInfo(null);
-                    props.setRefresh(true);
-                    toast.success("User updated Successfully");
+                    axios
+                      .post(`${process.env.REACT_APP_API_URL}/users/login`, {
+                        email: values.email,
+                        password: values.password,
+                      })
+                      .then((res) => {
+                        console.log(res);
+                        props.setShow(false);
+                        props.setInfo(null);
+                        history.push("/profile");
+                        toast.success("User updated Successfully");
+                      });
                   }
                 } else {
                   console.log(passwordRef.current);

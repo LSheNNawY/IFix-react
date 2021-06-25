@@ -23,7 +23,6 @@ const Profile = (props) => {
   const history = useHistory();
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
-  const [refresh, setRefresh] = useState(false);
 
   const ajaxGetUser = async (id, roleState) => {
     await axios
@@ -79,7 +78,7 @@ const Profile = (props) => {
         }
       }
     }
-  }, [refresh]);
+  }, []);
   return (
     <div className="user-profile">
       <NavbarComponent />
@@ -181,7 +180,6 @@ const Profile = (props) => {
             role={setUserData.role}
             setShow={setShowProfile}
             setInfo={setProfileInfo}
-            setRefresh={setRefresh}
           />
         </>
       ) : (
