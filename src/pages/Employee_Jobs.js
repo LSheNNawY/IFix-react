@@ -20,7 +20,7 @@ const Jobs = () => {
     jobs: [],
   });
   const ajaxGetUser = async () => {
-    let id = "60c67036a55795eae7bb274d"; //should be authenticated user
+    let id = "60cecaf14b437f1dedff2d2c"; //should be authenticated user
     await axios
       .get(process.env.REACT_APP_API_URL + "/users/" + id)
       .then(({ data }) => {

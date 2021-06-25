@@ -63,3 +63,25 @@ input,label{
     border: none;
     border-bottom: rgb(163, 155, 155) solid .5px;
 }
+.register-wrapper .nav-tabs{
+    background-color: white;
+}
+.register-wrapper .nav-tabs .nav-item {
+   width: 50%;
+   text-align: center;
+}
+.register-wrapper .nav-tabs .nav-item button{
+    background-color: #052336;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+.register-wrapper .nav-tabs .nav-item button:active{
+    color:  #052336;
+}
+.register-wrapper .nav-tabs .nav-item button:focus{
+    color:  #052336;
+}
+.register-wrapper .nav-tabs .nav-item button:hover{
+    color:  #052336;
+}
