@@ -6,7 +6,7 @@ import FooterComponent from "../components/front/FooterComponent";
 import NavbarComponent from "../components/front/NavbarComponent";
 import UserContext from "../context/UserContext";
 import { useHistory } from "react-router-dom";
-import EmployeeReview from "./EmployeeReview";
+import EmployeeReview from "../components/front/EmployeeReviewComponent";
 import ClientJobs from "./ClientJobs";
 
 import "../assets/front/css/animate.min.css";

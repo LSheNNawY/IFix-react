@@ -5,15 +5,12 @@ import Review from "./Review";
 
 const ClientJobs = ({ job }) => {
   const [modalShow, setmodalShow] = useState(false);
-  const [jobState, setJobState] = useState(job);
-
-  useEffect(() => {}, []);
-  console.log(jobState);
+  const [empJob, setempJob] = useState(job);
   return (
     <>
       <Review
-        job={jobState}
-        setJob={setJobState}
+        job={empJob}
+        setJob={setempJob}
         show={modalShow}
         onHide={() => setmodalShow(false)}
       />
@@ -52,7 +49,7 @@ const ClientJobs = ({ job }) => {
                               <h4>
                                 Started At:{" "}
                                 <h6 className="badge badge-success">
-                                  {jobState.started_at
+                                  {empJob.started_at
                                     ? dateFormat(
                                         job.started_at,
                                         "mmmm dS, yyyy - h:MM TT"
@@ -65,7 +62,7 @@ const ClientJobs = ({ job }) => {
                               <h4>
                                 Ended At:{" "}
                                 <h6 className="badge badge-success">
-                                  {jobState.ended_at
+                                  {empJob.ended_at
                                     ? dateFormat(
                                         job.ended_at,
                                         "mmmm dS, yyyy - h:MM TT"
@@ -78,17 +75,21 @@ const ClientJobs = ({ job }) => {
 
                           <div className="row ">
                             <div className="col-6 ">
-                              <h4>
-                                Price :{" "}
-                                <h6 className="badge badge-success">
-                                  {jobState.price} EGP
-                                </h6>{" "}
-                              </h4>
+                              <span className="h4 d-block my-1">Price :</span>
+                              <i
+                                className={`${
+                                  empJob.ended_at
+                                    ? "h6 badge badge-success"
+                                    : "h6"
+                                }`}
+                              >
+                                {empJob.price} EGP
+                              </i>
                             </div>
-                            {jobState.review === undefined &&
-                            JSON.stringify(jobState.ended_at) !== undefined ? (
+                            {empJob.review === undefined &&
+                            JSON.stringify(empJob.ended_at) !== undefined ? (
                               <div
-                                className="col-3"
+                                className="col-2"
                                 onClick={() => setmodalShow(true)}
                                 style={{ cursor: "pointer" }}
                               >
@@ -100,9 +101,7 @@ const ClientJobs = ({ job }) => {
                             ) : (
                               ""
                             )}
-                            <div
-                             className="col-3"
-                            >
+                            <div className="col-1">
                               <i
                                 className="fas fa-credit-card"
                                 style={{ fontSize: "30px", padding: "30px" }}
