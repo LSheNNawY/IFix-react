@@ -151,6 +151,7 @@ const Login = () => {
                                             })
                                         }
                                         value={user.password}
+                                        placeholder="Enter your password"
                                     />
                                     {errors.password !== "" &&
                                     errors.password !== "valid" ? (
