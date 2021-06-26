@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
+import Logout from "./components/Logout";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
@@ -29,6 +30,7 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route path="/register" component={Register} />
         <Route path="/contact" component={Contact} />
         <Route path="/aboutUs" component={AboutUs} />

@@ -28,6 +28,7 @@ const Profile = (props) => {
     });
 
     const { id } = props.match.params;
+
     const ajaxGetEmployee = async () => {
         await axios
             .get(process.env.REACT_APP_API_URL + "/employees/" + id)
