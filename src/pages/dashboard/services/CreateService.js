@@ -6,7 +6,6 @@ import {
     Modal,
   } from "react-bootstrap";
   import React from "react";
-  import { render } from "@testing-library/react";
   import { Formik } from "formik";
   import axios from "axios";
   
