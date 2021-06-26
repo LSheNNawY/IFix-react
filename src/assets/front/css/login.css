@@ -105,6 +105,10 @@ input,label,option,select{
     color: #fff;
     background: #052336;
 }
+.login-wrapper .site-btn:focus{
+    color: #fff;
+    background: #052336;
+}
 .login-wrapper link {
     color: #ffc446 !important;
 }

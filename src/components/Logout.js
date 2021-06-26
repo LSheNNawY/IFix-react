@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import AuthContext from "../context/AuthContext";
+import UserContext from "../context/UserContext";
 
 const Logout = () => {
-  const { getLoggedIn } = useContext(AuthContext);
+  const { getLoggedIn } = useContext(UserContext);
   const history = useHistory();
 
   const Logout = async () => {

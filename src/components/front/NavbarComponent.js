@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useContext, useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import "../../assets/front/css/navbar.css";
 import UserContext from "../../context/UserContext";
+import "../../assets/front/css/navbar.css";
 
 const NavbarComponent = () => {
     let { user } = useContext(UserContext);
@@ -100,7 +100,7 @@ const NavbarComponent = () => {
                             {user ? (
                                 <>
                                     <li className="nav-item dropdown">
-                                        <span
+                                        <Link
                                             className="nav-link dropdown-toggle"
                                             id="navbarDropdown"
                                             role="button"
@@ -109,7 +109,7 @@ const NavbarComponent = () => {
                                             aria-expanded="false"
                                         >
                                             <i className="fas fa-user"></i>
-                                        </span>
+                                        </Link>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="navbarDropdown"
@@ -132,7 +132,7 @@ const NavbarComponent = () => {
                                             <Link
                                                 onClick={(e) => handleLogout(e)}
                                                 className="dropdown-item"
-                                                to="/logout"
+                                                //style={{ outline: "none" }}
                                             >
                                                 Logout
                                             </Link>
