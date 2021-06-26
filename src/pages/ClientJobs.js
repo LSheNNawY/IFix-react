@@ -13,13 +13,6 @@ const ClientJobs = ({ job }) => {
 
     return (
         <>
-            <Review
-                job={empJob}
-                setJob={setempJob}
-                show={modalShow}
-                onHide={() => setmodalShow(false)}
-                setSuccessMsg={setSuccessMsg}
-            />
             {modalstripe ? (
                 <Stripe
                     price={job.price}
@@ -29,6 +22,13 @@ const ClientJobs = ({ job }) => {
                     onHide={() => setmodalstripe(false)}
                 />
             ) : null}
+            <Review
+                job={empJob}
+                setJob={setempJob}
+                show={modalShow}
+                onHide={() => setmodalShow(false)}
+                setSuccessMsg={setSuccessMsg}
+            />
             <div className="container-fluid">
                 {successMsg ? <ToastContainer /> : null}
                 <div
@@ -53,12 +53,12 @@ const ClientJobs = ({ job }) => {
                                     <div className="col-xs-12 col-lg-8">
                                         <div className="row job_container">
                                             <div className="col-3">
-                                                <div className="services_item_icon">
+                                                <div className="services__item__icon  ">
                                                     <i className="fas fa-bolt"></i>
                                                 </div>
                                             </div>
                                             <div className="col-9">
-                                                <div className="services_item_text"></div>
+                                                <div className="services__item__text"></div>
                                                 <div className="dates">
                                                     <div className="row">
                                                         <div className="col-6 ">
@@ -129,7 +129,8 @@ const ClientJobs = ({ job }) => {
                                                         ) : (
                                                             ""
                                                         )}
-                                                        {empJob.ended_at === undefined ? (
+
+                                                        {empJob.ended_at? (
                                                             <div
                                                                 className="col-3"
                                                                 onClick={() => setmodalstripe(true)}

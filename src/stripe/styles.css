@@ -1,5 +1,4 @@
 
-
 input,
 button {
     -webkit-appearance: none;
@@ -48,7 +47,6 @@ button {
     -ms-flex-align: center;
     align-items: center;
     margin-left: 15px;
-    /*border-bottom: rgb(163, 155, 155) solid .5px*/
 }
 
 .FormRow:first-child {
@@ -91,8 +89,6 @@ button {
     color: black;
 }
 
-.StripeElement--webkit-autofill {
-}
 
 .StripeElement {
     width: 100%;
@@ -184,12 +180,6 @@ button {
     cursor: pointer;
     background: transparent;
 }
-
-
-
-
-
-
 
 
 .InputElement {
