@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
+import { ToastContainer } from "react-toastify";
 
 const ClientJobs = ({ job }) => {
   const [modalShow, setmodalShow] = useState(false);
   const [empJob, setempJob] = useState(job);
+  const [successMsg, setSuccessMsg] = useState(false);
+
   return (
     <>
       <Review
@@ -13,8 +16,10 @@ const ClientJobs = ({ job }) => {
         setJob={setempJob}
         show={modalShow}
         onHide={() => setmodalShow(false)}
+        setSuccessMsg = {setSuccessMsg}
       />
       <div className="container-fluid">
+      {successMsg ? <ToastContainer /> : null}
         <div
           className="row"
           style={{
@@ -48,27 +53,39 @@ const ClientJobs = ({ job }) => {
                             <div className="col-6 ">
                               <h4>
                                 Started At:{" "}
-                                <h6 className="badge badge-success">
-                                  {empJob.started_at
-                                    ? dateFormat(
-                                        job.started_at,
-                                        "mmmm dS, yyyy - h:MM TT"
-                                      )
-                                    : ""}
-                                </h6>
+                                {empJob.started_at ? (
+                                  <i className="badge badge-success h6">
+                                    {dateFormat(
+                                      empJob.started_at,
+                                      "mmmm dS, yyyy - h:MM TT"
+                                    )}
+                                  </i>
+                                ) : (
+                                  <div>
+                                    <i className="badge badge-warning h6">
+                                      Pending
+                                    </i>
+                                  </div>
+                                )}
                               </h4>
                             </div>
                             <div className="col-6 ">
                               <h4>
                                 Ended At:{" "}
-                                <h6 className="badge badge-success">
-                                  {empJob.ended_at
-                                    ? dateFormat(
-                                        job.ended_at,
-                                        "mmmm dS, yyyy - h:MM TT"
-                                      )
-                                    : ""}
-                                </h6>
+                                {empJob.ended_at ? (
+                                  <i className="badge badge-success h6">
+                                    {dateFormat(
+                                      empJob.started_at,
+                                      "mmmm dS, yyyy - h:MM TT"
+                                    )}
+                                  </i>
+                                ) : (
+                                  <div>
+                                    <i className="badge badge-warning h6">
+                                      Pending
+                                    </i>
+                                  </div>
+                                )}
                               </h4>
                             </div>
                           </div>
@@ -87,7 +104,7 @@ const ClientJobs = ({ job }) => {
                               </i>
                             </div>
                             {empJob.review === undefined &&
-                            JSON.stringify(empJob.ended_at) !== undefined ? (
+                            empJob.ended_at !== undefined ? (
                               <div
                                 className="col-2"
                                 onClick={() => setmodalShow(true)}

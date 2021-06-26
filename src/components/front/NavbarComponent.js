@@ -97,12 +97,14 @@ const NavbarComponent = () => {
                                             className="dropdown-menu"
                                             aria-labelledby="navbarDropdown"
                                         >
-                                            <Link
-                                                className="dropdown-item"
-                                                to="/jobs"
-                                            >
-                                                My Jobs
-                                            </Link>
+                                            {user.role === "employee" && (
+                                                <Link
+                                                    className="dropdown-item"
+                                                    to="/jobs"
+                                                >
+                                                    My Jobs
+                                                </Link>
+                                            )}
                                             <Link
                                                 className="dropdown-item"
                                                 to={`/profile`}
