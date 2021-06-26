@@ -40,8 +40,6 @@ const Review = (props) => {
       });
   };
 
-  useEffect(() => {}, []);
-
   return (
     <Modal {...props}>
       <Modal.Body className="show-grid">
@@ -60,6 +58,7 @@ const Review = (props) => {
             }}
             initialValues={{
               comment: "",
+              rateRequired: rate !== 0 ? true : false,
             }}
           >
             {({

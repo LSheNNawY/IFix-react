@@ -4,6 +4,7 @@ import dateFormat from "dateformat";
 import Review from "./Review";
 import { ToastContainer } from "react-toastify";
 
+
 const ClientJobs = ({ job }) => {
   const [modalShow, setmodalShow] = useState(false);
   const [empJob, setempJob] = useState(job);
@@ -118,13 +119,6 @@ const ClientJobs = ({ job }) => {
                             ) : (
                               ""
                             )}
-                            <div className="col-1">
-                              <i
-                                className="fas fa-credit-card"
-                                style={{ fontSize: "30px", padding: "30px" }}
-                                aria-hidden="true"
-                              ></i>
-                            </div>
                           </div>
                         </div>
                       </div>
