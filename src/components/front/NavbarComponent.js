@@ -105,7 +105,7 @@ const NavbarComponent = () => {
                                             </Link>
                                             <Link
                                                 className="dropdown-item"
-                                                to={`/profile/${user.id}`}
+                                                to={`/profile`}
                                             >
                                                 Profile
                                             </Link>

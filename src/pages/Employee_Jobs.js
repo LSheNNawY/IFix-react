@@ -20,7 +20,6 @@ const Jobs = () => {
             .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user.id}`)
             .then(({ data }) => {
                 setJobs(data);
-                console.log(data);
             });
     };
 
