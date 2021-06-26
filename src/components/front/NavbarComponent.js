@@ -12,9 +12,9 @@ const NavbarComponent = () => {
         <div className="navbar-wrapper">
             <nav className="navbar navbar-expand-lg navbar-light ">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="/">
+                    <Link className="navbar-brand" to="/">
                         Navbar
-                    </a>
+                    </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -105,7 +105,7 @@ const NavbarComponent = () => {
                                             </Link>
                                             <Link
                                                 className="dropdown-item"
-                                                to={`/profile/${user.id}`}
+                                                to={`/profile`}
                                             >
                                                 Profile
                                             </Link>
