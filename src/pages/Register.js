@@ -135,8 +135,6 @@ function Register() {
                                 phone: "",
                                 address: "",
                                 dateOfBirth: "",
-                                professionRequired:
-                                    role === "employee" ? true : false,
                                 profession: "",
                             }}
                         >

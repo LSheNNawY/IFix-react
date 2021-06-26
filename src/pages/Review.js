@@ -8,12 +8,12 @@ import axios from "axios";
 import { Formik } from "formik";
 import { notify } from "../helpers/generalFunctions";
 
-const schema = yup.object().shape({
-  comment: yup.string().required("Comment Required"),
-});
+// const schema = yup.object().shape({
+// });
 
 const Review = (props) => {
   const [rate, setRate] = useState(0);
+  const [rateError, setRateError] = useState(false);
   const { job, setJob, onHide, setSuccessMsg } = props;
 
   const ratingChanged = (newRating) => {
@@ -40,26 +40,29 @@ const Review = (props) => {
       });
   };
 
-  useEffect(() => {}, []);
-
   return (
     <Modal {...props}>
       <Modal.Body className="show-grid">
         <Container className="mt-3 w-100">
           <h2 className="mt-4 mb-4 text-center">Review</h2>
           <Formik
-            validationSchema={schema}
+            // validationSchema={schema}
             onSubmit={async (values, actions) => {
               actions.setSubmitting(true);
               try {
-                handleUpdateReview(values);
-                actions.setSubmitting(false);
+                if (rate > 0) {
+                  handleUpdateReview(values);
+                  actions.setSubmitting(false);
+                } else {
+                  setRateError(true);
+                }
               } catch (error) {
                 console.error(error);
               }
             }}
             initialValues={{
               comment: "",
+              rateRequired: rate !== 0 ? true : false,
             }}
           >
             {({
@@ -93,7 +96,6 @@ const Review = (props) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="Comment"
-                      isInvalid={touched.comment && errors.comment}
                     />
                     <Form.Control.Feedback type="invalid" tooltip>
                       {errors.comment}
@@ -118,9 +120,11 @@ const Review = (props) => {
                           value={rate}
                         />
                       }
+                      {rateError ? <div style={{color:"red"}}>Rate is required</div> : ""}
                     </div>
                   </Form.Group>
                 </Form.Row>
+
                 <Form.Row>
                   <Form.Group
                     as={Col}
