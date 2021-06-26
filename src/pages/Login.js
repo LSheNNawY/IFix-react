@@ -6,6 +6,7 @@ import { authFormValidation } from "../helpers/loginValidation";
 import UserContext from "../context/UserContext";
 
 import "../assets/front/css/login.css";
+
 const ajaxLogin = async (email, password) => {
     const data = await (
         await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
@@ -52,30 +53,26 @@ const Login = () => {
         }
     };
 
-  return (
-    <div className="login-wrapper">
-      <NavbarComponent />
-      <div
-        style={{
-          backgroundColor: "#ebeeef",
-          paddingTop: "120px",
-          paddingBottom: "120px",
-          marginTop: "-80px",
-        }}
-      >
-        <div className="container ">
-          <div className="row">
-            <div className=" login-form col-lg-6 col-md-8">
-              <div className="login-form-title">
-                <span className="login-form-title-1">login</span>
-              </div>
-
+    return (
+        <div className="login-wrapper">
+            <NavbarComponent />
+            <div
+                style={{
+                    backgroundColor: "#ebeeef",
+                    paddingTop: "120px",
+                    paddingBottom: "120px",
+                    marginTop: "-80px",
+                }}
+            >
+                <div className="container ">
+                    <div className="row">
+                        <div className=" login-form col-lg-6 col-md-8">
+                            <div className="login-form-title">
+                                <span className="login-form-title-1">
+                                    login
+                                </span>
+                            </div>
                             <form onSubmit={submitHandler}>
-
-
-
-
-
                                 <div className="mb-3">
                                     <label
                                         htmlFor="exampleInputEmail1"
@@ -120,19 +117,6 @@ const Login = () => {
                                         </h6>
                                     ) : null}
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 <div className="mb-3">
                                     <label
                                         htmlFor="exampleInputPassword1"

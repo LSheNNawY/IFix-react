@@ -2,23 +2,28 @@ import axios from "axios";
 import React from "react";
 import { useContext, useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import "../../assets/front/css/navbar.css";
 import UserContext from "../../context/UserContext";
+import "../../assets/front/css/navbar.css";
 
 const NavbarComponent = () => {
     let { user } = useContext(UserContext);
 
     const location = useLocation();
     const history = useHistory();
+    const { getUser } = useContext(UserContext);
 
     const handleLogout = (e) => {
         e.preventDefault();
-        console.log('clicked');
-        axios.post(`${process.env.REACT_APP_API_URL}/users/logout`).then(({data}) => {
-            if (data.ok)
-                history.push('/login');
-        })
-    }
+        console.log("clicked");
+        axios
+            .post(`${process.env.REACT_APP_API_URL}/users/logout`)
+            .then(({ data }) => {
+                if (data.ok) {
+                    getUser();
+                    history.push("/login");
+                }
+            });
+    };
 
     return (
         <div className="navbar-wrapper">
@@ -95,7 +100,7 @@ const NavbarComponent = () => {
                             {user ? (
                                 <>
                                     <li className="nav-item dropdown">
-                                        <span
+                                        <Link
                                             className="nav-link dropdown-toggle"
                                             id="navbarDropdown"
                                             role="button"
@@ -104,7 +109,7 @@ const NavbarComponent = () => {
                                             aria-expanded="false"
                                         >
                                             <i className="fas fa-user"></i>
-                                        </span>
+                                        </Link>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="navbarDropdown"
@@ -125,9 +130,9 @@ const NavbarComponent = () => {
                                             </Link>
                                             <div className="dropdown-divider"></div>
                                             <Link
-                                            onClick={(e) => handleLogout(e)}
+                                                onClick={(e) => handleLogout(e)}
                                                 className="dropdown-item"
-                                                to="/logout"
+                                                //style={{ outline: "none" }}
                                             >
                                                 Logout
                                             </Link>

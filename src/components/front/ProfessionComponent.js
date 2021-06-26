@@ -21,9 +21,14 @@ const ProfessionComponent = ({ profession }) => {
             </div>
           </Link>
           <div className="services__item__text">
-            <a href="electricity_services.html">
+          <Link
+            to={{
+              pathname: `/services/${profession._id}`,
+            //   profession: { profession: profession },
+            }}
+          >
               <h4>{profession.title}</h4>
-            </a>
+            </Link>
             <p>You can go and get more details</p>
           </div>
         </div>

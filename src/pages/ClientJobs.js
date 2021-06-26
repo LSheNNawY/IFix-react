@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";

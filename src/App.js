@@ -10,7 +10,7 @@ import Contact from "./pages/Contact";
 import Employee_Jobs from "./pages/Employee_Jobs";
 import AllProfessions from "./pages/AllProfessions";
 import Services from "./pages/Services";
-
+import Logout from "./components/Logout"
 import AdminLayout from "./layouts/Admin";
 import Review from "./pages/Review";
 
@@ -28,6 +28,7 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route path="/register" component={Register} />
         <Route path="/contact" component={Contact} />
         <Route path="/aboutUs" component={AboutUs} />

@@ -43,7 +43,8 @@ const Services = (props) => {
       </div>
 
       {profession && (
-        <div className="container">
+        <div className="container-fluid">
+        
           <div
             className="row"
             style={{
@@ -75,16 +76,17 @@ const Services = (props) => {
           <div
             className="team"
           >
-            <div className="container-fluid">
-              <div
-                className="row "
-                style={{
-                  marginLeft: "5%",
-                  marginTop: "50px",
-                  marginBottom: "50px",
-                }}
-              >
-                <div className="col-12 text-center">
+          
+            <div
+            className="row"
+            style={{
+              width: "90%",
+              marginLeft: "5%",
+              marginTop: "50PX",
+              marginBottom: "50px",
+            }}
+          >
+                <div className="col-12 text-center mt-5">
                   <p className="label ">TOP RATED</p>
                   <h2>Meet our Employees</h2>
                   <h2
@@ -118,7 +120,6 @@ const Services = (props) => {
               </div>
             </div>
           </div>
-        </div>
       )}
       <FooterComponent />
     </div>

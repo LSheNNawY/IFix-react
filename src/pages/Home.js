@@ -142,8 +142,8 @@ const Home = () => {
             </div>
 
             {/* services */}
-            <div className="team services">
-                <div className="container-fluid">
+            <div className="team services" >
+                <div className="container-fluid" style={{paddingBottom:"40px"}}>
                     <div
                         className="row"
                         style={{

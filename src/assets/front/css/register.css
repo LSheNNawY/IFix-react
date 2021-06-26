@@ -79,6 +79,7 @@ input,label{
     width: 100%;
     color: white;
     text-align: center;
+    border-radius: 0px;
 }
 .register-wrapper .nav-tabs .nav-item button:active{
     color:  #052336;
