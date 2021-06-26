@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/front/css/index.css";
 import "../assets/front/css/register.css";
 import * as yup from "yup";
@@ -6,10 +6,15 @@ import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import { Formik } from "formik";
+import { notify } from "../helpers/generalFunctions";
+
+const schema = yup.object().shape({
+  comment: yup.string().required("Comment Required"),
+});
 
 const Review = (props) => {
   const [rate, setRate] = useState(0);
-  const { job, setJob, show, onHide } = props;
+  const { job, setJob, onHide, setSuccessMsg } = props;
 
   const ratingChanged = (newRating) => {
     setRate(newRating);
@@ -20,35 +25,30 @@ const Review = (props) => {
       review: {
         rate: rate,
         comment: values.comment,
-      }
+      },
     };
     await axios
-      .put(process.env.REACT_APP_API_URL + "/jobs/" + job._id +"/updateReview", review , {
-        "Content-Type": "multipart/form-data",
-      })
+      .put(
+        process.env.REACT_APP_API_URL + "/jobs/" + job._id + "/updateReview",
+        review
+      )
       .then(({ data }) => {
         setJob(data);
-        onHide()
+        onHide();
+        setSuccessMsg(true);
+        notify("💥 Review completed", "success");
       });
   };
 
-
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return (
-    <Modal
-      {...props}
-      // size="lg"
-      // aria-labelledby="contained-modal-title-vcenter"
-      // centered
-    >
+    <Modal {...props}>
       <Modal.Body className="show-grid">
         <Container className="mt-3 w-100">
           <h2 className="mt-4 mb-4 text-center">Review</h2>
           <Formik
-            // validationSchema={schema}
+            validationSchema={schema}
             onSubmit={async (values, actions) => {
               actions.setSubmitting(true);
               try {
@@ -75,7 +75,7 @@ const Review = (props) => {
                 encType="multipart/form-data"
                 onSubmit={handleSubmit}
               >
-                <Form.Row>
+                <Form.Row className="mb-3">
                   <Form.Group
                     as={Col}
                     md="10"
@@ -121,16 +121,16 @@ const Review = (props) => {
                     </div>
                   </Form.Group>
                 </Form.Row>
-                <Form.Row >
-                <Form.Group
+                <Form.Row>
+                  <Form.Group
                     as={Col}
                     md="12"
                     className="text-center"
                     controlId="validationFormik105"
                   >
-                  <Button type="submit" className="site-btn ">
-                    Review
-                  </Button>
+                    <Button type="submit" className="site-btn ">
+                      Review
+                    </Button>
                   </Form.Group>
                 </Form.Row>
               </Form>

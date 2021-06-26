@@ -475,11 +475,11 @@
     margin-top:25px ;
     margin-bottom: 60px;
 }
-.index-wrapper  .services__item__icon {
-    height: 85px;
-    width: 85px;
-    border: 1px solid #ffc446;
-    color: #ffc446;
+.index-wrapper .services__item__icon {
+    height: 85px !important;
+    width: 85px !important;
+    border: 1px solid #ffc446 !important;
+    color: #ffc446 !important;
     font-size: 40px;
     line-height: 85px;
     text-align: center;

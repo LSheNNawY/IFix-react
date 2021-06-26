@@ -6,7 +6,7 @@ import FooterComponent from "../components/front/FooterComponent";
 import NavbarComponent from "../components/front/NavbarComponent";
 import UserContext from "../context/UserContext";
 import { useHistory } from "react-router-dom";
-import EmployeeReview from "./EmployeeReview";
+import EmployeeReview from "../components/front/EmployeeReviewComponent";
 import ClientJobs from "./ClientJobs";
 
 import "../assets/front/css/animate.min.css";
@@ -14,6 +14,7 @@ import "../assets/front/css/profile.css";
 
 import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
+import ProfileEdit from "../components/ProfileEdit";
 
 const Profile = (props) => {
   const { user } = useContext(UserContext);
@@ -22,6 +23,8 @@ const Profile = (props) => {
   const [jobs, setJobs] = useState([]);
 
   const history = useHistory();
+  const [profileInfo, setProfileInfo] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
 
   const ajaxGetUser = async (id, roleState) => {
     await axios
@@ -38,6 +41,10 @@ const Profile = (props) => {
       .then(({ data }) => {
         setJobs(data);
       });
+  };
+  const handleEdit = (data) => {
+    setShowProfile(true);
+    setProfileInfo(data);
   };
 
   useEffect(() => {
@@ -128,20 +135,24 @@ const Profile = (props) => {
                         </a>
                       </li>
                     </ul>
-                    {/* {user && user.id === id ? (
-                    <button type="submit" className="site-btn">
-                      Edit Profile
-                    </button>
-                  ) : (
-                    <Link
-                      to={`/order?prof=${
-                        userData.profession ? userData.profession._id : ""
-                      }&emp=${userData._id}`}
-                      className="site-btn"
-                    >
-                      BOOK
-                    </Link>
-                  )} */}
+                    {user && user.id === userData._id ? (
+                      <button
+                        type="submit"
+                        className="site-btn"
+                        onClick={() => handleEdit(userData)}
+                      >
+                        Edit Profile
+                      </button>
+                    ) : (
+                      <Link
+                        to={`/order?prof=${
+                          userData.profession ? userData.profession._id : ""
+                        }&emp=${userData._id}`}
+                        className="site-btn"
+                      >
+                        BOOK
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -172,6 +183,13 @@ const Profile = (props) => {
               </section>
             </>
           )}
+          <ProfileEdit
+            show={showProfile}
+            user={userData}
+            role={setUserData.role}
+            setShow={setShowProfile}
+            setInfo={setProfileInfo}
+          />
         </>
       ) : (
         <h1 class="text-center">Loading</h1>
