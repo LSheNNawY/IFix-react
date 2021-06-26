@@ -3,23 +3,34 @@ import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
 import { ToastContainer } from "react-toastify";
+import Stripe from "../stripe/StripeContainer";
 
 const ClientJobs = ({ job }) => {
   const [modalShow, setmodalShow] = useState(false);
   const [empJob, setempJob] = useState(job);
   const [successMsg, setSuccessMsg] = useState(false);
+  const [modalstripe, setmodalstripe] = useState(false);
 
   return (
     <>
+      {modalstripe ? (
+        <Stripe
+          price={job.price}
+          job_id={job._id}
+          setJob={setempJob}
+          show={modalstripe}
+          onHide={() => setmodalstripe(false)}
+        />
+      ) : null}
       <Review
         job={empJob}
         setJob={setempJob}
         show={modalShow}
         onHide={() => setmodalShow(false)}
-        setSuccessMsg = {setSuccessMsg}
+        setSuccessMsg={setSuccessMsg}
       />
       <div className="container-fluid">
-      {successMsg ? <ToastContainer /> : null}
+        {successMsg ? <ToastContainer /> : null}
         <div
           className="row"
           style={{
@@ -113,6 +124,22 @@ const ClientJobs = ({ job }) => {
                                 <i
                                   className="fas fa-comment"
                                   style={{ fontSize: "30px", padding: "30px" }}
+                                ></i>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+
+                            {empJob.ended_at === undefined ? (
+                              <div
+                                className="col-3"
+                                onClick={() => setmodalstripe(true)}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i
+                                  className="fas fa-credit-card"
+                                  style={{ fontSize: "30px", padding: "30px" }}
+                                  aria-hidden="true"
                                 ></i>
                               </div>
                             ) : (
