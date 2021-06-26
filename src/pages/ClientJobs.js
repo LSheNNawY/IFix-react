@@ -130,7 +130,7 @@ const ClientJobs = ({ job }) => {
                                                             ""
                                                         )}
 
-                                                        {empJob.ended_at? (
+                                                        {empJob.ended_at===undefined? (
                                                             <div
                                                                 className="col-3"
                                                                 onClick={() => setmodalstripe(true)}
