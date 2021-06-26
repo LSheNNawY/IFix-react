@@ -10,14 +10,14 @@ const PUBLIC_KEY = "pk_test_51J5eE2E2CuIQ1rCYOfgWBHy9aO9SGrJGNwBVv2B5pvLXeuZY0ew
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
 const Stripe = (props) => {
-    const {job_id, price, show, onHide} = props;
+    const {job_id, price, show, onHide,setJob} = props;
 
     return (
         <Modal
             {...props}
         >
             <Elements stripe={stripeTestPromise}>
-            <CheckoutForm job_id={job_id} price={price} onHide={onHide} show={show}/>
+            <CheckoutForm job_id={job_id} price={price} setJob={setJob}  onHide={onHide} show={show}/>
         </Elements>
         </Modal>
     );
