@@ -38,6 +38,8 @@ function App() {
         <Route path="/jobs" component={Employee_Jobs} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        <Route path="/review" component={Review} />
+
         <Route
           path="/services/:id"
           render={(props) => <Services {...props} />}
