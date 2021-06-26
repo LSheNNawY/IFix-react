@@ -4,7 +4,6 @@ import dateFormat from "dateformat";
 import Review from "./Review";
 import { ToastContainer } from "react-toastify";
 
-
 const ClientJobs = ({ job }) => {
   const [modalShow, setmodalShow] = useState(false);
   const [empJob, setempJob] = useState(job);
