@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
+import Stripe from "../stripe/StripeContainer"
 
 const ClientJobs = ({ job }) => {
   const [modalShow, setmodalShow] = useState(false);
+  const [modalstripe, setmodalstripe] = useState(false);
   const [jobState, setJobState] = useState(job);
+
+
 
   useEffect(() => {}, []);
   console.log(jobState);
@@ -17,6 +21,12 @@ const ClientJobs = ({ job }) => {
         show={modalShow}
         onHide={() => setmodalShow(false)}
       />
+      {
+        modalstripe? <Stripe price={job.price} job_id={job._id}  show={modalstripe}
+                             onHide={() => setmodalstripe(false)}
+        /> :null
+      }
+
       <div className="container-fluid">
         <div
           className="row"
@@ -102,6 +112,8 @@ const ClientJobs = ({ job }) => {
                             )}
                             <div
                              className="col-3"
+                             onClick={() => setmodalstripe(true)}
+                             style={{ cursor: "pointer" }}
                             >
                               <i
                                 className="fas fa-credit-card"
