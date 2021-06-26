@@ -178,19 +178,17 @@ export const CheckoutForm = ({price,job_id,onHide,setJob}) => {
         </div>
     ) : (
         <form  className="Form text-center" onSubmit={handleSubmit}>
-            <fieldset className="FormGroup mt-5">
-                <Field
-                    label="Name :"
-                    id="name"
-                    type="text"
-                    placeholder=""
-                    required
-                    autoComplete="name"
-                    value={billingDetails.name}
+            <fieldset className="FormGroup mt-5" style={{color:"black !important"}}>
+                <CardField
+                    style={{color:"black !important"}}
                     onChange={(e) => {
-                        setBillingDetails({ ...billingDetails, name: e.target.value });
+                        setError(e.error);
+                        setCardComplete(e.complete);
                     }}
                 />
+            </fieldset>
+            {error && <ErrorMessage>{error.message}</ErrorMessage>}
+            <fieldset className="FormGroup">
                 <Field
                     label="Email :"
                     id="email"
@@ -204,30 +202,34 @@ export const CheckoutForm = ({price,job_id,onHide,setJob}) => {
                     }}
                 />
                 <Field
-                    label="Phone :"
-                    id="phone"
-                    type="tel"
+                    label="Name :"
+                    id="name"
+                    type="text"
                     placeholder=""
                     required
-                    autoComplete="tel"
-                    value={billingDetails.phone}
+                    autoComplete="name"
+                    value={billingDetails.name}
                     onChange={(e) => {
-                        setBillingDetails({ ...billingDetails, phone: e.target.value });
+                        setBillingDetails({ ...billingDetails, name: e.target.value });
                     }}
                 />
+                {/*<Field*/}
+                {/*    label="Phone :"*/}
+                {/*    id="phone"*/}
+                {/*    type="tel"*/}
+                {/*    placeholder=""*/}
+                {/*    required*/}
+                {/*    autoComplete="tel"*/}
+                {/*    value={billingDetails.phone}*/}
+                {/*    onChange={(e) => {*/}
+                {/*        setBillingDetails({ ...billingDetails, phone: e.target.value });*/}
+                {/*    }}*/}
+                {/*/>*/}
             </fieldset>
-            <fieldset className="FormGroup" style={{color:"black !important"}}>
-                <CardField
-                    style={{color:"black !important"}}
-                    onChange={(e) => {
-                        setError(e.error);
-                        setCardComplete(e.complete);
-                    }}
-                />
-            </fieldset>
-            {error && <ErrorMessage>{error.message}</ErrorMessage>}
+
             <SubmitButton className="" style={{marginBottom:"10rem"}} processing={processing} error={error} disabled={!stripe}>
-                Pay {price}
+                Pay {price} <i className="fas fa-spinner fa-pulse"></i>
+
             </SubmitButton>
         </form>
     );

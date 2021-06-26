@@ -7,22 +7,22 @@ import Stripe from "../stripe/StripeContainer"
 const ClientJobs = ({job}) => {
     const [modalShow, setmodalShow] = useState(false);
     const [modalstripe, setmodalstripe] = useState(false);
-    const [jobState, setJobState] = useState(job);
+    const [empJob, setempJob] = useState(job);
 
 
     useEffect(() => {
     }, []);
-    console.log(jobState);
+    console.log(empJob);
     return (
         <>
             <Review
-                job={jobState}
-                setJob={setJobState}
+                job={empJob}
+                setJob={setempJob}
                 show={modalShow}
                 onHide={() => setmodalShow(false)}
             />
             {
-                modalstripe ? <Stripe price={job.price} job_id={job._id} setJob={setJobState}
+                modalstripe ? <Stripe price={job.price} job_id={job._id} setJob={setempJob}
                                       show={modalstripe}
                                       onHide={() => setmodalstripe(false)}
                 /> : null
@@ -63,7 +63,7 @@ const ClientJobs = ({job}) => {
                                                             <h4>
                                                                 Started At:{" "}
                                                                 <h6 className="badge badge-success">
-                                                                    {jobState.started_at
+                                                                    {empJob.started_at
                                                                         ? dateFormat(
                                                                             job.started_at,
                                                                             "mmmm dS, yyyy - h:MM TT"
@@ -76,7 +76,7 @@ const ClientJobs = ({job}) => {
                                                             <h4>
                                                                 Ended At:{" "}
                                                                 <h6 className="badge badge-success">
-                                                                    {jobState.ended_at
+                                                                    {empJob.ended_at
                                                                         ? dateFormat(
                                                                             job.ended_at,
                                                                             "mmmm dS, yyyy - h:MM TT"
@@ -92,12 +92,12 @@ const ClientJobs = ({job}) => {
                                                             <h4>
                                                                 Price :{" "}
                                                                 <h6 className="badge badge-success">
-                                                                    {jobState.price} EGP
+                                                                    {empJob.price} EGP
                                                                 </h6>{" "}
                                                             </h4>
                                                         </div>
-                                                        {jobState.review === undefined &&
-                                                        jobState.ended_at !== undefined ? (
+                                                        {empJob.review === undefined &&
+                                                        empJob.ended_at !== undefined ? (
                                                             <div
                                                                 className="col-3"
                                                                 onClick={() => setmodalShow(true)}
@@ -113,7 +113,7 @@ const ClientJobs = ({job}) => {
                                                         )}
                                                         {
 
-                                                            jobState.ended_at === undefined ? (
+                                                            empJob.ended_at === undefined ? (
                                                                 <div
                                                                     className="col-3"
                                                                     onClick={() => setmodalstripe(true)}
