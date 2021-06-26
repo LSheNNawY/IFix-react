@@ -10,15 +10,20 @@ const NavbarComponent = () => {
 
     const location = useLocation();
     const history = useHistory();
+    const { getUser } = useContext(UserContext);
 
     const handleLogout = (e) => {
         e.preventDefault();
-        console.log('clicked');
-        axios.post(`${process.env.REACT_APP_API_URL}/users/logout`).then(({data}) => {
-            if (data.ok)
-                history.push('/login');
-        })
-    }
+        console.log("clicked");
+        axios
+            .post(`${process.env.REACT_APP_API_URL}/users/logout`)
+            .then(({ data }) => {
+                if (data.ok) {
+                    getUser();
+                    history.push("/login");
+                }
+            });
+    };
 
     return (
         <div className="navbar-wrapper">
@@ -125,7 +130,7 @@ const NavbarComponent = () => {
                                             </Link>
                                             <div className="dropdown-divider"></div>
                                             <Link
-                                            onClick={(e) => handleLogout(e)}
+                                                onClick={(e) => handleLogout(e)}
                                                 className="dropdown-item"
                                                 to="/logout"
                                             >
