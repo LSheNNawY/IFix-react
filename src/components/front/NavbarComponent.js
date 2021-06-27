@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import "../../assets/front/css/navbar.css";
@@ -14,7 +14,6 @@ const NavbarComponent = () => {
 
     const handleLogout = (e) => {
         e.preventDefault();
-        console.log("clicked");
         axios
             .post(`${process.env.REACT_APP_API_URL}/users/logout`)
             .then(({ data }) => {
@@ -100,7 +99,8 @@ const NavbarComponent = () => {
                             {user ? (
                                 <>
                                     <li className="nav-item dropdown">
-                                        <Link
+                                        <span
+
                                             className="nav-link dropdown-toggle"
                                             id="navbarDropdown"
                                             role="button"
@@ -109,7 +109,7 @@ const NavbarComponent = () => {
                                             aria-expanded="false"
                                         >
                                             <i className="fas fa-user"></i>
-                                        </Link>
+                                        </span>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="navbarDropdown"
@@ -129,13 +129,13 @@ const NavbarComponent = () => {
                                                 Profile
                                             </Link>
                                             <div className="dropdown-divider"></div>
-                                            <Link
+                                            <span
                                                 onClick={(e) => handleLogout(e)}
                                                 className="dropdown-item"
-                                                //style={{ outline: "none" }}
+                                                style={{ cursor: "pointer" }}
                                             >
                                                 Logout
-                                            </Link>
+                                            </span>
                                         </div>
                                     </li>
                                 </>

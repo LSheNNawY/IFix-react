@@ -29,7 +29,7 @@ const Order = () => {
     const [loggedUser, setLoggedUser] = useState({});
     const [services, setServices] = useState([]);
     const [service, setService] = useState("");
-    const [address, setAddress] = useState("");
+    const [address, setAddress] = useState("other");
     const [startDate, setStartDate] = useState(new Date());
     const [errors, setErrors] = useState({});
     const [showModal, setShowModal] = useState(false);
@@ -74,7 +74,12 @@ const Order = () => {
                 console.log(data);
                 handleClose();
                 setSuccessMsg(true);
-                notify("💥 Order created successfully, we will contact you", "success", history, "/");
+                notify(
+                    "💥 Order created successfully, we will contact you",
+                    "success",
+                    history,
+                    "/"
+                );
             })
             .catch(() => {
                 notify(
@@ -85,14 +90,13 @@ const Order = () => {
     };
 
     useEffect(() => {
-        if (user === undefined || JSON.stringify(user) === "{}") {
+        if (!user || user === undefined || JSON.stringify(user) === "{}") {
             async function getUser() {
                 const response = await axios.get(
                     `${process.env.REACT_APP_API_URL}/users/current-user`
                 );
                 setLoggedUser(response.data);
-                setAddress(response.data.address);
-                if (JSON.stringify(response.data) === "{}") {
+                if (!response.data || response.data === undefined) {
                     history.push(
                         `/login?prof=${professionId}&emp=${employeeId}`
                     );
@@ -115,35 +119,9 @@ const Order = () => {
                 const services = await axios.get(
                     `${process.env.REACT_APP_API_URL}/professions/${professionId}?services=true`
                 );
-                // console.log(services.data);
                 setServices(services.data);
             }
             getProfessionServices();
-        } else {
-            console.log("not found");
-        }
-    }, []);
-
-    useEffect(() => {
-        if (employeeId) {
-            async function getEmployeeJobs() {
-                const employee = await axios.get(
-                    `${process.env.REACT_APP_API_URL}/employees/${employeeId}`
-                );
-                if (employee.data.jobs.length > 0) {
-                    console.log(
-                        employee.data.jobs[employee.data.jobs.length - 1]
-                    );
-                    setStartDate(
-                        new Date(
-                            employee.data.jobs[
-                                employee.data.jobs.length - 1
-                            ].created_at
-                        )
-                    );
-                }
-            }
-            getEmployeeJobs();
         } else {
             console.log("not found");
         }
@@ -271,7 +249,10 @@ const Order = () => {
                                         <option value={loggedUser.address}>
                                             {loggedUser.address}
                                         </option>
-                                        <option value="other">
+                                        <option
+                                            value="other"
+                                            selected="selected"
+                                        >
                                             Another address
                                         </option>
                                     </select>
