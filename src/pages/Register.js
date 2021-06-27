@@ -33,17 +33,20 @@ const schema = yup.object().shape({
 function Register() {
   const [professions, setProfessions] = useState([]);
   const history = useHistory();
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("user");
 
   toast.configure();
+
   useEffect(() => {
     bsCustomFileInput.init();
   }, []);
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/professions")
       .then((res) => setProfessions(res.data));
   }, []);
+
   return (
     <div className="register-wrapper">
       <NavbarComponent />
@@ -55,15 +58,22 @@ function Register() {
           marginTop: "-140px",
         }}
       >
-        <Container className="mt-5 w-50">
+        <Container className="mt-5 col-lg-6">
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item ">
-              <button className="nav-link" onClick={() => setRole("employee")}>
-                employee
+              <button
+                className={`nav-link ${role === "employee" ? "active" : ""}`}
+                onClick={() => setRole("employee")}
+              >
+                Employee
               </button>
             </li>
-            <li className="nav-item ">
-              <button className="nav-link " onClick={() => setRole("user")}>
+
+            <li className="nav-item">
+              <button
+                className={`nav-link ${role === "user" ? "active" : ""}`}
+                onClick={() => setRole("user")}
+              >
                 User
               </button>
             </li>
@@ -72,6 +82,7 @@ function Register() {
             <div className="login-form-title">
               <h1 className="mt-4 mb-4 login-form-title-1">Register</h1>
             </div>
+
             {/* <h1 className="mt-4 mb-4">Register</h1> */}
             <Formik
               validationSchema={schema}
@@ -105,7 +116,7 @@ function Register() {
                       }
                     )
                     .then(async (res) => {
-                        toast.success("Registered Successfully")
+                      toast.success("Registered Successfully");
                       history.push("/");
                     })
                     .catch((err) => {
@@ -120,12 +131,11 @@ function Register() {
                       if (error === "phone") {
                         toast.error("Phone already registered");
                         actions.setFieldError(
-                            "phone",
-                            "Phone is already Registered"
-                          );
+                          "phone",
+                          "Phone is already Registered"
+                        );
                       }
                     });
-
                 } catch (error) {
                   console.error(error);
                 } finally {

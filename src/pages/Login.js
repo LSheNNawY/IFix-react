@@ -45,7 +45,7 @@ const Login = () => {
                     await getUser();
                     history.push("/");
                 } else {
-                    setLoggingError("Wrong user!");
+                    setLoggingError("Invalid credentials");
                 }
             } catch (err) {
                 console.log(err);

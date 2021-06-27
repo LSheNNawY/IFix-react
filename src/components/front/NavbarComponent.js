@@ -31,20 +31,13 @@ const NavbarComponent = () => {
                     <Link className="navbar-brand" to="/">
                         Navbar
                     </Link>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar-togglerDemo02"
+                        aria-controls="navbar-togglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="line"></span>
                     </button>
                     <div
-                        className="collapse navbar-collapse float-end col-md-4"
-                        id="navbarNav"
+                        className="collapse navbar-collapse  "
+                        id="navbar-togglerDemo02"
                     >
                         <ul className="navbar-nav">
                             <li className="nav-item">
@@ -160,6 +153,7 @@ const NavbarComponent = () => {
                 </div>
             </nav>
         </div>
+     
     );
 };
 
