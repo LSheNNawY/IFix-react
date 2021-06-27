@@ -84,6 +84,10 @@ input,label{
 .register-wrapper .nav-tabs .nav-item button:active{
     color:  #052336;
 }
+.register-wrapper .nav-tabs .nav-item .active{
+    color:  #052336;
+    background-color: white;
+}
 .register-wrapper .nav-tabs .nav-item button:focus{
     color:  #052336;
 }

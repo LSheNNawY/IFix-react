@@ -329,7 +329,7 @@
     position: relative;
     display: block;
 }
-.index-wrapper .chooseUl li {
+.index-wrapper .chooseUl li , .modal-content .modal-body li{
     list-style: none;
     font-size: 15px;
     font-weight: 300;
@@ -337,7 +337,7 @@
     line-height: 32px;
     margin-left: -35px;
 }
-.index-wrapper .chooseUl li i {
+.index-wrapper .chooseUl li i , .modal-content .modal-body li i {
     color: #ffc446;
     margin-right: 10px;
 }
@@ -522,7 +522,23 @@
     text-align: left;
 }
 
-.index-wrapper .profession-wrapper .job_container {
-    border: 1px solid #ffc446;
-    border-radius: 15px;
+.modal .modal-content .modal-footer .btn {
+    color: #1b2839;
+    background-color:white;
+    border: none;
 }
+.modal .modal-content .modal-footer .btn:hover {
+    color: #1b2839;
+    background-color:white;
+
+  }
+  .modal-content,.modal-title {
+    font-family: Rajdhani-SemiBold;
+  }
+  .modal-content{
+      background-color:#1b2839  !important ;
+      color: white  !important;
+  }
+  .modal-content .modal-body li{
+      color: white;
+  }

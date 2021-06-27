@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import UserContext, { UserContextProvider } from "./context/UserContext";
 import reportWebVitals from "./reportWebVitals";
+// import "../node_modules/jquery/dist/jquery.min.js";
+// import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 
 ReactDOM.render(
   <React.StrictMode>
