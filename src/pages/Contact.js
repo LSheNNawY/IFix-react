@@ -3,33 +3,37 @@ import "../assets/front/css/index.css";
 import FooterComponent from "../components/front/FooterComponent";
 import contact_header from "../assets/front/img/contact_header.PNG";
 import { Link } from "react-router-dom";
-import {authFormValidation} from "../helpers/concateValidation";
+import { authFormValidation } from "../helpers/concateValidation";
 import axios from "axios";
-import React, {useState} from "react";
-
-
-
-
+import React, { useState } from "react";
 
 const Contact = () => {
-    const [commentState, SetCommentState] = useState({ name: "", email: "",body:"" });
-    const [errors, setErrors] = useState({ name: "", email: "",body:"" });
+    const [commentState, SetCommentState] = useState({
+        name: "",
+        email: "",
+        body: "",
+    });
+    const [errors, setErrors] = useState({ name: "", email: "", body: "" });
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(commentState)
-        if (authFormValidation(commentState.name, commentState.email, commentState.body, setErrors)) {
+        console.log(commentState);
+        if (
+            authFormValidation(
+                commentState.name,
+                commentState.email,
+                commentState.body,
+                setErrors
+            )
+        ) {
             try {
-
                 const added = await axios.post(
                     `${process.env.REACT_APP_API_URL}/mail`,
                     commentState,
                     {
-                        "Content-Type":
-                            "multipart/form-data",
+                        "Content-Type": "multipart/form-data",
                     }
                 );
-
-            }catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }
@@ -74,7 +78,11 @@ const Contact = () => {
                                 scrolling="no"
                                 marginHeight="0"
                                 marginWidth="0"
-                                style={{ marginLeft: "5%", border: "0", width: "90%" }}
+                                style={{
+                                    marginLeft: "5%",
+                                    border: "0",
+                                    width: "90%",
+                                }}
                             ></iframe>
 
                             <br />
@@ -105,7 +113,8 @@ const Contact = () => {
                                 <div className="contact__widget__item__text">
                                     <h4>Address</h4>
                                     <p>
-                                        160 Pennsylvania Ave NW, Washington, Castle, PA 16101-5161
+                                        160 Pennsylvania Ave NW, Washington,
+                                        Castle, PA 16101-5161
                                     </p>
                                 </div>
                             </div>
@@ -132,9 +141,6 @@ const Contact = () => {
                     <div className="col-lg-6 col-md-6">
                         <div className="contact__form">
                             <form onSubmit={submitHandler}>
-
-
-
                                 <div className="mb-3">
                                     <label
                                         htmlFor="exampleInputname"
@@ -179,8 +185,6 @@ const Contact = () => {
                                         </h6>
                                     ) : null}
                                 </div>
-
-
 
                                 <div className="mb-3">
                                     <label
@@ -227,9 +231,6 @@ const Contact = () => {
                                     ) : null}
                                 </div>
 
-
-
-
                                 <div className="mb-3">
                                     <label
                                         htmlFor="exampleInputTextArea"
@@ -266,8 +267,9 @@ const Contact = () => {
                                         }
                                         value={commentState.body}
                                         placeholder="Enter your comment"
-                                    >                  </textarea>
-
+                                    >
+                                        {" "}
+                                    </textarea>
 
                                     {errors.body !== "" &&
                                     errors.body !== "valid" ? (
@@ -275,15 +277,7 @@ const Contact = () => {
                                             {errors.body}
                                         </h6>
                                     ) : null}
-
                                 </div>
-
-
-
-
-
-
-
 
                                 <button type="submit" className="site-btn">
                                     Send Message

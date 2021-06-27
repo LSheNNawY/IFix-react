@@ -137,18 +137,18 @@ const Order = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <ul>
-                        <li>fees ......</li>
-                        <li>cond. 5</li>
-                        <li>cond. 4</li>
-                        <li>cond. 3</li>
-                        <li>cond. 2</li>
+                        <li> <i className="fas fa-check-square"></i>fees ......</li>
+                        <li><i className="fas fa-check-square"></i>cond. 5</li>
+                        <li><i className="fas fa-check-square"></i>cond. 4</li>
+                        <li><i className="fas fa-check-square"></i>cond. 3</li>
+                        <li><i className="fas fa-check-square"></i>cond. 2</li>
                     </ul>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button  onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
+                    <Button   onClick={handleSubmit}>
                         Confirm
                     </Button>
                 </Modal.Footer>
@@ -167,7 +167,7 @@ const Order = () => {
                         {successMsg ? <ToastContainer /> : null}
                     </div>
                     <div className="row">
-                        <div className=" login-form col-md-8">
+                        <div className=" login-form col-lg-8">
                             <div className="login-form-title">
                                 <span className="login-form-title-1">
                                     Order
