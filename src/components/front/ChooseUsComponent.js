@@ -51,31 +51,30 @@ export default function ChooseUsComponent() {
                             }}
                         ></h2>
                         <p>
-                            Consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Quis
-                            ipsum suspendisse ultrices gravida lacus vel
-                            facilisis.
+                        We want you to be happy with your repair or installation, and that's why we offer a 100% satisfaction guarantee. If you aren't happy, we'll keep working until you are.
                         </p>
                         <ul className="chooseUl">
                             <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
+                                <i className="fas fa-check-square"></i>
+                                Fast and Flexible Service
                             </li>
                             <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
+                                <i className="fas fa-check-square">
+                               
+                                </i>
+                                Guaranteed On-Time Service
                             </li>
                             <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
+                                <i className="fas fa-check-square"></i>
+                                Transparent Pricing
                             </li>
                             <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
+                                <i className="fas fa-check-square"></i>
+                                Trusted Technicians
                             </li>
                             <li>
-                                <i className="fas fa-check-square"></i>bla bla
-                                bla bla bla bla bla
+                                <i className="fas fa-check-square"></i>
+                                We Respect Our Customerss
                             </li>
                         </ul>
                         <Link to="/contact" className="primary-btn">

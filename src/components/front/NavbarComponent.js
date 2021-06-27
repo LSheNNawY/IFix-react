@@ -1,13 +1,23 @@
 import React from "react";
 import { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import "../../assets/front/css/navbar.css";
 import UserContext from "../../context/UserContext";
+import { useHistory } from "react-router";
+import axios from "axios";
 
 const NavbarComponent = () => {
-    const { user } = useContext(UserContext);
-
+    const { user,getUser } = useContext(UserContext);
     const location = useLocation();
+    const history = useHistory();
+    const Logout = async () => {
+        await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`);
+        await getUser();
+        history.push("/");
+      };
+ 
+
+    
     return (
         <div className="navbar-wrapper">
             <nav className="navbar navbar-expand-lg navbar-light ">
@@ -83,7 +93,7 @@ const NavbarComponent = () => {
                             {user ? (
                                 <>
                                     <li className="nav-item dropdown">
-                                        <span
+                                        <Link
                                             className="nav-link dropdown-toggle"
                                             id="navbarDropdown"
                                             role="button"
@@ -91,8 +101,8 @@ const NavbarComponent = () => {
                                             aria-haspopup="true"
                                             aria-expanded="false"
                                         >
-                                            Dropdown
-                                        </span>
+                                            <i class="fas fa-user-alt"></i>
+                                        </Link>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="navbarDropdown"
@@ -110,12 +120,13 @@ const NavbarComponent = () => {
                                                 Profile
                                             </Link>
                                             <div className="dropdown-divider"></div>
-                                            <Link
+                                            <button
+                                                onClick={Logout}
                                                 className="dropdown-item"
-                                                to="/logout"
+                                                //style={{ outline: "none" }}
                                             >
                                                 Logout
-                                            </Link>
+                                            </button>
                                         </div>
                                     </li>
                                 </>
@@ -129,6 +140,7 @@ const NavbarComponent = () => {
                                                     : ""
                                             }`}
                                             to="/login"
+                                           
                                         >
                                             Login
                                         </Link>
