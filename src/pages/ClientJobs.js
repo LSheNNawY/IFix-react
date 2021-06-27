@@ -53,7 +53,7 @@ const ClientJobs = ({ job }) => {
                   <div className="col-xs-12 col-lg-8">
                     <div className="row job_container">
                       <div className="col-3">
-                        <div className="services__item__icon  ">
+                        <div className="services__item__icon" style={{ marginTop: "55%" }}>
                           <i className="fas fa-bolt"></i>
                         </div>
                       </div>
@@ -63,7 +63,7 @@ const ClientJobs = ({ job }) => {
                           <div className="row">
                             <div className="col-6 ">
                               <h4>
-                                Started At:{" "}
+                                Started At :{" "}
                                 {empJob.started_at ? (
                                   <i className="badge badge-success h6">
                                     {dateFormat(
@@ -82,7 +82,7 @@ const ClientJobs = ({ job }) => {
                             </div>
                             <div className="col-6 ">
                               <h4>
-                                Ended At:{" "}
+                                Ended At :{" "}
                                 {empJob.ended_at ? (
                                   <i className="badge badge-success h6">
                                     {dateFormat(
