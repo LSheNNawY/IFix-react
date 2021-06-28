@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Stripe from "../stripe/StripeContainer";
 
-const ClientJobs = ({job}) => {
+const ClientJobs = ({ job }) => {
     const [modalShow, setmodalShow] = useState(false);
     const [empJob, setempJob] = useState(job);
     const [successMsg, setSuccessMsg] = useState(false);
@@ -30,7 +30,7 @@ const ClientJobs = ({job}) => {
                 setSuccessMsg={setSuccessMsg}
             />
             <div className="container-fluid">
-                {successMsg ? <ToastContainer/> : null}
+                {successMsg ? <ToastContainer /> : null}
                 <div
                     className="row"
                     style={{
@@ -51,13 +51,11 @@ const ClientJobs = ({job}) => {
                                     }}
                                 >
                                     <div className="col-xs-12 col-lg-8">
-
                                         <div className="row job_container">
                                             <div className="col-3">
-                                                    <div className="services__item__icon ">
-                                                        <i className="fas fa-bolt"></i>
-                                                    </div>
-
+                                                <div className="services__item__icon ">
+                                                    <i className="fas fa-bolt"></i>
+                                                </div>
                                             </div>
                                             <div className="col-9">
                                                 <div className="services__item__text"></div>
@@ -105,28 +103,40 @@ const ClientJobs = ({job}) => {
 
                                                     <div className="row ">
                                                         <div className="col-6 ">
-                              <span className="h4 d-block my-1">
-                                Employee Name :
-                              </span>
+                                                            <span className="h4 d-block my-1">
+                                                                Employee Name :
+                                                            </span>
                                                             <span className="d-block my-1">
-                                {" "}
-                                                                {job.employee.firstName +
-                                                                " " +
-                                                                job.employee.lastName}{" "}
-                              </span>
+                                                                {" "}
+                                                                {job.employee
+                                                                    .firstName +
+                                                                    " " +
+                                                                    job.employee
+                                                                        .lastName}{" "}
+                                                            </span>
                                                         </div>
 
                                                         <div className="col-6 ">
-                              <span className="h4 d-block my-1">
-                                Employee Phone :
-                              </span>
-                                                            <span span
-                                                                  className="d-block mb-2"> {job.employee.phone} </span>
+                                                            <span className="h4 d-block my-1">
+                                                                Employee Phone :
+                                                            </span>
+                                                            <span
+                                                                span
+                                                                className="d-block mb-2"
+                                                            >
+                                                                {" "}
+                                                                {
+                                                                    job.employee
+                                                                        .phone
+                                                                }{" "}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div className="row ">
                                                         <div className="col-6 ">
-                                                            <span className="h4 d-block my-1">Price :</span>
+                                                            <span className="h4 d-block my-1">
+                                                                Price :
+                                                            </span>
                                                             <i
                                                                 className={`${
                                                                     empJob.ended_at
@@ -134,14 +144,21 @@ const ClientJobs = ({job}) => {
                                                                         : "h6"
                                                                 }`}
                                                             >
-                                                                {empJob.price} EGP
+                                                                {empJob.price}{" "}
+                                                                EGP
                                                             </i>
                                                         </div>
-                                                        {empJob.review === undefined &&
-                                                        empJob.ended_at !== undefined ? (
+                                                        {empJob.review ===
+                                                            undefined &&
+                                                        empJob.ended_at !==
+                                                            undefined ? (
                                                             <div
                                                                 className="col-2"
-                                                                onClick={() => setmodalShow(true)}
+                                                                onClick={() =>
+                                                                    setmodalShow(
+                                                                        true
+                                                                    )
+                                                                }
                                                                 style={{
                                                                     cursor: "pointer",
                                                                 }}
@@ -149,8 +166,10 @@ const ClientJobs = ({job}) => {
                                                                 <i
                                                                     className="fas fa-comment"
                                                                     style={{
-                                                                        fontSize: "30px",
-                                                                        padding: "30px",
+                                                                        fontSize:
+                                                                            "30px",
+                                                                        padding:
+                                                                            "30px",
                                                                     }}
                                                                 ></i>
                                                             </div>
@@ -158,11 +177,17 @@ const ClientJobs = ({job}) => {
                                                             ""
                                                         )}
 
-                                                        {empJob.ended_at === undefined && empJob.started_at!==undefined ? (
+                                                        {empJob.ended_at ===
+                                                            undefined &&
+                                                        empJob.started_at !==
+                                                            undefined ? (
                                                             <div
-
                                                                 className="col-3"
-                                                                onClick={() => setmodalstripe(true)}
+                                                                onClick={() =>
+                                                                    setmodalstripe(
+                                                                        true
+                                                                    )
+                                                                }
                                                                 style={{
                                                                     cursor: "pointer",
                                                                 }}
@@ -170,8 +195,10 @@ const ClientJobs = ({job}) => {
                                                                 <i
                                                                     className="fas fa-credit-card"
                                                                     style={{
-                                                                        fontSize: "30px",
-                                                                        padding: "30px",
+                                                                        fontSize:
+                                                                            "30px",
+                                                                        padding:
+                                                                            "30px",
                                                                     }}
                                                                     aria-hidden="true"
                                                                 ></i>
