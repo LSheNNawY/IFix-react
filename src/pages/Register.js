@@ -160,7 +160,6 @@ function Register() {
                 values,
                 touched,
                 errors,
-                status,
               }) => (
                 <Form
                   noValidate
@@ -213,12 +212,10 @@ function Register() {
                           value={values.email}
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          isInvalid={
-                            touched.email && !!errors.email && status.email
-                          }
+                          isInvalid={touched.email && !!errors.email}
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
-                          {status && status.email ? status.email : errors.email}
+                          {errors.email}
                         </Form.Control.Feedback>
                       </InputGroup>
                     </Form.Group>
