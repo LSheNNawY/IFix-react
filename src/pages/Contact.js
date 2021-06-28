@@ -8,28 +8,23 @@ const Contact = () => {
     <div className="index-wrapper">
       <NavbarComponent />
       {/*  contact   */}
-      <div
-        className="contact"
-        style={{
-          backgroundImage: `url(${contact_header})`,
-          marginTop: "-30px",
-        }}
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 text-center">
-              <div className="breadcrumb__text">
-                <h2>CONTACT US</h2>
-                <div className="breadcrumb__links">
-                  <Link to="/">Home</Link>
-                  <span style={{ color: "white" }}>|</span>
-                  <Link to="aboutUs">ABOUT</Link>
+      <div className="contact">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12 text-center">
+                            <div className="breadcrumb__text">
+                                <h2>CONTACT</h2>
+                                <div className="breadcrumb__links">
+                                    <Link to="/">Home</Link>
+                                    <span style={{color: "white"}}>|</span>
+                                    <Link to="/contact">contact</Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
+
       {/*  location  */}
       <div className="container-fluid">
         <div className="row-">

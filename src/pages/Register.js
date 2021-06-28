@@ -35,7 +35,7 @@ function Register() {
     const { getUser } = useContext(UserContext);
     const [professions, setProfessions] = useState([]);
     const history = useHistory();
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState("user");
     useEffect(() => {
         bsCustomFileInput.init();
     }, []);
@@ -55,19 +55,28 @@ function Register() {
                     marginTop: "-140px",
                 }}
             >
-                <Container className="mt-5 w-50">
+                <Container className="mt-5 col-lg-6">
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                         <li className="nav-item ">
                             <button
-                                className="nav-link"
+                                className={`nav-link ${
+                                   role === "employee"
+                                        ? "active"
+                                        : ""
+                                }`}
                                 onClick={() => setRole("employee")}
                             >
                                 employee
                             </button>
                         </li>
-                        <li className="nav-item ">
+                        
+                        <li className="nav-item" >
                             <button
-                                className="nav-link "
+                             className={`nav-link ${
+                                    role === "user"
+                                         ? "active"
+                                         : ""
+                                 }`}
                                 onClick={() => setRole("user")}
                             >
                                 User

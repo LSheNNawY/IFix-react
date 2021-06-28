@@ -5,7 +5,6 @@ import "../../assets/front/css/navbar.css";
 import UserContext from "../../context/UserContext";
 import { useHistory } from "react-router";
 import axios from "axios";
-
 const NavbarComponent = () => {
     const { user,getUser } = useContext(UserContext);
     const location = useLocation();
@@ -25,20 +24,13 @@ const NavbarComponent = () => {
                     <a className="navbar-brand" href="/">
                         Navbar
                     </a>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar-togglerDemo02"
+                        aria-controls="navbar-togglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="line"></span>
                     </button>
                     <div
-                        className="collapse navbar-collapse float-end col-md-4"
-                        id="navbarNav"
+                        className="collapse navbar-collapse  "
+                        id="navbar-togglerDemo02"
                     >
                         <ul className="navbar-nav">
                             <li className="nav-item">
@@ -152,6 +144,7 @@ const NavbarComponent = () => {
                 </div>
             </nav>
         </div>
+     
     );
 };
 
