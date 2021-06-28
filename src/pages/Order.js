@@ -204,11 +204,14 @@ const Order = () => {
                                     </select>
                                 </div>
 
-                                {(service === "other" ||
+                                {
+                                    (service === "other" ||
                                     !checkServiceAvailability(
                                         services,
                                         service
-                                    )) &&
+                                    ))
+
+                                    &&
                                 service !== "" ? (
                                     <div className="form-group">
                                         <label htmlFor="description">

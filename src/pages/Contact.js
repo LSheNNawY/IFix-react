@@ -236,7 +236,7 @@ const Contact = () => {
                                         htmlFor="exampleInputTextArea"
                                         className="form-label"
                                     >
-                                        Email
+                                        Comment
                                     </label>
                                     <div className="input-group-prepend">
                                         <span
