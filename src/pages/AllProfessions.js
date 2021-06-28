@@ -4,7 +4,6 @@ import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import ProfessionComponent from "../components/front/ProfessionComponent";
 import FooterComponent from "../components/front/FooterComponent";
-import contact_header from "../assets/front/img/contact_header.PNG";
 
 import "../assets/front/css/index.css";
 

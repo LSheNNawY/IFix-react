@@ -6,20 +6,7 @@ import { authFormValidation } from "../helpers/loginValidation";
 import UserContext from "../context/UserContext";
 
 import "../assets/front/css/login.css";
-
-const ajaxLogin = async (email, password) => {
-    const data = await (
-        await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "Application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        })
-    ).json();
-    return data;
-};
+import axios from "axios";
 
 const Login = () => {
     const [user, setUser] = useState({ email: "", password: "" });
@@ -31,25 +18,34 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         if (authFormValidation(user.email, user.password, setErrors)) {
-            try {
-                const userData = await ajaxLogin(user.email, user.password);
-                console.log("user data = ", userData);
-                if (userData.userId) {
-                    localStorage.setItem(
-                        "user",
-                        JSON.stringify({
-                            userId: userData.userId,
-                            email: userData.email,
-                        })
-                    );
-                    await getUser();
+            axios
+                .post(`${process.env.REACT_APP_API_URL}/users/login`, {
+                    email: user.email,
+                    password: user.password,
+                })
+                .then(({ data }) => {
+                    getUser();
                     history.push("/");
-                } else {
-                    setLoggingError("Invalid credentials");
-                }
-            } catch (err) {
-                console.log(err);
-            }
+                })
+                .catch(({ response }) => {
+                    switch (response.data.error) {
+                        case "wrong":
+                            setLoggingError("Invalid credentials");
+                            break;
+                        case "blocked":
+                            setLoggingError(
+                                "Your account is blocked, please contact us"
+                            );
+                            break;
+                        case "inactive":
+                            setLoggingError(
+                                "Please, check your email address to activate your account"
+                            );
+                            break;
+                        default:
+                            break;
+                    }
+                });
         }
     };
 
@@ -161,9 +157,9 @@ const Login = () => {
                                     ) : null}
                                 </div>
                                 {loggingError ? (
-                                    <h6 className="text-danger pb-3">
+                                    <p className="text-danger pb-3">
                                         {loggingError}
-                                    </h6>
+                                    </p>
                                 ) : (
                                     ""
                                 )}
@@ -182,6 +178,15 @@ const Login = () => {
                                             className=" ml-2 text-warning"
                                         >
                                             Register
+                                        </Link>
+                                    </p>
+                                    <p className="text-muted font-weight-bold">
+                                        Forgot password?
+                                        <Link
+                                            to="/forgot-password"
+                                            className=" ml-2 text-warning"
+                                        >
+                                            Reset
                                         </Link>
                                     </p>
                                 </div>
