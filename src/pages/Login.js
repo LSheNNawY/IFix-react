@@ -184,6 +184,15 @@ const Login = () => {
                                             Register
                                         </Link>
                                     </p>
+                                    <p className="text-muted font-weight-bold">
+                                        Forgot password?
+                                        <Link
+                                            to="/forgot-password"
+                                            className=" ml-2 text-warning"
+                                        >
+                                            Reset
+                                        </Link>
+                                    </p>
                                 </div>
                             </form>
                         </div>
