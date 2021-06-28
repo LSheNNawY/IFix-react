@@ -6,7 +6,7 @@
     font-family: Rajdhani-SemiBold;
     src: url(../fonts/Rajdhani-SemiBold.ttf);
 }
-input,label{
+ .register-wrapper input,label{
     font-family:  Rajdhani-SemiBold;
 
 }

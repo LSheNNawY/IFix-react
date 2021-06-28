@@ -3,7 +3,7 @@
     src: url(../fonts/Rajdhani-Medium.ttf) 
  }
 
- .label {
+ .index-wrapper .label {
     font-size: 15px;
     color: #ffc446;
     font-weight: 700;
