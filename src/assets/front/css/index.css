@@ -522,6 +522,15 @@
     text-align: left;
 }
 
+.index-wrapper .profession-wrapper .job_container {
+    border: 1px solid #ffc446;
+    border-radius: 15px;
+}
+
+.job_container > div {
+    padding-bottom: 20px;
+}
+
 .modal .modal-content .modal-footer .btn {
     color: #1b2839;
     background-color:white;
