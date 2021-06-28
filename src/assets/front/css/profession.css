@@ -49,5 +49,5 @@
 }
 .profession-wrapper .services__item__icon:hover{
     background-color:#ffc446 ;
-    color: white;
+    color: white !important;
 }

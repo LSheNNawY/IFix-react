@@ -87,8 +87,6 @@ function Register() {
             <Formik
               validationSchema={schema}
               onSubmit={async (values, actions) => {
-                console.log(values);
-                console.log(actions);
                 actions.setSubmitting(true);
                 try {
                   const formData = new FormData();

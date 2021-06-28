@@ -538,22 +538,23 @@
 }
 
 .modal .modal-content .modal-footer .btn {
-    color: #1b2839;
-    background-color:white;
+    color: white;
+    background-color:#1b2839;
     border: none;
 }
 .modal .modal-content .modal-footer .btn:hover {
-    color: #1b2839;
-    background-color:white;
+    color: white;
+    background-color:#1b2839;
+    border: none;
 
   }
   .modal-content,.modal-title {
     font-family: Rajdhani-SemiBold;
   }
-  .modal-content{
+  /* .modal-content{
       background-color:#1b2839  !important ;
       color: white  !important;
-  }
-  .modal-content .modal-body li{
+  } */
+  /* .modal-content .modal-body li{
       color: white;
-  }
+  } */
