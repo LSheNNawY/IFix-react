@@ -105,7 +105,15 @@ const Services = (props) => {
                   >
                     {profession.employees &&
                       profession.employees.map((employee) => (
-                        <Employee employee={employee} key={employee._id} />
+                          <>
+                            {employee.status ==="active"?
+                                (
+                                    <Employee employee={employee} key={employee._id} />
+                                ):""
+
+                            }
+
+                          </>
                       ))}
                   </div>
                 </div>

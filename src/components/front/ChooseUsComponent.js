@@ -38,7 +38,7 @@ export default function ChooseUsComponent() {
                         </div>
                     </div>
                     <div
-                        className="col-lg-6 col-md-6 about__text"
+                        className="col-lg-6 about__text"
                         style={{ paddingLeft: "50px" }}
                     >
                         <div className="label mt-5">WHY YOU CHOOSE US</div>
@@ -86,3 +86,4 @@ export default function ChooseUsComponent() {
         </>
     );
 }
+

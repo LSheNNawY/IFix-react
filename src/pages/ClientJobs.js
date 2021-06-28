@@ -53,7 +53,7 @@ const ClientJobs = ({ job }) => {
                                     <div className="col-xs-12 col-lg-8">
                                         <div className="row job_container">
                                             <div className="col-3">
-                                                <div className="services__item__icon  ">
+                                                <div className="services__item__icon ">
                                                     <i className="fas fa-bolt"></i>
                                                 </div>
                                             </div>
@@ -104,6 +104,37 @@ const ClientJobs = ({ job }) => {
                                                     <div className="row ">
                                                         <div className="col-6 ">
                                                             <span className="h4 d-block my-1">
+                                                                Employee Name :
+                                                            </span>
+                                                            <span className="d-block my-1">
+                                                                {" "}
+                                                                {job.employee
+                                                                    .firstName +
+                                                                    " " +
+                                                                    job.employee
+                                                                        .lastName}{" "}
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="col-6 ">
+                                                            <span className="h4 d-block my-1">
+                                                                Employee Phone :
+                                                            </span>
+                                                            <span
+                                                                span
+                                                                className="d-block mb-2"
+                                                            >
+                                                                {" "}
+                                                                {
+                                                                    job.employee
+                                                                        .phone
+                                                                }{" "}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row ">
+                                                        <div className="col-6 ">
+                                                            <span className="h4 d-block my-1">
                                                                 Price :
                                                             </span>
                                                             <i
@@ -147,7 +178,9 @@ const ClientJobs = ({ job }) => {
                                                         )}
 
                                                         {empJob.ended_at ===
-                                                        undefined ? (
+                                                            undefined &&
+                                                        empJob.started_at !==
+                                                            undefined ? (
                                                             <div
                                                                 className="col-3"
                                                                 onClick={() =>

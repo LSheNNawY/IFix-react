@@ -1,46 +1,61 @@
 import axios from "axios";
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
+import "../../assets/front/css/navbar.css";
 // import logo from "../../assets/front/img/ifixbag.png";
 // import "../../assets/front/css/index.css";
 
-const NavbarComponent = () => {
+/*const NavbarComponent = () => {
   const { user, getUser } = useContext(UserContext);
 
-  const history = useHistory();
-
-  const Logout = async () => {
+   const Logout = async () => {
     await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`);
     await getUser();
     history.push("/");
   };
+  const location = useLocation(); 
+  const history = useHistory();*/
+
+const NavbarComponent = () => {
+  let { user } = useContext(UserContext);
+
   const location = useLocation();
+  const history = useHistory();
+  const { getUser } = useContext(UserContext);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/users/logout`)
+      .then(({ data }) => {
+        if (data.ok) {
+          getUser();
+          history.push("/login");
+        }
+      });
+  };
+
   return (
     <div className="navbar-wrapper">
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            {/* <image src= {logo}
-            style={{width:"150px",height:"150px", border:"3px solid red"}} /> */}
+          <Link className="navbar-brand" to="/">
             Navbar
-          </a>
+          </Link>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler "
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
+            data-toggle="collapse"
+            data-target="#navbar-togglerDemo02"
+            aria-controls="navbar-togglerDemo02"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="line"></span>
           </button>
-          <div
-            className="collapse navbar-collapse float-end col-md-4"
-            id="navbarNav"
-          >
+          <div className="collapse navbar-collapse  " id="navbar-togglerDemo02">
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link
@@ -94,30 +109,28 @@ const NavbarComponent = () => {
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      Dropdown
+                      <i className="fas fa-user"></i>
                     </span>
                     <div
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <Link className="dropdown-item" to="/jobs">
-                        My Jobs
-                      </Link>
-                      <Link
-                        className="dropdown-item"
-                        to={`/profile/${user.id}`}
-                      >
+                      {user.role === "employee" && (
+                        <Link className="dropdown-item" to="/jobs">
+                          My Jobs
+                        </Link>
+                      )}
+                      <Link className="dropdown-item" to={`/profile`}>
                         Profile
                       </Link>
                       <div className="dropdown-divider"></div>
-                      
-                      <button
-                        onClick={Logout}
+                      <span
+                        onClick={(e) => handleLogout(e)}
                         className="dropdown-item"
-                        //style={{ outline: "none" }}
+                        style={{ cursor: "pointer" }}
                       >
                         Logout
-                      </button>
+                      </span>
                     </div>
                   </li>
                 </>
