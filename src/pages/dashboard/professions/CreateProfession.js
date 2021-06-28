@@ -39,7 +39,6 @@ function CreateProfession(props) {
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
         >
             <Modal.Body className="show-grid">
                 <Container className="mt-3 w-100">
