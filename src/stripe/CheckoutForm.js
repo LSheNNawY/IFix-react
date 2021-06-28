@@ -119,6 +119,8 @@ export const CheckoutForm = ({price,job_id,onHide,setJob}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setProcessing(true)
+
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement),
@@ -227,8 +229,9 @@ export const CheckoutForm = ({price,job_id,onHide,setJob}) => {
                 {/*/>*/}
             </fieldset>
 
-            <SubmitButton className="" style={{marginBottom:"10rem"}} processing={processing} error={error} disabled={!stripe}>
-                Pay {price} <i className="fas fa-spinner fa-pulse"></i>
+            <SubmitButton className="" style={{marginBottom:"10rem"}}  error={error} disabled={processing}>
+                {/*Pay {price} <i className="fas fa-spinner fa-pulse"></i>*/}
+                {processing ? "processing ....":`Pay $ ${price}`}
 
             </SubmitButton>
         </form>

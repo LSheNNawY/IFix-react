@@ -190,22 +190,22 @@ const Home = () => {
                             marginBottom: "50px",
                         }}
                     >
-                        <div className="col-md-6 content">
+                        {/* <div className="col-md-6 content">
                             <i className="fas fa-users"></i>
                             <div className="counter__item__num">
                                 <h2 className="count">25</h2>
                                 <span>k+</span>
                                 <p>Happy Customers</p>
                             </div>
-                        </div>
-                        <div className="col-md-6 content">
+                        </div> */}
+                        {/* <div className="col-md-6 content">
                             <i className="fas fa-comment-dollar"></i>
                             <div className="counter__item__num">
                                 <h2 className="count">28</h2>
                                 <span>k+</span>
                                 <p>Project Complete</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -238,7 +238,8 @@ const Home = () => {
                                     borderBottom: "3px solid lightgray",
                                     marginLeft: "45%",
                                 }}
-                            ></h2>
+                            >
+                            </h2>
                             <div
                                 className="row"
                                 style={{
@@ -271,9 +272,9 @@ const Home = () => {
                                     We Offer Fast, Professional &amp;
                                     Exceptional Services
                                 </h2>
-                                <a href="#" className="primary-btn">
+                                <Link to="professions" className="primary-btn">
                                     Get a services
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

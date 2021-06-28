@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import "../../assets/front/css/navbar.css";
@@ -14,7 +14,6 @@ const NavbarComponent = () => {
 
     const handleLogout = (e) => {
         e.preventDefault();
-        console.log("clicked");
         axios
             .post(`${process.env.REACT_APP_API_URL}/users/logout`)
             .then(({ data }) => {
@@ -32,20 +31,13 @@ const NavbarComponent = () => {
                     <Link className="navbar-brand" to="/">
                         Navbar
                     </Link>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar-togglerDemo02"
+                        aria-controls="navbar-togglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="line"></span>
                     </button>
                     <div
-                        className="collapse navbar-collapse float-end col-md-4"
-                        id="navbarNav"
+                        className="collapse navbar-collapse  "
+                        id="navbar-togglerDemo02"
                     >
                         <ul className="navbar-nav">
                             <li className="nav-item">
@@ -100,7 +92,8 @@ const NavbarComponent = () => {
                             {user ? (
                                 <>
                                     <li className="nav-item dropdown">
-                                        <Link
+                                        <span
+
                                             className="nav-link dropdown-toggle"
                                             id="navbarDropdown"
                                             role="button"
@@ -109,7 +102,7 @@ const NavbarComponent = () => {
                                             aria-expanded="false"
                                         >
                                             <i className="fas fa-user"></i>
-                                        </Link>
+                                        </span>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="navbarDropdown"
@@ -129,13 +122,13 @@ const NavbarComponent = () => {
                                                 Profile
                                             </Link>
                                             <div className="dropdown-divider"></div>
-                                            <Link
+                                            <span
                                                 onClick={(e) => handleLogout(e)}
                                                 className="dropdown-item"
-                                                //style={{ outline: "none" }}
+                                                style={{ cursor: "pointer" }}
                                             >
                                                 Logout
-                                            </Link>
+                                            </span>
                                         </div>
                                     </li>
                                 </>
@@ -160,6 +153,7 @@ const NavbarComponent = () => {
                 </div>
             </nav>
         </div>
+     
     );
 };
 
