@@ -1,11 +1,11 @@
- 
+/*  
   body {
     font-family: sans-serif;
     background: linear-gradient(black, gray);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-  }
+  } */
   
  .login-box .user-box input {
     outline: none;
@@ -46,7 +46,7 @@
     transition: 500ms;
     font-size: 16px;
     pointer-events: none;
-   
+
   }
   
   .login-box .user-box .input {
