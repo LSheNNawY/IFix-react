@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { authFormValidation } from "../helpers/concateValidation";
 import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 
 const Contact = () => {
     const [commentState, SetCommentState] = useState({
@@ -14,6 +16,7 @@ const Contact = () => {
         body: "",
     });
     const [errors, setErrors] = useState({ name: "", email: "", body: "" });
+    const history = useHistory();
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log(commentState);
