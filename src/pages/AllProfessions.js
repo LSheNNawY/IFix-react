@@ -40,7 +40,7 @@ const AllProfessions = () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container-fluid">
         <div
           className="row "
           style={{
@@ -63,7 +63,15 @@ const AllProfessions = () => {
             ></h2>
           </div>
         </div>
-        <div className="row">
+        <div
+          className="row "
+          style={{
+            width: "90%",
+            marginLeft: "5%",
+            marginTop: "50PX",
+            marginBottom: "50px",
+          }}
+        >
           {professions.length > 0 &&
             professions.map((profession) => (
               <ProfessionComponent

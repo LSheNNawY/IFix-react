@@ -1,10 +1,10 @@
-import React from "react";
-import { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import "../../assets/front/css/navbar.css";
-import UserContext from "../../context/UserContext";
 import axios from "axios";
-import { useHistory } from "react-router";
+import React from "react";
+import { useContext, useState } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import UserContext from "../../context/UserContext";
+// import logo from "../../assets/front/img/ifixbag.png";
+// import "../../assets/front/css/index.css";
 
 const NavbarComponent = () => {
   const { user, getUser } = useContext(UserContext);
@@ -22,6 +22,8 @@ const NavbarComponent = () => {
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
+            {/* <image src= {logo}
+            style={{width:"150px",height:"150px", border:"3px solid red"}} /> */}
             Navbar
           </a>
           <button

@@ -1,9 +1,10 @@
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Formik } from "formik";
 import axios from "axios";
 import ModalDialog from "react-bootstrap/ModalDialog";
 import * as yup from "yup";
+import bsCustomFileInput from "bs-custom-file-input";
 
 const schema = yup.object().shape({
     title: yup.string().min(3).max(15).required("Title Required"),
@@ -15,7 +16,9 @@ const schema = yup.object().shape({
 
 function CreateProfession(props) {
     const { professions, setProfessions, show, onHide } = props;
-
+    useEffect(() => {
+        bsCustomFileInput.init();
+    }, []);
     const handleCreateProfession = async (formData) => {
         await axios
             .post(process.env.REACT_APP_API_URL + "/professions", formData, {
@@ -83,13 +86,13 @@ function CreateProfession(props) {
                         }}
                     >
                         {({
-                            handleSubmit,
-                            handleChange,
-                            handleBlur,
-                            values,
-                            touched,
-                            errors,
-                        }) => (
+                              handleSubmit,
+                              handleChange,
+                              handleBlur,
+                              values,
+                              touched,
+                              errors,
+                          }) => (
                             <Form
                                 noValidate
                                 encType="multipart/form-data"
@@ -132,12 +135,11 @@ function CreateProfession(props) {
                                         <label>Image</label>
                                         <Form.File
                                             className="position-relative"
-                                            required
-                                            id="custom-file"
+                                            // required
                                             name="img"
-                                            label=""
+                                            label="img"
                                             placeholder="Image"
-                                            custom
+
                                             onChange={(e) =>
                                                 (values.img = e.target.files[0])
                                             }
@@ -147,6 +149,9 @@ function CreateProfession(props) {
                                             }
                                             feedback={errors.img}
                                             feedbackTooltip
+                                            id="custom-file"
+
+                                            custom
                                         />
                                     </Form.Group>
                                 </Form.Row>

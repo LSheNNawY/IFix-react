@@ -59,7 +59,7 @@ function App() {
         <Route path="/order" component={Order} />
         <Route path="/review" component={Review} />
         <Route path="/jobs" component={Jobs} />
-        <Route path="/employeejobs" component={Employee_Jobs} />
+        <Route path="/jobs" component={Employee_Jobs} />        
         <Route path="/professions" component={AllProfessions} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />

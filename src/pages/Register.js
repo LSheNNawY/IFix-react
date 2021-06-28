@@ -135,8 +135,6 @@ function Register() {
                                 phone: "",
                                 address: "",
                                 dateOfBirth: "",
-                                professionRequired:
-                                    role === "employee" ? true : false,
                                 profession: "",
                             }}
                         >
@@ -163,7 +161,6 @@ function Register() {
                                             <Form.Control
                                                 type="text"
                                                 name="firstName"
-                                                placeholder="First Name"
                                                 value={values.firstName}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -188,7 +185,6 @@ function Register() {
                                             <Form.Control
                                                 type="text"
                                                 name="lastName"
-                                                placeholder="Last Name"
                                                 value={values.lastName}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}

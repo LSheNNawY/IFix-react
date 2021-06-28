@@ -23,4 +23,4 @@ const AuthContextProvider = (props) => {
 };
 
 export default AuthContext;
-export { AuthContextProvider };
+export { AuthContextProvider};
