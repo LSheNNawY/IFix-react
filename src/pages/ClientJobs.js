@@ -160,6 +160,7 @@ const ClientJobs = ({job}) => {
 
                                                         {empJob.ended_at === undefined && empJob.started_at!==undefined ? (
                                                             <div
+
                                                                 className="col-3"
                                                                 onClick={() => setmodalstripe(true)}
                                                                 style={{
