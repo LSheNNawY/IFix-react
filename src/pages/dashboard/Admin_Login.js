@@ -17,7 +17,7 @@ function Admin_Login() {
   const history = useHistory();
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (authFormValidation(user.email, user.password,  setErrors)) {
+    if (authFormValidation(user.email, user.password, setErrors)) {
       console.log(errors.password);
       //console.log(errors.role);
       axios
@@ -59,10 +59,10 @@ function Admin_Login() {
   };
   return (
     <div className="body">
-      <div class="login-box">
+      <div className="login-box">
         <h2>Login</h2>
-        <form onSubmit={submitHandler} class="form">
-          <div class="user-box">
+        <form onSubmit={submitHandler} className="form">
+          <div className="user-box">
             <input
               className={`input  ${
                 errors.email !== "" && errors.email !== "valid"
@@ -123,16 +123,16 @@ function Admin_Login() {
             <label class="label" for="">
               Password
             </label>
-              </div>
-            <div className="input-group-prepend">
-              <span
-                className={`input-group${
-                  errors.password !== "" && errors.password !== "valid"
-                    ? "border-danger"
-                    : ""
-                }`}
-              ></span>
-            </div>
+          </div>
+          <div className="input-group-prepend">
+            <span
+              className={`input-group${
+                errors.password !== "" && errors.password !== "valid"
+                  ? "border-danger"
+                  : ""
+              }`}
+            ></span>
+          </div>
           {/*  {errors.role !== "" && errors.role !== "valid" ? (
             <h6 className="invalid-feedback" style={{backgroundColor:"red"}}>{errors.role}</h6>
           ) : null} */}

@@ -28,7 +28,7 @@ const authFormValidation = (email, password,  setError) => {
     setError(error);
 
 
-    return error.email === 'valid' && error.password === 'valid' && error.role === 'valid' ;
+    return error.email === 'valid' && error.password === 'valid'  ;
 }
 
 module.exports = {emailValidate,authFormValidation}
