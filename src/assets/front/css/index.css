@@ -492,7 +492,7 @@
     transform: rotate(45deg);
     -webkit-transition: all, 0.3s;
     -o-transition: all, 0.3s;
-    margin-top: 45px;
+    /* margin-top: 45px; */
     
 }
 

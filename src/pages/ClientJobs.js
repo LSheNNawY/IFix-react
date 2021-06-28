@@ -53,7 +53,7 @@ const ClientJobs = ({ job }) => {
                                     <div className="col-xs-12 col-lg-8">
                                         <div className="row job_container">
                                             <div className="col-3">
-                                                <div className="services__item__icon ">
+                                                <div className="services__item__icon " style={{marginTop:"55%"}}>
                                                     <i className="fas fa-bolt"></i>
                                                 </div>
                                             </div>
