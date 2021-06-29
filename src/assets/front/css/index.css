@@ -492,7 +492,7 @@
     transform: rotate(45deg);
     -webkit-transition: all, 0.3s;
     -o-transition: all, 0.3s;
-    margin-top: 45px;
+    /* margin-top: 45px; */
     
 }
 
@@ -518,6 +518,12 @@
 .index-wrapper .profession-wrapper {
     width: 100%;
 }
+
+.index-wrapper .profession-wrapper .job_container {
+    border: 1px solid #ffc446;
+    border-radius: 15px;
+}
+
  .index-wrapper .profession-wrapper .services__item__text {
     text-align: left;
 }
