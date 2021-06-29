@@ -6,8 +6,8 @@ import "../../assets/dashboard/css/style.css"
 
 function Admin_Login() {
     return (
-        
-    <div class="login-box">
+        <div className="body">
+       <div class="login-box">
         <h2>Login</h2>
         <form action="" class="form">
         <div class="user-box">
@@ -30,6 +30,7 @@ function Admin_Login() {
 
         </form>
   
+  </div>
   </div>
  
             
