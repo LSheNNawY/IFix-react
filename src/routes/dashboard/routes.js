@@ -8,13 +8,13 @@ import Users from "../../pages/dashboard/Users";
 import Employees from "../../pages/dashboard/Employees";
 
 const dashboardRoutes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "fa fa-chart-pie",
-    component: Dashboard,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "fa fa-chart-pie",
+  //   component: Dashboard,
+  //   layout: "/admin",
+  // },
   // {
   //     path: "/profile",
   //     name: "User Profile",
@@ -22,13 +22,13 @@ const dashboardRoutes = [
   //     component: UserProfile,
   //     layout: "/admin",
   // },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "fa fa-bullhorn",
-    component: Notifications,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "fa fa-bullhorn",
+  //   component: Notifications,
+  //   layout: "/admin",
+  // },
   {
     path: "/professions",
     name: "Professions",
