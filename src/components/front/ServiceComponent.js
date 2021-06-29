@@ -9,7 +9,7 @@ const ServiceComponent = ({ service }) => {
       <div className="col-lg-4 col-md-6 profession-wrapper">
         <div className="services__item">
           <div className="services__item__icon">
-            <i className={service.icon} style={{marginRight:"24%",marginTop:"33%",transform:"rotate(-45deg)"}}></i>
+            <i className={`fas fa-${service.icon}`} style={{marginRight:"24%",marginTop:"33%",transform:"rotate(-45deg)"}}></i>
           </div>
           <div className="services__item__text">
             <h4>{service.service}</h4>
