@@ -18,7 +18,7 @@ const Stripe = (props) => {
         >
             <Elements stripe={stripeTestPromise}>
             <CheckoutForm job_id={job_id} price={price} setJob={setJob}  onHide={onHide} show={show}/>
-        </Elements>
+            </Elements>
         </Modal>
     );
 };

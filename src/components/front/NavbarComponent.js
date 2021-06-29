@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import "../../assets/front/css/navbar.css";
-// import logo from "../../assets/front/img/ifixbag.png";
+import logo from "../../assets/front/img/one.jpeg";
 // import "../../assets/front/css/index.css";
 
 /*const NavbarComponent = () => {
@@ -43,7 +43,7 @@ const NavbarComponent = () => {
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Navbar
+            <img src={logo} style={{width:"70px",height:"47px"}}/>
           </Link>
           <button
             className="navbar-toggler "

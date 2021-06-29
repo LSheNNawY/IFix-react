@@ -136,12 +136,12 @@ const Order = () => {
                     <Modal.Title>Terms and conditions.</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ul>
-                        <li> <i className="fas fa-check-square"></i>fees ......</li>
-                        <li><i className="fas fa-check-square"></i>cond. 5</li>
-                        <li><i className="fas fa-check-square"></i>cond. 4</li>
-                        <li><i className="fas fa-check-square"></i>cond. 3</li>
-                        <li><i className="fas fa-check-square"></i>cond. 2</li>
+                    <ul >
+                        <li style={{ fontSize: "18px"}}> <i className="fas fa-check-square"></i>fees ......</li>
+                        <li style={{ fontSize: "18px"}}><i className="fas fa-check-square"></i>cond. 5</li>
+                        <li style={{ fontSize: "18px"}}><i className="fas fa-check-square"></i>cond. 4</li>
+                        <li style={{ fontSize: "18px"}}><i className="fas fa-check-square"></i>cond. 3</li>
+                        <li style={{ fontSize: "18px"}}><i className="fas fa-check-square"></i>cond. 2</li>
                     </ul>
                 </Modal.Body>
                 <Modal.Footer>
@@ -204,11 +204,14 @@ const Order = () => {
                                     </select>
                                 </div>
 
-                                {(service === "other" ||
+                                {
+                                    (service === "other" ||
                                     !checkServiceAvailability(
                                         services,
                                         service
-                                    )) &&
+                                    ))
+
+                                    &&
                                 service !== "" ? (
                                     <div className="form-group">
                                         <label htmlFor="description">
