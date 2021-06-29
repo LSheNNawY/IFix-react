@@ -71,7 +71,7 @@ const ClientJobs = ({ job }) => {
                           <div className="row">
                             <div className="col-6 ">
                               <h4>
-                                Started At:{" "}
+                                Started At :{" "}
                                 {empJob.started_at ? (
                                   <i className="badge badge-success h6">
                                     {dateFormat(
@@ -90,7 +90,7 @@ const ClientJobs = ({ job }) => {
                             </div>
                             <div className="col-6 ">
                               <h4>
-                                Ended At:{" "}
+                                Ended At :{" "}
                                 {empJob.ended_at ? (
                                   <i className="badge badge-success h6">
                                     {dateFormat(
