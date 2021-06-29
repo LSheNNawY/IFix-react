@@ -18,8 +18,7 @@ function Admin_Login() {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (authFormValidation(user.email, user.password, errors.role, setErrors)) {
-      //console.log(errors.password);
-      console.log("role before = ", errors.role);
+      
       axios
         .post(`${process.env.REACT_APP_API_URL}/users/login`, {
           email: user.email,
@@ -34,15 +33,18 @@ function Admin_Login() {
           } else {
             errors.role = "only admin allowed";
             console.log("role after = " ,errors.role);
-            //console.log("not admin");
             history.push("/adminlogin");
           } */
-          //console.log(errors.role)
+          
 
-          if (data.role === "user") {
-            console.log("only admin allowed");
+          if (data.role === "user") 
+          {
+            document.querySelector("#role_id").innerText =
+              "Only admins allowed";
             history.push("/adminlogin");
-          } else {
+          } 
+          else 
+          {
             history.push("/admin");
           }
         })
@@ -77,7 +79,7 @@ function Admin_Login() {
                   ? "is-invalid"
                   : ""
               }`}
-             /*  style= {{backgroundColor: "rgba(0, 0, 0, 0.5);"}} */
+              /*  style= {{backgroundColor: "rgba(0, 0, 0, 0.5);"}} */
               name="email"
               placeholder="Email"
               onChange={(e) =>
@@ -94,7 +96,7 @@ function Admin_Login() {
             {errors.email !== "" && errors.email !== "valid" ? (
               <h6 className="invalid-feedback">{errors.email}</h6>
             ) : null}
-           {/*  <label class="label" for="">
+            {/*  <label class="label" for="">
               Username
             </label> */}
           </div>
@@ -145,22 +147,20 @@ function Admin_Login() {
             ></span>
           </div>
 
-            {errors.role !== "" && errors.role !== "valid" ? (
-              <h6
-                className="invalid-feedback"
-                style={{ backgroundColor: "red" }}
-              >
-                {errors.role}
-              </h6>
-            ) : null}
-
+          {errors.role !== "" && errors.role !== "valid" ? (
+            <h6 className="invalid-feedback" style={{ backgroundColor: "red" }}>
+              {errors.role}
+            </h6>
+          ) : null}
 
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>
           ) : (
             ""
           )}
-
+          <div>
+            <p className="text-danger pb-3" id="role_id"></p>
+          </div>
           <button type="submit">
             <span></span>
             <span></span>
