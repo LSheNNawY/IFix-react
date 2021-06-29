@@ -43,7 +43,7 @@ const EmployeeReviewComponent = ({ job }) => {
           </div>
         </div>
       </div>
-      ):""}
+      ) : ""}
    
     </>
   );

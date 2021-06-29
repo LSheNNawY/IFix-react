@@ -16,6 +16,8 @@ import Review from "./pages/Review";
 import AccountActivation from "./pages/AccountActivation";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
+import Admin_Login from "./pages/dashboard/login" 
+
 
 // import UserContext from "./context/UserContext";
 import axios from "axios";
@@ -40,6 +42,7 @@ function App() {
                 <Route path="/professions" component={AllProfessions} />
                 <Route exact path="/profile" component={Profile} />
                 <Route path="/jobs" component={Employee_Jobs} />
+                <Route path="/admin/login" component={Admin_Login} />
                 <Route
                     path="/profile/:id"
                     render={(props) => <Profile {...props} />}
@@ -48,6 +51,7 @@ function App() {
                     path="/admin"
                     render={(props) => <AdminLayout {...props} />}
                 />
+
                 <Route path="/review" component={Review} />
                 <Route
                     path="/account-activation"
