@@ -18,7 +18,6 @@ const Contact = () => {
         body: "",
     });
     const [errors, setErrors] = useState({ name: "", email: "", body: "" });
-    const history = useHistory();
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log(commentState);
