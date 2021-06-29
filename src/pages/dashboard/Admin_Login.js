@@ -40,7 +40,7 @@ function Admin_Login() {
           //console.log(errors.role)
 
           if (data.role === "user") {
-            console.log("not admin");
+            console.log("only admin allowed");
             history.push("/adminlogin");
           } else {
             history.push("/admin");
@@ -77,6 +77,7 @@ function Admin_Login() {
                   ? "is-invalid"
                   : ""
               }`}
+             /*  style= {{backgroundColor: "rgba(0, 0, 0, 0.5);"}} */
               name="email"
               placeholder="Email"
               onChange={(e) =>
