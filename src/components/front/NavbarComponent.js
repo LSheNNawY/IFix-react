@@ -32,6 +32,7 @@ const NavbarComponent = () => {
       .then(({ data }) => {
         if (data.ok) {
           getUser();
+          sessionStorage.clear();
           history.push("/login");
         }
       });
