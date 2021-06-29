@@ -54,6 +54,8 @@ const NavbarComponent = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
+            <i class="fas fa-bars"></i>
+
             <span className="line"></span>
           </button>
           <div className="collapse navbar-collapse  " id="navbar-togglerDemo02">

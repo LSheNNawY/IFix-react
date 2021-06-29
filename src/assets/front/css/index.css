@@ -10,6 +10,9 @@
 * {
     font-family: Rajdhani-MediumRa;
 }
+.index-wrapper{
+    background-color: white;
+}
 
 .index-wrapper img {
     width: 100%;
