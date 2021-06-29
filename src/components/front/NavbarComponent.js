@@ -33,6 +33,7 @@ const NavbarComponent = () => {
                     </Link>
                     <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar-togglerDemo02"
                         aria-controls="navbar-togglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-bars"></i>
                         <span className="line"></span>
                     </button>
                     <div

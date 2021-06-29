@@ -6,33 +6,35 @@ import "../../assets/dashboard/css/style.css"
 
 function Admin_Login() {
     return (
-        <div className="body">
-       <div class="login-box">
-        <h2>Login</h2>
-        <form action="" class="form">
-        <div class="user-box">
-            <input class="input" type="text" id="" required=""/>
-            <label class="label" for="">Username</label>
-        </div>
+        <div className="login-admin-wrapper">
         
-        <div class="user-box">
-            <input class="input" type="password" id="" required=""/>
-            <label class="label" for="">Password</label>
-        </div>
-        
-        <Link >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </Link >
+                <div class="login-box">
+                    <h2>Login</h2>
+                    <form action="" class="form">
+                    <div class="user-box">
+                        <input class="input" type="text" id="" required="" placeholder="Username"/>
+                        {/* <label class="label" for="">Username</label> */}
+                    </div>
+                    
+                    <div class="user-box">
+                        <input class="input" type="password" id="" required="" placeholder="password"/>
+                        {/* <label class="label" for="">Password</label> */}
+                    </div>
+                    
+                    <Link >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Submit
+                    </Link >
 
-        </form>
-  
-  </div>
-  </div>
- 
+                    </form>
+            
+            </div>
+
+                </div>
+      
             
     );
 }

@@ -6,7 +6,10 @@
     font-family: Rajdhani-SemiBold;
     src: url(../fonts/Rajdhani-SemiBold.ttf);
 }
-input,label,option,select{
+ .login-wrapper input,
+ .login-wrapper label,
+ .login-wrapper option,
+ .login-wrapper select{
     font-family:  Rajdhani-SemiBold;
 }
 
