@@ -78,6 +78,7 @@ function Admin_Login() {
                   : ""
               }`}
               name="email"
+              placeholder="Email"
               onChange={(e) =>
                 setUser({
                   ...user,
@@ -92,9 +93,9 @@ function Admin_Login() {
             {errors.email !== "" && errors.email !== "valid" ? (
               <h6 className="invalid-feedback">{errors.email}</h6>
             ) : null}
-            <label class="label" for="">
+           {/*  <label class="label" for="">
               Username
-            </label>
+            </label> */}
           </div>
           <div className="input-group-prepend">
             <span
@@ -113,6 +114,7 @@ function Admin_Login() {
                   : ""
               }`}
               name="password"
+              placeholder="password"
               onChange={(e) =>
                 setUser({
                   ...user,
@@ -128,9 +130,9 @@ function Admin_Login() {
               <h6 className="invalid-feedback">{errors.password}</h6>
             ) : null}
 
-            <label class="label" for="">
+            {/* <label class="label" for="">
               Password
-            </label>
+            </label> */}
           </div>
           <div className="input-group-prepend">
             <span
@@ -151,7 +153,7 @@ function Admin_Login() {
               </h6>
             ) : null}
 
-            
+
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>
           ) : (
