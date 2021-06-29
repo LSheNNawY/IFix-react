@@ -17,7 +17,7 @@ const ProfessionComponent = ({ profession }) => {
             {" "}
             <div className="services__item__icon">
               {/* <i className="fas fa-bolt"></i> */}
-              <img src={`http://localhost:5000/uploads/professions/${profession.img}`} alt="profession" style={{width:"100%", height:"75%",marginBottom:"13%"}}/>
+              <img src={`http://localhost:5000/uploads/professions/${profession.img}`} alt="" style={{width:"100%", height:"75%",marginBottom:"13%"}}/>
             </div>
           </Link>
           <div className="services__item__text">
