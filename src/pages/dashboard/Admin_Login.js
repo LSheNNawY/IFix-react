@@ -10,16 +10,16 @@ import axios from "axios";
 
 function Admin_Login() {
   const [user, setUser] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({ email: "", password: "", role: "" });
   const [loggingError, setLoggingError] = useState("");
   const { getUser } = useContext(UserContext);
 
   const history = useHistory();
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (authFormValidation(user.email, user.password, setErrors)) {
-      console.log(errors.password);
-      //console.log(errors.role);
+    if (authFormValidation(user.email, user.password, errors.role, setErrors)) {
+      //console.log(errors.password);
+      console.log("role before = " ,errors.role);
       axios
         .post(`${process.env.REACT_APP_API_URL}/users/login`, {
           email: user.email,
@@ -32,9 +32,10 @@ function Admin_Login() {
           if (data.role === "admin" || data.role === "super admin") {
             history.push("/admin");
           } else {
-            //errors.role = "invalid";
-            //console.log(errors.role);
-            console.log("not admin");
+            errors.role = "only admin allowed";
+            console.log("role after = " ,errors.role);
+            //console.log("not admin");
+            history.push("/adminlogin");
           }
           //console.log(errors.role)
         })
@@ -133,9 +134,12 @@ function Admin_Login() {
               }`}
             ></span>
           </div>
-          {/*  {errors.role !== "" && errors.role !== "valid" ? (
+
+
+           {errors.role !== "" && errors.role !== "valid" ? (
             <h6 className="invalid-feedback" style={{backgroundColor:"red"}}>{errors.role}</h6>
-          ) : null} */}
+          ) : null}
+          
 
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>

@@ -4,7 +4,7 @@ const emailValidate = (email) => {
 }
 
 
-const authFormValidation = (email, password,  setError) => {
+const authFormValidation = (email, password, role, setError) => {
     let error = {};
     if (email === '')
         error.email = 'Email is required';
@@ -25,10 +25,15 @@ const authFormValidation = (email, password,  setError) => {
     else
         error.role = 'valid'; */
 
+    if (role === 'user')
+        error.role = 'only admin allowed'
+    else
+        error.role = 'valid';
+
     setError(error);
 
 
-    return error.email === 'valid' && error.password === 'valid'  ;
+    return error.email === 'valid' && error.password === 'valid' && error.role === 'valid' ;
 }
 
 module.exports = {emailValidate,authFormValidation}
