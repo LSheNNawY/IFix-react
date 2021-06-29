@@ -19,7 +19,7 @@ function Admin_Login() {
     e.preventDefault();
     if (authFormValidation(user.email, user.password, errors.role, setErrors)) {
       //console.log(errors.password);
-      console.log("role before = " ,errors.role);
+      console.log("role before = ", errors.role);
       axios
         .post(`${process.env.REACT_APP_API_URL}/users/login`, {
           email: user.email,
@@ -28,16 +28,23 @@ function Admin_Login() {
         .then(({ data }) => {
           getUser();
           console.log("data = ", data);
-          //console.log("getUser = ", getUser);
-          if (data.role === "admin" || data.role === "super admin") {
+
+          /* if (data.role === "admin" || data.role === "super admin") {
             history.push("/admin");
           } else {
             errors.role = "only admin allowed";
             console.log("role after = " ,errors.role);
             //console.log("not admin");
             history.push("/adminlogin");
-          }
+          } */
           //console.log(errors.role)
+
+          if (data.role === "user") {
+            console.log("not admin");
+            history.push("/adminlogin");
+          } else {
+            history.push("/admin");
+          }
         })
         .catch(({ response }) => {
           switch (response.data.error) {
@@ -135,12 +142,16 @@ function Admin_Login() {
             ></span>
           </div>
 
+            {errors.role !== "" && errors.role !== "valid" ? (
+              <h6
+                className="invalid-feedback"
+                style={{ backgroundColor: "red" }}
+              >
+                {errors.role}
+              </h6>
+            ) : null}
 
-           {errors.role !== "" && errors.role !== "valid" ? (
-            <h6 className="invalid-feedback" style={{backgroundColor:"red"}}>{errors.role}</h6>
-          ) : null}
-          
-
+            
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>
           ) : (
