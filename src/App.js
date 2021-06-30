@@ -107,6 +107,7 @@ function App() {
                     render={(props) => <Services {...props} />}
                 />
                 <Route path="/notfound" component={NotFound} />
+                <Route component={NotFound} />
             </Switch>
         </div>
     );
