@@ -18,7 +18,7 @@ import AccountActivation from "./pages/AccountActivation";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
 import Admin_Login from "./pages/dashboard/Admin_Login";
-
+import NotFound from "./components/front/NotFound";
 // import UserContext from "./context/UserContext";
 import axios from "axios";
 
@@ -87,6 +87,8 @@ function App() {
           path="/services/:id"
           render={(props) => <Services {...props} />}
         />
+        <Route path="/notfound" component={NotFound} />
+
       </Switch>
     </div>
   );
