@@ -6,7 +6,7 @@ import CreateProfession from "./CreateProfession"
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 import EditProfession from "./EditProfession";
-
+import Pagination from 'pagination-react-hooks';
 function Index() {
     const [professions, setProfessions] = useState([]);
     const [modalShow, setModalShow] = useState(false);
@@ -17,7 +17,11 @@ function Index() {
 
     });
   }, []);
-
+    const show = (value) => (
+        <tr key={value.id} className="card">
+            <span>{value.name}</span>
+        </tr>
+    )
   return (
     <>
         <CreateProfession  professions={professions} setProfessions={setProfessions} show={modalShow} onHide={() => setModalShow(false)} />
@@ -62,6 +66,13 @@ function Index() {
               </Card.Body>
             </Card>
           </Col>
+            <Pagination
+                data="2"
+                Show={show}
+                displayNumber={professions}
+                previousText="previous"
+                nextText="next"
+            />
         </Row>
       </Container>
     </>
