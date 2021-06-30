@@ -26,17 +26,7 @@ function Admin_Login() {
         })
         .then(({ data }) => {
           getUser();
-          console.log("data = ", data);
           history.push("/adminlogin");
-
-          /* if (data.role === "admin" || data.role === "super admin") {
-            history.push("/admin");
-          } else {
-            errors.role = "only admin allowed";
-            console.log("role after = " ,errors.role);
-            history.push("/adminlogin");
-          } */
-          
 
           if (data.role === "user") 
           {
@@ -98,9 +88,6 @@ function Admin_Login() {
             {errors.email !== "" && errors.email !== "valid" ? (
               <h6 className="invalid-feedback">{errors.email}</h6>
             ) : null}
-            {/*  <label class="label" for="">
-              Username
-            </label> */}
           </div>
           <div className="input-group-prepend">
             <span
@@ -111,7 +98,7 @@ function Admin_Login() {
               }`}
             ></span>
           </div>
-          <div class="user-box">
+          <div className="user-box">
             <input
               className={`input  ${
                 errors.password !== "" && errors.password !== "valid"
@@ -135,9 +122,6 @@ function Admin_Login() {
               <h6 className="invalid-feedback">{errors.password}</h6>
             ) : null}
 
-            {/* <label class="label" for="">
-              Password
-            </label> */}
           </div>
           <div className="input-group-prepend">
             <span
