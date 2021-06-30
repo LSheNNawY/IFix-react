@@ -66,9 +66,16 @@ function App() {
           exact
           path="/adminlogin"
           render={() => {
-             if (user) {
+            if (
+              user &&
+              (user.role === "admin" || user.role === "super admin")
+            ) {
               return <AdminLayout />;
-            } else return  <Admin_Login />;
+            }
+            if (user && user.role === "user") {
+              return <Home />;
+            } 
+            else return <Admin_Login />;
           }}
         />
         <Route path="/review" component={Review} />
