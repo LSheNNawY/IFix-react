@@ -164,22 +164,7 @@ const Home = () => {
               marginBottom: "50px",
             }}
           >
-            {/* <div className="col-md-6 content">
-                            <i className="fas fa-users"></i>
-                            <div className="counter__item__num">
-                                <h2 className="count">25</h2>
-                                <span>k+</span>
-                                <p>Happy Customers</p>
-                            </div>
-                        </div> */}
-            {/* <div className="col-md-6 content">
-                            <i className="fas fa-comment-dollar"></i>
-                            <div className="counter__item__num">
-                                <h2 className="count">28</h2>
-                                <span>k+</span>
-                                <p>Project Complete</p>
-                            </div>
-                        </div> */}
+            
           </div>
         </div>
       </div>
@@ -202,7 +187,7 @@ const Home = () => {
               marginBottom: "50px",
             }}
           >
-            <div className="col-12 text-center">
+            <div className="col-12 text-center " style={{marginTop:"10%"}}>
               <p className="label ">TOP RATED</p>
               <h2>Meet our TOP RATED</h2>
               <h2
