@@ -19,6 +19,7 @@
         "gulp-append-prepend": "1.0.8",
         "jquery": "^3.6.0",
         "node-sass": "^6.0.1",
+        "pagination-react-hooks": "^1.1.0",
         "react": "^17.0.2",
         "react-bootstrap": "^1.6.1",
         "react-chartist": "^0.14.4",
