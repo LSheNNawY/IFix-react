@@ -66,9 +66,9 @@ function App() {
           exact
           path="/adminlogin"
           render={() => {
-            if (user) {
+             if (user) {
               return <AdminLayout />;
-            } else return <Admin_Login />;
+            } else return  <Admin_Login />;
           }}
         />
         <Route path="/review" component={Review} />

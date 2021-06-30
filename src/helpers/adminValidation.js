@@ -26,7 +26,7 @@ const authFormValidation = (email, password, role, setError) => {
         error.role = 'valid'; */
 
     if (role === 'user')
-        error.role = 'only admin allowed'
+        error.role = 'invalid credentials'
     else
         error.role = 'valid';
 

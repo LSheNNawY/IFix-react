@@ -20,13 +20,14 @@ function Admin_Login() {
     if (authFormValidation(user.email, user.password, errors.role, setErrors)) {
       
       axios
-        .post(`${process.env.REACT_APP_API_URL}/users/login`, {
+        .post(`${process.env.REACT_APP_API_URL}/admin/login`, {
           email: user.email,
           password: user.password,
         })
         .then(({ data }) => {
           getUser();
           console.log("data = ", data);
+          history.push("/adminlogin");
 
           /* if (data.role === "admin" || data.role === "super admin") {
             history.push("/admin");
@@ -39,8 +40,6 @@ function Admin_Login() {
 
           if (data.role === "user") 
           {
-            document.querySelector("#role_id").innerText =
-              "Only admins allowed";
             history.push("/adminlogin");
           } 
           else 
@@ -48,18 +47,27 @@ function Admin_Login() {
             history.push("/admin");
           }
         })
+        
         .catch(({ response }) => {
           switch (response.data.error) {
+
+            case "invalid credentials":
+              setLoggingError("Invalid credentials");
+              break;
+
             case "wrong":
               setLoggingError("Invalid credentials");
               break;
+
             case "blocked":
               setLoggingError("Your account is blocked, please contact us");
               break;
+
             case "inactive":
               setLoggingError(
                 "Please, check your email address to activate your account"
               );
+
               break;
             default:
               break;
@@ -147,20 +155,14 @@ function Admin_Login() {
             ></span>
           </div>
 
-          {errors.role !== "" && errors.role !== "valid" ? (
-            <h6 className="invalid-feedback" style={{ backgroundColor: "red" }}>
-              {errors.role}
-            </h6>
-          ) : null}
+         
 
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>
           ) : (
             ""
           )}
-          <div>
-            <p className="text-danger pb-3" id="role_id"></p>
-          </div>
+        
           <button type="submit">
             <span></span>
             <span></span>
