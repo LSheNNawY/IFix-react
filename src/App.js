@@ -1,5 +1,5 @@
- import { useContext } from "react";
- import UserContext from "./context/UserContext";
+import { useContext } from "react";
+import UserContext from "./context/UserContext";
 import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -17,8 +17,7 @@ import Review from "./pages/Review";
 import AccountActivation from "./pages/AccountActivation";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
-import Admin_Login from "./pages/dashboard/Admin_Login" ;
-
+import Admin_Login from "./pages/dashboard/Admin_Login";
 
 // import UserContext from "./context/UserContext";
 import axios from "axios";
@@ -28,7 +27,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 axios.defaults.withCredentials = true;
 
 function App() {
-   const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   return (
     <div className="App">
       <Switch>
@@ -63,7 +62,15 @@ function App() {
         <Route path="/jobs" component={Employee_Jobs} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Route exact path="/adminlogin" render={()=> <Admin_Login/>} />
+        <Route
+          exact
+          path="/adminlogin"
+          render={() => {
+            if (user) {
+              return <AdminLayout />;
+            } else return <Admin_Login />;
+          }}
+        />
         <Route path="/review" component={Review} />
         <Route path="/account-activation" component={AccountActivation} />
         <Route path="/forgot-password" component={ForgotPassword} />
