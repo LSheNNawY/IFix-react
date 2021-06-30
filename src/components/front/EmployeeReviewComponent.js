@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import "../../assets/front/css/index.css";
 import "../../assets/front/css/profile.css";
@@ -43,7 +43,7 @@ const EmployeeReviewComponent = ({ job }) => {
           </div>
         </div>
       </div>
-      ):""}
+      ) : ""}
    
     </>
   );

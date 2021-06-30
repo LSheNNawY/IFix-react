@@ -4,19 +4,7 @@ import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import "../../assets/front/css/navbar.css";
-// import logo from "../../assets/front/img/ifixbag.png";
-// import "../../assets/front/css/index.css";
-
-/*const NavbarComponent = () => {
-  const { user, getUser } = useContext(UserContext);
-
-   const Logout = async () => {
-    await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`);
-    await getUser();
-    history.push("/");
-  };
-  const location = useLocation(); 
-  const history = useHistory();*/
+import logo from "../../assets/front/img/two.jpeg";
 
 const NavbarComponent = () => {
   let { user } = useContext(UserContext);
@@ -43,7 +31,7 @@ const NavbarComponent = () => {
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Navbar
+            <img src={logo} style={{width:"70px",height:"50px"}}/><span style={{marginLeft:"5px", fontSize:"27px"}}>IFIX</span>
           </Link>
           <button
             className="navbar-toggler "
@@ -54,6 +42,8 @@ const NavbarComponent = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
+            <i className="fas fa-bars"></i>
+
             <span className="line"></span>
           </button>
           <div className="collapse navbar-collapse  " id="navbar-togglerDemo02">

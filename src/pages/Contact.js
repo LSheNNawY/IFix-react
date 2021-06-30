@@ -10,13 +10,14 @@ import { useHistory } from "react-router-dom";
 
 
 const Contact = () => {
+    let history = useHistory();
+
     const [commentState, SetCommentState] = useState({
         name: "",
         email: "",
         body: "",
     });
     const [errors, setErrors] = useState({ name: "", email: "", body: "" });
-    const history = useHistory();
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log(commentState);
@@ -36,8 +37,11 @@ const Contact = () => {
                         "Content-Type": "multipart/form-data",
                     }
                 );
+                history.push("/")
+
             } catch (err) {
-                console.log(err);
+                    console.log(err);
+
             }
         }
     };
@@ -239,7 +243,7 @@ const Contact = () => {
                                         htmlFor="exampleInputTextArea"
                                         className="form-label"
                                     >
-                                        Email
+                                        Comment
                                     </label>
                                     <div className="input-group-prepend">
                                         <span

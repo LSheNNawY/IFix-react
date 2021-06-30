@@ -6,11 +6,6 @@ import "../assets/front/css/index.css";
 import "../assets/front/css/about.css";
 import "../assets/front/css/animate.min.css";
 
-import about from "../assets/front/img/about.PNG";
-import fix1 from "../assets/front/img/fix1.jpg"
-import fix2 from "../assets/front/img/fix2.jpg"
-import fix3 from "../assets/front/img/fix3.jpg"
-
 import FooterComponent from "../components/front/FooterComponent";
 import ChooseUsComponent from "../components/front/ChooseUsComponent";
 import Employee from "../components/front/EmployeeComponent";
@@ -24,7 +19,6 @@ const AboutUs = (props) => {
 
     const [professions, setProfessions] = useState([]);
     const [employees, setEmployees] = useState([]);
-    const sliderText = "We Provide Best Fix Services";
 
     useEffect(() => {
         ajaxGetProfessions(3).then(({ data }) => {
