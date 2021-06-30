@@ -38,7 +38,6 @@ function App() {
                     path="/login"
                     render={() => {
                         if (user) {
-                            //alert("You can't login if you are logged in!")
                             return <Home />;
                         } else return <Login />;
                     }}
