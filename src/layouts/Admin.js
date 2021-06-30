@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, Route, Switch } from "react-router-dom";
-import axios from "axios";
+import { useLocation, Route, Switch, useHistory } from "react-router-dom";
 import AdminNavbar from "../components/dashboard/Navbars/AdminNavbar";
 import Footer from "../components/dashboard/Footer/Footer";
 import Sidebar from "../components/dashboard/Sidebar/Sidebar";
@@ -17,6 +16,7 @@ import sidebarImage from "../assets/dashboard/img/sidebar-3.jpg";
 import { useEffect } from "react";
 
 function Admin() {
+  const history = useHistory();
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
@@ -26,8 +26,6 @@ function Admin() {
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   const getRoutes = (routes) => {
-    console.log(routes);
-
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
@@ -44,7 +42,9 @@ function Admin() {
   };
 
   useEffect(() => {
-    console.log(user);
+    if (user?.role !== "super admin" && user?.role !== "admin") {
+      history.push("/notfound");
+    }
     user.role === "admin"
       ? setFinalRoutes(finalRoutes.filter((route) => route.path !== "/admins"))
       : setFinalRoutes(finalRoutes);
