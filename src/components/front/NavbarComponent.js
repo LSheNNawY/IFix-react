@@ -5,18 +5,6 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import "../../assets/front/css/navbar.css";
 import logo from "../../assets/front/img/two.jpeg";
-// import "../../assets/front/css/index.css";
-
-/*const NavbarComponent = () => {
-  const { user, getUser } = useContext(UserContext);
-
-   const Logout = async () => {
-    await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`);
-    await getUser();
-    history.push("/");
-  };
-  const location = useLocation(); 
-  const history = useHistory();*/
 
 const NavbarComponent = () => {
   let { user } = useContext(UserContext);
@@ -32,6 +20,7 @@ const NavbarComponent = () => {
       .then(({ data }) => {
         if (data.ok) {
           getUser();
+          sessionStorage.clear();
           history.push("/login");
         }
       });

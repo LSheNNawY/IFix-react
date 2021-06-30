@@ -1,5 +1,5 @@
- import { useContext } from "react";
- import UserContext from "./context/UserContext";
+import { useContext } from "react";
+import UserContext from "./context/UserContext";
 import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -28,7 +28,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 axios.defaults.withCredentials = true;
 
 function App() {
-   const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   return (
     <div className="App">
       <Switch>
