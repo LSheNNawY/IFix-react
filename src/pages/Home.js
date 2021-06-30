@@ -64,9 +64,6 @@ const Home = () => {
                   Best fix
                 </span>
                 <h2>{sliderText}</h2>
-                {/* <Link to={"/contact"} className="primary-btn">
-                                    Contact us
-                                </Link> */}
               </div>
             </div>
           </div>
@@ -77,9 +74,6 @@ const Home = () => {
               <div className="hero__text">
                 <span>Best fix</span>
                 <h2>{sliderText}</h2>
-                {/* <Link to={"contact"} className="primary-btn">
-                                    Contact us
-                                </Link> */}
               </div>
             </div>
           </div>
@@ -89,9 +83,6 @@ const Home = () => {
               <div className="hero__text">
                 <span>Best fix</span>
                 <h2>{sliderText}</h2>
-                {/* <a href="contact.html" className="primary-btn">
-                                    Contact us
-                                </a> */}
               </div>
             </div>
           </div>
@@ -144,7 +135,9 @@ const Home = () => {
                   borderBottom: "3px solid lightgray",
                   marginLeft: "45%",
                 }}
-              ></h2>
+              >
+                {""}
+              </h2>
               <div className="row">
                 {professions.map((profession) => (
                   <ProfessionComponent
@@ -219,7 +212,9 @@ const Home = () => {
                   borderBottom: "3px solid lightgray",
                   marginLeft: "45%",
                 }}
-              ></h2>
+              >
+                {""}
+              </h2>
               <div
                 className="row"
                 style={{
