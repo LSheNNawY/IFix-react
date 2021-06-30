@@ -1,4 +1,4 @@
-
+/* 
    body {
     font-family: sans-serif;
     width:100%;
@@ -7,7 +7,7 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  
+   */
  .login-box .user-box input {
     outline: none  !important;
     border: none !important;
