@@ -53,12 +53,6 @@ function Admin_Login() {
               setLoggingError("Your account is blocked, please contact us");
               break;
 
-            case "inactive":
-              setLoggingError(
-                "Please, check your email address to activate your account"
-              );
-
-              break;
             default:
               break;
           }

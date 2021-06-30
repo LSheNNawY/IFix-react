@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, Route, Switch, useHistory } from "react-router-dom";
+import { useLocation, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import AdminNavbar from "../components/dashboard/Navbars/AdminNavbar";
 import Footer from "../components/dashboard/Footer/Footer";
@@ -24,7 +24,6 @@ function Admin() {
   const location = useLocation();
   const mainPanel = React.useRef(null);
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const history = useHistory();
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -43,10 +42,6 @@ function Admin() {
   };
 
   useEffect(() => {
-    if (user?.role !== "super admin" || user?.role !== "admin") {
-      history.push("/");
-    }
-
     user.role === "admin"
       ? setFinalRoutes(finalRoutes.filter((route) => route.path !== "/admins"))
       : setFinalRoutes(finalRoutes);
