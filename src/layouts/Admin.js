@@ -26,8 +26,6 @@ function Admin() {
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   const getRoutes = (routes) => {
-    console.log(routes);
-
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
