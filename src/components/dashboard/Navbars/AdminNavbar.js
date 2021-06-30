@@ -84,7 +84,7 @@ function Header() {
                                 className="m-0"
                                 onClick={(e) => e.preventDefault()}
                             >
-                                <span className="no-icon">{user.username.toUpperCase()}</span>
+                                <span className="no-icon">{user?.username.toUpperCase()}</span>
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
