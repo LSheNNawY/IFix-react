@@ -42,7 +42,7 @@ function Admin() {
   };
 
   useEffect(() => {
-    if (user?.role !== "super user" || user?.role !== "admin") {
+    if (user?.role !== "super admin" && user?.role !== "admin") {
       history.push("/notfound");
     }
     user.role === "admin"

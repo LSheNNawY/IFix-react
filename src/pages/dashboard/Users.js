@@ -43,7 +43,6 @@ export default function Users() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`)
       .then(({ data }) => {
-        console.log(data);
         setUsers(data);
       })
       .catch((error) => {
