@@ -56,7 +56,6 @@ export default function Employees() {
             .then(({ data }) => {
                 setEmployees(data);
                 setRefresh(false);
-                console.log(data);
             })
             .catch((error) => {
                 console.log(error.response);
