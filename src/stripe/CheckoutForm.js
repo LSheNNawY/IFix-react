@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 
 import {
     CardElement,
-    Elements,
     useElements,
     useStripe
 } from "@stripe/react-stripe-js";

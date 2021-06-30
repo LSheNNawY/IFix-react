@@ -6,8 +6,12 @@ import { Link } from "react-router-dom";
 import { authFormValidation } from "../helpers/concateValidation";
 import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 
 const Contact = () => {
+    let history = useHistory();
+
     const [commentState, SetCommentState] = useState({
         name: "",
         email: "",
@@ -33,8 +37,11 @@ const Contact = () => {
                         "Content-Type": "multipart/form-data",
                     }
                 );
+                history.push("/")
+
             } catch (err) {
-                console.log(err);
+                    console.log(err);
+
             }
         }
     };
@@ -236,7 +243,7 @@ const Contact = () => {
                                         htmlFor="exampleInputTextArea"
                                         className="form-label"
                                     >
-                                        Email
+                                        Comment
                                     </label>
                                     <div className="input-group-prepend">
                                         <span
