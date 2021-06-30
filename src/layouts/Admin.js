@@ -23,7 +23,7 @@ function Admin() {
   const [finalRoutes, setFinalRoutes] = useState(routes);
   const location = useLocation();
   const mainPanel = React.useRef(null);
-  const user = JSON.parse(sessionStorage.getItem("user"))
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   const getRoutes = (routes) => {
     console.log(routes);
@@ -44,25 +44,25 @@ function Admin() {
   };
 
   useEffect(() => {
-    console.log(user)
+    console.log(user);
     user.role === "admin"
-    ? setFinalRoutes(finalRoutes.filter((route) => route.path !== "/admins"))
-    : setFinalRoutes(finalRoutes);
+      ? setFinalRoutes(finalRoutes.filter((route) => route.path !== "/admins"))
+      : setFinalRoutes(finalRoutes);
   }, []);
 
-  // React.useEffect(() => {
-  //   document.documentElement.scrollTop = 0;
-  //   document.scrollingElement.scrollTop = 0;
-  //   mainPanel.current.scrollTop = 0;
-  //   if (
-  //     window.innerWidth < 993 &&
-  //     document.documentElement.className.indexOf("nav-open") !== -1
-  //   ) {
-  //     document.documentElement.classList.toggle("nav-open");
-  //     var element = document.getElementById("bodyClick");
-  //     element.parentNode.removeChild(element);
-  //   }
-  // }, [location]);
+  React.useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.scrollingElement.scrollTop = 0;
+    mainPanel.current.scrollTop = 0;
+    if (
+      window.innerWidth < 993 &&
+      document.documentElement.className.indexOf("nav-open") !== -1
+    ) {
+      document.documentElement.classList.toggle("nav-open");
+      var element = document.getElementById("bodyClick");
+      element.parentNode.removeChild(element);
+    }
+  }, [location]);
 
   return (
     <>
