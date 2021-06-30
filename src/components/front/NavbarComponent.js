@@ -42,7 +42,7 @@ const NavbarComponent = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <i class="fas fa-bars"></i>
+            <i className="fas fa-bars"></i>
 
             <span className="line"></span>
           </button>

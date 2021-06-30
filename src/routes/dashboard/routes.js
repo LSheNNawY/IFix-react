@@ -23,13 +23,6 @@ const dashboardRoutes = [
   //     layout: "/admin",
   // },
   {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "fa fa-bullhorn",
-    component: Notifications,
-    layout: "/admin",
-  },
-  {
     path: "/professions",
     name: "Professions",
     icon: "fa fa-bullhorn",
