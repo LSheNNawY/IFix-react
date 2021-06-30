@@ -65,9 +65,7 @@ function App() {
 
         {user && (user.role === "super admin" || user.role === "admin") ? (
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        ) : (
-          <h1>403 unauthorized</h1>
-        )}
+        ) : null}
 
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route
@@ -82,8 +80,7 @@ function App() {
             }
             if (user && user.role === "user") {
               return <Home />;
-            } 
-            else return <AdminLogin />;
+            } else return <AdminLogin />;
           }}
         />
         <Route path="/review" component={Review} />
