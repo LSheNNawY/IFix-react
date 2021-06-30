@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
 import axios from "axios";
 

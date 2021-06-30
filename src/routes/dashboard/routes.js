@@ -1,6 +1,4 @@
 import Dashboard from "../../pages/dashboard/Dashboard";
-import UserProfile from "../../pages/dashboard/UserProfile";
-import Notifications from "../../pages/dashboard/Notifications";
 import Professions from "../../pages/dashboard/professions/Index";
 import Jobs from "../../pages/dashboard/JobTable";
 import Admins from "../../pages/dashboard/Admins";
