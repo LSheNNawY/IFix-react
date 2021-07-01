@@ -126,7 +126,7 @@ const ClientJobs = ({ job }) => {
                               <span className="h4 d-block my-1">
                                 Employee Phone :
                               </span>
-                              <span span className="d-block mb-2">
+                              <span className="d-block mb-2">
                                 {" "}
                                 {job.employee.phone}{" "}
                               </span>
