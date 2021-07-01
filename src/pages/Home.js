@@ -6,7 +6,8 @@ import ProfessionComponent from "../components/front/ProfessionComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import Employee from "../components/front/EmployeeComponent";
 import ChooseUsComponent from "../components/front/ChooseUsComponent";
-
+import ProfessionLoader from "../components/loaders/ProfessionLoader";
+import UserLoader from "../components/loaders/UserLoader";
 import "../assets/front/css/index.css";
 // import "../assets/front/css/animate.min.css";
 
@@ -23,8 +24,10 @@ const Home = () => {
   const [professions, setProfessions] = useState([]);
   const [employees, setEmployees] = useState([]);
   const sliderText = "We Provide Best Fix Services";
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     ajaxGetProfessions(3).then(({ data }) => {
       setProfessions(data);
       let emps = [];
@@ -35,8 +38,12 @@ const Home = () => {
       });
 
       setEmployees(emps);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     });
   }, []);
+
   return (
     <div className="index-wrapper">
       <NavbarComponent />
@@ -138,14 +145,23 @@ const Home = () => {
               >
                 {""}
               </h2>
-              <div className="row">
-                {professions.map((profession) => (
-                  <ProfessionComponent
-                    profession={profession}
-                    key={profession._id}
-                  />
-                ))}
-              </div>
+
+              {loading ? (
+                <div className="row">
+                  <ProfessionLoader />
+                  <ProfessionLoader />
+                  <ProfessionLoader />
+                </div>
+              ) : (
+                <div className="row">
+                  {professions.map((profession) => (
+                    <ProfessionComponent
+                      profession={profession}
+                      key={profession._id}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -215,19 +231,34 @@ const Home = () => {
               >
                 {""}
               </h2>
-              <div
-                className="row"
-                style={{
-                  marginTop: "30px",
-                }}
-              >
-                {employees.length > 0 &&
-                  employees.map((employee) =>
-                    employee.status === "active" ? (
-                      <Employee employee={employee} key={employee._id} />
-                    ) : null
-                  )}
-              </div>
+
+              {loading ? (
+                <div
+                  className="row"
+                  style={{
+                    marginTop: "30px",
+                  }}
+                >
+                  <UserLoader />
+                  <UserLoader />
+                  <UserLoader />
+                  <UserLoader />
+                </div>
+              ) : (
+                <div
+                  className="row"
+                  style={{
+                    marginTop: "30px",
+                  }}
+                >
+                  {employees.length > 0 &&
+                    employees.map((employee) =>
+                      employee.status === "active" ? (
+                        <Employee employee={employee} key={employee._id} />
+                      ) : null
+                    )}
+                </div>
+              )}
             </div>
           </div>
         </div>
