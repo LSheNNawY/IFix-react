@@ -19,6 +19,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
 import AdminLogin from "./pages/dashboard/Admin_Login";
 
+
 import NotFound from "./components/front/NotFound";
 import axios from "axios";
 // import UserContext from "./context/UserContext";
@@ -64,6 +65,7 @@ function App() {
                     path="/profile/:id"
                     render={(props) => <Profile {...props} />}
                 />
+               
                 <Route exact path="/adminlogin" render={() => <AdminLogin />} />
 
                 {user &&

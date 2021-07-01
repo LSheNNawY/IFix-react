@@ -171,11 +171,11 @@ export default function JobComponent({ job }) {
           />
         </Modal.Body>
         <Modal.Footer className="mt-4">
-          <Button variant="secondary" onClick={handleCloseEndModal}>
+          <Button variant="secondary" onClick={handleClosePriceModal}>
             Close
           </Button>
           <Button variant="primary" onClick={(e) => handleSubmitPrice(e)}>
-            End
+            Confirm
           </Button>
         </Modal.Footer>
       </Modal>
@@ -302,15 +302,6 @@ export default function JobComponent({ job }) {
                     ) : null}
                   </div>
                 </div>
-                {/* <div className="col-6">
-                                    <i
-                                        className="far fa-edit"
-                                        style={{
-                                            fontSize: "30px",
-                                            padding: "30px",
-                                        }}
-                                    ></i>
-                                </div> */}
               </div>
             </div>
           </div>

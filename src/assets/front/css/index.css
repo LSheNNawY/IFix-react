@@ -10,9 +10,9 @@
 * {
     font-family: Rajdhani-MediumRa;
 }
-.index-wrapper{
+/* .index-wrapper{
     background-color: white;
-}
+} */
 
 .index-wrapper img {
     width: 100%;
@@ -332,8 +332,12 @@
     position: relative;
     display: block;
 }
+.index-wrapper .about__text p {
+    font-family: Rajdhani-SemiBold;
+}
 .index-wrapper .chooseUl li , .modal-content .modal-body li{
     list-style: none;
+    font-family: Rajdhani-SemiBold;
     font-size: 15px;
     font-weight: 300;
     color: #444;
@@ -349,11 +353,12 @@
 /* ----counter-- */
 .index-wrapper .counter {
     padding-top: 305px;
-    background-color: #1b2839;
+    background-color: #1b2839 !important;
     width: 100%;
     position: relative;
     bottom: 250px;
     z-index: -90;
+    height: 300px;
 }
 
 .index-wrapper .counter .content {
@@ -376,14 +381,14 @@
 
 .index-wrapper .counter__item__num h2 {
     font-size: 50px;
-    color: #ffffff;
+    color: black;
     font-weight: 600;
     display: inline-block;
 }
 
 .index-wrapper .counter__item__num span {
     font-size: 50px;
-    color: #ffffff;
+    color: black;
     font-family: "Rajdhani", sans-serif;
     font-weight: 600;
     display: inline-block;

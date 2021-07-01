@@ -50,7 +50,7 @@ function Dashboard() {
     <>
       <Container fluid>
         {/* Recents */}
-        <h4 style={{color: "#FFF"}}>Recents</h4>
+        <h4>Recents</h4>
         <Row>
           <Col lg="4" sm="6">
             <Card className="card-stats">
@@ -135,7 +135,7 @@ function Dashboard() {
         </Row>
 
         {/* Total */}
-        <h4 style={{color: "#FFF"}}>Total</h4>
+        <h4>Total</h4>
         <Row>
           <Col lg="4" sm="6">
             <Card className="card-stats">
