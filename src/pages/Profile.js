@@ -40,7 +40,8 @@ const Profile = (props) => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)
       .then(({ data }) => {
-        setJobs(data);
+        console.log(data);
+        setJobs(data.jobs);
       });
   };
   const handleEdit = (data) => {
@@ -193,7 +194,7 @@ const Profile = (props) => {
           />
         </>
       ) : (
-        <h1 class="text-center">Loading</h1>
+        <h1 className="text-center">Loading</h1>
       )}
       <FooterComponent />
     </div>
