@@ -77,6 +77,7 @@ function Index() {
               </Card.Body>
             </Card>
           </Col>
+
         </Row>
         <PaginationComponent
           pageNumber={pageNumber}

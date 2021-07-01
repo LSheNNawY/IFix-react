@@ -3,6 +3,7 @@ import "../../../styles/CollapseTable.css";
 import axios from "axios";
 import ServiceTable from "../services/ServiceTable";
 
+
 // react-bootstrap components
 import EditProfession from "./EditProfession";
 import CreateService from "../services/CreateService";
