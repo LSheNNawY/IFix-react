@@ -53,11 +53,13 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
-    if (user === undefined || JSON.stringify(user) === "{}") {
+    console.log(user);
+    if (user === undefined || user === "") {
       async function getUser() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/users/current-user`
         );
+        console.log(response);
         if (response.data === "") {
           history.push("/login");
         } else {

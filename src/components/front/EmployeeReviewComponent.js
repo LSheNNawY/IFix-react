@@ -5,7 +5,6 @@ import "../../assets/front/css/profile.css";
 
 const EmployeeReviewComponent = ({ job }) => {
   const [empJob, setempJob] = useState(job);
-  console.log(empJob);
  
   return (
     <>
