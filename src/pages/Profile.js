@@ -72,7 +72,6 @@ const Profile = (props) => {
             } else {
               setRole("user");
               ajaxGetUser(response.data.id, "user");
-
             }
           }
         }
@@ -93,8 +92,8 @@ const Profile = (props) => {
         }
       }
     }
-  },[pageNumber]);
-  
+  }, [pageNumber]);
+
   return (
     <div className="index-wrapper">
       <NavbarComponent />
@@ -202,12 +201,15 @@ const Profile = (props) => {
       ) : (
         <h1 className="text-center">Loading</h1>
       )}
-
-      <PaginationComponent
-        pageNumber={pageNumber}
-        totalPages={totalPages}
-        setPageNumber={setPageNumber}
-      />
+      {role === "user" ? (
+        <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
+      ) : (
+        ""
+      )}
       <FooterComponent />
     </div>
   );
