@@ -7,19 +7,25 @@ import CreateProfession from "./CreateProfession";
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 import Search from "../../../components/dashboard/search/Search";
 import PaginationComponent from "../PaginationComponent";
+import Loading from "../../../components/Loading";
 
 function Index() {
   const [professions, setProfessions] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${process.env.REACT_APP_API_URL}/professions?page=${pageNumber}`)
       .then(({ data }) => {
         setProfessions(data.professions);
         setTotalPages(data.totalPages);
+        setTimeout(() => {
+          setLoading(false);
+        }, 300);
       });
   }, [pageNumber]);
 
@@ -42,7 +48,11 @@ function Index() {
                 <div className="row mt-4">
                   <div className="col-md-6">
                     {/* search component */}
-                    <Search setResult={setProfessions} searchFor={"professions"} setTotalPages={setTotalPages}/>
+                    <Search
+                      setResult={setProfessions}
+                      searchFor={"professions"}
+                      setTotalPages={setTotalPages}
+                    />
                   </div>
                 </div>
                 <div className="float-right">
@@ -53,37 +63,42 @@ function Index() {
                 </div>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover table-striped text-center profession">
-                  <thead>
-                    <tr>
-                      <th className="border-0">#</th>
-                      <th className="border-0 profession">TITLE</th>
-                      <th className="border-0">IMAGE</th>
-                      <th className="border-0">SERVICES</th>
-                      <th className="border-0">ACTIONS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {professions.map((profession, index) => (
-                      <ProfessionTable
-                        professionState={profession}
-                        setProfessions={setProfessions}
-                        index={index}
-                        key={profession._id}
-                      />
-                    ))}
-                  </tbody>
-                </Table>
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <Table className="table-hover table-striped text-center profession">
+                    <thead>
+                      <tr>
+                        <th className="border-0">#</th>
+                        <th className="border-0 profession">TITLE</th>
+                        <th className="border-0">IMAGE</th>
+                        <th className="border-0">SERVICES</th>
+                        <th className="border-0">ACTIONS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {professions.map((profession, index) => (
+                        <ProfessionTable
+                          professionState={profession}
+                          setProfessions={setProfessions}
+                          index={index}
+                          key={profession._id}
+                        />
+                      ))}
+                    </tbody>
+                  </Table>
+                )}
               </Card.Body>
             </Card>
           </Col>
-
         </Row>
-        <PaginationComponent
-          pageNumber={pageNumber}
-          totalPages={totalPages}
-          setPageNumber={setPageNumber}
-        />
+        {!loading ? (
+          <PaginationComponent
+            pageNumber={pageNumber}
+            totalPages={totalPages}
+            setPageNumber={setPageNumber}
+          />
+        ) : null}
       </Container>
     </>
   );
