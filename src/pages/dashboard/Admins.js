@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
+import Search from "../../components/dashboard/search/Search";
 import ProfileForm from "./forms/ProfileForm";
 
 export default function Admins() {
@@ -71,16 +72,22 @@ export default function Admins() {
               <Card.Header>
                 <Card.Title as="h4">Admins</Card.Title>
                 <p className="card-category">control</p>
-                <div className="float-right">
-                  <button
-                    className="btn btn-primary"
-                    title="Add"
-                    onClick={() => {
-                      handleAddAdmin();
-                    }}
-                  >
-                    <i className="fa fa-plus"></i> New Admin
-                  </button>
+                <div className="row mt-4">
+                  <div className="col-6">
+                    {/* search component */}
+                    <Search setResult={setAdmins} searchFor={"admins"} />
+                  </div>
+                  <div className="text-right col-6">
+                    <button
+                      className="btn btn-primary"
+                      title="Add"
+                      onClick={() => {
+                        handleAddAdmin();
+                      }}
+                    >
+                      <i className="fa fa-plus"></i> New Admin
+                    </button>
+                  </div>
                 </div>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">

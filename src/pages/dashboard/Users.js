@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
+import Search from "../../components/dashboard/search/Search";
 import Profile from "./forms/Profile";
 
 export default function Users() {
@@ -57,6 +59,12 @@ export default function Users() {
             <Card.Header>
               <Card.Title as="h4">Users</Card.Title>
               <p className="card-category">control</p>
+              <div className="row mt-4">
+                <div className="col-md-6">
+                  {/* search component */}
+                  <Search setResult={setUsers} searchFor={"users"} />
+                </div>
+              </div>
             </Card.Header>
             <Card.Body className="table-full-width table-responsive px-0">
               <Table className="table-hover table-striped">
@@ -78,7 +86,11 @@ export default function Users() {
                     return (
                       <tr key={user._id}>
                         <td>{index + 1}</td>
-                        <td>{user.firstName.toLowerCase()}</td>
+                        <td>
+                          <Link to={`/admin/jobs?userId=${user._id}`}>
+                            {user.firstName.toLowerCase()}
+                          </Link>
+                        </td>
                         <td>{user.lastName.toLowerCase()}</td>
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
