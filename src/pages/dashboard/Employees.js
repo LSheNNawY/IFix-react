@@ -81,7 +81,11 @@ export default function Employees() {
                 <div className="row mt-4">
                   <div className="col-md-6">
                     {/* search component */}
-                    <Search setResult={setEmployees} searchFor={"employees"} setTotalPages={setTotalPages} />
+                    <Search
+                      setResult={setEmployees}
+                      searchFor={"employees"}
+                      setTotalPages={setTotalPages}
+                    />
                   </div>
                   <div className="col-md-6 text-right">
                     <button
