@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Search({ setResult, searchFor }) {
+export default function Search({ setResult, searchFor, setTotalPages }) {
   const [search, setSearch] = useState("");
 
   const handleSearch = (e) => {
@@ -9,10 +9,12 @@ export default function Search({ setResult, searchFor }) {
     axios
       .get(`${process.env.REACT_APP_API_URL}/${searchFor}?search=${search}`)
       .then(({ data }) => {
-        setResult(data);
+        console.log(data);
+        setResult(data[searchFor]);
+        setTotalPages(data.totalPages)
       })
-      .catch(({ response }) => {
-        console.log(response);
+      .catch((error) => {
+        console.log(error);
       });
   };
 

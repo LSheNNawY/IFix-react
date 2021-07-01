@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
+import PaginationComponent from "./PaginationComponent";
 
 function Jobs() {
   const history = useHistory
@@ -10,20 +10,24 @@ function Jobs() {
   const searchParams = new URLSearchParams(search);
   const userId = searchParams.get("userId");
   const [jobs, setJobs] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const query = userId? `/jobs?userId=${userId}` : '/jobs';
-    axios.get(process.env.REACT_APP_API_URL + query).then((res) => {
-      setJobs(res.data);
-    });
-  }, []);
+    const searchQuery = userId? `jobs?userId=${userId}&&page=${pageNumber}` : `jobs?page=${pageNumber}`;
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/${searchQuery}`)
+      .then(({ data }) => {
+        setJobs(data.jobs);
+        setTotalPages(data.totalPages);
+      });
+  }, [pageNumber]);
 
   const deleteUser = (id) => {
     if (window.confirm("Are you sure..?")) {
       axios
         .delete(`${process.env.REACT_APP_API_URL}/jobs/${id}`)
         .then(({ data }) => {
-          console.log("data will delete = ", data);
           setJobs((old) => old.filter((job) => job._id !== id));
         })
         .catch((error) => {
@@ -106,6 +110,11 @@ function Jobs() {
             </Card>
           </Col>
         </Row>
+        <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
       </Container>
     </>
   );

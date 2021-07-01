@@ -3,12 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
 import Search from "../../components/dashboard/search/Search";
 import ProfileForm from "./forms/ProfileForm";
+import PaginationComponent from "./PaginationComponent";
+import dateFormat from "dateformat";
 
 export default function Admins() {
   const [admins, setAdmins] = useState([]);
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const handleLockAdmin = (id, status) => {
     axios
@@ -54,15 +58,16 @@ export default function Admins() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/admins`)
+      .get(`${process.env.REACT_APP_API_URL}/admins?page=${pageNumber}`)
       .then(({ data }) => {
-        setAdmins(data);
+        setAdmins(data.admins);
+        setTotalPages(data.totalPages);
         setRefresh(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [refresh]);
+  }, [refresh, pageNumber]);
   return (
     <>
       <Container fluid>
@@ -75,7 +80,7 @@ export default function Admins() {
                 <div className="row mt-4">
                   <div className="col-6">
                     {/* search component */}
-                    <Search setResult={setAdmins} searchFor={"admins"} />
+                    <Search setResult={setAdmins} searchFor={"admins"} setTotalPages={setTotalPages} />
                   </div>
                   <div className="text-right col-6">
                     <button
@@ -124,7 +129,13 @@ export default function Admins() {
                               {admin.status}
                             </span>
                           </td>
-                          <td>{admin.created_at}</td>
+                          <td>
+                            {" "}
+                            {dateFormat(
+                              admin.created_at,
+                              "mmmm dS, yyyy - h:MM TT"
+                            )}
+                          </td>
                           <td>
                             <button
                               className="btn btn-warning mr-1"
@@ -172,6 +183,11 @@ export default function Admins() {
             </Card>
           </Col>
         </Row>
+        <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
       </Container>
       <ProfileForm
         show={showProfile}
