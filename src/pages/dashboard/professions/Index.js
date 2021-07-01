@@ -6,7 +6,7 @@ import CreateProfession from "./CreateProfession";
 // react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 import Search from "../../../components/dashboard/search/Search";
-import PaginationComponent from "../PaginationComponent";
+import PaginationComponent from "../../../components/dashboard/Pagination/PaginationComponent";
 
 function Index() {
   const [professions, setProfessions] = useState([]);

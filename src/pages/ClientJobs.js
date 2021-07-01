@@ -10,7 +10,6 @@ const ClientJobs = ({ job }) => {
   const [empJob, setempJob] = useState(job);
   const [successMsg, setSuccessMsg] = useState(false);
   const [modalstripe, setmodalstripe] = useState(false);
-
   return (
     <>
       {modalstripe ? (

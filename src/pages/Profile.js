@@ -11,16 +11,18 @@ import ClientJobs from "./ClientJobs";
 
 import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
-
 import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 import ProfileEdit from "../components/ProfileEdit";
+import PaginationComponent from "../components/front/PaginationComponent";
 
 const Profile = (props) => {
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
   const [role, setRole] = useState("");
   const [jobs, setJobs] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const history = useHistory();
   const [profileInfo, setProfileInfo] = useState(null);
@@ -31,16 +33,18 @@ const Profile = (props) => {
       .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id)
       .then(({ data }) => {
         setUserData(data);
-        getUserJobs(data)
+        getUserJobs(data);
       });
   };
-  
+
   const getUserJobs = async (user) => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}&&page=${pageNumber}`
+      )
       .then(({ data }) => {
-        console.log(data);
         setJobs(data.jobs);
+        setTotalPages(data.totalPages);
       });
   };
   const handleEdit = (data) => {
@@ -68,6 +72,7 @@ const Profile = (props) => {
             } else {
               setRole("user");
               ajaxGetUser(response.data.id, "user");
+
             }
           }
         }
@@ -88,7 +93,8 @@ const Profile = (props) => {
         }
       }
     }
-  }, []);
+  },[pageNumber]);
+  
   return (
     <div className="index-wrapper">
       <NavbarComponent />
@@ -177,13 +183,14 @@ const Profile = (props) => {
                 <div className="container" style={{ marginTop: "15rem" }}>
                   <h1>My Jobs</h1>
                   {jobs &&
-                     jobs.map((job) => {
+                    jobs.map((job) => {
                       return <ClientJobs key={job._id} job={job} />;
                     })}
                 </div>
               </section>
             </>
           )}
+
           <ProfileEdit
             show={showProfile}
             user={userData}
@@ -195,6 +202,12 @@ const Profile = (props) => {
       ) : (
         <h1 className="text-center">Loading</h1>
       )}
+
+      <PaginationComponent
+        pageNumber={pageNumber}
+        totalPages={totalPages}
+        setPageNumber={setPageNumber}
+      />
       <FooterComponent />
     </div>
   );
