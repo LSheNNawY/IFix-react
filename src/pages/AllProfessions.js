@@ -7,17 +7,22 @@ import FooterComponent from "../components/front/FooterComponent";
 
 import "../assets/front/css/index.css";
 
-const ajaxGetProfessions = async () => {
-  return await axios.get(`${process.env.REACT_APP_API_URL}/professions`);
-};
+// const ajaxGetProfessions = async () => {
+//   return await axios.get(`${process.env.REACT_APP_API_URL}/professions`);
+// };
 
 const AllProfessions = () => {
   const [professions, setProfessions] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    ajaxGetProfessions().then(({ data }) => {
-      setProfessions(data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/professions?page=${pageNumber}`)
+      .then(({ data }) => {
+        setProfessions(data.professions);
+        setTotalPages(data.totalPages);
+      });
   }, []);
   return (
     <div className="index-wrapper">
@@ -29,7 +34,7 @@ const AllProfessions = () => {
               <div className="breadcrumb__text">
                 <h2>Our Services</h2>
                 <div className="breadcrumb__links">
-                   <Link to="/">Home</Link>
+                  <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
                   <Link to="/professions">Services</Link>
                 </div>

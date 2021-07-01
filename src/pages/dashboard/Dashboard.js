@@ -66,7 +66,7 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Users Today</p>
+                      <p className="card-category">Clients</p>
                       <Card.Title as="h4">{userCountTotalRecent}</Card.Title>
                     </div>
                   </Col>
@@ -92,7 +92,7 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Employees Today</p>
+                      <p className="card-category">Employees</p>
                       <Card.Title as="h4">
                         {employeeCountTotalRecent}
                       </Card.Title>
@@ -120,7 +120,7 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Jobs Today</p>
+                      <p className="card-category">Jobs</p>
                       <Card.Title as="h4">{jobCountTotalRecent}</Card.Title>
                     </div>
                   </Col>
@@ -151,7 +151,7 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Users</p>
+                      <p className="card-category">Clients</p>
                       <Card.Title as="h4">{userCountTotal}</Card.Title>
                     </div>
                   </Col>
