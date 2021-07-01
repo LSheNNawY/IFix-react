@@ -4,7 +4,7 @@ import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import Employee from "../components/front/EmployeeComponent";
-import "../assets/front/css/index.css";
+import "../assets/front/css/index.scoped.css";
 import ServiceComponent from "./../components/front/ServiceComponent";
 
 const ajaxGetProfession = async (id) => {

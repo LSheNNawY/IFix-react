@@ -30,11 +30,12 @@ const Profile = (props) => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id)
       .then(({ data }) => {
+        console.log(data);
         setUserData(data);
         getUserJobs(data)
       });
   };
-
+  
   const getUserJobs = async (user) => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)

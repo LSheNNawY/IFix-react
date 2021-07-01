@@ -1,13 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
+import Search from "../../components/dashboard/search/Search";
 import ProfileForm from "./forms/ProfileForm";
+import PaginationComponent from "./PaginationComponent";
+import dateFormat from "dateformat";
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
   const handleLockEmployee = (id, status) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/employees/${id}/${status}`)
@@ -52,15 +59,16 @@ export default function Employees() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/employees`)
+      .get(`${process.env.REACT_APP_API_URL}/employees?page=${pageNumber}`)
       .then(({ data }) => {
-        setEmployees(data);
+        setEmployees(data.employees);
+        setTotalPages(data.totalPages);
         setRefresh(false);
       })
       .catch((error) => {
         console.log(error.response);
       });
-  }, [refresh]);
+  }, [refresh, pageNumber]);
   return (
     <>
       <Container fluid>
@@ -70,16 +78,22 @@ export default function Employees() {
               <Card.Header>
                 <Card.Title as="h4">Employees</Card.Title>
                 <p className="card-category">control</p>
-                <div className="float-right">
-                  <button
-                    className="btn btn-primary"
-                    title="Add"
-                    onClick={() => {
-                      handleAddEmployee();
-                    }}
-                  >
-                    <i className="fa fa-plus"></i> New Employee
-                  </button>
+                <div className="row mt-4">
+                  <div className="col-md-6">
+                    {/* search component */}
+                    <Search setResult={setEmployees} searchFor={"employees"} setTotalPages={setTotalPages} />
+                  </div>
+                  <div className="col-md-6 text-right">
+                    <button
+                      className="btn btn-primary"
+                      title="Add"
+                      onClick={() => {
+                        handleAddEmployee();
+                      }}
+                    >
+                      <i className="fa fa-plus"></i> New Employee
+                    </button>
+                  </div>
                 </div>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
@@ -97,12 +111,16 @@ export default function Employees() {
                       <th className="border-0">Controls</th>
                     </tr>
                   </thead>
-                  <tbody >
+                  <tbody>
                     {employees.map((employee, index) => {
                       return (
                         <tr key={employee._id}>
                           <td>{index + 1}</td>
-                          <td>{employee.firstName.toLowerCase()}</td>
+                          <td>
+                            <Link to={`/admin/jobs?userId=${employee._id}`}>
+                              {employee.firstName.toLowerCase()}
+                            </Link>
+                          </td>
                           <td>{employee.lastName.toLowerCase()}</td>
                           <td>{employee.email}</td>
                           <td>{employee.phone}</td>
@@ -122,7 +140,13 @@ export default function Employees() {
                               {employee.status}
                             </span>
                           </td>
-                          <td>{employee.created_at}</td>
+                          <td>
+                            {" "}
+                            {dateFormat(
+                              employee.created_at,
+                              "mmmm dS, yyyy - h:MM TT"
+                            )}
+                          </td>
                           <td>
                             <button
                               className="btn btn-warning mr-1"
@@ -182,6 +206,11 @@ export default function Employees() {
             </Card>
           </Col>
         </Row>
+        <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
       </Container>
       <ProfileForm
         show={showProfile}

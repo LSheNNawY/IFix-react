@@ -10,7 +10,7 @@ import { notify } from "../helpers/generalFunctions";
 import "react-toastify/dist/ReactToastify.css";
 
 
-import "../assets/front/css/login.css";
+import "../assets/front/css/login.scoped.css";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");

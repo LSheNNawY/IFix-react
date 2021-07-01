@@ -3,7 +3,7 @@ import React from "react";
 import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
-import "../../assets/front/css/navbar.css";
+import "../../assets/front/css/navbar.scoped.css";
 import logo from "../../assets/front/img/two.jpeg";
 
 const NavbarComponent = () => {

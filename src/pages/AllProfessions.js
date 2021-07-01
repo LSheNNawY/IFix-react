@@ -5,7 +5,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import ProfessionComponent from "../components/front/ProfessionComponent";
 import FooterComponent from "../components/front/FooterComponent";
 
-import "../assets/front/css/index.css";
+import "../assets/front/css/index.scoped.css";
 
 const ajaxGetProfessions = async () => {
   return await axios.get(`${process.env.REACT_APP_API_URL}/professions`);

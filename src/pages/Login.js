@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { authFormValidation } from "../helpers/loginValidation";
 import UserContext from "../context/UserContext";
 
-import "../assets/front/css/login.css";
+import "../assets/front/css/login.scoped.css";
 import axios from "axios";
 
 const Login = () => {

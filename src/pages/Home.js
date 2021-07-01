@@ -7,7 +7,7 @@ import FooterComponent from "../components/front/FooterComponent";
 import Employee from "../components/front/EmployeeComponent";
 import ChooseUsComponent from "../components/front/ChooseUsComponent";
 
-import "../assets/front/css/index.css";
+import "../assets/front/css/index.scoped.css";
 // import "../assets/front/css/animate.min.css";
 
 import carosel from "../assets/front/img/carasoul/carasoul1.jpg";

@@ -7,7 +7,7 @@ import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import { useHistory } from "react-router-dom";
 
-import "../assets/front/css/register.css";
+import "../assets/front/css/register.scoped.css";
 import bsCustomFileInput from "bs-custom-file-input";
 import { toast } from "react-toastify";
 

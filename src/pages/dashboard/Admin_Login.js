@@ -4,7 +4,7 @@ import { authFormValidation } from "../../helpers/adminValidation";
 import UserContext from "../../context/UserContext";
 
 // react-bootstrap components
-import "../../assets/dashboard/css/style.css";
+import "../../assets/dashboard/css/style.scoped.css";
 
 import axios from "axios";
 
@@ -60,7 +60,7 @@ function Admin_Login() {
     }
   };
   return (
-    <div className="body">
+    <div className="bodyy">
       <div className="login-box">
         <h2>Login</h2>
         <form onSubmit={submitHandler} className="form">

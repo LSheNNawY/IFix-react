@@ -1,5 +1,5 @@
 import NavbarComponent from "../components/front/NavbarComponent";
-import "../assets/front/css/index.css";
+import "../assets/front/css/index.scoped.css";
 import FooterComponent from "../components/front/FooterComponent";
 import contact_header from "../assets/front/img/contact_header.PNG";
 import { Link } from "react-router-dom";

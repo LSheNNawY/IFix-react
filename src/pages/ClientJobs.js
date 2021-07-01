@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../assets/front/css/index.css";
+import "../assets/front/css/index.scoped.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
 import { ToastContainer } from "react-toastify";

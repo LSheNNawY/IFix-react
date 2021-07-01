@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
-import "../../assets/front/css/index.css";
+import "../../assets/front/css/index.scoped.css";
 import "../../assets/front/css/profile.css";
 
 const EmployeeReviewComponent = ({ job }) => {

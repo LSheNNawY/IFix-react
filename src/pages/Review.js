@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../assets/front/css/index.css";
-import "../assets/front/css/register.css";
+import "../assets/front/css/index.scoped.css";
+import "../assets/front/css/register.scoped.css";
 import * as yup from "yup";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
