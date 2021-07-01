@@ -66,13 +66,7 @@ function Index() {
               </Card.Body>
             </Card>
           </Col>
-            <Pagination
-                data="2"
-                Show={show}
-                displayNumber={professions}
-                previousText="previous"
-                nextText="next"
-            />
+
         </Row>
       </Container>
     </>
