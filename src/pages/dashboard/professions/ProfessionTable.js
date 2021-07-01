@@ -10,7 +10,6 @@ import CreateService from "../services/CreateService";
 function ProfessionTable({ professionState, setProfessions, index }) {
     const [modalProfessionShow, setmodalProfessionShow] = useState(false);
     const [modalServiceShow, setmodalServiceShow] = useState(false);
-
     const [profession, setProfession] = useState(professionState);
 
     const deleteProfission = (id) => {
@@ -46,7 +45,7 @@ function ProfessionTable({ professionState, setProfessions, index }) {
                 <td>{profession.title}</td>
 
                 <td>
-                    <div style={{ width: "100px" }}>
+                    <div style={{ width: "100px", margin:"auto" }}>
                         <img
                             style={{ width: "60%" }}
                             src={`http://localhost:5000/uploads/professions/${profession.img}`}
