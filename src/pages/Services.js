@@ -62,7 +62,9 @@ const Services = (props) => {
                   borderBottom: "3px solid lightgray",
                   marginLeft: "45%",
                 }}
-              ></h2>
+              >
+                {""}
+              </h2>
             </div>
             {profession.services &&
               profession.services.map((service) => {
