@@ -1,12 +1,14 @@
-body {
+/* body {
   font-family: sans-serif;
   width: 100%;
   background: linear-gradient(black, gray);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+} */
+.container-fluid{
+  background-color:linear-gradient(black, gray) ;
 }
-
 .login-box .user-box input {
   outline: none !important;
   border: none !important;

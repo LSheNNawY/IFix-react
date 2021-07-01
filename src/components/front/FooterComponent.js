@@ -14,7 +14,7 @@ const FooterComponent = () => {
                             marginLeft: "5%",
                         }}
                     >
-                        <div className="col-lg-- col-md-6 col-sm-6">
+                        <div className="col-4">
                             <div className="footer__about">
                                 <div className="footer__logo">
                                     <a
@@ -40,7 +40,7 @@ const FooterComponent = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-3">
+                        <div className="col-4">
                             <div className="footer__widget">
                                 <h5>Quick Links</h5>
                                 <ul>
@@ -62,7 +62,7 @@ const FooterComponent = () => {
                         </div>
 
 
-                        <div className="col-lg-3 col-md-3 col-sm-3">
+                        <div className="col-4">
                             <div className="footer__widget">
                                 <h5>Follow us on</h5>
                                 <ul>

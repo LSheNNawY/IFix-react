@@ -68,7 +68,7 @@ const AboutUs = (props) => {
                             marginBottom: "50px",
                         }}
                     >
-                        <div className="col-md-6 content">
+                        {/* <div className="col-md-6 content">
                             <i className="fas fa-users"></i>
                             <div className="counter__item__num">
                                 <h2 className="count">25</h2>
@@ -83,7 +83,7 @@ const AboutUs = (props) => {
                                 <span>k+</span>
                                 <p>Project Complete</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
