@@ -38,11 +38,10 @@ function Header() {
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_API_URL}/users/logout`)
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         if (data.ok) {
-          getUser();
-          sessionStorage.clear();
-          history.push("/adminlogin");
+          await getUser()
+          history.push('/adminlogin');
         }
       });
   };

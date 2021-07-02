@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { authFormValidation } from "../../helpers/adminValidation";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 import UserContext from "../../context/UserContext";
+import { authFormValidation } from "../../helpers/adminValidation";
 
 // react-bootstrap components
 import "../../assets/dashboard/css/style.css";
-
-import axios from "axios";
 
 function Admin_Login() {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -18,7 +17,6 @@ function Admin_Login() {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (authFormValidation(user.email, user.password, errors.role, setErrors)) {
-      
       axios
         .post(`${process.env.REACT_APP_API_URL}/admin/login`, {
           email: user.email,
@@ -28,29 +26,22 @@ function Admin_Login() {
           getUser();
           history.push("/adminlogin");
 
-          if (data.role === "user") 
-          {
+          if (data.role === "user") {
             history.push("/adminlogin");
-          } 
-          else 
-          {
+          } else {
             history.push("/admin");
           }
         })
-        
         .catch(({ response }) => {
+          console.log(response);
           switch (response.data.error) {
-
             case "invalid credentials":
-              setLoggingError("Invalid credentials");
-              break;
-
             case "wrong":
               setLoggingError("Invalid credentials");
               break;
 
             case "blocked":
-              setLoggingError("Your account is blocked, please contact us");
+              setLoggingError("This account is blocked, please contact us");
               break;
 
             default:
@@ -121,7 +112,6 @@ function Admin_Login() {
             {errors.password !== "" && errors.password !== "valid" ? (
               <h6 className="invalid-feedback">{errors.password}</h6>
             ) : null}
-
           </div>
           <div className="input-group-prepend">
             <span
@@ -133,14 +123,12 @@ function Admin_Login() {
             ></span>
           </div>
 
-         
-
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>
           ) : (
             ""
           )}
-        
+
           <button type="submit">
             <span></span>
             <span></span>

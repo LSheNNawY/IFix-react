@@ -11,16 +11,18 @@ import ClientJobs from "./ClientJobs";
 
 import "../assets/front/css/animate.min.css";
 import "../assets/front/css/profile.css";
-
 import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 import ProfileEdit from "../components/ProfileEdit";
+import PaginationComponent from "../components/front/PaginationComponent";
 
 const Profile = (props) => {
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
   const [role, setRole] = useState("");
   const [jobs, setJobs] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const history = useHistory();
   const [profileInfo, setProfileInfo] = useState(null);
@@ -30,18 +32,19 @@ const Profile = (props) => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/${roleState}s/` + id)
       .then(({ data }) => {
-        console.log(data);
         setUserData(data);
-        getUserJobs(data)
+        getUserJobs(data);
       });
   };
-  
+
   const getUserJobs = async (user) => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}&&page=${pageNumber}`
+      )
       .then(({ data }) => {
-        console.log(data);
         setJobs(data.jobs);
+        setTotalPages(data.totalPages);
       });
   };
   const handleEdit = (data) => {
@@ -50,27 +53,25 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
-    if (user === undefined || JSON.stringify(user) === "{}") {
+    if (!user || user === undefined || JSON.stringify(user) === "{}") {
       async function getUser() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/users/current-user`
         );
-        if (response.data === "") {
-          history.push("/login");
-        } else {
+        if (!response.data || response.data === undefined) {
           if (JSON.stringify(props.match.params) !== "{}") {
             let { id } = props.match.params;
             setRole("employee");
             ajaxGetUser(id, "employee");
           } else {
-            if (response.data.role === "employee") {
-              setRole("employee");
-              ajaxGetUser(response.data.id, "employee");
-            } else {
-              setRole("user");
-              ajaxGetUser(response.data.id, "user");
-            }
+            history.push("/login");
           }
+        } else if (response.data.role === "employee") {
+          setRole("employee");
+          ajaxGetUser(response.data.id, "employee");
+        } else {
+          setRole("user");
+          ajaxGetUser(response.data.id, "user");
         }
       }
       getUser();
@@ -89,7 +90,8 @@ const Profile = (props) => {
         }
       }
     }
-  }, []);
+  }, [pageNumber]);
+
   return (
     <div className="index-wrapper">
       <NavbarComponent />
@@ -176,25 +178,41 @@ const Profile = (props) => {
             <>
               <section>
                 <div className="container" style={{ marginTop: "15rem" }}>
-                  <h1>My Jobs</h1>
+                  {userData.role === "user" && jobs.length > 0 ? (
+                    <h1>My Jobs</h1>
+                  ) : (
+                    ""
+                  )}
+
                   {jobs &&
-                     jobs.map((job) => {
+                    jobs.map((job) => {
                       return <ClientJobs key={job._id} job={job} />;
                     })}
                 </div>
               </section>
             </>
           )}
+
           <ProfileEdit
             show={showProfile}
             user={userData}
             role={setUserData.role}
             setShow={setShowProfile}
             setInfo={setProfileInfo}
+            setUserData={setUserData}
           />
         </>
       ) : (
         <h1 className="text-center">Loading</h1>
+      )}
+      {userData.role === "user" ? (
+        <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
+      ) : (
+        ""
       )}
       <FooterComponent />
     </div>

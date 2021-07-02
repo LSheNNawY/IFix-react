@@ -11,7 +11,7 @@ const UserContextProvider = (props) => {
       `${process.env.REACT_APP_API_URL}/users/current-user`
     );
     setUser(response.data);
-    sessionStorage.setItem("user", JSON.stringify(response.data));
+    // sessionStorage.setItem("user", JSON.stringify(response.data));
   }
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 function PaginationComponent({ pageNumber, totalPages, setPageNumber }) {
   const pages = new Array(totalPages).fill(null).map((v, i) => i);
@@ -14,7 +14,7 @@ function PaginationComponent({ pageNumber, totalPages, setPageNumber }) {
 
   return (
     <nav aria-label="Page navigation example">
-      <ul className="pagination pagination-template d-flex justify-content-center mb-3">
+      <ul className="pagination back pagination-template d-flex justify-content-center mb-3 ">
         <li className={`page-item  ${pageNumber === 0 ? "disabled" : ""}`}>
           <a href="" className={`page-link`} onClick={(e) => prevPage(e)}>
             <i className="fa fa-angle-left"></i>
