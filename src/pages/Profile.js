@@ -44,7 +44,6 @@ const Profile = (props) => {
       )
       .then(({ data }) => {
         setJobs(data.jobs);
-        console.log(data.jobs);
         setTotalPages(data.totalPages);
       });
   };
@@ -54,7 +53,6 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
-    console.log(user);
     if (!user || user === undefined || JSON.stringify(user) === "{}") {
       async function getUser() {
         const response = await axios.get(
@@ -201,6 +199,7 @@ const Profile = (props) => {
             role={setUserData.role}
             setShow={setShowProfile}
             setInfo={setProfileInfo}
+            setUserData={setUserData}
           />
         </>
       ) : (

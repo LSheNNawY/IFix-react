@@ -53,7 +53,7 @@ function ProfileEdit(props) {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/professions`)
-      .then(({data}) => setProfessions(data.professions));
+      .then(({ data }) => setProfessions(data.professions));
   }, []);
 
   const handleClose = () => {
@@ -173,19 +173,10 @@ function ProfileEdit(props) {
                     }
                   );
                   if (done) {
-                    console.log(done);
-                    axios
-                      .post(`${process.env.REACT_APP_API_URL}/users/login`, {
-                        email: values.email,
-                        password: values.password,
-                      })
-                      .then((res) => {
-                        console.log(res);
-                        props.setShow(false);
-                        props.setInfo(null);
-                        history.push("/profile");
-                        toast.success("User updated Successfully");
-                      });
+                    props.setUserData(done.data);
+                    props.setShow(false);
+                    props.setInfo(null);
+                    toast.success("User updated Successfully");
                   }
                 } else {
                   console.log(passwordRef.current);
