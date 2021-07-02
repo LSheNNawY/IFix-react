@@ -33,11 +33,11 @@ export default function ChooseUsComponent() {
                                         <img
                                             src={ifix2}
                                             alt="img"
-                                            height="250px"
+                                            height="100%"
                                         />
                                     </div>
                                     <div className="col-md-12">
-                                        <img src={ifix3} height="250px"
+                                        <img src={ifix3} height="100%"
                                              alt="img" style={{marginTop: "15px"}}/>
 
                                     </div>

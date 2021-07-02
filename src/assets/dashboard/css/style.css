@@ -6,11 +6,11 @@
   background-size: cover;
   background-repeat: no-repeat;
 } */
-.adminLogin{
+.adminLogin {
   font-family: sans-serif;
-    background: linear-gradient(black, gray);
-   
-height: 730px;
+  background: linear-gradient(black, gray);
+
+  height: 100vh;
 }
 .login-box .user-box input {
   outline: none !important;

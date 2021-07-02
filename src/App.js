@@ -56,6 +56,8 @@ function App() {
         <Route exact path="/adminlogin">
           {user && (user.role === "admin" || user.role === "super admin") ? (
             <Redirect to="/admin/dashboard" />
+          ) : user && (user.role === "user" || user.role === "employee") ? (
+            <Redirect to="/notfound" />
           ) : (
             <AdminLogin />
           )}

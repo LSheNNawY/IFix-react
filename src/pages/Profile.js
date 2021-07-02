@@ -78,19 +78,21 @@ const Profile = (props) => {
                 setLoading(false);
               }, 500);
             } else {
-              setRole("user");
-              ajaxGetUser(response.data.id, "user");
-              setTimeout(() => {
-                setLoading(false);
-              }, 500);
+              history.push("/login");
             }
           }
         } else if (response.data.role === "employee") {
           setRole("employee");
           ajaxGetUser(response.data.id, "employee");
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         } else {
           setRole("user");
           ajaxGetUser(response.data.id, "user");
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         }
       }
       getUser();
@@ -206,11 +208,7 @@ const Profile = (props) => {
             <>
               <section>
                 <div className="container" style={{ marginTop: "15rem" }}>
-                  {role === "user" && jobs.length > 0 ? (
-                    <h1>My Jobs</h1>
-                  ) : (
-                    ""
-                  )}
+                  {role === "user" && jobs.length > 0 ? <h1>My Jobs</h1> : ""}
 
                   {jobs &&
                     jobs.map((job) => {
