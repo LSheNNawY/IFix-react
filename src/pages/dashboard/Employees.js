@@ -54,10 +54,10 @@ export default function Employees() {
     setShowProfile(true);
   };
 
-  const handleEditEmployee = (employee) => {
-    setShowProfile(true);
-    setProfileInfo(employee);
-  };
+  // const handleEditEmployee = (employee) => {
+  //   setShowProfile(true);
+  //   setProfileInfo(employee);
+  // };
 
   useEffect(() => {
     setLoading(true);
@@ -162,14 +162,14 @@ export default function Employees() {
                               )}
                             </td>
                             <td>
-                              <button
+                              {/* <button
                                 className="btn btn-warning mr-1"
                                 onClick={() => {
                                   handleEditEmployee(employee);
                                 }}
                               >
                                 <i className="fa fa-pen"></i>
-                              </button>
+                              </button> */}
                               <button
                                 className="btn btn-danger mr-1"
                                 title="Delete"
