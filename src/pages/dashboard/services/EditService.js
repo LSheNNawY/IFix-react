@@ -15,7 +15,6 @@ const schema = yup.object().shape({
 
 function EditService(props) {
   const { profession, setProfession, selectedService, show, onHide } = props;
-
   const handleUpdateProfession = async (values) => {
     let data = {
       services: [values],
