@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import JobComponent from "../components/front/JobComponent";
 import PaginationComponent from "../components/front/PaginationComponent";
 import UserContext from "../context/UserContext";
+import Loading from "../components/Loading";
 
 const Jobs = () => {
   const { user } = useContext(UserContext);
@@ -16,6 +17,7 @@ const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const getEmployeeJobs = async (user) => {
     await axios
@@ -29,6 +31,7 @@ const Jobs = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     if (user === undefined || JSON.stringify(user) === "{}") {
       async function getUser() {
         const response = await axios.get(
@@ -41,6 +44,9 @@ const Jobs = () => {
           history.push("/");
         } else {
           getEmployeeJobs(response.data);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
         }
       }
       getUser();
@@ -48,6 +54,9 @@ const Jobs = () => {
       setLoggedUser(user);
       if (user.role === "employee") {
         getEmployeeJobs(user);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       } else {
         history.push("/");
       }
@@ -85,20 +94,26 @@ const Jobs = () => {
           }}
         >
           <div className="container">
-            <div className="row">
-              <div className=" profession-wrapper">
-                {jobs.map((job) => (
-                  <JobComponent job={job} key={job._id} />
-                ))}
-              </div>
+            <div className="row" style={{ minHeight: "90vh" }}>
+              {loading ? (
+                <Loading />
+              ) : (
+                <div className=" profession-wrapper">
+                  {jobs.map((job) => (
+                    <JobComponent job={job} key={job._id} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <PaginationComponent
-          pageNumber={pageNumber}
-          totalPages={totalPages}
-          setPageNumber={setPageNumber}
-        />
+        {totalPages !== 0 ? (
+          <PaginationComponent
+            pageNumber={pageNumber}
+            totalPages={totalPages}
+            setPageNumber={setPageNumber}
+          />
+        ) : null}
       </div>
 
       <FooterComponent />
