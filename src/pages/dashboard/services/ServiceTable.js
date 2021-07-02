@@ -66,7 +66,7 @@ function ServiceTable({ profession, setProfession }) {
                 <td> {service.price}</td>
                 <td>
                   {" "}
-                  <i className={`${service.icon}`} style={{fontSize:"19px"}}> </i>
+                  <i className={` fas fa-${service.icon}`} style={{fontSize:"19px"}}> </i>
                 </td>
                 <td>
                   {" "}

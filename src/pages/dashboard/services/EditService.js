@@ -15,9 +15,18 @@ const schema = yup.object().shape({
 
 function EditService(props) {
   const { profession, setProfession, selectedService, show, onHide } = props;
+  let services = profession.services;
+
   const handleUpdateProfession = async (values) => {
+    const newServices = services.map((service) => {
+      if (service._id === selectedService._id){
+        service=values;
+      }
+
+      return service;
+    });
     let data = {
-      services: [values],
+      services: newServices,
     };
 
     await axios
@@ -26,6 +35,7 @@ function EditService(props) {
         data,
         {
           "Content-Type": "multipart/form-data",
+
         }
       )
       .then(({ data }) => {

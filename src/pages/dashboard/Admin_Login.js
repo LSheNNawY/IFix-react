@@ -29,7 +29,7 @@ function Admin_Login() {
           if (data.role === "user") {
             history.push("/adminlogin");
           } else {
-            history.push("/admin");
+            history.push("/admin/dashboard");
           }
         })
         .catch(({ response }) => {
