@@ -53,29 +53,26 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
-    console.log(user);
-    if (user === undefined || user === "") {
+    if (!user || user === undefined || JSON.stringify(user) === "{}") {
       async function getUser() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/users/current-user`
         );
-        console.log(response);
-        if (response.data === "") {
-          history.push("/login");
-        } else {
+        console.log("response", response.data);
+        if (!response.data || response.data === undefined) {
           if (JSON.stringify(props.match.params) !== "{}") {
             let { id } = props.match.params;
             setRole("employee");
             ajaxGetUser(id, "employee");
           } else {
-            if (response.data.role === "employee") {
-              setRole("employee");
-              ajaxGetUser(response.data.id, "employee");
-            } else {
-              setRole("user");
-              ajaxGetUser(response.data.id, "user");
-            }
+            history.push("/login");
           }
+        } else if (response.data.role === "employee") {
+          setRole("employee");
+          ajaxGetUser(response.data.id, "employee");
+        } else {
+          setRole("user");
+          ajaxGetUser(response.data.id, "user");
         }
       }
       getUser();
@@ -94,7 +91,7 @@ const Profile = (props) => {
         }
       }
     }
-  }, [pageNumber]);
+  }, [pageNumber,userData]);
 
   return (
     <div className="index-wrapper">
