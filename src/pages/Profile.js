@@ -233,7 +233,7 @@ const Profile = (props) => {
       ) : (
         <Loading />
       )}
-      {role === "user" ? (
+      {role === "user" && totalPages !== 0 ? (
         <PaginationComponent
           pageNumber={pageNumber}
           totalPages={totalPages}
