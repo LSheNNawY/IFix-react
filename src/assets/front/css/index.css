@@ -340,28 +340,15 @@
     font-family: Rajdhani-SemiBold;
     font-size: 15px;
     font-weight: 300;
-    /* color: #444; */
-    color: white;
+    color: #444;
     line-height: 32px;
     margin-left: -35px;
-    font-family: Rajdhani-SemiBold;
-
-
 }
 .index-wrapper .chooseUl li i , .modal-content .modal-body li i {
     color: #ffc446;
     margin-right: 10px;
-    
-    
+}
 
-}
-#root > div > div > div.container-fluid > div > div.col-lg-6.about__text {
-    margin-top: 7%;
-}
-.container-fluid .col-lg-6.about__text  p {
-    font-family: Rajdhani-SemiBold;
-
-}
 
 /* ----counter-- */
 .index-wrapper .counter {
@@ -579,4 +566,3 @@
   /* .modal-content .modal-body li{
       color: white;
   } */
- 

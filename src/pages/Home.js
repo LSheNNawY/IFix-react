@@ -204,7 +204,7 @@ const Home = () => {
               marginBottom: "50px",
             }}
           >
-            <div className="col-12 text-center " style={{marginTop:"10%"}}>
+            <div className="col-12 text-center">
               <p className="label ">TOP RATED</p>
               <h2>Meet our TOP RATED</h2>
               <h2

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ifix1 from "../../assets/front/img/fix1.jpg";
 import ifix2 from "../../assets/front/img/fix2.jpg";
 import ifix3 from "../../assets/front/img/fix3.jpg";
-{/* <style>.hh {{ height: "225px" }}</style>; */}
+<style>.hh {{ height: "225px" }}</style>;
 
 export default function ChooseUsComponent() {
     return (
@@ -16,13 +16,13 @@ export default function ChooseUsComponent() {
                         width: "90%",
                         marginLeft: "5%",
                         marginTop: "50px",
-                        marginBottom: "-50px",
-                        
+                        marginBottom: "50px",
+                        backgroundColor: "white",
                         paddingBottom: "20px",
                     }}
                 >
                     <div className="col-lg-6 ">
-                        <div className="row" >
+                        <div className="row">
                             <div className="col-lg-6">
                                 <img src={ifix1} height="500px" alt="img" />
                             </div>
@@ -76,13 +76,12 @@ export default function ChooseUsComponent() {
                                 We Respect Our Customerss
                             </li>
                         </ul>
-                       {/*  <Link to="/contact" className="primary-btn">
+                        <Link to="/contact" className="primary-btn">
                             Contact us
-                        </Link> */}
+                        </Link>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-

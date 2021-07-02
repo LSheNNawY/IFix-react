@@ -4,7 +4,7 @@ import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
 import Employee from "../components/front/EmployeeComponent";
-import "../assets/front/css/index.scoped.css";
+import "../assets/front/css/index.css";
 import ServiceComponent from "./../components/front/ServiceComponent";
 
 const ajaxGetProfession = async (id) => {
@@ -33,7 +33,7 @@ const Services = (props) => {
                 <div className="breadcrumb__links">
                   <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
-                  <Link to={`/services/${profession._id}`}>Services</Link>
+                  <Link to={`/professions`}>Services</Link>
                 </div>
               </div>
             </div>

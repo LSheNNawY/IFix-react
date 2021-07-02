@@ -16,7 +16,7 @@ import FooterComponent from "../components/front/FooterComponent";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import "../assets/front/css/login.scoped.css";
+import "../assets/front/css/login.css";
 
 const checkServiceAvailability = (arr, service) => {
     return arr.some((ser) => {

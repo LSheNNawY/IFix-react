@@ -8,7 +8,7 @@ import { notify } from "../helpers/generalFunctions";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import "../assets/front/css/index.scoped.css";
+import "../assets/front/css/index.css";
 
 const PasswordReset = () => {
     const history = useHistory();
