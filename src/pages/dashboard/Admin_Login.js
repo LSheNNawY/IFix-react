@@ -51,8 +51,14 @@ function Admin_Login() {
     }
   };
   return (
-    <div className="body">
-      <div className="login-box">
+    <div className="adminLogin">
+
+{/* 
+    <div className="container ">
+      <div className="row"> */}
+
+     {/* <div className ="col-lg-6 "> */}
+      <div className="login-box m-auto">
         <h2>Login</h2>
         <form onSubmit={submitHandler} className="form">
           <div className="user-box">
@@ -138,7 +144,10 @@ function Admin_Login() {
           </button>
         </form>
       </div>
-    </div>
+      </div>
+    //   </div>
+    // </div>
+    // </div>
   );
 }
 
