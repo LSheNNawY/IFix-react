@@ -1,10 +1,15 @@
 
 /* footer section  */
+@font-face {
+    font-family: Rajdhani-SemiBold;
+    src: url(../fonts/Rajdhani-SemiBold.ttf);
+}
 
 .footer-wrapper .footer {
     background: #1b2839;
     padding-top: 60px;
     min-height: 310px;
+    font-family: Rajdhani-SemiBold;
 }
 
 .footer-wrapper .footer__logo a h2 {
@@ -20,7 +25,6 @@
     line-height: 26px;
     margin-bottom: 10px;
     font-family: Rajdhani-SemiBold;
-
 }
 .footer-wrapper .footer .fas {
     margin-left: -40px;
@@ -38,11 +42,13 @@
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 24px;
+    font-family: Rajdhani-SemiBold;
 }
 
 .footer-wrapper .footer__widget ul li {
     list-style: none;
     color: #444;
+    font-family: Rajdhani-SemiBold;
 }
 p {
     font-size: 15px;
@@ -86,4 +92,5 @@ p {
     /* text-align: -webkit-match-parent; */
     color: silver;
     margin-left: -40px;
+    font-family: Rajdhani-SemiBold;
 }

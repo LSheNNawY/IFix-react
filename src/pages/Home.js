@@ -7,7 +7,7 @@ import FooterComponent from "../components/front/FooterComponent";
 import Employee from "../components/front/EmployeeComponent";
 import ChooseUsComponent from "../components/front/ChooseUsComponent";
 
-import "../assets/front/css/index.scoped.css";
+import "../assets/front/css/index.css";
 // import "../assets/front/css/animate.min.css";
 
 import carosel from "../assets/front/img/carasoul/carasoul1.jpg";
@@ -162,9 +162,25 @@ const Home = () => {
               marginLeft: "5%",
               marginTop: "50px",
               marginBottom: "50px",
+              backgroundColor:"#1b2839"
             }}
           >
-            
+            {/* <div className="col-md-6 content">
+                            <i className="fas fa-users"></i>
+                            <div className="counter__item__num">
+                                <h2 className="count">25</h2>
+                                <span>k+</span>
+                                <p>Happy Customers</p>
+                            </div>
+                        </div> 
+            <div className="col-md-6 content">
+                            <i className="fas fa-comment-dollar"></i>
+                            <div className="counter__item__num">
+                                <h2 className="count">28</h2>
+                                <span>k+</span>
+                                <p>Project Complete</p>
+                            </div>
+                        </div> */}
           </div>
         </div>
       </div>
@@ -175,6 +191,7 @@ const Home = () => {
         style={{
           position: "relative",
           bottom: "210px",
+          
         }}
       >
         <div className="container-fluid">

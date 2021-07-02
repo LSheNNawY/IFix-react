@@ -4,7 +4,7 @@ import { authFormValidation } from "../../helpers/adminValidation";
 import UserContext from "../../context/UserContext";
 
 // react-bootstrap components
-import "../../assets/dashboard/css/style.scoped.css";
+import "../../assets/dashboard/css/style.css";
 
 import axios from "axios";
 

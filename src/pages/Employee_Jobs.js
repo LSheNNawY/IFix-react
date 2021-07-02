@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
-import "../assets/front/css/index.scoped.css";
+import "../assets/front/css/index.css";
 import { Link } from "react-router-dom";
 import JobComponent from "../components/front/JobComponent";
 
@@ -19,7 +19,7 @@ const Jobs = () => {
         await axios
             .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user.id}`)
             .then(({ data }) => {
-                setJobs(data);
+                setJobs(data.jobs);
             });
     };
 

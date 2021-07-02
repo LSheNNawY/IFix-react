@@ -20,7 +20,8 @@
   background-color: white !important;
 }
 .main-panel .container {
-  background: rgba(203, 203, 210, 0.15) !important;
+  background: linear-gradient(black, gray);
+
 }
 .fixed-plugin .button-container .github-btn{
     display: inline-block;

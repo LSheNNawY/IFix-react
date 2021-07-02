@@ -8,8 +8,8 @@ import ifix3 from "../../assets/front/img/fix3.jpg";
 
 export default function ChooseUsComponent() {
     return (
-        <>
-            <div className="container-fluid" >
+        <div className="index-wrapper">
+            <div className="container-fluid">
                 <div
                     className="row"
                     style={{
@@ -41,8 +41,7 @@ export default function ChooseUsComponent() {
                         className="col-lg-6 about__text"
                         style={{ paddingLeft: "50px" }}
                     >
-                        {/* <div className="label mt-5">WHY YOU CHOOSE US</div> */}
-                        <span className="choose">Why choose us</span>
+                        <span className="choose mt-5">Why choose us</span>
                         <h2
                             className="mt-3 mb-3"
                             style={{
@@ -83,7 +82,7 @@ export default function ChooseUsComponent() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

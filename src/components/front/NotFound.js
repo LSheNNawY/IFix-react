@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../../assets/front/css/notFound.scoped.css'
+import '../../assets/front/css/notFound.css'
 
 const NotFound = () => {
     return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../assets/front/css/index.scoped.css";
+import "../assets/front/css/index.css";
 import dateFormat from "dateformat";
 import Review from "./Review";
 import { ToastContainer } from "react-toastify";
@@ -126,7 +126,7 @@ const ClientJobs = ({ job }) => {
                               <span className="h4 d-block my-1">
                                 Employee Phone :
                               </span>
-                              <span span className="d-block mb-2">
+                              <span className="d-block mb-2">
                                 {" "}
                                 {job.employee.phone}{" "}
                               </span>

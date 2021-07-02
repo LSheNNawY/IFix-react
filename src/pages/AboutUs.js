@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import NavbarComponent from "../components/front/NavbarComponent";
 import {Link} from "react-router-dom";
 
-import "../assets/front/css/index.scoped.css";
-import "../assets/front/css/about.scoped.css";
+import "../assets/front/css/index.css";
+import "../assets/front/css/about.css";
 import "../assets/front/css/animate.min.css";
 
 import FooterComponent from "../components/front/FooterComponent";

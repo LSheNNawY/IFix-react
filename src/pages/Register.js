@@ -44,7 +44,7 @@ function Register() {
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/professions")
-      .then((res) => setProfessions(res.data));
+      .then(({ data }) => setProfessions(data.professions));
   }, []);
 
   return (

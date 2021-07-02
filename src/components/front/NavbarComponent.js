@@ -3,7 +3,7 @@ import React from "react";
 import { useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
-import "../../assets/front/css/navbar.scoped.css";
+import "../../assets/front/css/navbar.css";
 import logo from "../../assets/front/img/two.jpeg";
 
 const NavbarComponent = () => {
@@ -31,7 +31,7 @@ const NavbarComponent = () => {
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <img src={logo} style={{width:"70px",height:"50px"}} alt="logo" /><span style={{marginLeft:"5px", fontSize:"27px"}}>IFIX</span>
+            <img src={logo} style={{width:"70px",height:"50px"}} alt="logo" /><span style={{marginLeft:"5px", fontSize:"27px",position:"relative",top:"3px"}}>IFIX</span>
           </Link>
           <button
             className="navbar-toggler "
