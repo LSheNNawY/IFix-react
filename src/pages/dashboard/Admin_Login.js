@@ -20,27 +20,16 @@ function Admin_Login() {
     if (authFormValidation(user.email, user.password, errors.role, setErrors)) {
       
       axios
-        .post(`${process.env.REACT_APP_API_URL}/users/login`, {
+        .post(`${process.env.REACT_APP_API_URL}/admin/login`, {
           email: user.email,
           password: user.password,
         })
         .then(({ data }) => {
           getUser();
-          console.log("data = ", data);
-
-          /* if (data.role === "admin" || data.role === "super admin") {
-            history.push("/admin");
-          } else {
-            errors.role = "only admin allowed";
-            console.log("role after = " ,errors.role);
-            history.push("/adminlogin");
-          } */
-          
+          history.push("/adminlogin");
 
           if (data.role === "user") 
           {
-            document.querySelector("#role_id").innerText =
-              "Only admins allowed";
             history.push("/adminlogin");
           } 
           else 
@@ -48,19 +37,22 @@ function Admin_Login() {
             history.push("/admin");
           }
         })
+        
         .catch(({ response }) => {
           switch (response.data.error) {
+
+            case "invalid credentials":
+              setLoggingError("Invalid credentials");
+              break;
+
             case "wrong":
               setLoggingError("Invalid credentials");
               break;
+
             case "blocked":
               setLoggingError("Your account is blocked, please contact us");
               break;
-            case "inactive":
-              setLoggingError(
-                "Please, check your email address to activate your account"
-              );
-              break;
+
             default:
               break;
           }
@@ -96,9 +88,6 @@ function Admin_Login() {
             {errors.email !== "" && errors.email !== "valid" ? (
               <h6 className="invalid-feedback">{errors.email}</h6>
             ) : null}
-            {/*  <label class="label" for="">
-              Username
-            </label> */}
           </div>
           <div className="input-group-prepend">
             <span
@@ -109,7 +98,7 @@ function Admin_Login() {
               }`}
             ></span>
           </div>
-          <div class="user-box">
+          <div className="user-box">
             <input
               className={`input  ${
                 errors.password !== "" && errors.password !== "valid"
@@ -133,9 +122,6 @@ function Admin_Login() {
               <h6 className="invalid-feedback">{errors.password}</h6>
             ) : null}
 
-            {/* <label class="label" for="">
-              Password
-            </label> */}
           </div>
           <div className="input-group-prepend">
             <span
@@ -147,20 +133,14 @@ function Admin_Login() {
             ></span>
           </div>
 
-          {errors.role !== "" && errors.role !== "valid" ? (
-            <h6 className="invalid-feedback" style={{ backgroundColor: "red" }}>
-              {errors.role}
-            </h6>
-          ) : null}
+         
 
           {loggingError ? (
             <p className="text-danger pb-3">{loggingError}</p>
           ) : (
             ""
           )}
-          <div>
-            <p className="text-danger pb-3" id="role_id"></p>
-          </div>
+        
           <button type="submit">
             <span></span>
             <span></span>

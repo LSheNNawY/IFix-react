@@ -26,14 +26,12 @@ const FooterComponent = () => {
                                 </div>
                                 <ul>
                                     <li>
-                                        <i className="fas fa-map-marker-alt"></i>514
-                                        Academy thomes merry St. Algonquin
+                                        <i className="fas fa-map-marker-alt"></i>ITI
                                         <br />
-                                        Square, opp. IL 60102
                                     </li>
                                     <li>
-                                        <i className="fas fa-phone"></i> Phone: +1
-                                        800 556 6688 +1 800 559 6580
+                                        <i className="fas fa-phone"></i> Phone: +2
+                                        01286680617
                                     </li>
                                     <li>
                                         <i className="fas fa-envelope"></i> Email:

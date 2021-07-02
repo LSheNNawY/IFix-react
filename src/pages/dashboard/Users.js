@@ -1,12 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
+import Search from "../../components/dashboard/search/Search";
 import Profile from "./forms/Profile";
+import PaginationComponent from "./PaginationComponent";
+import dateFormat from "dateformat";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const handleLockUser = (id, status) => {
     axios
@@ -41,15 +47,15 @@ export default function Users() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/users`)
+      .get(`${process.env.REACT_APP_API_URL}/users?page=${pageNumber}`)
       .then(({ data }) => {
-        console.log(data);
-        setUsers(data);
+        setUsers(data.users);
+        setTotalPages(data.totalPages);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [pageNumber]);
   return (
     <Container fluid>
       <Row>
@@ -58,6 +64,12 @@ export default function Users() {
             <Card.Header>
               <Card.Title as="h4">Users</Card.Title>
               <p className="card-category">control</p>
+              <div className="row mt-4">
+                <div className="col-md-6">
+                  {/* search component */}
+                  <Search setResult={setUsers} searchFor={"users"} setTotalPages={setTotalPages} />
+                </div>
+              </div>
             </Card.Header>
             <Card.Body className="table-full-width table-responsive px-0">
               <Table className="table-hover table-striped">
@@ -79,7 +91,11 @@ export default function Users() {
                     return (
                       <tr key={user._id}>
                         <td>{index + 1}</td>
-                        <td>{user.firstName.toLowerCase()}</td>
+                        <td>
+                          <Link to={`/admin/jobs?userId=${user._id}`}>
+                            {user.firstName.toLowerCase()}
+                          </Link>
+                        </td>
                         <td>{user.lastName.toLowerCase()}</td>
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
@@ -95,7 +111,13 @@ export default function Users() {
                             {user.status}
                           </span>
                         </td>
-                        <td>{user.created_at}</td>
+                        <td>
+                            {" "}
+                            {dateFormat(
+                              user.created_at,
+                              "mmmm dS, yyyy - h:MM TT"
+                            )}
+                          </td>
                         <td>
                           <button
                             className="btn btn-danger mr-1"
@@ -147,6 +169,11 @@ export default function Users() {
           setShow={setShowProfile}
         />
       ) : null}
+       <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
     </Container>
   );
 }

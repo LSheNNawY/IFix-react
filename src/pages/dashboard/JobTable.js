@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// react-bootstrap components
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
+import { useHistory, useLocation } from "react-router";
+import PaginationComponent from "./PaginationComponent";
 
 function Jobs() {
+  const history = useHistory
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const userId = searchParams.get("userId");
   const [jobs, setJobs] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API_URL + "/jobs").then((res) => {
-      setJobs(res.data);
-      /*  console.log(res.data);
-      console.log(res.data[1].client.phone); */
-    });
-  }, []);
+    const searchQuery = userId? `jobs?userId=${userId}&&page=${pageNumber}` : `jobs?page=${pageNumber}`;
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/${searchQuery}`)
+      .then(({ data }) => {
+        setJobs(data.jobs);
+        setTotalPages(data.totalPages);
+      });
+  }, [pageNumber]);
 
   const deleteUser = (id) => {
     if (window.confirm("Are you sure..?")) {
       axios
         .delete(`${process.env.REACT_APP_API_URL}/jobs/${id}`)
         .then(({ data }) => {
-          console.log("data will delete = ", data);
           setJobs((old) => old.filter((job) => job._id !== id));
         })
         .catch((error) => {
@@ -44,24 +52,11 @@ function Jobs() {
                     <tr>
                       <th className="border-0"> # </th>
                       <th className="border-0"> Employee_Name </th>
-                      {/*  <th className="border-0">
-                                                {" "}
-                                                Employee_Phone{" "}
-                                            </th> */}
                       <th className="border-0"> Client_Name </th>
-                      {/* <th className="border-0">
-                                                {" "}
-                                                Client_Phone{" "}
-                                            </th> */}
                       <th className="border-0"> Profession </th>
                       <th className="border-0"> Service_Title </th>
-                      {/*  <th className="border-0">
-                                                {" "}
-                                                Service_Price{" "}
-                                            </th> */}
                       <th className="border-0"> Warranty </th>
                       <th className="border-0"> Payment Method </th>
-
                       <th className="border-0"> Price </th>
                       <th className="border-0"> Actions </th>
                     </tr>
@@ -115,10 +110,14 @@ function Jobs() {
             </Card>
           </Col>
         </Row>
+        <PaginationComponent
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+        />
       </Container>
     </>
   );
 }
-
 
 export default Jobs;

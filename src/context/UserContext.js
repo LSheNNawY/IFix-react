@@ -7,7 +7,6 @@ const UserContextProvider = (props) => {
   const [user, setUser] = useState(undefined);
 
   async function getUser() {
-    console.log("from get user in context");
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/current-user`
     );

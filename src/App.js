@@ -17,69 +17,99 @@ import Review from "./pages/Review";
 import AccountActivation from "./pages/AccountActivation";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
-import Admin_Login from "./pages/dashboard/Admin_Login";
+import AdminLogin from "./pages/dashboard/Admin_Login";
 
-// import UserContext from "./context/UserContext";
+import NotFound from "./components/front/NotFound";
 import axios from "axios";
+// import UserContext from "./context/UserContext";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 axios.defaults.withCredentials = true;
 
 function App() {
-  const { user } = useContext(UserContext);
-  return (
-    <div className="App">
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route
-          exact
-          path="/login"
-          render={() => {
-            if (user) {
-              //alert("You can't login if you are logged in!")
-              return <Home />;
-            } else return <Login />;
-          }}
-        />
-        <Route path="/logout" component={Logout} />
-        <Route
-          exact
-          path="/register"
-          render={() => {
-            if (user) {
-              alert("You are already registered!");
-              return <Home />;
-            } else return <Register />;
-          }}
-        />
-        <Route path="/contact" component={Contact} />
-        <Route path="/aboutUs" component={AboutUs} />
-        <Route path="/order" component={Order} />
-        <Route path="/review" component={Review} />
-        <Route path="/professions" component={AllProfessions} />
-        <Route exact path="/profile" component={Profile} />
-        <Route path="/jobs" component={Employee_Jobs} />
-        <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
-        <Route exact path="/adminlogin" render={() => <Admin_Login />} />
+    const { user } = useContext(UserContext);
+    return (
+        <div className="App">
+            <Switch>
+                <Route path="/" component={Home} exact />
+                <Route
+                    exact
+                    path="/login"
+                    render={() => {
+                        if (user) {
+                            return <Home />;
+                        } else return <Login />;
+                    }}
+                />
+                <Route path="/logout" component={Logout} />
+                <Route
+                    exact
+                    path="/register"
+                    render={() => {
+                        if (user) {
+                            alert("You are already registered!");
+                            return <Home />;
+                        } else return <Register />;
+                    }}
+                />
+                <Route path="/contact" component={Contact} />
+                <Route path="/aboutUs" component={AboutUs} />
+                <Route path="/order" component={Order} />
+                <Route path="/review" component={Review} />
+                <Route path="/professions" component={AllProfessions} />
+                <Route exact path="/profile" component={Profile} />
+                <Route path="/jobs" component={Employee_Jobs} />
+                <Route
+                    path="/profile/:id"
+                    render={(props) => <Profile {...props} />}
+                />
+                <Route exact path="/adminlogin" render={() => <AdminLogin />} />
 
-        {user && (user.role === "super admin" || user.role === "admin") ? (
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        ) : (
-          <h1>403 unauthorized</h1>
-        )}
+                {user &&
+                (user.role === "super admin" || user.role === "admin") ? (
+                    <Route
+                        path="/admin"
+                        render={(props) => <AdminLayout {...props} />}
+                    />
+                ) : null}
 
-        <Route path="/review" component={Review} />
-        <Route path="/account-activation" component={AccountActivation} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/password-reset" component={PasswordReset} />
+                <Route
+                    path="/admin"
+                    render={(props) => <AdminLayout {...props} />}
+                />
+                <Route
+                    exact
+                    path="/adminlogin"
+                    render={() => {
+                        if (
+                            user &&
+                            (user.role === "admin" ||
+                                user.role === "super admin")
+                        ) {
+                            return <AdminLayout />;
+                        }
+                        if (user && user.role === "user") {
+                            return <Home />;
+                        } else return <AdminLogin />;
+                    }}
+                />
+                <Route path="/review" component={Review} />
+                <Route
+                    path="/account-activation"
+                    component={AccountActivation}
+                />
+                <Route path="/forgot-password" component={ForgotPassword} />
+                <Route path="/password-reset" component={PasswordReset} />
 
-        <Route
-          path="/services/:id"
-          render={(props) => <Services {...props} />}
-        />
-      </Switch>
-    </div>
-  );
+                <Route
+                    path="/services/:id"
+                    render={(props) => <Services {...props} />}
+                />
+                <Route path="/notfound" component={NotFound} />
+                <Route component={NotFound} />
+            </Switch>
+        </div>
+    );
 }
 export default App;

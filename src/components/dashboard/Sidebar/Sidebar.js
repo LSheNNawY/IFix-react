@@ -1,5 +1,5 @@
 import React from "react";
-import {useLocation, NavLink} from "react-router-dom";
+import {useLocation, NavLink, Link} from "react-router-dom";
 
 import {Nav} from "react-bootstrap";
 
@@ -29,9 +29,9 @@ function Sidebar({color, image, routes}) {
                             />
                         </div>
                     </a>
-                    <a className="simple-text" href="https://www.creative-tim.com">
+                    <Link to="/admin/dashboard" className="simple-text">
                         IFix
-                    </a>
+                    </Link>
                 </div>
                 <Nav>
                     {routes.map((prop, key) => {
