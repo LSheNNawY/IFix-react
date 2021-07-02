@@ -246,12 +246,17 @@ const Home = () => {
                                     marginTop: "30px",
                                 }}
                             >
-                                {employees.length>0 &&
+
+                                {employees.length>0  &&
                                     employees.map((employee) => (
-                                        <Employee
-                                            employee={employee}
-                                            key={employee._id}
-                                        />
+
+                                            employee.status==="active"?
+                                                (  <Employee
+                                                    employee={employee}
+                                                    key={employee._id}
+                                                />):null
+
+
                                     ))}
 
 

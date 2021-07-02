@@ -122,7 +122,7 @@ export default function Users() {
                             </button>
                           )}
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-primary ml-1"
                             onClick={() => {
                               setShowProfile(true);
                               setProfileInfo(user);
