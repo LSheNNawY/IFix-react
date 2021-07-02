@@ -6,3 +6,7 @@
     text-align: center !important;
 }
 
+.profession .table > thead > tr > th {
+    text-align:center !important;
+}
+
