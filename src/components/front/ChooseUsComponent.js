@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import ifix1 from "../../assets/front/img/fix1.jpg";
 import ifix2 from "../../assets/front/img/fix2.jpg";
 import ifix3 from "../../assets/front/img/fix3.jpg";
-<style>.hh {{ height: "225px" }}</style>;
+
+<style>.hh {{height: "225px"}}</style>;
 
 export default function ChooseUsComponent() {
     return (
@@ -24,22 +25,31 @@ export default function ChooseUsComponent() {
                     <div className="col-lg-6 ">
                         <div className="row">
                             <div className="col-lg-6">
-                                <img src={ifix1} height="500px" alt="img" />
+                                <img src={ifix1} height="500px" alt="img"/>
                             </div>
                             <div className="col-lg-6">
-                                <img
-                                    src={ifix2}
-                                    style={{ marginBottom: "15px", height: "250px" }}
-                                    alt="img"
-                                />
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <img
+                                            src={ifix2}
+                                            alt="img"
+                                            height="250px"
+                                        />
+                                    </div>
+                                    <div className="col-md-12">
+                                        <img src={ifix3} height="250px"
+                                             alt="img" style={{marginTop: "15px"}}/>
 
-                                <img src={ifix3} alt="img" style={{marginTop: "15px",height: "250px"}}/>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
                     <div
                         className="col-lg-6 about__text"
-                        style={{ paddingLeft: "50px" }}
+                        style={{paddingLeft: "50px"}}
                     >
                         <span className="choose mt-5">Why choose us</span>
                         <h2
@@ -50,7 +60,8 @@ export default function ChooseUsComponent() {
                             }}
                         ></h2>
                         <p>
-                        We want you to be happy with your repair or installation, and that's why we offer a 100% satisfaction guarantee. If you aren't happy, we'll keep working until you are.
+                            We want you to be happy with your repair or installation, and that's why we offer a 100%
+                            satisfaction guarantee. If you aren't happy, we'll keep working until you are.
                         </p>
                         <ul className="chooseUl">
                             <li>
@@ -59,7 +70,7 @@ export default function ChooseUsComponent() {
                             </li>
                             <li>
                                 <i className="fas fa-check-square">
-                               
+
                                 </i>
                                 Guaranteed On-Time Service
                             </li>
