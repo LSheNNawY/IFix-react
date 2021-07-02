@@ -181,22 +181,6 @@ const Home = () => {
               backgroundColor:"#1b2839"
             }}
           >
-            {/* <div className="col-md-6 content">
-                            <i className="fas fa-users"></i>
-                            <div className="counter__item__num">
-                                <h2 className="count">25</h2>
-                                <span>k+</span>
-                                <p>Happy Customers</p>
-                            </div>
-                        </div> 
-            <div className="col-md-6 content">
-                            <i className="fas fa-comment-dollar"></i>
-                            <div className="counter__item__num">
-                                <h2 className="count">28</h2>
-                                <span>k+</span>
-                                <p>Project Complete</p>
-                            </div>
-                        </div> */}
           </div>
         </div>
       </div>
@@ -248,7 +232,7 @@ const Home = () => {
                 </div>
               ) : (
                 <div
-                  className="row"
+                  className="row justify-content-center"
                   style={{
                     marginTop: "30px",
                   }}
