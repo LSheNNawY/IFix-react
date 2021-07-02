@@ -44,6 +44,7 @@ const Profile = (props) => {
       )
       .then(({ data }) => {
         setJobs(data.jobs);
+        console.log(data.jobs);
         setTotalPages(data.totalPages);
       });
   };
@@ -53,12 +54,12 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
+    console.log(user);
     if (!user || user === undefined || JSON.stringify(user) === "{}") {
       async function getUser() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/users/current-user`
         );
-        console.log("response", response.data);
         if (!response.data || response.data === undefined) {
           if (JSON.stringify(props.match.params) !== "{}") {
             let { id } = props.match.params;
@@ -91,7 +92,7 @@ const Profile = (props) => {
         }
       }
     }
-  }, [pageNumber,userData]);
+  }, [pageNumber]);
 
   return (
     <div className="index-wrapper">
@@ -179,7 +180,12 @@ const Profile = (props) => {
             <>
               <section>
                 <div className="container" style={{ marginTop: "15rem" }}>
-                  <h1>My Jobs</h1>
+                  {userData.role === "user" && jobs.length > 0 ? (
+                    <h1>My Jobs</h1>
+                  ) : (
+                    ""
+                  )}
+
                   {jobs &&
                     jobs.map((job) => {
                       return <ClientJobs key={job._id} job={job} />;
@@ -200,7 +206,7 @@ const Profile = (props) => {
       ) : (
         <h1 className="text-center">Loading</h1>
       )}
-      {role === "user" ? (
+      {userData.role === "user" ? (
         <PaginationComponent
           pageNumber={pageNumber}
           totalPages={totalPages}
