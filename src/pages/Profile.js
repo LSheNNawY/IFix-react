@@ -16,6 +16,8 @@ import empImg from "../assets/front/img/employees/employee1.jpg";
 import clientDefaultImg from "../assets/front/img/employees/employee2.jpg";
 import ProfileEdit from "../components/ProfileEdit";
 
+import Loading from "../components/Loading";
+
 const Profile = (props) => {
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
@@ -25,6 +27,7 @@ const Profile = (props) => {
   const history = useHistory();
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const ajaxGetUser = async (id, roleState) => {
     await axios
@@ -32,10 +35,10 @@ const Profile = (props) => {
       .then(({ data }) => {
         console.log(data);
         setUserData(data);
-        getUserJobs(data)
+        getUserJobs(data);
       });
   };
-  
+
   const getUserJobs = async (user) => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/jobs?userId=${user._id}`)
@@ -50,6 +53,7 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     if (user === undefined || JSON.stringify(user) === "{}") {
       async function getUser() {
         const response = await axios.get(
@@ -62,13 +66,22 @@ const Profile = (props) => {
             let { id } = props.match.params;
             setRole("employee");
             ajaxGetUser(id, "employee");
+            setTimeout(() => {
+              setLoading(false);
+            }, 500);
           } else {
             if (response.data.role === "employee") {
               setRole("employee");
               ajaxGetUser(response.data.id, "employee");
+              setTimeout(() => {
+                setLoading(false);
+              }, 500);
             } else {
               setRole("user");
               ajaxGetUser(response.data.id, "user");
+              setTimeout(() => {
+                setLoading(false);
+              }, 500);
             }
           }
         }
@@ -79,13 +92,22 @@ const Profile = (props) => {
         let { id } = props.match.params;
         setRole("employee");
         ajaxGetUser(id, "employee");
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       } else {
         if (user.role === "employee") {
           setRole("employee");
           ajaxGetUser(user.id, "employee");
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         } else {
           setRole("user");
           ajaxGetUser(user.id, "user");
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         }
       }
     }
@@ -178,7 +200,7 @@ const Profile = (props) => {
                 <div className="container" style={{ marginTop: "15rem" }}>
                   <h1>My Jobs</h1>
                   {jobs &&
-                     jobs.map((job) => {
+                    jobs.map((job) => {
                       return <ClientJobs key={job._id} job={job} />;
                     })}
                 </div>
@@ -194,7 +216,7 @@ const Profile = (props) => {
           />
         </>
       ) : (
-        <h1 className="text-center">Loading</h1>
+        <Loading />
       )}
       <FooterComponent />
     </div>

@@ -46,7 +46,7 @@ function ProfileEdit(props) {
   const history = useHistory();
 
   let user = props.user;
-  const role = user ? user.role : props.role;
+  let role = user ? user.role : props.role;
   let show = props.show;
 
   toast.configure();
@@ -156,6 +156,7 @@ function ProfileEdit(props) {
                 );
                 console.log(validPassword);
                 if (validPassword.data) {
+                  role = role === "super admin" ? "user" : role;
                   const done = await axios.put(
                     `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
                     role === "employee"
