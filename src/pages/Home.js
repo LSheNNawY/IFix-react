@@ -162,6 +162,7 @@ const Home = () => {
               marginLeft: "5%",
               marginTop: "50px",
               marginBottom: "50px",
+              backgroundColor:"#1b2839"
             }}
           >
             {/* <div className="col-md-6 content">
@@ -171,8 +172,8 @@ const Home = () => {
                                 <span>k+</span>
                                 <p>Happy Customers</p>
                             </div>
-                        </div> */}
-            {/* <div className="col-md-6 content">
+                        </div> 
+            <div className="col-md-6 content">
                             <i className="fas fa-comment-dollar"></i>
                             <div className="counter__item__num">
                                 <h2 className="count">28</h2>
@@ -190,6 +191,7 @@ const Home = () => {
         style={{
           position: "relative",
           bottom: "210px",
+          
         }}
       >
         <div className="container-fluid">

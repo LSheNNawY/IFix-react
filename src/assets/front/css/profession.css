@@ -1,4 +1,10 @@
 
+@font-face {
+    font-family: Rajdhani-Medium;
+    src: url(../fonts/Rajdhani-Medium.ttf);
+}
+
+
 .profession-wrapper .services__item {
     margin-bottom: 80px;
     margin-top: 80px;
@@ -46,6 +52,7 @@
     font-weight: 300;
     margin-bottom: 0;
     line-height: 27px;
+    font-family: Rajdhani-Medium;
 }
 .profession-wrapper .services__item__text {
     text-align: left;
