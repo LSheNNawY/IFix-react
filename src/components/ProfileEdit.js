@@ -48,7 +48,6 @@ function ProfileEdit(props) {
   let user = props.user;
   const role = user ? user.role : props.role;
   let show = props.show;
-
   toast.configure();
 
   useEffect(() => {
