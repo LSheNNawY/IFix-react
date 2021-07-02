@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import NavbarComponent from "../components/front/NavbarComponent";
 import FooterComponent from "../components/front/FooterComponent";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { authFormValidation } from "../helpers/loginValidation";
 import UserContext from "../context/UserContext";
 
@@ -15,6 +15,11 @@ const Login = () => {
   const { getUser } = useContext(UserContext);
 
   const history = useHistory();
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const professionId = searchParams.get("prof");
+  const employeeId = searchParams.get("emp");
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (authFormValidation(user.email, user.password, setErrors)) {
@@ -25,7 +30,9 @@ const Login = () => {
         })
         .then(({ data }) => {
           getUser();
-          history.push("/");
+          if (professionId && employeeId) {
+            history.goBack();
+          }
         })
         .catch(({ response }) => {
           switch (response.data.error) {

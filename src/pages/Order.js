@@ -119,6 +119,7 @@ const Order = () => {
                 const services = await axios.get(
                     `${process.env.REACT_APP_API_URL}/professions/${professionId}?services=true`
                 );
+                console.log(services.data);
                 setServices(services.data);
             }
             getProfessionServices();
