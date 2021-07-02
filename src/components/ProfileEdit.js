@@ -76,6 +76,7 @@ function ProfileEdit(props) {
     let year = newDate.getFullYear();
     let month = "" + (newDate.getMonth() + 1);
     let day = "" + newDate.getDay();
+    console.log(newDate)
 
     if (month.length < 2) {
       month = "0" + month;
@@ -83,7 +84,6 @@ function ProfileEdit(props) {
     if (day.length < 2) {
       day = "0" + day;
     }
-
     return [year, month, day].join("-");
   };
 

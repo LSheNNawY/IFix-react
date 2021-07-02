@@ -178,7 +178,7 @@ const Profile = (props) => {
             <>
               <section>
                 <div className="container" style={{ marginTop: "15rem" }}>
-                  {userData.role === "user" && jobs.length > 0 ? (
+                  {role === "user" && jobs.length > 0 ? (
                     <h1>My Jobs</h1>
                   ) : (
                     ""
@@ -205,7 +205,7 @@ const Profile = (props) => {
       ) : (
         <h1 className="text-center">Loading</h1>
       )}
-      {userData.role === "user" ? (
+      {role === "user" ? (
         <PaginationComponent
           pageNumber={pageNumber}
           totalPages={totalPages}
