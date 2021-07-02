@@ -53,28 +53,20 @@ function App() {
         <Route path="/jobs" component={Employee_Jobs} />
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
 
-        <Route exact path="/adminlogin" render={() => <AdminLogin />} />
+        <Route exact path="/adminlogin">
+          {user && (user.role === "admin" || user.role === "super admin") ? (
+            <Redirect to="/admin/dashboard" />
+          ) : (
+            <AdminLogin />
+          )}
+        </Route>
 
         {user && (user.role === "super admin" || user.role === "admin") ? (
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         ) : null}
 
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Route
-          exact
-          path="/adminlogin"
-          render={() => {
-            if (
-              user &&
-              (user.role === "admin" || user.role === "super admin")
-            ) {
-              return <AdminLayout />;
-            }
-            if (user && user.role === "user") {
-              return <Home />;
-            } else return <AdminLogin />;
-          }}
-        />
+
         <Route path="/review" component={Review} />
         <Route path="/account-activation" component={AccountActivation} />
         <Route path="/forgot-password" component={ForgotPassword} />

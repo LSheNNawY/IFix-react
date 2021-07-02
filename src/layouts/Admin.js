@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useLocation, Route, Switch, useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
+
+import routes from "../routes/dashboard/routes.js";
+
 import AdminNavbar from "../components/dashboard/Navbars/AdminNavbar";
 import Footer from "../components/dashboard/Footer/Footer";
 import Sidebar from "../components/dashboard/Sidebar/Sidebar";
 import FixedPlugin from "../components/dashboard/FixedPlugin/FixedPlugin";
-
-import routes from "../routes/dashboard/routes.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/dashboard/css/animate.min.css";
@@ -13,7 +15,7 @@ import "../assets/dashboard/css/light-bootstrap-dashboard-react.css";
 import "../assets/dashboard/css/demo.css";
 
 import sidebarImage from "../assets/dashboard/img/sidebar-3.jpg";
-import { useEffect } from "react";
+import axios from "axios";
 
 function Admin() {
   const history = useHistory();
@@ -23,7 +25,7 @@ function Admin() {
   const [finalRoutes, setFinalRoutes] = useState(routes);
   const location = useLocation();
   const mainPanel = React.useRef(null);
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const { user } = useContext(UserContext);
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -42,12 +44,27 @@ function Admin() {
   };
 
   useEffect(() => {
-    if (user?.role !== "super admin" && user?.role !== "admin") {
-      history.push("/notfound");
+    if (!user || user === undefined || JSON.stringify(user) === "{}") {
+      async function getUser() {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/current-user`
+        );
+        if (!response.data || response.data === undefined) {
+          history.push("/adminlogin");
+        } else if (
+          response.data?.role !== "super admin" &&
+          response.data?.role !== "admin"
+        ) {
+          history.push("/notfound");
+        }
+        response.data?.role === "admin"
+          ? setFinalRoutes(
+              finalRoutes.filter((route) => route.path !== "/admins")
+            )
+          : setFinalRoutes(finalRoutes);
+      }
+      getUser();
     }
-    user.role === "admin"
-      ? setFinalRoutes(finalRoutes.filter((route) => route.path !== "/admins"))
-      : setFinalRoutes(finalRoutes);
   }, []);
 
   React.useEffect(() => {
