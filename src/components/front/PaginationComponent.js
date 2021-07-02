@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import "../../assets/front/css/pagination.css";
+
 
 function PaginationComponent({ pageNumber, totalPages, setPageNumber }) {
   const pages = new Array(totalPages).fill(null).map((v, i) => i);
@@ -14,10 +16,10 @@ function PaginationComponent({ pageNumber, totalPages, setPageNumber }) {
 
   return (
     <nav aria-label="Page navigation example">
-      <ul className="pagination pagination-template d-flex justify-content-center mb-3">
+      <ul className="pagination jobsPaginate pagination-template d-flex justify-content-center mb-4">
         <li className={`page-item  ${pageNumber === 0 ? "disabled" : ""}`}>
           <a href="" className={`page-link`} onClick={(e) => prevPage(e)}>
-            <i className="fa fa-angle-left"></i>
+            <i className="fas fa-angle-left"></i>
           </a>
         </li>
 
@@ -44,7 +46,7 @@ function PaginationComponent({ pageNumber, totalPages, setPageNumber }) {
           }`}
         >
           <a href="" className="page-link" onClick={(e) => nextPage(e)}>
-            <i className="fa fa-angle-right"></i>
+            <i className="fas fa-angle-right"></i>
           </a>
         </li>
       </ul>

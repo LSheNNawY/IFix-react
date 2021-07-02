@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
 import Search from "../../components/dashboard/search/Search";
 import ProfileForm from "./forms/ProfileForm";
-import PaginationComponent from "./PaginationComponent";
 import dateFormat from "dateformat";
+import PaginationComponent from "../../components/dashboard/Pagination/PaginationComponent"
+
 
 export default function Admins() {
   const [admins, setAdmins] = useState([]);

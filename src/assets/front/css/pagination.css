@@ -1,0 +1,47 @@
+.page-item .page-link {
+  padding: 10px 20px !important;
+}
+
+.jobsPaginate .page-link {
+  color: #ffc446 !important;
+  border-color: lightgrey !important;
+}
+
+.jobsPaginate .page-item .active {
+  border: 1px solid #ffc446;
+  color: #fff !important;
+  background-color: #ffc446;
+}
+
+.jobsPaginate .page-link:hover {
+  color: #fff !important;
+  background-color: #ffc446 !important;
+  border: 1px solid  lightgray !important; 
+}
+
+.page-link:focus {
+  z-index: 3;
+  outline: 0;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.back .page-link {
+  color: #36adc5 !important;
+  border-color: lightgrey !important;
+}
+
+.back .page-item .active {
+  border: 1px solid #36adc5;
+  color: #fff !important;
+  background-color: #36adc5;
+}
+
+.back .focus {
+  background-color: #36adc5;
+}
+
+.back .page-link:hover {
+  color: #fff !important;
+  background-color: #36adc5 !important;
+  border: 1px solid  lightgray !important; 
+}

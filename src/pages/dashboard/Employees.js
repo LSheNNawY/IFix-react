@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Card, Table } from "react-bootstrap";
 import Search from "../../components/dashboard/search/Search";
 import ProfileForm from "./forms/ProfileForm";
-import PaginationComponent from "./PaginationComponent";
+import PaginationComponent from "../../components/dashboard/Pagination/PaginationComponent"
 import dateFormat from "dateformat";
 
 export default function Employees() {

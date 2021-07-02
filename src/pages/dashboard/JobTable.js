@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
-import PaginationComponent from "./PaginationComponent";
+import PaginationComponent from "../../components/dashboard/Pagination/PaginationComponent"
 
 function Jobs() {
   const history = useHistory
@@ -20,6 +20,7 @@ function Jobs() {
       .then(({ data }) => {
         setJobs(data.jobs);
         setTotalPages(data.totalPages);
+        console.log(data.totalPages);
       });
   }, [pageNumber]);
 
