@@ -162,6 +162,9 @@ const Home = () => {
                   ))}
                 </div>
               )}
+              <Link to="/professions" className="primary-btn mt-3">
+                See All
+              </Link>
             </div>
           </div>
         </div>
@@ -178,10 +181,9 @@ const Home = () => {
               marginLeft: "5%",
               marginTop: "50px",
               marginBottom: "50px",
-              backgroundColor:"#1b2839"
+              backgroundColor: "#1b2839",
             }}
-          >
-          </div>
+          ></div>
         </div>
       </div>
 
@@ -191,7 +193,6 @@ const Home = () => {
         style={{
           position: "relative",
           bottom: "210px",
-          
         }}
       >
         <div className="container-fluid">
