@@ -191,12 +191,17 @@ export default function JobComponent({ job }) {
           <div className="col-9">
             <div className="services__item__text"></div>
             <div className="dates">
-              <div className="row">
-                <div
-                  className="col-6 mt-2"
-                  style={{ marginLeft: "22%", fontWeight: "700" }}
-                >
-                  <h4 className=" my-1">{empJob.service}</h4>
+              <div className="row mt-3">
+                <div className="col-6 ">
+                  <span className="h4 d-block my-1"> Service :</span>
+                  <span className="d-block my-1">{empJob.service}</span>
+                </div>
+
+                <div className="col-6 ">
+                  <span className="h4 d-block my-1"> Wish Date : </span>
+                  <span className="d-block my-1">
+                    {dateFormat(empJob.wish_date, "mmmm dS, yyyy - h:MM TT")}
+                  </span>
                 </div>
               </div>
               <div className="row ">
@@ -270,10 +275,7 @@ export default function JobComponent({ job }) {
 
                 <div className="col-6 ">
                   <span className="h4 d-block my-1">Client Phone :</span>
-                  <span className="d-block mb-2">
-                    {" "}
-                    {job.client.phone}{" "}
-                  </span>
+                  <span className="d-block mb-2"> {job.client.phone} </span>
                 </div>
               </div>
               <div className="row ">
