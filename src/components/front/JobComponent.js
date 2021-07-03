@@ -193,12 +193,12 @@ export default function JobComponent({ job }) {
             <div className="dates">
               <div className="row mt-3">
                 <div className="col-6 ">
-                  <span className="h4 d-block my-1"> Service:</span>
+                  <span className="h4 d-block my-1"> Service :</span>
                   <span className="d-block my-1">{empJob.service}</span>
                 </div>
 
                 <div className="col-6 ">
-                  <span className="h4 d-block my-1"> Wish Date: </span>
+                  <span className="h4 d-block my-1"> Wish Date : </span>
                   <span className="d-block my-1">
                     {dateFormat(empJob.wish_date, "mmmm dS, yyyy - h:MM TT")}
                   </span>
