@@ -73,9 +73,9 @@ function ProfileEdit(props) {
 
   const formatDate = (date) => {
     let newDate = new Date(date);
-    let year = newDate.getFullYear();
     let month = "" + (newDate.getMonth() + 1);
-    let day = "" + newDate.getDay();
+    let day = "" + newDate.getDate();
+    let year = newDate.getFullYear();
 
     if (month.length < 2) {
       month = "0" + month;
