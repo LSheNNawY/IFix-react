@@ -51,7 +51,7 @@ export default function ChooseUsComponent() {
                         className="col-lg-6 about__text"
                         style={{paddingLeft: "50px"}}
                     >
-                        <span className="choose mt-5">Why choose us</span>
+                        <span className="choose mt-5">Why us</span>
                         <h2
                             className="mt-3 mb-3"
                             style={{
