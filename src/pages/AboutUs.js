@@ -123,7 +123,7 @@ const AboutUs = (props) => {
               >{""}</h2>
               {loading ? (
                 <div
-                  className="row"
+                  className="row "
                   style={{
                     marginTop: "30px",
                   }}
@@ -135,7 +135,7 @@ const AboutUs = (props) => {
                 </div>
               ) : (
                 <div
-                  className="row"
+                  className="row justify-content-center"
                   style={{
                     marginTop: "30px",
                   }}
