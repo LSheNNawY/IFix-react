@@ -11,7 +11,7 @@ import {
   
   import * as yup from "yup";
   const schema = yup.object().shape({
-    service: yup.string().min(5).max(20).required("Service Required"),
+    service: yup.string().min(5).max(30).required("Service Required"),
     description: yup.string().min(10).required("Description Required"),
     Price: yup.number(),
     icon: yup.string(),

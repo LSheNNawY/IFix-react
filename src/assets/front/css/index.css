@@ -519,7 +519,7 @@
     font-weight: 300;
     margin-bottom: 0;
     line-height: 27px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     color: rgb(87, 85, 85)
 }
 
