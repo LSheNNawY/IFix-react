@@ -111,7 +111,7 @@ const NavbarComponent = () => {
                           My Jobs
                         </Link>
                       )}
-                      <Link className="dropdown-item" to={`/profile`}>
+                      <Link className="dropdown-item" to="/profile">
                         Profile
                       </Link>
                       <div className="dropdown-divider"></div>
