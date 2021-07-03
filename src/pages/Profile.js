@@ -93,7 +93,7 @@ const Profile = (props) => {
         }, 500);
       }
     }
-  }, [pageNumber, userData]);
+  }, [pageNumber]);
 
   return (
     <div className="index-wrapper">
