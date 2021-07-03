@@ -33,7 +33,6 @@ const schema = yup
     }),
   })
   .nullable();
-bsCustomFileInput.init();
 
 function ProfileEdit(props) {
   const [professions, setProfessions] = useState([]);
@@ -46,6 +45,7 @@ function ProfileEdit(props) {
   toast.configure();
 
   useEffect(() => {
+    bsCustomFileInput.init();
     axios
       .get(`${process.env.REACT_APP_API_URL}/professions`)
       .then(({ data }) => setProfessions(data.professions));
@@ -354,7 +354,7 @@ function ProfileEdit(props) {
                     label="Picture"
                     onChange={(e) => {
                       values.picture = e.target.files[0];
-                      if (values.picture !== "") {
+                      if (values.picture) {
                         setPic(URL.createObjectURL(values.picture));
                       }
                     }}
