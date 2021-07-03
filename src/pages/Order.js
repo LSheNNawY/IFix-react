@@ -128,18 +128,18 @@ const Order = () => {
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Terms and conditions.</Modal.Title>
+          <Modal.Title>Are you sure you want to order now ?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ul>
             <li style={{ fontSize: "18px" }}>
               {" "}
-              <i className="fas fa-check-square"></i>fees ......
+              <i className="fas fa-check-square"></i>You will pay 50 L.E even if the visit didn't take place.
             </li>
             <li style={{ fontSize: "18px" }}>
-              <i className="fas fa-check-square"></i>cond. 5
+              <i className="fas fa-check-square"></i>In the event of a complaint , please send us mail.
             </li>
-            <li style={{ fontSize: "18px" }}>
+            {/* <li style={{ fontSize: "18px" }}>
               <i className="fas fa-check-square"></i>cond. 4
             </li>
             <li style={{ fontSize: "18px" }}>
@@ -147,7 +147,7 @@ const Order = () => {
             </li>
             <li style={{ fontSize: "18px" }}>
               <i className="fas fa-check-square"></i>cond. 2
-            </li>
+            </li> */}
           </ul>
         </Modal.Body>
         <Modal.Footer>
