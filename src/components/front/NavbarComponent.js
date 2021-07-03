@@ -100,8 +100,10 @@ const NavbarComponent = () => {
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      <i className="fas fa-user"></i>
+                      <span className="no-icon mr-3">{user?.username?.toUpperCase()}</span>
+                      {/*<i className="fas fa-user"></i>*/}
                     </span>
+
                     <div
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
@@ -114,6 +116,7 @@ const NavbarComponent = () => {
                       <Link className="dropdown-item" to="/profile">
                         Profile
                       </Link>
+
                       <div className="dropdown-divider"></div>
                       <span
                         onClick={(e) => handleLogout(e)}
