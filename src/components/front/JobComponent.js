@@ -270,7 +270,7 @@ export default function JobComponent({ job }) {
 
                 <div className="col-6 ">
                   <span className="h4 d-block my-1">Client Phone :</span>
-                  <span span className="d-block mb-2">
+                  <span className="d-block mb-2">
                     {" "}
                     {job.client.phone}{" "}
                   </span>
