@@ -18,6 +18,7 @@ import AccountActivation from "./pages/AccountActivation";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
 import AdminLogin from "./pages/dashboard/Admin_Login";
+import EmployeeProfile from "./pages/EmployeeProfile";
 
 import NotFound from "./components/front/NotFound";
 import axios from "axios";
@@ -51,7 +52,7 @@ function App() {
         <Route path="/professions" component={AllProfessions} />
         <Route exact path="/profile" component={Profile} />
         <Route path="/jobs" component={Employee_Jobs} />
-        <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
+        <Route path="/profile/employee/:id" render={(props) => <EmployeeProfile {...props} />} />
 
         <Route exact path="/adminlogin">
           {user && (user.role === "admin" || user.role === "super admin") ? (
