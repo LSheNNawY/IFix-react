@@ -152,14 +152,12 @@ function ProfileEdit(props) {
                   user._id,
                   values.password
                 );
-                console.log(validPassword);
                 if (validPassword.data) {
                   role = role === "super admin" ? "user" : role;
                   const done = await axios.put(
                     `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
-                    role === "employee"
-                      ? formData
-                      : {
+                    role === "admin" || role === "super admin"
+                      ? {
                           firstName: values.firstName,
                           lastName: values.lastName,
                           email: values.email,
@@ -167,7 +165,8 @@ function ProfileEdit(props) {
                           phone: values.phone,
                           dateOfBirth: values.dateOfBirth,
                           address: values.address,
-                        },
+                        }
+                      : formData,
                     {
                       "Content-Type": "multipart/form-data",
                     }
@@ -199,7 +198,7 @@ function ProfileEdit(props) {
             }) => (
               <Form
                 noValidate
-                encType={role === "admin" ? null : "multipart/form-data"}
+                encType="multipart/form-data"
                 onSubmit={handleSubmit}
               >
                 <Form.Row>
@@ -351,7 +350,9 @@ function ProfileEdit(props) {
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
-                {role === "employee" ? (
+                {user &&
+                (user.role === "admin" ||
+                  user.role === "super admin") ? null : (
                   <Form.Group>
                     {user && user.picture ? (
                       <Image
@@ -368,7 +369,9 @@ function ProfileEdit(props) {
                       label="Picture"
                       onChange={(e) => {
                         values.picture = e.target.files[0];
-                        setPic(URL.createObjectURL(values.picture));
+                        if (values.picture !== "") {
+                          setPic(URL.createObjectURL(values.picture));
+                        }
                       }}
                       onBlur={handleBlur}
                       isInvalid={touched.picture && !!errors.picture}
@@ -377,7 +380,7 @@ function ProfileEdit(props) {
                       feedbackTooltip
                     />
                   </Form.Group>
-                ) : null}
+                )}
 
                 <Button variant="danger" onClick={handleClose}>
                   Cancel
