@@ -152,22 +152,11 @@ function ProfileEdit(props) {
                   user._id,
                   values.password
                 );
-                console.log(validPassword);
                 if (validPassword.data) {
                   role = role === "super admin" ? "user" : role;
                   const done = await axios.put(
                     `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
-                    role === "employee"
-                      ? formData
-                      : {
-                          firstName: values.firstName,
-                          lastName: values.lastName,
-                          email: values.email,
-                          password: values.password,
-                          phone: values.phone,
-                          dateOfBirth: values.dateOfBirth,
-                          address: values.address,
-                        },
+                    formData,
                     {
                       "Content-Type": "multipart/form-data",
                     }
@@ -199,7 +188,7 @@ function ProfileEdit(props) {
             }) => (
               <Form
                 noValidate
-                encType={role === "admin" ? null : "multipart/form-data"}
+                encType="multipart/form-data"
                 onSubmit={handleSubmit}
               >
                 <Form.Row>
@@ -351,33 +340,33 @@ function ProfileEdit(props) {
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
-                {role === "employee" ? (
-                  <Form.Group>
-                    {user && user.picture ? (
-                      <Image
-                        src={pic}
-                        roundedCircle
-                        className="mr-2"
-                        style={{ width: 120, height: 120 }}
-                      />
-                    ) : null}
-                    <Form.File
-                      className="position-relative"
-                      required
-                      name="picture"
-                      label="Picture"
-                      onChange={(e) => {
-                        values.picture = e.target.files[0];
-                        setPic(URL.createObjectURL(values.picture));
-                      }}
-                      onBlur={handleBlur}
-                      isInvalid={touched.picture && !!errors.picture}
-                      feedback={errors.picture}
-                      id="validationFormik107"
-                      feedbackTooltip
+                <Form.Group>
+                  {user && user.picture ? (
+                    <Image
+                      src={pic}
+                      roundedCircle
+                      className="mr-2"
+                      style={{ width: 120, height: 120 }}
                     />
-                  </Form.Group>
-                ) : null}
+                  ) : null}
+                  <Form.File
+                    className="position-relative"
+                    required
+                    name="picture"
+                    label="Picture"
+                    onChange={(e) => {
+                      values.picture = e.target.files[0];
+                      if (values.picture !== "") {
+                        setPic(URL.createObjectURL(values.picture));
+                      }
+                    }}
+                    onBlur={handleBlur}
+                    isInvalid={touched.picture && !!errors.picture}
+                    feedback={errors.picture}
+                    id="validationFormik107"
+                    feedbackTooltip
+                  />
+                </Form.Group>
 
                 <Button variant="danger" onClick={handleClose}>
                   Cancel
