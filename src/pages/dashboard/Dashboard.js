@@ -39,6 +39,7 @@ function Dashboard() {
   useEffect(() => {
     setLoading(true);
     StatisticsTotal().then(({ data }) => {
+      // console.log(data)
       setUserCountTotal(data.TotalCountUsers);
       setemployeeCountTotal(data.TotalCountEmployees);
       setjobCountTotal(data.TotalCountJobs);
@@ -47,6 +48,7 @@ function Dashboard() {
 
   useEffect(() => {
     StatisticsTotalRecent().then(({ data }) => {
+      console.log(data)
       console.log(data.TotalCountUsers);
       setUserCountTotalRecent(data.TotalCountUsers);
       setemployeeCountTotalRecent(data.TotalCountEmployees);

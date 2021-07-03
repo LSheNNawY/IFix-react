@@ -86,7 +86,7 @@ const Services = (props) => {
                 <p className="label ">TOP RATED</p>
                 <h2>Meet our Employees</h2>
                 <h2
-                  className="mt-3 mb-3"
+                  className="mt-3 mb-3 "
                   style={{
                     width: "120px",
                     borderBottom: "3px solid lightgray",
@@ -94,7 +94,7 @@ const Services = (props) => {
                   }}
                 ></h2>
                 <div
-                  className="row"
+                  className="row justify-content-center"
                   style={{
                     marginTop: "30px",
                   }}
