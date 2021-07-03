@@ -25,7 +25,6 @@ const Profile = (props) => {
   const [jobs, setJobs] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-
   const history = useHistory();
   const [profileInfo, setProfileInfo] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
@@ -63,24 +62,7 @@ const Profile = (props) => {
           `${process.env.REACT_APP_API_URL}/users/current-user`
         );
         if (!response.data || response.data === undefined) {
-          if (JSON.stringify(props.match.params) !== "{}") {
-            let { id } = props.match.params;
-            setRole("employee");
-            ajaxGetUser(id, "employee");
-            setTimeout(() => {
-              setLoading(false);
-            }, 500);
-          } else {
-            if (response.data.role === "employee") {
-              setRole("employee");
-              ajaxGetUser(response.data.id, "employee");
-              setTimeout(() => {
-                setLoading(false);
-              }, 500);
-            } else {
-              history.push("/login");
-            }
-          }
+          history.push("/login");
         } else if (response.data.role === "employee") {
           setRole("employee");
           ajaxGetUser(response.data.id, "employee");
@@ -97,27 +79,18 @@ const Profile = (props) => {
       }
       getUser();
     } else {
-      if (JSON.stringify(props.match.params) !== "{}") {
-        let { id } = props.match.params;
+      if (user.role === "employee") {
         setRole("employee");
-        ajaxGetUser(id, "employee");
+        ajaxGetUser(user.id, "employee");
         setTimeout(() => {
           setLoading(false);
         }, 500);
       } else {
-        if (user.role === "employee") {
-          setRole("employee");
-          ajaxGetUser(user.id, "employee");
-          setTimeout(() => {
-            setLoading(false);
-          }, 500);
-        } else {
-          setRole("user");
-          ajaxGetUser(user.id, "user");
-          setTimeout(() => {
-            setLoading(false);
-          }, 500);
-        }
+        setRole("user");
+        ajaxGetUser(user.id, "user");
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     }
   }, [pageNumber]);
@@ -177,16 +150,7 @@ const Profile = (props) => {
                       >
                         Edit Profile
                       </button>
-                    ) : (
-                      <Link
-                        to={`/order?prof=${
-                          userData.profession ? userData.profession._id : ""
-                        }&emp=${userData._id}`}
-                        className="site-btn"
-                      >
-                        BOOK
-                      </Link>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </div>

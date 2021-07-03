@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useHistory } from "react-router-dom";
+import bsCustomFileInput from "bs-custom-file-input";
 
 const schema = yup
   .object()
@@ -26,11 +26,6 @@ const schema = yup
       .required("Phone Required"),
     address: yup.string().required("Address Required"),
     dateOfBirth: yup.date(),
-    // pictureRequired: yup.boolean(),
-    // picture: yup.mixed().when("pictureRequired", {
-    //   is: true,
-    //   then: yup.string().required(),
-    // }),
     professionRequired: yup.boolean(),
     profession: yup.string().when("professionRequired", {
       is: true,
@@ -43,7 +38,6 @@ function ProfileEdit(props) {
   const [professions, setProfessions] = useState([]);
   const [pic, setPic] = useState("");
   const passwordRef = useRef(null);
-  const history = useHistory();
 
   let user = props.user;
   let role = user ? user.role : props.role;
@@ -51,6 +45,7 @@ function ProfileEdit(props) {
   toast.configure();
 
   useEffect(() => {
+    bsCustomFileInput.init();
     axios
       .get(`${process.env.REACT_APP_API_URL}/professions`)
       .then(({ data }) => setProfessions(data.professions));
@@ -73,10 +68,9 @@ function ProfileEdit(props) {
 
   const formatDate = (date) => {
     let newDate = new Date(date);
-    let year = newDate.getFullYear();
     let month = "" + (newDate.getMonth() + 1);
-    let day = "" + newDate.getDay();
-    console.log(newDate)
+    let day = "" + newDate.getDate();
+    let year = newDate.getFullYear();
 
     if (month.length < 2) {
       month = "0" + month;
@@ -96,8 +90,6 @@ function ProfileEdit(props) {
     phone: user.phone,
     address: user.address,
     dateOfBirth: user.dateOfBirth ? formatDate(user.dateOfBirth) : "",
-    // pictureRequired: role === "admin" ? false : true,
-    // picture: user.picture ?? "",
     professionRequired: role === "employee" ? true : false,
     profession: user.profession ? user.profession._id : "",
   };
@@ -108,7 +100,7 @@ function ProfileEdit(props) {
     } else {
       setPic("");
     }
-  }, [user]);
+  }, []);
 
   return (
     <>
@@ -153,22 +145,11 @@ function ProfileEdit(props) {
                   user._id,
                   values.password
                 );
-                console.log(validPassword);
                 if (validPassword.data) {
                   role = role === "super admin" ? "user" : role;
                   const done = await axios.put(
                     `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
-                    role === "employee"
-                      ? formData
-                      : {
-                          firstName: values.firstName,
-                          lastName: values.lastName,
-                          email: values.email,
-                          password: values.password,
-                          phone: values.phone,
-                          dateOfBirth: values.dateOfBirth,
-                          address: values.address,
-                        },
+                    formData,
                     {
                       "Content-Type": "multipart/form-data",
                     }
@@ -200,7 +181,7 @@ function ProfileEdit(props) {
             }) => (
               <Form
                 noValidate
-                encType={role === "admin" ? null : "multipart/form-data"}
+                encType="multipart/form-data"
                 onSubmit={handleSubmit}
               >
                 <Form.Row>
@@ -352,33 +333,39 @@ function ProfileEdit(props) {
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
-                {role === "employee" ? (
-                  <Form.Group>
-                    {user && user.picture ? (
-                      <Image
-                        src={pic}
-                        roundedCircle
-                        className="mr-2"
-                        style={{ width: 120, height: 120 }}
-                      />
-                    ) : null}
-                    <Form.File
-                      className="position-relative"
-                      required
-                      name="picture"
-                      label="Picture"
-                      onChange={(e) => {
-                        values.picture = e.target.files[0];
-                        setPic(URL.createObjectURL(values.picture));
+                <Form.Group>
+                  {user && user.picture ? (
+                    <Image
+                      src={pic}
+                      roundedCircle
+                      className="mr-2"
+                      style={{
+                        width: 120,
+                        height: 120,
+                        marginBottom: 16,
+                        marginTop: 16,
                       }}
-                      onBlur={handleBlur}
-                      isInvalid={touched.picture && !!errors.picture}
-                      feedback={errors.picture}
-                      id="validationFormik107"
-                      feedbackTooltip
                     />
-                  </Form.Group>
-                ) : null}
+                  ) : null}
+                  <Form.File
+                    className="position-relative"
+                    required
+                    name="picture"
+                    label="Picture"
+                    onChange={(e) => {
+                      values.picture = e.target.files[0];
+                      if (values.picture) {
+                        setPic(URL.createObjectURL(values.picture));
+                      }
+                    }}
+                    onBlur={handleBlur}
+                    isInvalid={touched.picture && !!errors.picture}
+                    feedback={errors.picture}
+                    id="validationFormik107"
+                    feedbackTooltip
+                    custom
+                  />
+                </Form.Group>
 
                 <Button variant="danger" onClick={handleClose}>
                   Cancel
