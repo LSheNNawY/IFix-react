@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import empImg from "../../assets/front/img/employees/employee1.jpg";
 
 export default function Employee({ employee }) {
-  console.log(employee.image);
   const ratingArr = new Array(Math.ceil(employee.rating) || 3).fill(null);
 
   return (
