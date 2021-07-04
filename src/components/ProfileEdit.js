@@ -166,218 +166,232 @@ function ProfileEdit(props) {
                   return toast.error("Enter your password correctly");
                 }
                 actions.setSubmitting(false);
-              } catch (error) {
-                console.error(error);
+              } catch (err) {
+                const error = err.response.data.error;
+                if (error === "email") {
+                  toast.error("Email already registered");
+                  actions.setFieldError(
+                    "email",
+                    "Email is already Registered"
+                  );
+                }
+                if (error === "phone") {
+                  toast.error("Phone already registered");
+                  actions.setFieldError(
+                    "phone",
+                    "Phone is already Registered"
+                  );
+                }
               }
             }}
           >
-            {({
-              handleSubmit,
-              handleChange,
-              handleBlur,
-              values,
-              touched,
-              errors,
-            }) => (
-              <Form
-                noValidate
-                encType="multipart/form-data"
-                onSubmit={handleSubmit}
-              >
-                <Form.Row>
-                  <Form.Group as={Col} md="6" controlId="validationFormik101">
-                    <Form.Label>First name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="firstName"
-                      value={values.firstName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.firstName && !!errors.firstName}
-                    />
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.firstName}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="validationFormik102">
-                    <Form.Label>Last name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="lastName"
-                      value={values.lastName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.lastName && !!errors.lastName}
-                    />
-
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.lastName}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Form.Row>
-
-                <Form.Row>
-                  <Form.Group
-                    as={Col}
-                    md="12"
-                    controlId="validationFormikUsername2"
-                  >
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Email"
-                      name="email"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.email && !!errors.email}
-                    />
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.email}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  {/* password field */}
-                  <Form.Group as={Col} md="6" controlId="validationFormik103">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      ref={passwordRef}
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.password && !!errors.password}
-                    />
-
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  {/* profession field */}
-                  {role === "employee" ? (
-                    <Form.Group as={Col} md="6" controlId="validationFormik110">
-                      <Form.Label>Profession</Form.Label>
-                      <Form.Control
-                        as="select"
-                        name="profession"
-                        value={values.profession}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        isInvalid={touched.profession && !!errors.profession}
-                      >
-                        <option value="">Select Profession</option>
-                        {professions.map((profession) => (
-                          <option value={profession._id} key={profession._id}>
-                            {profession.title}
-                          </option>
-                        ))}
-                      </Form.Control>
-
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.profession}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  ) : null}
-                </Form.Row>
-
-                <Form.Row>
-                  <Form.Group as={Col} md="6" controlId="validationFormik104">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Phone"
-                      name="phone"
-                      value={values.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.phone && !!errors.phone}
-                    />
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.phone}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="validationFormik114">
-                    <Form.Label>Birth Date</Form.Label>
-                    <Form.Control
-                      type="date"
-                      name="dateOfBirth"
-                      value={values.dateOfBirth}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.dateOfBirth && !!errors.dateOfBirth}
-                    />
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.dateOfBirth}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Form.Row>
-
-                <Form.Row>
-                  <Form.Group as={Col} md="12" controlId="validationFormik105">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Address"
-                      name="address"
-                      value={values.address}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={touched.address && !!errors.address}
-                    />
-
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {errors.address}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Form.Row>
-                <Form.Group>
-                  {user && user.picture ? (
-                    <Image
-                      src={pic}
-                      roundedCircle
-                      className="mr-2"
-                      style={{
-                        width: 120,
-                        height: 120,
-                        marginBottom: 16,
-                        marginTop: 16,
-                      }}
-                    />
-                  ) : null}
-                  <Form.File
-                    className="position-relative"
-                    required
-                    name="picture"
-                    label="Picture"
-                    onChange={(e) => {
-                      values.picture = e.target.files[0];
-                      if (values.picture) {
-                        setPic(URL.createObjectURL(values.picture));
-                      }
-                    }}
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            values,
+            touched,
+            errors,
+          }) => (
+            <Form
+              noValidate
+              encType="multipart/form-data"
+              onSubmit={handleSubmit}
+            >
+              <Form.Row>
+                <Form.Group as={Col} md="6" controlId="validationFormik101">
+                  <Form.Label>First name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="firstName"
+                    value={values.firstName}
+                    onChange={handleChange}
                     onBlur={handleBlur}
-                    isInvalid={touched.picture && !!errors.picture}
-                    feedback={errors.picture}
-                    id="validationFormik107"
-                    feedbackTooltip
-                    custom
+                    isInvalid={touched.firstName && !!errors.firstName}
                   />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.firstName}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="6" controlId="validationFormik102">
+                  <Form.Label>Last name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="lastName"
+                    value={values.lastName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.lastName && !!errors.lastName}
+                  />
+
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.lastName}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group
+                  as={Col}
+                  md="12"
+                  controlId="validationFormikUsername2"
+                >
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.email && !!errors.email}
+                  />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.email}
+                  </Form.Control.Feedback>
                 </Form.Group>
 
-                <Button variant="danger" onClick={handleClose}>
-                  Cancel
-                </Button>
-                <Button variant="primary" type="submit" className="ml-1">
-                  Save
-                </Button>
-              </Form>
-            )}
+                {/* password field */}
+                <Form.Group as={Col} md="6" controlId="validationFormik103">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    ref={passwordRef}
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.password && !!errors.password}
+                  />
+
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.password}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* profession field */}
+                {role === "employee" ? (
+                  <Form.Group as={Col} md="6" controlId="validationFormik110">
+                    <Form.Label>Profession</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="profession"
+                      value={values.profession}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      isInvalid={touched.profession && !!errors.profession}
+                    >
+                      <option value="">Select Profession</option>
+                      {professions.map((profession) => (
+                        <option value={profession._id} key={profession._id}>
+                          {profession.title}
+                        </option>
+                      ))}
+                    </Form.Control>
+
+                    <Form.Control.Feedback type="invalid" tooltip>
+                      {errors.profession}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : null}
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group as={Col} md="6" controlId="validationFormik104">
+                  <Form.Label>Phone</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Phone"
+                    name="phone"
+                    value={values.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.phone && !!errors.phone}
+                  />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.phone}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="6" controlId="validationFormik114">
+                  <Form.Label>Birth Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="dateOfBirth"
+                    value={values.dateOfBirth}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.dateOfBirth && !!errors.dateOfBirth}
+                  />
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.dateOfBirth}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group as={Col} md="12" controlId="validationFormik105">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Address"
+                    name="address"
+                    value={values.address}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.address && !!errors.address}
+                  />
+
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.address}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Form.Row>
+              <Form.Group>
+                {user && user.picture ? (
+                  <Image
+                    src={pic}
+                    roundedCircle
+                    className="mr-2"
+                    style={{
+                      width: 120,
+                      height: 120,
+                      marginBottom: 16,
+                      marginTop: 16,
+                    }}
+                  />
+                ) : null}
+                <Form.File
+                  className="position-relative"
+                  required
+                  name="picture"
+                  label="Picture"
+                  onChange={(e) => {
+                    values.picture = e.target.files[0];
+                    if (values.picture) {
+                      setPic(URL.createObjectURL(values.picture));
+                    }
+                  }}
+                  onBlur={handleBlur}
+                  isInvalid={touched.picture && !!errors.picture}
+                  feedback={errors.picture}
+                  id="validationFormik107"
+                  feedbackTooltip
+                  custom
+                />
+              </Form.Group>
+
+              <Button variant="danger" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button variant="primary" type="submit" className="ml-1">
+                Save
+              </Button>
+            </Form>
+          )}
           </Formik>
         </Modal.Body>
-      </Modal>
+    </Modal>
     </>
   );
 }
