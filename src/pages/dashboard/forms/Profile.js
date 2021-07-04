@@ -22,9 +22,10 @@ const Profile = (props) => {
             <Image
               src={"http://localhost:5000/uploads/users/" + user.picture}
               roundedCircle
-              width="120"
-              height="120"
+              // width="120"
+              // height="120"
               className="mr-2"
+              style={{width: "300px", height: "300px"}}
             />
           ) : (
             <Image

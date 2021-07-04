@@ -1,7 +1,16 @@
 
+@font-face {
+    font-family: Rajdhani-Medium;
+    src: url(../fonts/Rajdhani-Medium.ttf);
+}
+
+
 .profession-wrapper .services__item {
     margin-bottom: 80px;
     margin-top: 80px;
+}
+.profession-wrapper{
+    background-color: white !important;
 }
 .profession-wrapper .services__item__icon {
     height: 85px;
@@ -43,11 +52,12 @@
     font-weight: 300;
     margin-bottom: 0;
     line-height: 27px;
+    font-family: Rajdhani-Medium;
 }
 .profession-wrapper .services__item__text {
     text-align: left;
 }
 .profession-wrapper .services__item__icon:hover{
     background-color:#ffc446 ;
-    color: white;
+    color: white !important;
 }

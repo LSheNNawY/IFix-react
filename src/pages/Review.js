@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import NavbarComponent from "../components/front/NavbarComponent";
-import FooterComponent from "../components/front/FooterComponent";
 import "../assets/front/css/index.css";
 import "../assets/front/css/register.css";
-import { useLocation } from "react-router-dom";
-import { Formik } from "formik";
 import * as yup from "yup";
-import { Button, Col, Container, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
+import { Formik } from "formik";
+import { notify } from "../helpers/generalFunctions";
+
+// const schema = yup.object().shape({
+// });
 
 const Review = (props) => {
-  const [job, setJob] = useState({});
   const [rate, setRate] = useState(0);
-  const location = useLocation();
-  const history = useHistory();
+  const [rateError, setRateError] = useState(false);
+  const { job, setJob, onHide, setSuccessMsg } = props;
 
   const ratingChanged = (newRating) => {
     setRate(newRating);
@@ -26,120 +25,124 @@ const Review = (props) => {
       review: {
         rate: rate,
         comment: values.comment,
-      }
+      },
     };
     await axios
-      .put(process.env.REACT_APP_API_URL + "/jobs/" + job._id +"/updateReview", review , {
-        "Content-Type": "multipart/form-data",
-      })
+      .put(
+        process.env.REACT_APP_API_URL + "/jobs/" + job._id + "/updateReview",
+        review
+      )
       .then(({ data }) => {
-        history.push("/jobs");
+        setJob(data);
+        onHide();
+        setSuccessMsg(true);
+        notify("💥 Review completed", "success");
       });
   };
 
-  useEffect(() => {
-    setJob(location.state.job);
-  }, []);
-
   return (
-    <div className="register-wrapper">
-      <NavbarComponent />
-      <div
-        style={{
-          backgroundColor: "#ebeeef",
-          paddingTop: "120px",
-          paddingBottom: "120px",
-          marginTop: "-140px",
-        }}
-      >
-        <Container className="mt-5 w-50">
-          <div className=" login-form ">
-            <div className="login-form-title">
-              <h1 className="mt-4 mb-4 login-form-title-1">Review</h1>
-            </div>
-            <Formik
-              // validationSchema={schema}
-              onSubmit={async (values, actions) => {
-                actions.setSubmitting(true);
-                try {
+    <Modal {...props}>
+      <Modal.Body className="show-grid">
+        <Container className="mt-3 w-100">
+          <h2 className="mt-4 mb-4 text-center">Review</h2>
+          <Formik
+            // validationSchema={schema}
+            onSubmit={async (values, actions) => {
+              actions.setSubmitting(true);
+              try {
+                if (rate > 0) {
                   handleUpdateReview(values);
                   actions.setSubmitting(false);
-                } catch (error) {
-                  console.error(error);
+                } else {
+                  setRateError(true);
                 }
-              }}
-              initialValues={{
-                comment: "",
-              }}
-            >
-              {({
-                handleSubmit,
-                handleChange,
-                handleBlur,
-                values,
-                touched,
-                errors,
-              }) => (
-                <Form
-                  noValidate
-                  encType="multipart/form-data"
-                  onSubmit={handleSubmit}
-                >
-                  <Form.Row>
-                    <Form.Group
-                      as={Col}
-                      md="12"
-                      controlId="validationFormik105"
-                    >
-                      <Form.Label>Comment</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="comment"
-                        name="comment"
-                        value={values.comment}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        // isInvalid={touched.comment && !!errors.comment}
-                      />
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+            initialValues={{
+              comment: "",
+              rateRequired: rate !== 0 ? true : false,
+            }}
+          >
+            {({
+              handleSubmit,
+              handleChange,
+              handleBlur,
+              values,
+              touched,
+              errors,
+            }) => (
+              <Form
+                noValidate
+                encType="multipart/form-data"
+                onSubmit={handleSubmit}
+              >
+                <Form.Row className="mb-3">
+                  <Form.Group
+                    as={Col}
+                    md="10"
+                    className="offset-1"
+                    controlId="validationFormik101"
+                  >
+                    <Form.Label>Comment</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      cols="30"
+                      rows="4"
+                      type="text"
+                      name="comment"
+                      value={values.comment}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Comment"
+                    />
+                    <Form.Control.Feedback type="invalid" tooltip>
+                      {errors.comment}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                  <Form.Group
+                    as={Col}
+                    md="10"
+                    className="offset-1"
+                    controlId="validationFormik105"
+                  >
+                    <Form.Label>Rate</Form.Label>
+                    <div>
+                      {
+                        <ReactStars
+                          count={5}
+                          size={24}
+                          onChange={ratingChanged}
+                          activeColor="#ffd700"
+                          value={rate}
+                        />
+                      }
+                      {rateError ? <div style={{color:"red"}}>Rate is required</div> : ""}
+                    </div>
+                  </Form.Group>
+                </Form.Row>
 
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.comment}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Form.Row>
-                    <Form.Group
-                      as={Col}
-                      md="12"
-                      controlId="validationFormik105"
-                    >
-                      <Form.Label>Rate</Form.Label>
-                      <div>
-                        {
-                          <ReactStars
-                            count={5}
-                            size={24}
-                            onChange={ratingChanged}
-                            activeColor="#ffd700"
-                            value={rate}
-                          />
-                        }
-                      </div>
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Button type="submit" className="site-btn ">
-                    Save
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-          </div>
+                <Form.Row>
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    className="text-center"
+                    controlId="validationFormik105"
+                  >
+                    <Button type="submit" className="site-btn ">
+                      Review
+                    </Button>
+                  </Form.Group>
+                </Form.Row>
+              </Form>
+            )}
+          </Formik>
         </Container>
-      </div>
-      <FooterComponent />
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 };
 

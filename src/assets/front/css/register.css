@@ -6,7 +6,8 @@
     font-family: Rajdhani-SemiBold;
     src: url(../fonts/Rajdhani-SemiBold.ttf);
 }
-input,label{
+ .register-wrapper input,
+ .register-wrapper label{
     font-family:  Rajdhani-SemiBold;
 
 }
@@ -79,9 +80,14 @@ input,label{
     width: 100%;
     color: white;
     text-align: center;
+    border-radius: 0px;
 }
 .register-wrapper .nav-tabs .nav-item button:active{
     color:  #052336;
+}
+.register-wrapper .nav-tabs .nav-item .active{
+    color:  #052336;
+    background-color: white;
 }
 .register-wrapper .nav-tabs .nav-item button:focus{
     color:  #052336;

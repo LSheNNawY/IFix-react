@@ -6,15 +6,16 @@ import {
     Modal,
   } from "react-bootstrap";
   import React from "react";
-  import { render } from "@testing-library/react";
   import { Formik } from "formik";
   import axios from "axios";
   
   import * as yup from "yup";
   const schema = yup.object().shape({
-    service: yup.string().min(5).max(20).required("Service Required"),
+    service: yup.string().min(5).max(30).required("Service Required"),
     description: yup.string().min(10).required("Description Required"),
     Price: yup.number(),
+    icon: yup.string(),
+
   });
   
   function CreateService (props) {
@@ -45,7 +46,6 @@ import {
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
         >
           <Modal.Body className="show-grid">
             <Container className="mt-3 w-100">
@@ -65,7 +65,8 @@ import {
                   initialValues={{
                     service: "",
                     description: "",
-                    price:""
+                    price:"",
+                    icon:""
                   }}
               >
                 {({
@@ -133,6 +134,30 @@ import {
                           </Form.Control.Feedback>
                         </Form.Group>
                       </Form.Row>
+
+                      <Form.Row>
+                        <Form.Group
+                            as={Col}
+                            md="10"
+                            className="offset-1"
+                            controlId="validationFormik104"
+                        >
+                          <Form.Label> Service Icon</Form.Label>
+                          <Form.Control
+                              type="text"
+                              placeholder="icon"
+                              name="icon"
+                              value={values.icon}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              isInvalid={touched.icon && errors.icon}
+                          />
+                          <Form.Control.Feedback type="invalid" tooltip>
+                            {errors.icon}
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                      </Form.Row>
+
                       <Form.Row className="text-center">
                         <Button type="submit" style={{ margin: "auto" }}>
                           Save

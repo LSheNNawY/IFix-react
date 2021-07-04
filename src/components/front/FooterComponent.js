@@ -1,5 +1,6 @@
 import React from "react";
 import '../../assets/front/css/footer.css'
+import {Link} from "react-router-dom";
 
 const FooterComponent = () => {
     return (
@@ -13,7 +14,7 @@ const FooterComponent = () => {
                             marginLeft: "5%",
                         }}
                     >
-                        <div className="col-lg-4 col-md-6 col-sm-6">
+                        <div className="col-4">
                             <div className="footer__about">
                                 <div className="footer__logo">
                                     <a
@@ -25,14 +26,12 @@ const FooterComponent = () => {
                                 </div>
                                 <ul>
                                     <li>
-                                        <i className="fas fa-map-marker-alt"></i>514
-                                        Academy thomes merry St. Algonquin
+                                        <i className="fas fa-map-marker-alt"></i>ITI
                                         <br />
-                                        Square, opp. IL 60102
                                     </li>
                                     <li>
-                                        <i className="fas fa-phone"></i> Phone: +1
-                                        800 556 6688 +1 800 559 6580
+                                        <i className="fas fa-phone"></i> Phone: +2
+                                        01286680617
                                     </li>
                                     <li>
                                         <i className="fas fa-envelope"></i> Email:
@@ -41,56 +40,53 @@ const FooterComponent = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-lg-2 col-md-6 col-sm-6">
-                            <div className="footer__widget">
-                                <h5>Feature Services</h5>
-                                <ul>
-                                    <li>
-                                        <a href="electricity_services.html">
-                                            Electricity Service
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Service Name</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Service Name</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Service Name</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col-lg-2 col-md-6 col-sm-6">
+                        <div className="col-4">
                             <div className="footer__widget">
                                 <h5>Quick Links</h5>
                                 <ul>
                                     <li>
-                                        <a href="aboutUs.html">About</a>
+                                        <Link to="/aboutUs">About</Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to="/contact">Contact Us</Link>
+
                                     </li>
                                     <li>
-                                        <a href="#">Team</a>
+                                        <Link to="/professions">Services</Link>
+
                                     </li>
-                                    <li>
-                                        <a href="contact.html">Contact us</a>
-                                    </li>
-                                    <li>
-                                        <a href="aboutUs.html">Locations</a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-6">
+
+
+                        <div className="col-4">
                             <div className="footer__widget">
-                                <h5>Newsletter</h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit sed do eiusmod tempor
-                                    incididunt
-                                </p>
+                                <h5>Follow us on</h5>
+                                <ul>
+                                    <li>
+                                        <Link to="">
+                                            <i className="fab fa-facebook-square"></i> Facebook
+                                        </Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to="">
+                                            <i className="fab fa-twitter-square"></i> Twitter
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="">
+                                            <i className="fab fa-instagram"></i> Instagram
+                                        </Link>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </footer>

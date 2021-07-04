@@ -6,8 +6,7 @@ import { Button, Col, Form, Modal, Image } from "react-bootstrap";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup
   .object()
@@ -44,18 +43,16 @@ function ProfileForm(props) {
   const [pic, setPic] = useState("");
   const passwordRef = useRef(null);
 
-
-
   let user = props.user;
   const role = user ? user.role : props.role;
   let show = props.show;
 
-  toast.configure()
+  toast.configure();
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/professions`)
-      .then((res) => setProfessions(res.data));
+      .then(({ data }) => setProfessions(data.professions));
   }, []);
 
   const handleClose = () => {
@@ -209,13 +206,13 @@ function ProfileForm(props) {
                       props.setShow(false);
                       props.setInfo(null);
                       props.setRefresh(true);
-                      toast.success('User updated Successfully')
+                      toast.success("User updated Successfully");
                     }
                   } else {
                     console.log(passwordRef.current);
-                    passwordRef.current.className = "form-control  border-danger"
-                    return toast.error('Enter your password correctly')
-
+                    passwordRef.current.className =
+                      "form-control  border-danger";
+                    return toast.error("Enter your password correctly");
                   }
                 } else {
                   for (let data of formData.entries()) {
@@ -236,14 +233,27 @@ function ProfileForm(props) {
                     props.setShow(false);
                     props.setInfo(null);
                     props.setRefresh(true);
-                    toast.success('User Added Successfully')
-
+                    toast.success("User Added Successfully");
                   }
                 }
 
                 actions.setSubmitting(false);
-              } catch (error) {
-                console.error(error);
+              } catch (err) {
+                const error = err.response.data.error;
+                if (error === "email") {
+                  toast.error("Email already registered");
+                  actions.setFieldError(
+                    "email",
+                    "Email is already Registered"
+                  );
+                }
+                if (error === "phone") {
+                  toast.error("Phone already registered");
+                  actions.setFieldError(
+                    "phone",
+                    "Phone is already Registered"
+                  );
+                }
               }
             }}
           >
@@ -416,7 +426,7 @@ function ProfileForm(props) {
                         src={pic}
                         roundedCircle
                         className="mr-2"
-                        style={{width: 120, height: 120}}
+                        style={{ width: 120, height: 120 }}
                       />
                     ) : null}
                     <Form.File

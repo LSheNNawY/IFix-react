@@ -1,20 +1,72 @@
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import { notify } from "../helpers/generalFunctions";
+import { authFormValidation } from "../helpers/concateValidation";
 import NavbarComponent from "../components/front/NavbarComponent";
-import "../assets/front/css/index.css";
-import FooterComponent from "../components/front/FooterComponent";
 import contact_header from "../assets/front/img/contact_header.PNG";
-import { Link } from "react-router-dom";
+import FooterComponent from "../components/front/FooterComponent";
+import "../assets/front/css/index.css";
+
 const Contact = () => {
+  let history = useHistory();
+
+  const [commentState, SetCommentState] = useState({
+    name: "",
+    email: "",
+    body: "",
+  });
+  const [errors, setErrors] = useState({ name: "", email: "", body: "" });
+  const [successMsg, setSuccessMsg] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (
+      authFormValidation(
+        commentState.name,
+        commentState.email,
+        commentState.body,
+        setErrors
+      )
+    ) {
+      try {
+        const added = await axios.post(
+          `${process.env.REACT_APP_API_URL}/mail`,
+          commentState,
+          {
+            "Content-Type": "multipart/form-data",
+          }
+        );
+        if (added.status === 200) {
+          setSuccessMsg(true);
+          notify("💥 Success, Mail sent", "success", history, "/");
+        } else {
+          setSuccessMsg(true);
+          notify("💥 Error, Please try agian later", "error", history, "/");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   return (
     <div className="index-wrapper">
       <NavbarComponent />
+      {successMsg ? <ToastContainer /> : null}
       {/*  contact   */}
-
-      <div className="contact">
+      <div
+        className="contact"
+        style={{
+          backgroundImage: `url(${contact_header})`,
+          marginTop: "-30px",
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center">
               <div className="breadcrumb__text">
-                <h2>Contact US</h2>
+                <h2>CONTACT US</h2>
                 <div className="breadcrumb__links">
                   <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
@@ -39,7 +91,11 @@ const Contact = () => {
                 scrolling="no"
                 marginHeight="0"
                 marginWidth="0"
-                style={{ marginLeft: "5%", border: "0", width: "90%" }}
+                style={{
+                  marginLeft: "5%",
+                  border: "0",
+                  width: "90%",
+                }}
               ></iframe>
 
               <br />
@@ -96,10 +152,121 @@ const Contact = () => {
           </div>
           <div className="col-lg-6 col-md-6">
             <div className="contact__form">
-              <form action="#">
-                <input type="text" placeholder="Name" />
-                <input type="text" placeholder="Email" />
-                <textarea placeholder="Comment"></textarea>
+              <form onSubmit={submitHandler}>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputname" className="form-label">
+                    Name
+                  </label>
+                  <div className="input-group-prepend">
+                    <span
+                      className={`input-group ${
+                        errors.name !== "" && errors.name !== "valid"
+                          ? "border-danger"
+                          : ""
+                      }`}
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    className={`form-control  ${
+                      errors.name !== "" && errors.name !== "valid"
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    id="exampleInputname"
+                    aria-describedby="emailHelp"
+                    name="name"
+                    onChange={(e) =>
+                      SetCommentState({
+                        ...commentState,
+                        name: e.target.value,
+                      })
+                    }
+                    value={commentState.name}
+                    placeholder="Enter your name"
+                  />
+                  {errors.name !== "" && errors.name !== "valid" ? (
+                    <h6 className="invalid-feedback">{errors.name}</h6>
+                  ) : null}
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
+                    Email
+                  </label>
+                  <div className="input-group-prepend">
+                    <span
+                      className={`input-group ${
+                        errors.email !== "" && errors.email !== "valid"
+                          ? "border-danger"
+                          : ""
+                      }`}
+                    ></span>
+                  </div>
+                  <input
+                    type="email"
+                    className={`form-control  ${
+                      errors.email !== "" && errors.email !== "valid"
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    name="email"
+                    onChange={(e) =>
+                      SetCommentState({
+                        ...commentState,
+                        email: e.target.value,
+                      })
+                    }
+                    value={commentState.email}
+                    placeholder="Enter your email"
+                  />
+                  {errors.email !== "" && errors.email !== "valid" ? (
+                    <h6 className="invalid-feedback">{errors.email}</h6>
+                  ) : null}
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="exampleInputTextArea" className="form-label">
+                    Comment
+                  </label>
+                  <div className="input-group-prepend">
+                    <span
+                      className={`input-group ${
+                        errors.body !== "" && errors.body !== "valid"
+                          ? "border-danger"
+                          : ""
+                      }`}
+                    ></span>
+                  </div>
+                  <textarea
+                    rows="3"
+                    className={`form-control  ${
+                      errors.body !== "" && errors.body !== "valid"
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    id="exampleInputTextArea"
+                    aria-describedby="emailHelp"
+                    name="body"
+                    onChange={(e) =>
+                      SetCommentState({
+                        ...commentState,
+                        body: e.target.value,
+                      })
+                    }
+                    value={commentState.body}
+                    placeholder="Enter your comment"
+                  >
+                    {" "}
+                  </textarea>
+
+                  {errors.body !== "" && errors.body !== "valid" ? (
+                    <h6 className="invalid-feedback">{errors.body}</h6>
+                  ) : null}
+                </div>
+
                 <button type="submit" className="site-btn">
                   Send Message
                 </button>

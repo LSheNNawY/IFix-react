@@ -1,0 +1,192 @@
+
+input,
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border-style: none;
+}
+
+
+.AppWrapper {
+    width: 500px;
+    height: 400px;
+    position: relative;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: scale3D(0.95, 0.95, 0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale3D(1, 1, 1);
+    }
+}
+
+.Form {
+    animation: fade 200ms ease-out;
+}
+
+.FormGroup {
+    margin: 0 15px 20px;
+    padding: 0;
+    border-style: none;
+    color:black !important;
+    will-change: opacity, transform;
+    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #829fff;
+    border-radius: 4px;
+}
+
+.FormRow {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.FormRow:first-child {
+    border-top: none;
+}
+
+.FormRowLabel {
+    width: 15%;
+    min-width: 70px;
+    padding: 11px 0;
+    color: gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@keyframes void-animation-out {
+    0%,
+    to {
+        opacity: 1;
+    }
+}
+.FormRowInput:-webkit-autofill {
+    -webkit-text-fill-color: #fce883;
+    /* Hack to hide the default webkit autofill */
+    transition: background-color 100000000s;
+    animation: 1ms void-animation-out;
+}
+
+.FormRowInput {
+    font-size: 16px;
+    width: 100%;
+    padding: 11px 15px 11px 0;
+    color: black;
+    background-color: transparent;
+    animation: 1ms void-animation-out;
+}
+
+.FormRowInput::placeholder {
+    color: black;
+}
+
+
+.StripeElement {
+    width: 100%;
+    padding: 11px 15px 11px 0;
+}
+
+.SubmitButton {
+    font-size: 15px;
+    color: #fff;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    background: #052336;
+    padding: 14px 30px 12px;
+    width: 95%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.SubmitButton:active {
+    background-color:#052336 ;
+    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #052336;
+    transform: scale(0.99);
+}
+
+.SubmitButton.SubmitButton--error {
+    transform: translateY(15px);
+}
+.SubmitButton.SubmitButton--error:active {
+    transform: scale(0.99) translateY(15px);
+}
+
+.SubmitButton:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: #7795f8;
+    box-shadow: none;
+}
+
+.ErrorMessage {
+    color: black;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding: 0 30px;
+    font-size: 13px;
+    margin-top: 0px;
+    width: 100%;
+    transform: translateY(-15px);
+    opacity: 0;
+    animation: fade 150ms ease-out;
+    animation-delay: 50ms;
+    animation-fill-mode: forwards;
+    will-change: opacity, transform;
+}
+
+.ErrorMessage svg {
+    margin-right: 10px;
+}
+
+.Result {
+    margin-top: 50px;
+    text-align: center;
+    animation: fade 200ms ease-out;
+}
+
+.ResultTitle {
+    color: black;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.ResultMessage {
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 25px;
+    line-height: 1.6em;
+    text-align: center;
+}
+
+.ResetButton {
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+}
+
+
+.InputElement {
+    color: black !important;
+    font-weight: 500 !important;
+    font-family: Roboto, Open Sans, Segoe UI, sans-serif;
+    font-size: 16px !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}

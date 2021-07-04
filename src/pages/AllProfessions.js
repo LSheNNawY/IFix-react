@@ -1,24 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import NavbarComponent from "../components/front/NavbarComponent";
 import ProfessionComponent from "../components/front/ProfessionComponent";
 import FooterComponent from "../components/front/FooterComponent";
-import contact_header from "../assets/front/img/contact_header.PNG";
 
 import "../assets/front/css/index.css";
+import ProfessionLoader from "../components/loaders/ProfessionLoader";
 
-const ajaxGetProfessions = async () => {
-  return await axios.get(`${process.env.REACT_APP_API_URL}/professions`);
-};
+// const ajaxGetProfessions = async () => {
+//   return await axios.get(`${process.env.REACT_APP_API_URL}/professions`);
+// };
 
 const AllProfessions = () => {
   const [professions, setProfessions] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    ajaxGetProfessions().then(({ data }) => {
-      setProfessions(data);
-    });
+  useLayoutEffect(() => {
+    setLoading(true)
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/professions?page=${pageNumber}`)
+      .then(({ data }) => {
+        setProfessions(data.professions);
+        setTotalPages(data.totalPages);
+        setTimeout(() => {
+          setLoading(false);
+        }, 400)
+      });
   }, []);
   return (
     <div className="index-wrapper">
@@ -30,7 +40,7 @@ const AllProfessions = () => {
               <div className="breadcrumb__text">
                 <h2>Our Services</h2>
                 <div className="breadcrumb__links">
-                   <Link to="/">Home</Link>
+                  <Link to="/">Home</Link>
                   <span style={{ color: "white" }}>|</span>
                   <Link to="/professions">Services</Link>
                 </div>
@@ -40,7 +50,7 @@ const AllProfessions = () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container-fluid">
         <div
           className="row "
           style={{
@@ -60,17 +70,37 @@ const AllProfessions = () => {
                 borderBottom: "3px solid lightgray",
                 marginLeft: "45%",
               }}
-            ></h2>
+            >
+              {""}
+            </h2>
           </div>
         </div>
-        <div className="row">
-          {professions.length > 0 &&
-            professions.map((profession) => (
-              <ProfessionComponent
-                profession={profession}
-                key={profession._id}
-              />
-            ))}
+        <div
+          className="row "
+          style={{
+            width: "90%",
+            marginLeft: "5%",
+            marginTop: "50PX",
+            marginBottom: "50px",
+          }}
+        >
+          {loading ? (
+            <>
+              <ProfessionLoader />
+              <ProfessionLoader />
+              <ProfessionLoader />
+            </>
+          ) : (
+            <>
+              {professions.length > 0 &&
+                professions.map((profession) => (
+                  <ProfessionComponent
+                    profession={profession}
+                    key={profession._id}
+                  />
+                ))}
+            </>
+          )}
         </div>
       </div>
       <FooterComponent />

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../../../styles/CollapseTable.css";
 import axios from "axios";
 import EditService from "./EditService";
-import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
 function ServiceTable({ profession, setProfession }) {
   const [modalShow, setModalShow] = useState(false);
@@ -17,27 +16,25 @@ function ServiceTable({ profession, setProfession }) {
     setSelectedService(service);
   };
 
-
-  const handleDeleteService = async(id) => {
+  const handleDeleteService = async (id) => {
     if (window.confirm("Are you sure?")) {
       let services = profession.services;
-      let data={};
+      let data = {};
       services = services.filter((service) => service._id !== id);
-      data={
-        services:services
-      }
+      data = {
+        services: services,
+      };
       await axios
         .put(
-            process.env.REACT_APP_API_URL + "/professions/" + profession._id,
-            data,
-            {
-              "Content-Type": "multipart/form-data",
-            }
+          process.env.REACT_APP_API_URL + "/professions/" + profession._id,
+          data,
+          {
+            "Content-Type": "multipart/form-data",
+          }
         )
-        .then(({data}) => {
-            setProfession(data)
-      });
-     
+        .then(({ data }) => {
+          setProfession(data);
+        });
     }
   };
   return (
@@ -55,6 +52,7 @@ function ServiceTable({ profession, setProfession }) {
             <th>Service</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Icon</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -66,6 +64,10 @@ function ServiceTable({ profession, setProfession }) {
                 <td> {service.service}</td>
                 <td> {service.description}</td>
                 <td> {service.price}</td>
+                <td>
+                  {" "}
+                  <i className={` fas fa-${service.icon}`} style={{fontSize:"19px"}}> </i>
+                </td>
                 <td>
                   {" "}
                   <button

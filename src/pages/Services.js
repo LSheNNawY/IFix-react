@@ -17,7 +17,6 @@ const Services = (props) => {
 
   useEffect(() => {
     ajaxGetProfession(id).then(({ data }) => {
-      // console.log(data);
       setProfession(data);
     });
   }, []);
@@ -43,7 +42,7 @@ const Services = (props) => {
       </div>
 
       {profession && (
-        <div className="container">
+        <div className="container-fluid">
           <div
             className="row"
             style={{
@@ -64,6 +63,7 @@ const Services = (props) => {
                   marginLeft: "45%",
                 }}
               >
+                {""}
               </h2>
             </div>
             {profession.services &&
@@ -72,40 +72,43 @@ const Services = (props) => {
               })}
           </div>
           {/* team */}
-          <div
-            className="team"
-          >
-            <div className="container-fluid">
-              <div
-                className="row "
-                style={{
-                  marginLeft: "5%",
-                  marginTop: "50px",
-                  marginBottom: "50px",
-                }}
-              >
-                <div className="col-12 text-center">
-                  <p className="label ">TOP RATED</p>
-                  <h2>Meet our Employees</h2>
-                  <h2
-                    className="mt-3 mb-3"
-                    style={{
-                      width: "120px",
-                      borderBottom: "3px solid lightgray",
-                      marginLeft: "45%",
-                    }}
-                  ></h2>
-                  <div
-                    className="row"
-                    style={{
-                      marginTop: "30px",
-                    }}
-                  >
-                    {profession.employees &&
-                      profession.employees.map((employee) => (
-                        <Employee employee={employee} key={employee._id} />
-                      ))}
-                  </div>
+          <div className="team">
+            <div
+              className="row"
+              style={{
+                width: "90%",
+                marginLeft: "5%",
+                marginTop: "50PX",
+                marginBottom: "50px",
+              }}
+            >
+              <div className="col-12 text-center mt-5">
+                <p className="label ">TOP RATED</p>
+                <h2>Meet our Employees</h2>
+                <h2
+                  className="mt-3 mb-3 "
+                  style={{
+                    width: "120px",
+                    borderBottom: "3px solid lightgray",
+                    marginLeft: "45%",
+                  }}
+                ></h2>
+                <div
+                  className="row justify-content-center"
+                  style={{
+                    marginTop: "30px",
+                  }}
+                >
+                  {profession.employees &&
+                    profession.employees.map((employee) => (
+                      <>
+                        {employee.status === "active" ? (
+                          <Employee employee={employee} key={employee._id} />
+                        ) : (
+                          ""
+                        )}
+                      </>
+                    ))}
                 </div>
               </div>
             </div>

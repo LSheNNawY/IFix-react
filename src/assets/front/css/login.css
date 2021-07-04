@@ -6,7 +6,10 @@
     font-family: Rajdhani-SemiBold;
     src: url(../fonts/Rajdhani-SemiBold.ttf);
 }
-input,label,option,select{
+ .login-wrapper input,
+ .login-wrapper label,
+ .login-wrapper option,
+ .login-wrapper select{
     font-family:  Rajdhani-SemiBold;
 }
 
@@ -14,6 +17,7 @@ input,label,option,select{
 .login-wrapper form{
     background-color: white;
     padding: 40px;
+    
    
 }
 .login-form-title{
@@ -102,6 +106,10 @@ input,label,option,select{
     margin-top: 10px;
 }
 .login-wrapper .site-btn:hover{
+    color: #fff;
+    background: #052336;
+}
+.login-wrapper .site-btn:focus{
     color: #fff;
     background: #052336;
 }
