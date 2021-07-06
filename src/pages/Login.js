@@ -42,6 +42,11 @@ const Login = () => {
             case "blocked":
               setLoggingError("Your account is blocked, please contact us");
               break;
+
+            case "pending":
+              setLoggingError("Please wait we will contact you for interview");
+              break;
+
             case "inactive":
               setLoggingError(
                 "Please, check your email address to activate your account"
