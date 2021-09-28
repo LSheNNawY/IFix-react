@@ -125,7 +125,6 @@ export const CheckoutForm = ({price,job_id,onHide,setJob}) => {
         });
 
         if (!error) {
-            console.log("Stripe 23 | token generated!", paymentMethod);
             try {
                 const { id } = paymentMethod;
                 const response = await axios.post(
@@ -137,17 +136,16 @@ export const CheckoutForm = ({price,job_id,onHide,setJob}) => {
                     }
                 );
 
-                console.log("Stripe 35 | data", response);
                 setJob(response.data.job);
 
                 onHide();
 
                 if (response.data.success) {
-                    console.log(response)
-                    console.log("CheckoutForm.js 25 | payment successful!");
+                    // console.log(response)
+                    // console.log("CheckoutForm.js 25 | payment successful!");
                 }
             } catch (error) {
-                console.log("CheckoutForm.js 28 | ", error);
+                // console.log("CheckoutForm.js 28 | ", error);
             }
         } else {
             console.log(error.message);

@@ -9,7 +9,6 @@ export default function Search({ setResult, searchFor, setTotalPages }) {
     axios
       .get(`${process.env.REACT_APP_API_URL}/${searchFor}?search=${search}`)
       .then(({ data }) => {
-        console.log(data);
         setResult(data[searchFor]);
         setTotalPages(data.totalPages)
       })

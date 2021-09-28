@@ -71,7 +71,6 @@ function ProfileForm(props) {
       `${process.env.REACT_APP_API_URL}/users/verify-password`,
       { userId, password }
     );
-    console.log(valid);
     return valid;
   };
 
@@ -169,9 +168,9 @@ function ProfileForm(props) {
                       formData.append(field, values[field]);
                     }
                   }
-                  for (let i of formData.entries()) {
-                    console.log(i[0] + " => " + i[1]);
-                  }
+                  // for (let i of formData.entries()) {
+                  //   console.log(i[0] + " => " + i[1]);
+                  // }
                 } else {
                   adminData = {
                     firstName: values.firstName,
@@ -185,12 +184,10 @@ function ProfileForm(props) {
                 }
 
                 if (user) {
-                  console.log(user);
                   const validPassword = await verifyPassword(
                     user._id,
                     values.password
                   );
-                  console.log(validPassword);
                   if (validPassword.data) {
                     const done = await axios.put(
                       `${process.env.REACT_APP_API_URL}/${role}s/${user._id}`,
@@ -202,22 +199,21 @@ function ProfileForm(props) {
                         : null
                     );
                     if (done) {
-                      console.log(done);
                       props.setShow(false);
                       props.setInfo(null);
                       props.setRefresh(true);
                       toast.success("User updated Successfully");
                     }
                   } else {
-                    console.log(passwordRef.current);
+                    // console.log(passwordRef.current);
                     passwordRef.current.className =
                       "form-control  border-danger";
                     return toast.error("Enter your password correctly");
                   }
                 } else {
-                  for (let data of formData.entries()) {
-                    console.log(data[0] + " => " + data[1]);
-                  }
+                  // for (let data of formData.entries()) {
+                  //   console.log(data[0] + " => " + data[1]);
+                  // }
                   const done = await axios.post(
                     `${process.env.REACT_APP_API_URL}/${role}s`,
                     role === "employee" ? formData : adminData,
@@ -229,7 +225,6 @@ function ProfileForm(props) {
                   );
 
                   if (done) {
-                    console.log(done);
                     props.setShow(false);
                     props.setInfo(null);
                     props.setRefresh(true);

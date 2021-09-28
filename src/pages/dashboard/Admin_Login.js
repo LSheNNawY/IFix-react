@@ -33,7 +33,6 @@ function Admin_Login() {
           }
         })
         .catch(({ response }) => {
-          console.log(response);
           switch (response.data.error) {
             case "invalid credentials":
             case "wrong":

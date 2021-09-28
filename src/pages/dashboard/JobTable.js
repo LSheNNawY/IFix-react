@@ -25,7 +25,6 @@ function Jobs() {
       .then(({ data }) => {
         setJobs(data.jobs);
         setTotalPages(data.totalPages);
-        console.log(data.totalPages);
         setTimeout(() => {
           setLoading(false);
         }, 300);

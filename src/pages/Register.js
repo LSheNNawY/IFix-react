@@ -101,9 +101,9 @@ function Register() {
                       formData.append(field, values[field]);
                     }
                   }
-                  for (let i of formData.entries()) {
-                    console.log(i[0] + " => " + i[1]);
-                  }
+                  // for (let i of formData.entries()) {
+                  //   console.log(i[0] + " => " + i[1]);
+                  // }
 
                   axios
                     .post(

@@ -96,9 +96,10 @@ const Order = () => {
           history.push(`/login?prof=${professionId}&emp=${employeeId}`);
         } else if (response.data.role === "employee") {
           history.push("/");
-        } else {
-          console.log(response.data);
-        }
+        } 
+        // else {
+        //   console.log(response.data);
+        // }
       }
       getUser();
     } else {

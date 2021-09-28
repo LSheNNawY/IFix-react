@@ -29,7 +29,6 @@ const Login = () => {
           password: user.password,
         })
         .then(({ data }) => {
-          console.log(data);
           getUser();
           if (professionId && employeeId) {
             history.goBack();

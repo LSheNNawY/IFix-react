@@ -24,7 +24,6 @@ function EditProfession(props) {
       .then(({ data }) => {
         setProfession(data);
         onHide();
-        console.log(data);
       });
   };
 
@@ -39,7 +38,6 @@ function EditProfession(props) {
               actions.setSubmitting(true);
               try {
                 const formData = new FormData();
-                console.log(values);
                 for (let field in values) {
                   formData.append(field, values[field]);
                 }
