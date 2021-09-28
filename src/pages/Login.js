@@ -29,13 +29,13 @@ const Login = () => {
           password: user.password,
         })
         .then(({ data }) => {
+          console.log(data);
           getUser();
           if (professionId && employeeId) {
             history.goBack();
           }
         })
         .catch(({ response }) => {
-          console.log(response);
           switch (response.data.error) {
             case "wrong":
               setLoggingError("Invalid credentials");
