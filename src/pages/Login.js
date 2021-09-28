@@ -35,6 +35,7 @@ const Login = () => {
           }
         })
         .catch(({ response }) => {
+          console.log(response);
           switch (response.data.error) {
             case "wrong":
               setLoggingError("Invalid credentials");
