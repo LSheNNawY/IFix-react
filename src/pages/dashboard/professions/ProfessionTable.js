@@ -49,7 +49,7 @@ function ProfessionTable({ professionState, setProfessions, index }) {
           <div style={{ width: "100px", margin: "auto" }}>
             <img
               style={{ width: "60%" }}
-              src={`http://localhost:5000/uploads/professions/${profession.img}`}
+              src={`${process.env.REACT_APP_API_PUBLIC_URL}/uploads/professions/${profession.img}`}
               alt="profession"
             />
           </div>
@@ -58,8 +58,7 @@ function ProfessionTable({ professionState, setProfessions, index }) {
           <button
             data-toggle="collapse"
             data-target={"#demo1" + profession._id}
-            className="accordion-toggle"
-            className="btn btn-primary mr-1"
+            className="accordion-toggle btn btn-primary mr-1"
           >
             <span className="fas fa-eye"></span>
           </button>

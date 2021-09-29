@@ -122,7 +122,7 @@ function ProfileForm(props) {
 
   useEffect(() => {
     if (user) {
-      setPic("http://localhost:5000/uploads/users/" + user.picture);
+      setPic(`${process.env.REACT_APP_API_PUBLIC_URL}/uploads/users/${user.picture}`);
     } else {
       setPic("");
     }

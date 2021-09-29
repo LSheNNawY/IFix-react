@@ -107,7 +107,7 @@ const Profile = (props) => {
                   <img
                     src={
                       userData.picture
-                        ? `http://localhost:5000/uploads/users/${userData.picture}`
+                        ? `${process.env.REACT_APP_API_PUBLIC_URL}/uploads/users/${userData.picture}`
                         : empImg
                     }
                     alt=""

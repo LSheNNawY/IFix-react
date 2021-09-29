@@ -20,7 +20,7 @@ const Profile = (props) => {
         <Modal.Header closeButton>
           {user.picture ? (
             <Image
-              src={"http://localhost:5000/uploads/users/" + user.picture}
+              src={`${process.env.REACT_APP_API_PUBLIC_URL}/uploads/users/${user.picture}`}
               roundedCircle
               // width="120"
               // height="120"

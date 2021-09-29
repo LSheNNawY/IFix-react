@@ -13,7 +13,7 @@ const EmployeeReviewComponent = ({ job }) => {
             <div className="row">
               <div className="col-2">
                 <img
-                  src={`http://localhost:5000/uploads/users/${empJob.client.picture}`}
+                  src={`${process.env.REACT_APP_API_PUBLIC_URL}/uploads/users/${empJob.client.picture}`}
                   alt=""
                 />
               </div>

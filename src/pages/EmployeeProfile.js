@@ -61,7 +61,7 @@ const EmployeeProfile = (props) => {
                   <img
                     src={
                       employeeData.picture
-                        ? `http://localhost:5000/uploads/users/${employeeData.picture}`
+                        ? `${process.env.REACT_APP_API_PUBLIC_URL}/uploads/users/${employeeData.picture}`
                         : empImg
                     }
                     alt=""
